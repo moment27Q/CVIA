@@ -1,0 +1,7 @@
+﻿node_modules
+.env
+dist
+reports
+*.log
+backend/dist
+frontend/dist
