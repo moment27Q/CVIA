@@ -1,0 +1,38 @@
+{
+  "buckets": {
+    "peru|intern": {
+      "keywordWeights": {
+        "automatizacion": 1,
+        "diseno": 1,
+        "software": 1,
+        "ingles": 1
+      },
+      "sourceWeights": {
+        "computrabajo": 1.2,
+        "indeed": 1.15,
+        "bumeran": 1.0999999999999999,
+        "linkedin": 1.0499999999999998,
+        "glassdoor": 1
+      },
+      "updates": 1,
+      "updatedAt": "2026-02-23T22:46:28.665Z"
+    },
+    "united states|intern": {
+      "keywordWeights": {
+        "automatizacion": 1,
+        "diseno": 1,
+        "software": 1,
+        "ingles": 1
+      },
+      "sourceWeights": {
+        "computrabajo": 1.2,
+        "indeed": 1.15,
+        "bumeran": 1.0999999999999999,
+        "linkedin": 1.0499999999999998,
+        "glassdoor": 1
+      },
+      "updates": 1,
+      "updatedAt": "2026-02-23T22:51:51.021Z"
+    }
+  }
+}

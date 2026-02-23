@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import { LearningProfile } from './search-memory.service';
 
 export interface MatchedJob {
   title: string;
@@ -43,9 +44,9 @@ interface SourceConfig {
 @Injectable()
 export class JobSearchService {
   private readonly providerLimit = 25;
-  private readonly rapidApiKey = (process.env.RAPIDAPI_KEY || '').trim();
-  private readonly rapidApiHost = process.env.RAPIDAPI_HOST || 'linkedin-job-search-api.p.rapidapi.com';
-  private readonly rapidApiBaseUrl = process.env.RAPIDAPI_BASE_URL || `https://${this.rapidApiHost}`;
+  private readonly rapidApiKey = '1437576a6amsh581f50bd0e0e8dep17e9f0jsnc1df4a994f58';
+  private readonly rapidApiHost = 'linkedin-job-search-api.p.rapidapi.com';
+  private readonly rapidApiBaseUrl = 'https://linkedin-job-search-api.p.rapidapi.com';
 
   private readonly theirStackApiKey = (process.env.THEIRSTACK_API_KEY || '').trim();
   private readonly theirStackBaseUrl = process.env.THEIRSTACK_BASE_URL || 'https://api.theirstack.com/v1';
@@ -66,6 +67,7 @@ export class JobSearchService {
     country?: string,
     desiredRole?: string,
     experience?: ExperienceProfile,
+    learning?: LearningProfile,
   ): Promise<JobSearchResult> {
     const cleanedKeywords = this.cleanKeywords(keywords);
     const enrichedKeywords = this.enrichKeywordsWithExperience(cleanedKeywords, experience);
@@ -77,19 +79,20 @@ export class JobSearchService {
     const locationText = cityOrRegion ? `${cityOrRegion}, ${countryText}` : countryText;
 
     const queries = this.buildQueries(defaultSeeds, locationText);
-    const [theirStackResult, coreSignalResult, byQuery] = await Promise.all([
+    const [rapidResult, theirStackResult, coreSignalResult, byQuery] = await Promise.all([
+      this.searchRapidApiJobs(defaultSeeds, enrichedKeywords, locationText, desiredRole),
       this.searchTheirStackJobs(enrichedKeywords, countryText, cityOrRegion, desiredRole, experience),
       this.searchCoreSignalJobs(enrichedKeywords, countryText, cityOrRegion, desiredRole, experience),
       Promise.all(queries.map((q) => this.searchDuckDuckGo(q.query, q.source, countryText))),
     ]);
 
-    const merged = [...theirStackResult.jobs, ...coreSignalResult.jobs, ...byQuery.flat()];
+    const merged = [...rapidResult.jobs, ...theirStackResult.jobs, ...coreSignalResult.jobs, ...byQuery.flat()];
     const dedup = this.mergeAndDedupe(merged);
     const filtered = dedup.filter((job) => this.isJobInCountry(job, countryText, cityOrRegion));
     const base = filtered.length ? filtered : dedup;
 
     const ranked = base
-      .map((job) => ({ ...job, score: this.scoreJob(job, enrichedKeywords, countryText, cityOrRegion, experience) }))
+      .map((job) => ({ ...job, score: this.scoreJob(job, enrichedKeywords, countryText, cityOrRegion, experience, learning) }))
       .sort((a, b) => b.score - a.score)
       .slice(0, 180);
 
@@ -97,6 +100,7 @@ export class JobSearchService {
     const finalJobs = this.mergeAndDedupe([...ranked, ...fallback]).slice(0, 250);
 
     const providers: JobProviderStatus[] = [
+      rapidResult.status,
       theirStackResult.status,
       coreSignalResult.status,
       {
@@ -151,25 +155,44 @@ export class JobSearchService {
       (desiredRole || '').trim(),
       ...keywords.filter((k) => k.length >= 4),
       ...seeds,
+      'data engineer',
+      'software engineer',
+      'developer',
       'analyst',
     ]
       .map((x) => x.trim())
       .filter(Boolean)
-      .slice(0, 3);
+      .slice(0, 6);
 
     try {
       const responses = [];
-      // Keep RapidAPI load very low: one successful query (limit 25) per request.
-      for (const titleFilter of titleCandidates.slice(0, 1)) {
+      let lastRapidError: unknown = null;
+      const queryVariants = titleCandidates.flatMap((titleFilter) => [
+        {
+          title_filter: `"${titleFilter}"`,
+          location_filter: `"${locationText}"`,
+        },
+        {
+          title_filter: titleFilter,
+          location_filter: locationText,
+        },
+        {
+          title_filter: titleFilter,
+          location_filter: undefined,
+        },
+      ]);
+
+      // Try progressively broader filters until RapidAPI returns at least one job.
+      for (const paramsVariant of queryVariants) {
         for (const endpoint of endpoints) {
           try {
             const response = await axios.get(endpoint, {
               timeout: 18000,
               params: {
-                limit: 25,
+                limit: 10,
                 offset: 0,
-                title_filter: titleFilter,
-                location_filter: locationText,
+                title_filter: paramsVariant.title_filter,
+                location_filter: paramsVariant.location_filter,
                 description_type: 'text',
               },
               headers: {
@@ -177,19 +200,25 @@ export class JobSearchService {
                 'x-rapidapi-host': this.rapidApiHost,
               },
             });
-            responses.push(response);
-            break;
+
+            const records = this.extractRapidApiRecords(response.data);
+            if (records.length > 0) {
+              responses.push(response);
+              break;
+            }
           } catch (endpointError) {
+            lastRapidError = endpointError;
             if (axios.isAxiosError(endpointError) && endpointError.response?.status === 429) {
               continue;
             }
-            throw endpointError;
+            continue;
           }
         }
         if (responses.length) break;
       }
 
       if (!responses.length) {
+        const lastErrorText = this.readAxiosError(lastRapidError);
         return {
           jobs: [],
           status: {
@@ -197,7 +226,7 @@ export class JobSearchService {
             enabled: true,
             success: false,
             jobs: 0,
-            error: '429 quota/rate limit',
+            error: lastErrorText === 'request_failed' ? 'No jobs found or request failed' : lastErrorText,
           },
         };
       }
@@ -220,6 +249,7 @@ export class JobSearchService {
           enabled: true,
           success: deduped.length > 0,
           jobs: deduped.length,
+          error: deduped.length > 0 ? undefined : '0 jobs returned by RapidAPI for current filters',
         },
       };
     } catch (error) {
@@ -516,6 +546,7 @@ export class JobSearchService {
   private readAxiosError(error: unknown): string {
     if (axios.isAxiosError(error)) {
       const status = error.response?.status;
+      const code = error.code || '';
       const raw = error.response?.data;
       let text = '';
       if (typeof raw === 'string') text = raw;
@@ -526,7 +557,9 @@ export class JobSearchService {
           (typeof obj.error === 'string' && obj.error) ||
           JSON.stringify(raw);
       }
-      return `${status || 'request_failed'} ${text}`.trim();
+      const fallbackMessage = error.message || '';
+      const pieces = [status || code || 'request_failed', text || fallbackMessage].filter(Boolean);
+      return pieces.join(' ').trim();
     }
     if (error instanceof Error && error.message) {
       return error.message;
@@ -820,6 +853,7 @@ export class JobSearchService {
     countryText: string,
     cityOrRegion: string,
     experience?: ExperienceProfile,
+    learning?: LearningProfile,
   ): number {
     const haystack = this.normalize(`${job.title} ${job.company} ${job.location} ${job.tags.join(' ')}`);
     const needle = keywords.map((k) => this.normalize(k)).filter(Boolean);
@@ -846,6 +880,7 @@ export class JobSearchService {
     if (job.source === 'TheirStack') score += 6;
     if (job.source === 'CoreSignal') score += 6;
     score += this.scoreByExperience(haystack, experience);
+    score += this.scoreByLearning(haystack, job.source, keywords, learning);
     return score;
   }
 
@@ -877,6 +912,30 @@ export class JobSearchService {
     }
 
     return 0;
+  }
+
+  private scoreByLearning(
+    haystack: string,
+    source: string,
+    keywords: string[],
+    learning?: LearningProfile,
+  ): number {
+    if (!learning) return 0;
+
+    let score = 0;
+    const sourceKey = this.normalize(source);
+    const sourceWeight = learning.sourceWeights?.[sourceKey] || 0;
+    score += Math.min(sourceWeight, 8);
+
+    for (const keyword of keywords) {
+      const key = this.normalize(keyword);
+      if (!key) continue;
+      if (!haystack.includes(key)) continue;
+      const kwWeight = learning.keywordWeights?.[key] || 0;
+      score += Math.min(kwWeight, 4);
+    }
+
+    return score;
   }
 
   private getAgeInHours(ts: number): number {

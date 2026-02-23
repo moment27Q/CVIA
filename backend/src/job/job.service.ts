@@ -8,6 +8,7 @@ import { ScraperService } from '../common/services/scraper.service';
 import { UsageService } from '../common/services/usage.service';
 import { ExperienceProfile, JobSearchService } from '../common/services/job-search.service';
 import { CvParserService } from '../common/services/cv-parser.service';
+import { SearchMemoryService } from '../common/services/search-memory.service';
 
 const FREE_LIMIT = 3;
 const PREMIUM_PRICE = 15;
@@ -21,6 +22,7 @@ export class JobService {
     private readonly pdfService: PdfService,
     private readonly jobSearchService: JobSearchService,
     private readonly cvParserService: CvParserService,
+    private readonly searchMemoryService: SearchMemoryService,
   ) {}
 
   async generateApplication(dto: GenerateApplicationDto) {
@@ -114,13 +116,17 @@ export class JobService {
     const keywords = this.sanitizeKeywords(insights.keywords);
     const desiredRole = dto.desiredRole?.trim() || insights.roles[0] || '';
     const experienceProfile = this.inferExperienceProfile(cvText, desiredRole, insights);
+    const country = dto.country?.trim() || dto.location?.trim() || 'Peru';
+    const learningProfile = await this.searchMemoryService.getProfile(country, experienceProfile.level);
     const search = await this.jobSearchService.searchPublicJobs(
       keywords,
       dto.location,
       dto.country,
       desiredRole,
       experienceProfile,
+      learningProfile,
     );
+    await this.searchMemoryService.learnFromResults(country, experienceProfile.level, keywords, search.jobs);
     const region = dto.country?.trim() || dto.location?.trim() || 'tu pais';
 
     return {
