@@ -2,11 +2,11 @@ import { BadRequestException, HttpException, HttpStatus, Injectable } from '@nes
 import { ExportPdfDto } from './dto-export-pdf.dto';
 import { GenerateApplicationDto } from './dto-generate-application.dto';
 import { MatchCvJobsDto } from './dto-match-cv-jobs.dto';
-import { GeminiService } from '../common/services/gemini.service';
+import { CvInsights, GeminiService } from '../common/services/gemini.service';
 import { PdfService } from '../common/services/pdf.service';
 import { ScraperService } from '../common/services/scraper.service';
 import { UsageService } from '../common/services/usage.service';
-import { JobSearchService } from '../common/services/job-search.service';
+import { ExperienceProfile, JobSearchService } from '../common/services/job-search.service';
 import { CvParserService } from '../common/services/cv-parser.service';
 
 const FREE_LIMIT = 3;
@@ -110,16 +110,75 @@ export class JobService {
       );
     }
 
-    const rawKeywords = await this.geminiService.extractCvKeywords(cvText, dto.desiredRole);
-    const keywords = this.sanitizeKeywords(rawKeywords);
-    const jobs = await this.jobSearchService.searchPublicJobs(keywords, dto.location);
+    const insights = await this.extractInsightsWithFallback(cvText, dto.desiredRole);
+    const keywords = this.sanitizeKeywords(insights.keywords);
+    const desiredRole = dto.desiredRole?.trim() || insights.roles[0] || '';
+    const experienceProfile = this.inferExperienceProfile(cvText, desiredRole, insights);
+    const search = await this.jobSearchService.searchPublicJobs(
+      keywords,
+      dto.location,
+      dto.country,
+      desiredRole,
+      experienceProfile,
+    );
+    const region = dto.country?.trim() || dto.location?.trim() || 'tu pais';
 
     return {
       extractedKeywords: keywords,
-      totalJobsFound: jobs.length,
-      jobs,
-      note: 'Lista amplia en Peru, ordenada del mas reciente al mas antiguo, con enlaces directos por portal/palabra clave.',
+      extractedRoles: insights.roles || [],
+      englishLevel: insights.englishLevel,
+      preferredJobTypes: insights.preferredJobTypes || [],
+      experienceProfile,
+      totalJobsFound: search.jobs.length,
+      jobs: search.jobs,
+      providerStatus: search.providers,
+      note: `Lista en ${region}, ordenada de mas reciente a mas antigua, con enlaces directos por portal/palabra clave.`,
     };
+  }
+
+  private async extractInsightsWithFallback(cvText: string, desiredRole?: string): Promise<CvInsights> {
+    try {
+      return await this.geminiService.extractCvInsights(cvText, desiredRole);
+    } catch {
+      const base = `${desiredRole || ''} ${cvText}`
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, ' ')
+        .replace(/[^a-z0-9+#.\s-]/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+      const stopwords = new Set([
+        'de',
+        'la',
+        'el',
+        'en',
+        'con',
+        'para',
+        'por',
+        'del',
+        'las',
+        'los',
+        'una',
+        'uno',
+        'and',
+        'the',
+        'for',
+        'with',
+      ]);
+
+      const words = (base.match(/[a-z0-9+#.]{3,}/g) || []).filter((w) => !stopwords.has(w));
+      const keywords = [...new Set(words)].slice(0, 20);
+      return {
+        keywords,
+        roles: desiredRole ? [desiredRole.toLowerCase()] : keywords.slice(0, 4),
+        yearsExperience: 0,
+        level: 'junior',
+        prefersInternships: true,
+        englishLevel: 'unknown',
+        preferredJobTypes: ['practica', 'intern', 'junior'],
+      };
+    }
   }
 
   private sanitizeKeywords(list: string[]): string[] {
@@ -138,5 +197,51 @@ export class JobService {
 
     const uniq = [...new Set(cleaned)];
     return uniq.length ? uniq.slice(0, 14) : ['practicante', 'analista', 'asistente'];
+  }
+
+  private inferExperienceProfile(cvText: string, desiredRole?: string, insights?: CvInsights): ExperienceProfile {
+    const normalized = `${desiredRole || ''} ${cvText}`
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+
+    const yearsMatches = [
+      ...normalized.matchAll(/(\d{1,2})\s*(?:\+)?\s*(?:anos|ano|years|year)/g),
+    ].map((m) => Number(m[1]));
+    const heuristicYears = yearsMatches.length ? Math.max(...yearsMatches.filter((n) => !Number.isNaN(n))) : 0;
+    const maxYears = Math.max(heuristicYears, insights?.yearsExperience || 0);
+
+    const entrySignals = ['practicante', 'practica', 'intern', 'trainee', 'sin experiencia', 'estudiante'];
+    const seniorSignals = ['senior', 'lead', 'lider', 'manager', 'jefe', 'principal', 'arquitecto'];
+
+    const entryHits = entrySignals.filter((x) => normalized.includes(x)).length;
+    const seniorHits = seniorSignals.filter((x) => normalized.includes(x)).length;
+
+    let level: ExperienceProfile['level'] = (insights?.level as ExperienceProfile['level']) || 'mid';
+    if (maxYears <= 1 || entryHits >= 2) level = 'intern';
+    else if (maxYears <= 3 || entryHits > 0) level = 'junior';
+    else if (maxYears >= 6 || seniorHits >= 2) level = 'senior';
+
+    const prefersInternships =
+      typeof insights?.prefersInternships === 'boolean'
+        ? insights.prefersInternships
+        : level === 'intern' || (level === 'junior' && maxYears <= 1);
+    const seniorityTerms =
+      insights?.preferredJobTypes?.length
+        ? [...new Set([...insights.preferredJobTypes, ...(insights.roles || [])])].slice(0, 6)
+        : level === 'intern'
+          ? ['practicante', 'intern', 'trainee', 'junior']
+          : level === 'junior'
+            ? ['junior', 'entry level', 'asistente', 'analista junior']
+            : level === 'senior'
+              ? ['senior', 'lead', 'manager', 'principal']
+              : ['analista', 'associate', 'mid level'];
+
+    return {
+      years: maxYears,
+      level,
+      prefersInternships,
+      seniorityTerms,
+    };
   }
 }

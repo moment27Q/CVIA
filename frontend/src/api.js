@@ -28,12 +28,13 @@ export async function exportPremiumPdf(payload) {
   return data;
 }
 
-export async function matchJobsByCv({ cvFile, cvText, desiredRole, location }) {
+export async function matchJobsByCv({ cvFile, cvText, desiredRole, location, country }) {
   const formData = new FormData();
   if (cvFile) formData.append('cvFile', cvFile);
   if (cvText) formData.append('cvText', cvText);
   if (desiredRole) formData.append('desiredRole', desiredRole);
   if (location) formData.append('location', location);
+  if (country) formData.append('country', country);
 
   const res = await fetch(`${API_BASE}/api/job/match-cv-jobs`, {
     method: 'POST',

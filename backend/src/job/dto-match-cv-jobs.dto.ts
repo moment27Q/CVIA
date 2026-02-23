@@ -15,4 +15,9 @@ export class MatchCvJobsDto {
   @IsOptional()
   @MaxLength(120)
   location?: string;
+
+  @IsString()
+  @IsOptional()
+  @MaxLength(80)
+  country?: string;
 }

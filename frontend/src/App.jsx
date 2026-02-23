@@ -14,9 +14,12 @@ const initial = {
 
 const cvInitial = {
   desiredRole: '',
-  location: 'Peru',
+  country: 'Peru',
+  location: '',
   cvText: '',
 };
+
+const countryOptions = ['Peru', 'United States', 'Mexico', 'Argentina', 'Chile', 'Colombia', 'Spain'];
 
 export default function App() {
   const [view, setView] = useState('ats');
@@ -98,6 +101,7 @@ export default function App() {
         cvFile,
         cvText: cvForm.cvText,
         desiredRole: cvForm.desiredRole,
+        country: cvForm.country,
         location: cvForm.location,
       });
       setJobsResult(data);
@@ -232,15 +236,24 @@ export default function App() {
               placeholder="Ej: analista de datos"
             />
 
-            <label>Ubicacion preferida (opcional)</label>
-            <input name="location" value={cvForm.location} onChange={onCvChange} placeholder="Ej: Peru o Lima" />
+            <label>Pais</label>
+            <select name="country" value={cvForm.country} onChange={onCvChange}>
+              {countryOptions.map((country) => (
+                <option key={country} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+
+            <label>Ciudad o region (opcional)</label>
+            <input name="location" value={cvForm.location} onChange={onCvChange} placeholder="Ej: Lima, CDMX, Madrid" />
 
             <button disabled={jobsLoading} type="submit">
               {jobsLoading ? 'Buscando empleos...' : 'Encontrar empleos para mi perfil'}
             </button>
 
             <p className="muted">
-              Se consulta Peru en fuentes publicas como Computrabajo, Indeed, Bumeran, LinkedIn y portal estatal.
+              Se consulta Active Jobs DB (RapidAPI) en tiempo real y fuentes publicas (LinkedIn, Indeed, Computrabajo, etc).
             </p>
 
             {jobsError && <p className="error">{jobsError}</p>}
@@ -259,6 +272,15 @@ export default function App() {
                   <strong>Keywords detectadas:</strong> {(jobsResult.extractedKeywords || []).join(', ')}
                 </p>
                 <p className="muted">{jobsResult.note}</p>
+                {Array.isArray(jobsResult.providerStatus) && jobsResult.providerStatus.length > 0 && (
+                  <p className="muted">
+                    {jobsResult.providerStatus
+                      .map((p) =>
+                        `${p.provider}: ${p.success ? `OK (${p.jobs})` : p.enabled ? `ERROR (${p.error || 'sin detalle'})` : `desactivado (${p.error || 'sin detalle'})`}`,
+                      )
+                      .join(' | ')}
+                  </p>
+                )}
 
                 <div className="jobs-list">
                   {(jobsResult.jobs || []).map((job, idx) => (

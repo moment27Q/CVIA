@@ -14,6 +14,16 @@ interface GenerateInput {
   isPremium: boolean;
 }
 
+export interface CvInsights {
+  keywords: string[];
+  roles: string[];
+  yearsExperience: number;
+  level: 'intern' | 'junior' | 'mid' | 'senior';
+  prefersInternships: boolean;
+  englishLevel: 'basic' | 'intermediate' | 'advanced' | 'unknown';
+  preferredJobTypes: string[];
+}
+
 @Injectable()
 export class GeminiService {
   private readonly key = process.env.GEMINI_API_KEY || '';
@@ -65,6 +75,75 @@ export class GeminiService {
       return this.postProcessKeywords(merged, desiredRole);
     } catch {
       return this.postProcessKeywords(localKeywords, desiredRole);
+    }
+  }
+
+  async extractCvInsights(cvText: string, desiredRole?: string): Promise<CvInsights> {
+    const cleanText = cvText.replace(/\s+/g, ' ').trim();
+    const localKeywords = this.fallbackKeywords(cleanText, desiredRole);
+    const local = this.buildLocalInsights(cleanText, desiredRole, localKeywords);
+
+    if (!cleanText || !this.key) {
+      return local;
+    }
+
+    const excerpt = this.buildCvExcerpt(cleanText);
+    const prompt = [
+      'Analiza este CV y devuelve SOLO JSON valido con esta forma exacta:',
+      '{"keywords":[],"roles":[],"yearsExperience":0,"level":"intern|junior|mid|senior","prefersInternships":false,"englishLevel":"basic|intermediate|advanced|unknown","preferredJobTypes":[]}',
+      'Reglas:',
+      '- yearsExperience debe ser numero entero estimado (0-30).',
+      '- preferredJobTypes usa terminos como: practica, trainee, junior, tiempo completo, remoto, hibrido.',
+      '- keywords maximo 18, roles maximo 8.',
+      desiredRole ? `Rol objetivo declarado: ${desiredRole}` : 'Rol objetivo declarado: no especificado',
+      `CV: ${excerpt}`,
+    ].join('\n');
+
+    const raw = await this.callModel(prompt, 900);
+    if (!raw) return local;
+
+    try {
+      const jsonText = raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1);
+      const parsed = JSON.parse(jsonText);
+
+      const mergedKeywords = this.postProcessKeywords(
+        [
+          ...(Array.isArray(parsed.keywords) ? parsed.keywords : []),
+          ...local.keywords,
+        ],
+        desiredRole,
+      );
+
+      const roles = [...new Set([
+        ...(Array.isArray(parsed.roles) ? parsed.roles : []).map((x: unknown) => String(x).trim()).filter(Boolean),
+        ...local.roles,
+      ])].slice(0, 8);
+
+      const yearsExperience = Math.max(
+        0,
+        Math.min(30, Number.isFinite(Number(parsed.yearsExperience)) ? Math.floor(Number(parsed.yearsExperience)) : local.yearsExperience),
+      );
+
+      const level = this.normalizeLevel(parsed.level) || local.level;
+      const prefersInternships =
+        typeof parsed.prefersInternships === 'boolean' ? parsed.prefersInternships : local.prefersInternships;
+      const englishLevel = this.normalizeEnglishLevel(parsed.englishLevel) || local.englishLevel;
+      const preferredJobTypes = [...new Set([
+        ...(Array.isArray(parsed.preferredJobTypes) ? parsed.preferredJobTypes : []).map((x: unknown) => String(x).trim().toLowerCase()).filter(Boolean),
+        ...local.preferredJobTypes,
+      ])].slice(0, 10);
+
+      return {
+        keywords: mergedKeywords,
+        roles,
+        yearsExperience,
+        level,
+        prefersInternships,
+        englishLevel,
+        preferredJobTypes,
+      };
+    } catch {
+      return local;
     }
   }
 
@@ -240,5 +319,60 @@ export class GeminiService {
     const tail = fullText.slice(-chunk);
 
     return [head, middle, tail].join('\n');
+  }
+
+  private buildLocalInsights(cvText: string, desiredRole: string | undefined, localKeywords: string[]): CvInsights {
+    const normalized = cvText
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+
+    const yearsMatches = [...normalized.matchAll(/(\d{1,2})\s*(?:\+)?\s*(?:anos|ano|years|year)/g)].map((m) => Number(m[1]));
+    const yearsExperience = yearsMatches.length ? Math.max(...yearsMatches.filter((n) => !Number.isNaN(n))) : 0;
+
+    const entrySignals = ['practicante', 'practica', 'intern', 'trainee', 'sin experiencia', 'estudiante'];
+    const seniorSignals = ['senior', 'lead', 'lider', 'manager', 'jefe', 'principal', 'arquitecto'];
+    const entryHits = entrySignals.filter((x) => normalized.includes(x)).length;
+    const seniorHits = seniorSignals.filter((x) => normalized.includes(x)).length;
+
+    let level: CvInsights['level'] = 'mid';
+    if (yearsExperience <= 1 || entryHits >= 2) level = 'intern';
+    else if (yearsExperience <= 3 || entryHits > 0) level = 'junior';
+    else if (yearsExperience >= 6 || seniorHits >= 2) level = 'senior';
+
+    const prefersInternships = level === 'intern' || (level === 'junior' && yearsExperience <= 1);
+
+    let englishLevel: CvInsights['englishLevel'] = 'unknown';
+    if (/\b(c1|c2|advanced english|ingles avanzado|fluent|bilingue)\b/.test(normalized)) englishLevel = 'advanced';
+    else if (/\b(b1|b2|intermediate english|ingles intermedio)\b/.test(normalized)) englishLevel = 'intermediate';
+    else if (/\b(a1|a2|ingles basico|basic english)\b/.test(normalized)) englishLevel = 'basic';
+
+    const preferredJobTypes = prefersInternships
+      ? ['practica', 'intern', 'trainee', 'junior']
+      : level === 'senior'
+        ? ['tiempo completo', 'senior', 'lead']
+        : ['tiempo completo', 'junior', 'analista'];
+
+    return {
+      keywords: this.postProcessKeywords(localKeywords, desiredRole),
+      roles: desiredRole ? [desiredRole.toLowerCase()] : localKeywords.slice(0, 4),
+      yearsExperience,
+      level,
+      prefersInternships,
+      englishLevel,
+      preferredJobTypes,
+    };
+  }
+
+  private normalizeLevel(value: unknown): CvInsights['level'] | null {
+    const v = String(value || '').toLowerCase().trim();
+    if (v === 'intern' || v === 'junior' || v === 'mid' || v === 'senior') return v;
+    return null;
+  }
+
+  private normalizeEnglishLevel(value: unknown): CvInsights['englishLevel'] | null {
+    const v = String(value || '').toLowerCase().trim();
+    if (v === 'basic' || v === 'intermediate' || v === 'advanced' || v === 'unknown') return v;
+    return null;
   }
 }
