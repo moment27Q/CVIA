@@ -147,6 +147,11 @@ export class GeminiService {
     }
   }
 
+  async runStructuredPrompt(prompt: string, maxOutputTokens = 900): Promise<string | null> {
+    if (!this.key) return null;
+    return this.callModel(prompt, maxOutputTokens);
+  }
+
   private async callModel(prompt: string, maxOutputTokens: number): Promise<string | null> {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:generateContent?key=${this.key}`;
 

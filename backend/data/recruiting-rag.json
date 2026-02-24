@@ -1,0 +1,14 @@
+{
+  "matchCases": [
+    {
+      "id": "match_1771889049176_733",
+      "candidateSummary": "Backend developer con Node.js, PostgreSQL, APIs REST y 2 anos de experiencia.",
+      "jobSummary": "Backend Engineer\nBuscamos backend con Node, SQL, testing, arquitectura de microservicios.",
+      "whyAccepted": "No hubo respuesta estructurada de Gemini.",
+      "verdict": "unknown",
+      "quality": 0,
+      "createdAt": "2026-02-23T23:24:09.176Z"
+    }
+  ],
+  "careerPaths": []
+}

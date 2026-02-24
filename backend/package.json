@@ -20,11 +20,13 @@
     "dotenv": "^16.4.7",
     "pdf-parse": "^1.1.1",
     "pdfkit": "^0.15.1",
+    "pg": "^8.18.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
   "devDependencies": {
     "@types/node": "^22.13.10",
+    "@types/pg": "^8.16.0",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.2"

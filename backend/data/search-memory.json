@@ -2,20 +2,21 @@
   "buckets": {
     "peru|intern": {
       "keywordWeights": {
-        "automatizacion": 1,
-        "diseno": 1,
-        "software": 1,
-        "ingles": 1
+        "automatizacion": 5,
+        "diseno": 5,
+        "software": 5,
+        "ingles": 4,
+        "desarrollador de software snior": 1
       },
       "sourceWeights": {
-        "computrabajo": 1.2,
-        "indeed": 1.15,
-        "bumeran": 1.0999999999999999,
-        "linkedin": 1.0499999999999998,
-        "glassdoor": 1
+        "computrabajo": 6,
+        "indeed": 5.75,
+        "bumeran": 5.499999999999999,
+        "linkedin": 5.249999999999999,
+        "glassdoor": 5
       },
-      "updates": 1,
-      "updatedAt": "2026-02-23T22:46:28.665Z"
+      "updates": 5,
+      "updatedAt": "2026-02-24T01:06:20.831Z"
     },
     "united states|intern": {
       "keywordWeights": {
