@@ -47,3 +47,17 @@ export async function matchJobsByCv({ cvFile, cvText, desiredRole, location, cou
   }
   return data;
 }
+
+export async function generateCareerPathFromCv(payload) {
+  const res = await fetch(`${API_BASE}/api/recruiting/career-path-from-cv`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data?.message || 'Error al generar ruta de carrera');
+  }
+  return data;
+}

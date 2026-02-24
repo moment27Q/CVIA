@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
-import { exportPremiumPdf, generateApplication, matchJobsByCv } from './api';
+import { exportPremiumPdf, generateApplication, generateCareerPathFromCv, matchJobsByCv } from './api';
+import CareerPathRoadmap from './components/CareerPathRoadmap';
 
 const initial = {
   jobUrl: '',
@@ -16,6 +17,12 @@ const cvInitial = {
   desiredRole: '',
   country: 'Peru',
   location: '',
+  cvText: '',
+};
+
+const careerInitial = {
+  userId: '',
+  targetRole: '',
   cvText: '',
 };
 
@@ -36,6 +43,11 @@ export default function App() {
   const [jobsError, setJobsError] = useState('');
   const [jobsResult, setJobsResult] = useState(null);
 
+  const [careerForm, setCareerForm] = useState(careerInitial);
+  const [careerLoading, setCareerLoading] = useState(false);
+  const [careerError, setCareerError] = useState('');
+  const [careerResult, setCareerResult] = useState(null);
+
   const canExportPdf = useMemo(() => form.plan === 'premium' && result, [form.plan, result]);
 
   const onChange = (e) => {
@@ -46,6 +58,11 @@ export default function App() {
   const onCvChange = (e) => {
     const { name, value } = e.target;
     setCvForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const onCareerChange = (e) => {
+    const { name, value } = e.target;
+    setCareerForm((prev) => ({ ...prev, [name]: value }));
   };
 
   const onSubmit = async (e) => {
@@ -112,6 +129,35 @@ export default function App() {
     }
   };
 
+  const onGenerateCareer = async (e) => {
+    e.preventDefault();
+    setCareerLoading(true);
+    setCareerError('');
+    setCareerResult(null);
+
+    try {
+      const data = await generateCareerPathFromCv({
+        userId: careerForm.userId || 'anonymous',
+        targetRole: careerForm.targetRole,
+        cvText: careerForm.cvText,
+      });
+      setCareerResult(data);
+    } catch (err) {
+      setCareerError(err.message);
+    } finally {
+      setCareerLoading(false);
+    }
+  };
+
+  const matchPercent = useMemo(() => {
+    if (!careerResult) return 0;
+    const market = (careerResult.marketSkills || []).length;
+    const missing = (careerResult.missingSkills || []).length;
+    if (!market) return 50;
+    const score = Math.round(((market - missing) / market) * 100);
+    return Math.max(0, Math.min(100, score));
+  }, [careerResult]);
+
   return (
     <main className="page">
       <section className="hero">
@@ -126,6 +172,9 @@ export default function App() {
           </button>
           <button className={view === 'jobs' ? 'tab active' : 'tab'} onClick={() => setView('jobs')} type="button">
             Empleos por CV
+          </button>
+          <button className={view === 'career' ? 'tab active' : 'tab'} onClick={() => setView('career')} type="button">
+            Ruta de Carrera IA
           </button>
         </div>
       </section>
@@ -303,6 +352,62 @@ export default function App() {
                   ))}
                 </div>
               </>
+            )}
+          </article>
+        </section>
+      )}
+
+      {view === 'career' && (
+        <section className="grid-jobs">
+          <form className="card" onSubmit={onGenerateCareer}>
+            <h2>Generador de Ruta de Carrera</h2>
+
+            <label>ID de usuario (opcional)</label>
+            <input name="userId" value={careerForm.userId} onChange={onCareerChange} placeholder="matias" />
+
+            <label>Rol objetivo</label>
+            <input
+              name="targetRole"
+              value={careerForm.targetRole}
+              onChange={onCareerChange}
+              placeholder="Ej: Backend Developer"
+              required
+            />
+
+            <label>CV en texto</label>
+            <textarea
+              name="cvText"
+              value={careerForm.cvText}
+              onChange={onCareerChange}
+              rows={10}
+              placeholder="Pega aqui tu CV (PDF convertido a texto)"
+              required
+            />
+
+            <button disabled={careerLoading} type="submit">
+              {careerLoading ? 'Generando ruta...' : 'Generar Roadmap Personalizado'}
+            </button>
+
+            <p className="muted">
+              Este flujo usa RAG: compara tu CV con perfiles exitosos y genera un plan para cerrar brechas.
+            </p>
+
+            {careerError && <p className="error">{careerError}</p>}
+          </form>
+
+          <article className="card output">
+            <h2>CareerPathRoadmap</h2>
+            {!careerResult && <p className="muted">Aqui veras tu roadmap tipo timeline con pasos accionables.</p>}
+
+            {careerResult && (
+              <CareerPathRoadmap
+                currentRole="Perfil actual del CV"
+                targetRole={careerForm.targetRole}
+                matchPercent={matchPercent}
+                marketSkills={careerResult.marketSkills || []}
+                missingSkills={careerResult.missingSkills || []}
+                steps={careerResult.steps || []}
+              />
             )}
           </article>
         </section>
