@@ -27,6 +27,8 @@ export default function CareerPathRoadmap({
   marketSkills = [],
   missingSkills = [],
   onStatusChange,
+  onRequestResources,
+  userLevel = 'junior',
 }) {
   const [statusMap, setStatusMap] = useState(() =>
     steps.reduce((acc, _, i) => {
@@ -34,6 +36,15 @@ export default function CareerPathRoadmap({
       return acc;
     }, {}),
   );
+  const [resourceState, setResourceState] = useState({
+    open: false,
+    loading: false,
+    error: '',
+    stepTitle: '',
+    skill: '',
+    payload: null,
+    cached: false,
+  });
 
   const normalizedMarketSkills = useMemo(
     () => new Set((marketSkills || []).map((s) => String(s).toLowerCase().trim())),
@@ -54,6 +65,47 @@ export default function CareerPathRoadmap({
       if (onStatusChange) onStatusChange(idx, updated[idx]);
       return updated;
     });
+  };
+
+  const handleOpenResources = async (step) => {
+    const skill = (step.skills && step.skills[0]) || step.title || 'Skill';
+    setResourceState({
+      open: true,
+      loading: true,
+      error: '',
+      stepTitle: step.title || 'Paso',
+      skill,
+      payload: null,
+      cached: false,
+    });
+
+    if (!onRequestResources) {
+      setResourceState((prev) => ({
+        ...prev,
+        loading: false,
+        error: 'No hay conexion con recursos IA.',
+      }));
+      return;
+    }
+
+    try {
+      const result = await onRequestResources({
+        skill_name: skill,
+        user_level: userLevel,
+      });
+      setResourceState((prev) => ({
+        ...prev,
+        loading: false,
+        payload: result?.data || null,
+        cached: Boolean(result?.cached),
+      }));
+    } catch (error) {
+      setResourceState((prev) => ({
+        ...prev,
+        loading: false,
+        error: error?.message || 'No se pudo cargar recursos',
+      }));
+    }
   };
 
   return (
@@ -119,19 +171,79 @@ export default function CareerPathRoadmap({
 
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <p className="text-xs font-medium text-slate-500">ETA: {step.etaWeeks || 4} semanas</p>
-                  <button
-                    type="button"
-                    onClick={() => handleToggle(idx)}
-                    className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700"
-                  >
-                    Marcar estado
-                  </button>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleOpenResources(step)}
+                      className="rounded-lg border border-cyan-200 bg-cyan-50 px-3 py-2 text-xs font-semibold text-cyan-800 transition hover:bg-cyan-100"
+                    >
+                      Ver recursos IA
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleToggle(idx)}
+                      className="rounded-lg bg-slate-900 px-3 py-2 text-xs font-semibold text-white transition hover:bg-slate-700"
+                    >
+                      Marcar estado
+                    </button>
+                  </div>
                 </div>
               </article>
             </li>
           );
         })}
       </ol>
+
+      {resourceState.open && (
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/45 p-3 md:items-center">
+          <div className="w-full max-w-xl rounded-2xl border border-slate-200 bg-white p-4 shadow-xl md:p-5">
+            <div className="mb-3 flex items-start justify-between gap-3">
+              <div>
+                <h4 className="text-base font-bold text-slate-900">Detalle de Recursos de Aprendizaje</h4>
+                <p className="text-sm text-slate-600">
+                  {resourceState.stepTitle} · <span className="font-semibold">{resourceState.skill}</span>
+                </p>
+                {resourceState.cached && (
+                  <p className="mt-1 text-xs font-semibold text-emerald-700">Cache diario aplicado (sin gasto de saldo IA)</p>
+                )}
+              </div>
+              <button
+                type="button"
+                onClick={() => setResourceState((prev) => ({ ...prev, open: false }))}
+                className="rounded-lg border border-slate-200 px-2 py-1 text-xs font-semibold text-slate-600 hover:bg-slate-50"
+              >
+                Cerrar
+              </button>
+            </div>
+
+            {resourceState.loading && <p className="text-sm text-slate-600">Consultando recomendaciones con Gemini...</p>}
+            {resourceState.error && <p className="text-sm text-rose-700">{resourceState.error}</p>}
+
+            {resourceState.payload && (
+              <div className="space-y-3">
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Mejor curso gratuito</p>
+                  <p className="mt-1 text-sm font-semibold text-slate-900">{resourceState.payload?.free_resource?.title}</p>
+                  <p className="text-xs text-slate-600">
+                    {resourceState.payload?.free_resource?.platform} · Buscar: {resourceState.payload?.free_resource?.url_search_term}
+                  </p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Mejor curso de pago</p>
+                  <p className="mt-1 text-sm font-semibold text-slate-900">{resourceState.payload?.paid_resource?.title}</p>
+                  <p className="text-xs text-slate-600">{resourceState.payload?.paid_resource?.platform}</p>
+                </article>
+
+                <article className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                  <p className="text-xs font-bold uppercase tracking-wide text-slate-500">Proyecto práctico</p>
+                  <p className="mt-1 text-sm text-slate-800">{resourceState.payload?.practice_project}</p>
+                </article>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

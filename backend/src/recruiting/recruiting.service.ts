@@ -3,6 +3,7 @@ import { GeminiService } from '../common/services/gemini.service';
 import { CvParserService } from '../common/services/cv-parser.service';
 import { RecruitingRagService } from '../common/services/recruiting-rag.service';
 import { FeedbackDto } from './dto-feedback.dto';
+import { GetLearningResourcesDto } from './dto-get-learning-resources.dto';
 import { GenerateCareerPathDto } from './dto-generate-career-path.dto';
 import { GenerateCareerPathFromCvDto } from './dto-generate-career-path-from-cv.dto';
 import { MatchCvDto } from './dto-match-cv.dto';
@@ -128,6 +129,45 @@ export class RecruitingService {
 
   async registerFeedback(dto: FeedbackDto) {
     return this.ragService.registerFeedback(dto);
+  }
+
+  async getLearningResources(dto: GetLearningResourcesDto) {
+    const dayKey = new Date().toISOString().slice(0, 10);
+    const cached = await this.ragService.getLearningResourceCache(dto.skill_name, dto.user_level, dayKey);
+    if (cached) {
+      return {
+        cached: true,
+        skill_name: dto.skill_name,
+        user_level: dto.user_level,
+        data: cached,
+      };
+    }
+
+    const prompt = [
+      'Actua como un Tech Lead Curador de Contenido.',
+      `El usuario necesita aprender: ${dto.skill_name}.`,
+      `Nivel actual del usuario: ${dto.user_level}.`,
+      '',
+      'Genera un JSON estricto con 3 recomendaciones exactas:',
+      'Mejor Curso Gratuito: (Youtube, Documentacion oficial, Blogs).',
+      'Mejor Curso de Pago: (Udemy, Coursera, Platzi - especifica cual).',
+      'Proyecto Practico: Una idea rapida para aplicar lo aprendido hoy mismo.',
+      '',
+      'Formato JSON requerido:',
+      '{ "free_resource": { "title": "...", "platform": "...", "url_search_term": "..." }, "paid_resource": { "title": "...", "platform": "..." }, "practice_project": "..." }',
+    ].join('\n');
+
+    const raw = await this.geminiService.runStructuredPrompt(prompt, 700, 0.78);
+    const parsed = this.parseLearningResources(raw, dto.skill_name);
+
+    await this.ragService.saveLearningResourceCache(dto.skill_name, dto.user_level, dayKey, parsed);
+
+    return {
+      cached: false,
+      skill_name: dto.skill_name,
+      user_level: dto.user_level,
+      data: parsed,
+    };
   }
 
   private parseMatch(raw: string | null) {
@@ -338,5 +378,45 @@ export class RecruitingService {
     }
 
     return missingSkills[0] || 'proyectos de impacto y portafolio';
+  }
+
+  private parseLearningResources(raw: string | null, skillName: string) {
+    if (!raw) {
+      return this.learningResourceFallback(skillName);
+    }
+
+    try {
+      const jsonText = raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1);
+      const parsed = JSON.parse(jsonText);
+      return {
+        free_resource: {
+          title: String(parsed?.free_resource?.title || `Curso gratuito de ${skillName}`).slice(0, 140),
+          platform: String(parsed?.free_resource?.platform || 'Documentacion oficial').slice(0, 80),
+          url_search_term: String(parsed?.free_resource?.url_search_term || `${skillName} tutorial oficial`).slice(0, 180),
+        },
+        paid_resource: {
+          title: String(parsed?.paid_resource?.title || `Especializacion de ${skillName}`).slice(0, 140),
+          platform: String(parsed?.paid_resource?.platform || 'Udemy').slice(0, 80),
+        },
+        practice_project: String(parsed?.practice_project || `Crea un mini proyecto aplicando ${skillName} hoy.`).slice(0, 260),
+      };
+    } catch {
+      return this.learningResourceFallback(skillName);
+    }
+  }
+
+  private learningResourceFallback(skillName: string) {
+    return {
+      free_resource: {
+        title: `Fundamentos gratuitos de ${skillName}`,
+        platform: 'Documentacion oficial',
+        url_search_term: `${skillName} official documentation tutorial`,
+      },
+      paid_resource: {
+        title: `Curso completo de ${skillName}`,
+        platform: 'Udemy',
+      },
+      practice_project: `Construye una mini app de ejemplo usando ${skillName} con al menos 2 funcionalidades reales.`,
+    };
   }
 }

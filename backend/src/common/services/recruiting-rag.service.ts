@@ -27,6 +27,11 @@ interface CareerPathRecord {
 interface RecruitingRagDb {
   matchCases: MatchCase[];
   careerPaths: CareerPathRecord[];
+  learningResourceCache?: Array<{
+    key: string;
+    payload: Record<string, unknown>;
+    createdAt: string;
+  }>;
 }
 
 interface VectorMetaRow {
@@ -160,6 +165,60 @@ export class RecruitingRagService {
         successfulSteps: x.successfulSteps,
         quality: x.quality,
       }));
+  }
+
+  async getLearningResourceCache(skillName: string, userLevel: string, dayKey: string) {
+    const key = this.buildLearningCacheKey(skillName, userLevel, dayKey);
+    if (this.hasPgConfig) {
+      const rows = await this.query(
+        `SELECT metadata
+         FROM recruiting_case_vectors
+         WHERE case_type = 'learning_resource_cache' AND ref_id = $1
+         ORDER BY created_at DESC
+         LIMIT 1`,
+        [key],
+      );
+      if (!rows.rows.length) return null;
+      const metadata = (rows.rows[0].metadata || {}) as Record<string, unknown>;
+      return metadata?.response || null;
+    }
+
+    const db = await this.readDb();
+    const row = (db.learningResourceCache || []).find((x) => x.key === key);
+    return row?.payload || null;
+  }
+
+  async saveLearningResourceCache(
+    skillName: string,
+    userLevel: string,
+    dayKey: string,
+    response: Record<string, unknown>,
+  ) {
+    const key = this.buildLearningCacheKey(skillName, userLevel, dayKey);
+    if (this.hasPgConfig) {
+      await this.query(
+        `INSERT INTO recruiting_case_vectors (case_type, ref_id, content, metadata, embedding)
+         VALUES ('learning_resource_cache', $1, $2, $3::jsonb, $4::jsonb)`,
+        [
+          key,
+          `${skillName} | ${userLevel} | ${dayKey}`,
+          JSON.stringify({ response, skillName, userLevel, dayKey }),
+          JSON.stringify([]),
+        ],
+      );
+      return;
+    }
+
+    const db = await this.readDb();
+    db.learningResourceCache = db.learningResourceCache || [];
+    const next = db.learningResourceCache.filter((x) => x.key !== key);
+    next.push({
+      key,
+      payload: response,
+      createdAt: new Date().toISOString(),
+    });
+    db.learningResourceCache = next.slice(-200);
+    await this.writeDb(db);
   }
 
   async saveMatchPrediction(input: {
@@ -521,6 +580,10 @@ export class RecruitingRagService {
       .trim();
   }
 
+  private buildLearningCacheKey(skillName: string, userLevel: string, dayKey: string) {
+    return `${this.normalize(skillName)}|${this.normalize(userLevel)}|${dayKey}`;
+  }
+
   private extractSkillsFromText(text: string): string[] {
     const normalized = this.normalize(text);
     const skillLexicon = [
@@ -584,10 +647,11 @@ export class RecruitingRagService {
       return {
         matchCases: parsed.matchCases || [],
         careerPaths: parsed.careerPaths || [],
+        learningResourceCache: parsed.learningResourceCache || [],
       };
     } catch {
       await fs.mkdir(path.dirname(this.filePath), { recursive: true });
-      const initial: RecruitingRagDb = { matchCases: [], careerPaths: [] };
+      const initial: RecruitingRagDb = { matchCases: [], careerPaths: [], learningResourceCache: [] };
       await fs.writeFile(this.filePath, JSON.stringify(initial, null, 2), 'utf8');
       return initial;
     }

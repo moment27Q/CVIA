@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { exportPremiumPdf, generateApplication, generateCareerPathFromCv, matchJobsByCv } from './api';
+import { exportPremiumPdf, generateApplication, generateCareerPathFromCv, getLearningResources, matchJobsByCv } from './api';
 import CareerPathRoadmap from './components/CareerPathRoadmap';
 
 const initial = {
@@ -415,6 +415,8 @@ export default function App() {
                 marketSkills={careerResult.marketSkills || []}
                 missingSkills={careerResult.missingSkills || []}
                 steps={careerResult.steps || []}
+                userLevel="junior"
+                onRequestResources={getLearningResources}
               />
             )}
           </article>
