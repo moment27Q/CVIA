@@ -50,6 +50,13 @@ interface CareerPathCandidate {
   relevance?: number;
 }
 
+interface EvolvingCareerCase {
+  targetRole: string;
+  summary: string;
+  successfulSteps: string[];
+  quality: number;
+}
+
 @Injectable()
 export class RecruitingRagService {
   private readonly filePath = path.join(process.cwd(), 'data', 'recruiting-rag.json');
@@ -127,6 +134,32 @@ export class RecruitingRagService {
       .sort((a, b) => b[1] - a[1])
       .slice(0, limit)
       .map(([skill]) => skill);
+  }
+
+  async findTopSuccessfulCareerCases(query: string, limit = 3): Promise<EvolvingCareerCase[]> {
+    if (this.hasPgConfig) {
+      return this.findTopSuccessfulCareerCasesPg(query, limit);
+    }
+
+    const db = await this.readDb();
+    const q = this.normalize(query);
+    return db.careerPaths
+      .map((p) => ({
+        targetRole: p.targetRole,
+        summary: p.summary,
+        successfulSteps: (p.usefulStepTitles || []).slice(0, 8),
+        quality: Number(p.quality || 0),
+        relevance: this.tokenScore(q, this.normalize(`${p.targetRole} ${p.summary}`)),
+      }))
+      .filter((x) => x.quality > 0)
+      .sort((a, b) => (b.relevance || 0) + b.quality - ((a.relevance || 0) + a.quality))
+      .slice(0, limit)
+      .map((x) => ({
+        targetRole: x.targetRole,
+        summary: x.summary,
+        successfulSteps: x.successfulSteps,
+        quality: x.quality,
+      }));
   }
 
   async saveMatchPrediction(input: {
@@ -409,6 +442,40 @@ export class RecruitingRagService {
       .sort((a, b) => b[1] - a[1])
       .slice(0, limit)
       .map(([skill]) => skill);
+  }
+
+  private async findTopSuccessfulCareerCasesPg(query: string, limit: number): Promise<EvolvingCareerCase[]> {
+    const rows = await this.query(
+      `SELECT metadata
+       FROM recruiting_case_vectors
+       WHERE case_type = 'career_path'
+       ORDER BY created_at DESC
+       LIMIT 500`,
+      [],
+    );
+
+    const q = this.normalize(query);
+    return rows.rows
+      .map((r: any) => {
+        const m = (r.metadata || {}) as Record<string, unknown>;
+        const targetRole = String(m.targetRole || '');
+        const summary = String(m.summary || '');
+        const successfulSteps = Array.isArray(m.usefulStepTitles)
+          ? m.usefulStepTitles.map((x: unknown) => String(x)).slice(0, 8)
+          : [];
+        const quality = Number(m.quality || 0);
+        const relevance = this.tokenScore(q, this.normalize(`${targetRole} ${summary}`));
+        return { targetRole, summary, successfulSteps, quality, relevance };
+      })
+      .filter((x) => x.quality > 0)
+      .sort((a, b) => (b.relevance || 0) + b.quality - ((a.relevance || 0) + a.quality))
+      .slice(0, limit)
+      .map((x) => ({
+        targetRole: x.targetRole,
+        summary: x.summary,
+        successfulSteps: x.successfulSteps,
+        quality: x.quality,
+      }));
   }
 
   private async query(sql: string, params: unknown[]) {

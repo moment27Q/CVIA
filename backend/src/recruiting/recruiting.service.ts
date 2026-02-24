@@ -1,17 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { GeminiService } from '../common/services/gemini.service';
+import { CvParserService } from '../common/services/cv-parser.service';
 import { RecruitingRagService } from '../common/services/recruiting-rag.service';
 import { FeedbackDto } from './dto-feedback.dto';
 import { GenerateCareerPathDto } from './dto-generate-career-path.dto';
 import { GenerateCareerPathFromCvDto } from './dto-generate-career-path-from-cv.dto';
 import { MatchCvDto } from './dto-match-cv.dto';
-import { buildCareerPathGapPrompt, buildCareerPathSystemPrompt, buildMatchSystemPrompt } from './prompts';
+import { buildCareerPathGapPrompt, buildCareerPathSystemPrompt, buildEvolvingCareerPathPrompt, buildMatchSystemPrompt } from './prompts';
 
 @Injectable()
 export class RecruitingService {
   constructor(
     private readonly geminiService: GeminiService,
     private readonly ragService: RecruitingRagService,
+    private readonly cvParserService: CvParserService,
   ) {}
 
   async matchCv(dto: MatchCvDto) {
@@ -69,21 +71,37 @@ export class RecruitingService {
     };
   }
 
-  async generateCareerPathFromCv(dto: GenerateCareerPathFromCvDto) {
-    const insights = await this.geminiService.extractCvInsights(dto.cvText, dto.targetRole);
-    const cvSkills = this.extractTechnicalSkills(`${dto.cvText}\n${(insights.keywords || []).join(' ')}`).slice(0, 20);
+  async generateCareerPathFromCv(dto: GenerateCareerPathFromCvDto, cvFile?: any) {
+    const cvText = await this.cvParserService.parseCv(dto.cvText || '', cvFile);
+    if (cvText.length < 80) {
+      throw new BadRequestException(
+        'No se pudo leer contenido suficiente del CV. Sube un PDF/TXT/MD/CSV o pega el texto del CV.',
+      );
+    }
+
+    const insights = await this.geminiService.extractCvInsights(cvText, dto.targetRole);
+    const cvSkills = this.extractTechnicalSkills(`${cvText}\n${(insights.keywords || []).join(' ')}`).slice(0, 20);
     const marketSkills = await this.ragService.findSuccessfulRoleSkills(dto.targetRole, 18);
+    const historicalCases = await this.ragService.findTopSuccessfulCareerCases(
+      `${dto.targetRole}\n${cvText}\n${cvSkills.join(' ')}`,
+      3,
+    );
     const missingSkills = this.computeMissingSkills(cvSkills, marketSkills).slice(0, 14);
 
-    const prompt = buildCareerPathGapPrompt({
+    const keyDifference = this.detectKeyDifference(cvSkills, missingSkills, insights.englishLevel);
+    const improveTopic = this.detectImproveTopic(historicalCases, missingSkills);
+
+    const prompt = buildEvolvingCareerPathPrompt({
       targetRole: dto.targetRole,
       cvSkills,
+      historicalCases,
       marketSkills,
       missingSkills,
-      cvText: dto.cvText,
+      keyDifference,
+      improveTopic,
     });
 
-    const raw = await this.geminiService.runStructuredPrompt(prompt, 1400);
+    const raw = await this.geminiService.runStructuredPrompt(prompt, 1500, 0.8);
     const parsed = this.parseCareerPath(raw);
     const withFallback = parsed.steps.length
       ? parsed
@@ -101,7 +119,9 @@ export class RecruitingService {
       cvSkills,
       marketSkills,
       missingSkills,
-      ragContextUsed: marketSkills.length,
+      ragContextUsed: historicalCases.length,
+      keyDifference,
+      improveTopic,
       ...withFallback,
     };
   }
@@ -285,5 +305,38 @@ export class RecruitingService {
         },
       ],
     };
+  }
+
+  private detectKeyDifference(cvSkills: string[], missingSkills: string[], englishLevel: string | undefined): string {
+    if (missingSkills.length > 0) {
+      return `No domina aun ${missingSkills.slice(0, 3).join(', ')}`;
+    }
+    if (englishLevel && englishLevel !== 'advanced') {
+      return `Nivel de ingles ${englishLevel} (se requiere mejora para entrevistas y documentacion)`;
+    }
+    if (cvSkills.length < 4) {
+      return 'Perfil con stack reducido; necesita mas profundidad y amplitud tecnica';
+    }
+    return 'Necesita acelerar experiencia demostrable en proyectos reales';
+  }
+
+  private detectImproveTopic(
+    historicalCases: Array<{ successfulSteps: string[] }>,
+    missingSkills: string[],
+  ): string {
+    const historicalJoined = historicalCases
+      .flatMap((c) => c.successfulSteps || [])
+      .map((x) => this.normalize(String(x)))
+      .join(' ');
+
+    for (const skill of missingSkills) {
+      const normalizedSkill = this.normalize(skill);
+      if (!normalizedSkill) continue;
+      if (!historicalJoined.includes(normalizedSkill)) {
+        return skill;
+      }
+    }
+
+    return missingSkills[0] || 'proyectos de impacto y portafolio';
   }
 }

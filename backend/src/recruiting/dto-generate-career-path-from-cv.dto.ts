@@ -2,8 +2,9 @@ import { IsOptional, IsString, MaxLength } from 'class-validator';
 
 export class GenerateCareerPathFromCvDto {
   @IsString()
+  @IsOptional()
   @MaxLength(20000)
-  cvText!: string;
+  cvText?: string;
 
   @IsString()
   @MaxLength(200)

@@ -76,3 +76,39 @@ export function buildCareerPathGapPrompt(input: {
     `CV del usuario (resumen fuente): ${input.cvText.slice(0, 4000)}`,
   ].join('\n');
 }
+
+export function buildEvolvingCareerPathPrompt(input: {
+  targetRole: string;
+  cvSkills: string[];
+  historicalCases: Array<{ targetRole: string; summary: string; successfulSteps: string[]; quality: number }>;
+  marketSkills: string[];
+  missingSkills: string[];
+  keyDifference: string;
+  improveTopic: string;
+}) {
+  const historicalText = input.historicalCases.length
+    ? input.historicalCases
+        .map(
+          (c, idx) =>
+            `Caso ${idx + 1} (quality=${c.quality})\nObjetivo: ${c.targetRole}\nResumen: ${c.summary}\nPasos utiles: ${c.successfulSteps.join(', ')}`,
+        )
+        .join('\n\n')
+    : 'Sin casos historicos exitosos disponibles.';
+
+  return [
+    'Actua como un Mentor de Carrera experto.',
+    'Responde SOLO JSON valido con esta forma:',
+    '{"summary":"","estimatedMonths":0,"gapAnalysis":{"currentSkills":[],"marketSkills":[],"missingSkills":[]},"steps":[{"title":"","goal":"","skills":[],"resources":[],"etaWeeks":0}]}',
+    '',
+    `El usuario quiere ser ${input.targetRole}.`,
+    `Sus habilidades actuales son: ${input.cvSkills.join(', ') || 'No detectadas'}.`,
+    `LA VERDAD DEL MERCADO (Contexto Recuperado): En nuestra base de datos, los candidatos exitosos para este rol dominan estas tecnologias: ${input.marketSkills.join(', ') || 'Sin datos'}.`,
+    '',
+    `Contexto Historico: Aqui tienes como ayudamos a usuarios similares en el pasado:\n${historicalText}`,
+    `Instruccion de Diferenciacion: Analiza los casos anteriores, pero NO LOS COPIES. El usuario actual tiene una diferencia clave: ${input.keyDifference}. Tu mision es refinar la estrategia anterior para cubrir esa brecha especifica.`,
+    `Instruccion de Mejora: Si detectaste que en los casos pasados falto profundidad en ${input.improveTopic}, profundiza mas en esta nueva respuesta.`,
+    '',
+    `Brecha detectada: ${input.missingSkills.join(', ') || 'sin brecha explicita, reforzar stack objetivo'}.`,
+    'Devuelve una ruta paso a paso accionable, priorizando tecnologias del contexto recuperado.',
+  ].join('\n');
+}

@@ -47,6 +47,7 @@ export default function App() {
   const [careerLoading, setCareerLoading] = useState(false);
   const [careerError, setCareerError] = useState('');
   const [careerResult, setCareerResult] = useState(null);
+  const [careerCvFile, setCareerCvFile] = useState(null);
 
   const canExportPdf = useMemo(() => form.plan === 'premium' && result, [form.plan, result]);
 
@@ -137,6 +138,7 @@ export default function App() {
 
     try {
       const data = await generateCareerPathFromCv({
+        cvFile: careerCvFile,
         userId: careerForm.userId || 'anonymous',
         targetRole: careerForm.targetRole,
         cvText: careerForm.cvText,
@@ -381,7 +383,13 @@ export default function App() {
               onChange={onCareerChange}
               rows={10}
               placeholder="Pega aqui tu CV (PDF convertido a texto)"
-              required
+            />
+
+            <label>O sube tu CV (PDF/TXT/MD/CSV)</label>
+            <input
+              type="file"
+              accept=".pdf,.txt,.md,.csv,application/pdf,text/plain,text/markdown,text/csv"
+              onChange={(e) => setCareerCvFile(e.target.files?.[0] || null)}
             />
 
             <button disabled={careerLoading} type="submit">

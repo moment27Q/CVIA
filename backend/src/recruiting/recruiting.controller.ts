@@ -1,4 +1,5 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import { Body, Controller, HttpCode, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { FeedbackDto } from './dto-feedback.dto';
 import { GenerateCareerPathDto } from './dto-generate-career-path.dto';
 import { GenerateCareerPathFromCvDto } from './dto-generate-career-path-from-cv.dto';
@@ -20,8 +21,9 @@ export class RecruitingController {
   }
 
   @Post('career-path-from-cv')
-  async careerPathFromCv(@Body() dto: GenerateCareerPathFromCvDto) {
-    return this.recruitingService.generateCareerPathFromCv(dto);
+  @UseInterceptors(FileInterceptor('cvFile'))
+  async careerPathFromCv(@UploadedFile() cvFile: any, @Body() dto: GenerateCareerPathFromCvDto) {
+    return this.recruitingService.generateCareerPathFromCv(dto, cvFile);
   }
 
   @Post('feedback')

@@ -49,10 +49,15 @@ export async function matchJobsByCv({ cvFile, cvText, desiredRole, location, cou
 }
 
 export async function generateCareerPathFromCv(payload) {
+  const formData = new FormData();
+  if (payload.cvFile) formData.append('cvFile', payload.cvFile);
+  if (payload.cvText) formData.append('cvText', payload.cvText);
+  if (payload.targetRole) formData.append('targetRole', payload.targetRole);
+  if (payload.userId) formData.append('userId', payload.userId);
+
   const res = await fetch(`${API_BASE}/api/recruiting/career-path-from-cv`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
+    body: formData,
   });
 
   const data = await res.json();

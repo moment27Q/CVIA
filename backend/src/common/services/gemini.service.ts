@@ -147,12 +147,12 @@ export class GeminiService {
     }
   }
 
-  async runStructuredPrompt(prompt: string, maxOutputTokens = 900): Promise<string | null> {
+  async runStructuredPrompt(prompt: string, maxOutputTokens = 900, temperature = 0.8): Promise<string | null> {
     if (!this.key) return null;
-    return this.callModel(prompt, maxOutputTokens);
+    return this.callModel(prompt, maxOutputTokens, temperature);
   }
 
-  private async callModel(prompt: string, maxOutputTokens: number): Promise<string | null> {
+  private async callModel(prompt: string, maxOutputTokens: number, temperature = 0.45): Promise<string | null> {
     const url = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:generateContent?key=${this.key}`;
 
     try {
@@ -161,7 +161,7 @@ export class GeminiService {
         {
           contents: [{ role: 'user', parts: [{ text: prompt }] }],
           generationConfig: {
-            temperature: 0.45,
+            temperature,
             topP: 0.95,
             maxOutputTokens,
           },
