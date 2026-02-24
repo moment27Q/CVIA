@@ -22,11 +22,17 @@ export class RecruitingService {
       `${dto.cvText}\n${dto.jobTitle || ''}\n${dto.jobDescription}`,
       4,
     );
+    const skillsUsuario = this.extractTechnicalSkills(dto.cvText).slice(0, 20);
+    const skillsJob = this.extractTechnicalSkills(`${dto.jobTitle || ''}\n${dto.jobDescription}`).slice(0, 20);
+    const experienciaUsuario = this.extractExperienceSummary(dto.cvText);
 
     const prompt = buildMatchSystemPrompt({
       cvText: dto.cvText,
       jobDescription: dto.jobDescription,
       jobTitle: dto.jobTitle,
+      skillsUsuario,
+      experienciaUsuario,
+      skillsJob,
       similarAcceptedCases,
     });
 
@@ -43,6 +49,9 @@ export class RecruitingService {
     return {
       predictionId,
       ragContextUsed: similarAcceptedCases.length,
+      skillsUsuario,
+      skillsJob,
+      experienciaUsuario,
       ...parsed,
     };
   }
@@ -55,7 +64,7 @@ export class RecruitingService {
       priorSuccessfulPaths,
     });
 
-    const raw = await this.geminiService.runStructuredPrompt(prompt, 1200);
+    const raw = await this.geminiService.runStructuredPrompt(prompt, 1800);
     const parsed = this.parseCareerPath(raw);
 
     const pathId = await this.ragService.saveCareerPath({
@@ -91,6 +100,7 @@ export class RecruitingService {
 
     const keyDifference = this.detectKeyDifference(cvSkills, missingSkills, insights.englishLevel);
     const improveTopic = this.detectImproveTopic(historicalCases, missingSkills);
+    const experienceSummary = this.extractExperienceSummary(cvText);
 
     const prompt = buildEvolvingCareerPathPrompt({
       targetRole: dto.targetRole,
@@ -100,9 +110,10 @@ export class RecruitingService {
       missingSkills,
       keyDifference,
       improveTopic,
+      experienceSummary,
     });
 
-    const raw = await this.geminiService.runStructuredPrompt(prompt, 1500, 0.8);
+    const raw = await this.geminiService.runStructuredPrompt(prompt, 2200, 0.8);
     const parsed = this.parseCareerPath(raw);
     const withFallback = parsed.steps.length
       ? parsed
@@ -182,8 +193,43 @@ export class RecruitingService {
     }
 
     try {
-      const jsonText = raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1);
-      const parsed = JSON.parse(jsonText);
+      const parsed = this.parseJsonObject(raw);
+
+      if (
+        typeof parsed.match_summary !== 'undefined' ||
+        Array.isArray(parsed.matching_skills) ||
+        Array.isArray(parsed.missing_skills)
+      ) {
+        const matchingSkills = Array.isArray(parsed.matching_skills)
+          ? parsed.matching_skills.map((x: unknown) => String(x)).slice(0, 20)
+          : [];
+        const missingSkills = Array.isArray(parsed.missing_skills)
+          ? parsed.missing_skills.map((x: unknown) => String(x)).slice(0, 20)
+          : [];
+
+        const ratioBase = matchingSkills.length + missingSkills.length;
+        const inferredScore = ratioBase > 0 ? Math.round((matchingSkills.length / ratioBase) * 100) : 50;
+        const compatibilityScore = Math.max(0, Math.min(100, inferredScore));
+        const decision =
+          compatibilityScore >= 75 ? 'strong_match' : compatibilityScore >= 45 ? 'possible_match' : 'weak_match';
+        const reasons = [String(parsed.match_summary || '').trim(), String(parsed.improvement_tip || '').trim()]
+          .filter(Boolean)
+          .slice(0, 8);
+
+        return {
+          compatibilityScore,
+          decision,
+          reasons,
+          missingSkills,
+          interviewFocus: Array.isArray(parsed.matching_skills)
+            ? parsed.matching_skills.map((x: unknown) => String(x)).slice(0, 10)
+            : [],
+          matchSummary: String(parsed.match_summary || '').slice(0, 600),
+          matchingSkills,
+          improvementTip: String(parsed.improvement_tip || '').slice(0, 320),
+        };
+      }
+
       const score = Number(parsed.compatibilityScore);
 
       return {
@@ -200,6 +246,11 @@ export class RecruitingService {
           : [],
       };
     } catch {
+      const recovered = this.recoverPartialMatch(raw);
+      if (recovered) {
+        return recovered;
+      }
+      this.logParseFailure('match', raw);
       return {
         compatibilityScore: 50,
         decision: 'possible_match',
@@ -208,6 +259,23 @@ export class RecruitingService {
         interviewFocus: [],
       };
     }
+  }
+
+  private extractExperienceSummary(cvText: string): string {
+    const normalized = this.normalize(cvText);
+    const yearMatches = [...normalized.matchAll(/(\d{1,2})\s*(?:\+)?\s*(?:anos|ano|years|year)/g)];
+    const years = yearMatches
+      .map((m) => Number(m[1]))
+      .filter((n) => Number.isFinite(n))
+      .sort((a, b) => b - a);
+
+    if (years.length > 0) {
+      return `${years[0]} anos de experiencia estimada`;
+    }
+    if (/\b(practicante|practica|intern|trainee|sin experiencia)\b/.test(normalized)) {
+      return 'Perfil inicial: practicas o sin experiencia formal';
+    }
+    return 'Experiencia no especificada claramente en el CV';
   }
 
   private parseCareerPath(raw: string | null) {
@@ -220,8 +288,66 @@ export class RecruitingService {
     }
 
     try {
-      const jsonText = raw.slice(raw.indexOf('{'), raw.lastIndexOf('}') + 1);
-      const parsed = JSON.parse(jsonText);
+      const parsed = this.parseJsonObject(raw);
+      if (Array.isArray(parsed.priority_skills_to_learn)) {
+        const priority = parsed.priority_skills_to_learn.slice(0, 12).map((item: any, idx: number) => {
+          const skill = String(item?.skill || '').trim();
+          const why = String(item?.why_important || '').trim();
+          const level = String(item?.level_required || '').trim();
+          const courseType = String(item?.recommended_course_type || '').trim();
+          const project = String(item?.practice_project || '').trim();
+          const estimatedWeeksRaw = Number(item?.estimated_weeks);
+          const estimatedWeeks = Number.isFinite(estimatedWeeksRaw)
+            ? Math.max(1, Math.min(52, Math.round(estimatedWeeksRaw)))
+            : 4;
+
+          return {
+            title: skill ? `Prioridad ${idx + 1}: ${skill}` : `Prioridad ${idx + 1}`,
+            goal: [why, level ? `Nivel requerido: ${level}` : '', `Curso sugerido: ${courseType}`, `Proyecto: ${project}`]
+              .filter(Boolean)
+              .join(' | ')
+              .slice(0, 280),
+            skills: skill ? [skill] : [],
+            resources: courseType ? [courseType] : [],
+            etaWeeks: estimatedWeeks,
+          };
+        });
+
+        const summary = [
+          String(parsed.final_goal_validation || '').trim(),
+          Array.isArray(parsed.learning_order) && parsed.learning_order.length
+            ? `Orden sugerido: ${parsed.learning_order.map((x: unknown) => String(x)).join(' -> ')}`
+            : '',
+        ]
+          .filter(Boolean)
+          .join(' | ')
+          .slice(0, 800);
+
+        const estimatedMonths = Math.max(
+          1,
+          Math.min(
+            48,
+            Math.round(
+              priority.reduce((acc: number, s: { etaWeeks: number }) => acc + (Number(s.etaWeeks) || 0), 0) / 4,
+            ) || 6,
+          ),
+        );
+
+        return {
+          summary: summary || `Ruta personalizada para ${String(parsed.target_role || '').trim() || 'rol objetivo'}.`,
+          estimatedMonths,
+          steps: priority,
+          targetRole: String(parsed.target_role || '').trim(),
+          learningOrder: Array.isArray(parsed.learning_order)
+            ? parsed.learning_order.map((x: unknown) => String(x)).slice(0, 20)
+            : [],
+          milestoneChecklist: Array.isArray(parsed.milestone_checklist)
+            ? parsed.milestone_checklist.map((x: unknown) => String(x)).slice(0, 30)
+            : [],
+          finalGoalValidation: String(parsed.final_goal_validation || '').slice(0, 500),
+        };
+      }
+
       const steps = Array.isArray(parsed.steps) ? parsed.steps : [];
       return {
         summary: String(parsed.summary || '').slice(0, 800),
@@ -237,12 +363,403 @@ export class RecruitingService {
         })),
       };
     } catch {
+      const recovered = this.recoverPartialCareerPath(raw);
+      if (recovered) {
+        return recovered;
+      }
+      this.logParseFailure('career_path', raw);
       return {
         summary: 'No se pudo parsear la ruta de carrera.',
         estimatedMonths: 6,
         steps: [],
       };
     }
+  }
+
+  private parseJsonObject(raw: string): any {
+    const trimmed = String(raw || '').trim();
+    if (!trimmed) throw new Error('empty_raw');
+
+    try {
+      return JSON.parse(trimmed);
+    } catch {
+      // continue
+    }
+
+    const normalizedJson = this.normalizeBrokenJson(trimmed);
+    if (normalizedJson !== trimmed) {
+      try {
+        return JSON.parse(normalizedJson);
+      } catch {
+        // continue
+      }
+    }
+
+    // Some models may return a JSON string literal that contains escaped JSON.
+    if (trimmed.startsWith('"') && trimmed.endsWith('"')) {
+      try {
+        const once = JSON.parse(trimmed);
+        if (typeof once === 'string') {
+          return this.parseJsonObject(once);
+        }
+      } catch {
+        // continue
+      }
+    }
+
+    const fenced = trimmed.match(/```(?:json)?\s*([\s\S]*?)```/i);
+    if (fenced?.[1]) {
+      const fencedBody = fenced[1].trim();
+      try {
+        return JSON.parse(fencedBody);
+      } catch {
+        const normalizedFenced = this.normalizeBrokenJson(fencedBody);
+        if (normalizedFenced !== fencedBody) {
+          try {
+            return JSON.parse(normalizedFenced);
+          } catch {
+            // continue
+          }
+        }
+      }
+    }
+
+    // Extract balanced JSON object candidates and parse first valid one.
+    for (let start = 0; start < trimmed.length; start += 1) {
+      if (trimmed[start] !== '{') continue;
+
+      let depth = 0;
+      let inString = false;
+      let escaped = false;
+      for (let i = start; i < trimmed.length; i += 1) {
+        const ch = trimmed[i];
+
+        if (inString) {
+          if (escaped) {
+            escaped = false;
+            continue;
+          }
+          if (ch === '\\') {
+            escaped = true;
+            continue;
+          }
+          if (ch === '"') {
+            inString = false;
+          }
+          continue;
+        }
+
+        if (ch === '"') {
+          inString = true;
+          continue;
+        }
+        if (ch === '{') depth += 1;
+        if (ch === '}') depth -= 1;
+
+        if (depth === 0) {
+          const candidate = trimmed.slice(start, i + 1);
+          try {
+            return JSON.parse(candidate);
+          } catch {
+            const normalizedCandidate = this.normalizeBrokenJson(candidate);
+            if (normalizedCandidate !== candidate) {
+              try {
+                return JSON.parse(normalizedCandidate);
+              } catch {
+                // continue
+              }
+            }
+            break;
+          }
+        }
+      }
+    }
+
+    throw new Error('json_not_found');
+  }
+
+  private normalizeBrokenJson(input: string): string {
+    let output = '';
+    let inString = false;
+    let escaped = false;
+
+    for (let i = 0; i < input.length; i += 1) {
+      const ch = input[i];
+
+      if (inString) {
+        if (escaped) {
+          output += ch;
+          escaped = false;
+          continue;
+        }
+        if (ch === '\\') {
+          output += ch;
+          escaped = true;
+          continue;
+        }
+        if (ch === '"') {
+          output += ch;
+          inString = false;
+          continue;
+        }
+        // Gemini sometimes inserts literal line breaks/control chars inside string values.
+        if (ch === '\n' || ch === '\r' || ch === '\t') {
+          output += ' ';
+          continue;
+        }
+        output += ch;
+        continue;
+      }
+
+      if (ch === '"') {
+        output += ch;
+        inString = true;
+        continue;
+      }
+      output += ch;
+    }
+
+    // Remove trailing commas before object/array close.
+    return output.replace(/,\s*([}\]])/g, '$1');
+  }
+
+  private recoverPartialMatch(raw: string | null) {
+    const text = String(raw || '');
+    if (!text) return null;
+
+    const matchSummary = this.extractBrokenJsonString(text, 'match_summary');
+    const improvementTip = this.extractBrokenJsonString(text, 'improvement_tip');
+    const matchingSkills = this.extractBrokenJsonStringArray(text, 'matching_skills');
+    const missingSkills = this.extractBrokenJsonStringArray(text, 'missing_skills');
+
+    if (!matchSummary && !improvementTip && !matchingSkills.length && !missingSkills.length) {
+      return null;
+    }
+
+    const ratioBase = matchingSkills.length + missingSkills.length;
+    const inferredScore = ratioBase > 0 ? Math.round((matchingSkills.length / ratioBase) * 100) : 60;
+    const compatibilityScore = Math.max(0, Math.min(100, inferredScore));
+    const decision =
+      compatibilityScore >= 75 ? 'strong_match' : compatibilityScore >= 45 ? 'possible_match' : 'weak_match';
+
+    const reasons = [matchSummary, improvementTip].filter(Boolean).slice(0, 8) as string[];
+
+    return {
+      compatibilityScore,
+      decision,
+      reasons: reasons.length ? reasons : ['Se recupero respuesta parcial de Gemini.'],
+      missingSkills,
+      interviewFocus: matchingSkills.slice(0, 10),
+      matchSummary: String(matchSummary || '').slice(0, 600),
+      matchingSkills,
+      improvementTip: String(improvementTip || '').slice(0, 320),
+    };
+  }
+
+  private recoverPartialCareerPath(raw: string | null) {
+    const text = String(raw || '');
+    if (!text) return null;
+
+    const targetRole = this.extractBrokenJsonString(text, 'target_role');
+    const newSkills = this.extractAllBrokenJsonStringsByKey(text, 'skill').slice(0, 12);
+    const newWhy = this.extractAllBrokenJsonStringsByKey(text, 'why_important').slice(0, 12);
+    const newLevel = this.extractAllBrokenJsonStringsByKey(text, 'level_required').slice(0, 12);
+    const newCourse = this.extractAllBrokenJsonStringsByKey(text, 'recommended_course_type').slice(0, 12);
+    const newProject = this.extractAllBrokenJsonStringsByKey(text, 'practice_project').slice(0, 12);
+    const newWeeks = this.extractAllBrokenJsonNumbersByKey(text, 'estimated_weeks').slice(0, 12);
+    const newLearningOrder = this.extractBrokenJsonStringArray(text, 'learning_order');
+    const newChecklist = this.extractBrokenJsonStringArray(text, 'milestone_checklist');
+    const newFinalGoal = this.extractBrokenJsonString(text, 'final_goal_validation');
+
+    const newMaxLen = Math.max(newSkills.length, newWhy.length, newLevel.length, newCourse.length, newProject.length, newWeeks.length);
+    const newSteps = Array.from({ length: newMaxLen }).map((_, idx) => ({
+      title: newSkills[idx] ? `Prioridad ${idx + 1}: ${newSkills[idx]}` : `Prioridad ${idx + 1}`,
+      goal: [
+        String(newWhy[idx] || '').trim(),
+        newLevel[idx] ? `Nivel requerido: ${newLevel[idx]}` : '',
+        newCourse[idx] ? `Curso sugerido: ${newCourse[idx]}` : '',
+        newProject[idx] ? `Proyecto: ${newProject[idx]}` : '',
+      ]
+        .filter(Boolean)
+        .join(' | ')
+        .slice(0, 280),
+      skills: newSkills[idx] ? [newSkills[idx]] : [],
+      resources: newCourse[idx] ? [newCourse[idx]] : [],
+      etaWeeks: Number.isFinite(newWeeks[idx]) ? Math.max(1, Math.min(52, Math.round(newWeeks[idx]))) : 4,
+    }));
+
+    if (targetRole || newSteps.length || newLearningOrder.length || newChecklist.length || newFinalGoal) {
+      const summary = [newFinalGoal, newLearningOrder.length ? `Orden sugerido: ${newLearningOrder.join(' -> ')}` : '']
+        .filter(Boolean)
+        .join(' | ')
+        .slice(0, 800);
+      const estimatedMonths = Math.max(
+        1,
+        Math.min(
+          48,
+          Math.round(newSteps.reduce((acc, s) => acc + (Number(s.etaWeeks) || 0), 0) / 4) || 6,
+        ),
+      );
+
+      return {
+        summary: summary || `Ruta personalizada para ${targetRole || 'rol objetivo'}.`,
+        estimatedMonths,
+        steps: newSteps,
+        targetRole,
+        learningOrder: newLearningOrder.slice(0, 20),
+        milestoneChecklist: newChecklist.slice(0, 30),
+        finalGoalValidation: String(newFinalGoal || '').slice(0, 500),
+      };
+    }
+
+    const summary = this.extractBrokenJsonString(text, 'summary');
+    const estimatedMonthsRaw = this.extractBrokenJsonNumber(text, 'estimatedMonths');
+    const estimatedMonths = Number.isFinite(estimatedMonthsRaw)
+      ? Math.max(1, Math.min(48, Math.round(Number(estimatedMonthsRaw))))
+      : 6;
+
+    const titles = this.extractAllBrokenJsonStringsByKey(text, 'title').slice(0, 12);
+    const goals = this.extractAllBrokenJsonStringsByKey(text, 'goal').slice(0, 12);
+    const skillsBlocks = this.extractAllBrokenJsonArraysByKey(text, 'skills').slice(0, 12);
+    const resourceBlocks = this.extractAllBrokenJsonArraysByKey(text, 'resources').slice(0, 12);
+    const etaValues = this.extractAllBrokenJsonNumbersByKey(text, 'etaWeeks').slice(0, 12);
+
+    const maxLen = Math.max(titles.length, goals.length, skillsBlocks.length, resourceBlocks.length, etaValues.length);
+    const steps = Array.from({ length: maxLen }).map((_, idx) => ({
+      title: String(titles[idx] || `Paso ${idx + 1}`).slice(0, 120),
+      goal: String(goals[idx] || '').slice(0, 280),
+      skills: (skillsBlocks[idx] || []).slice(0, 12),
+      resources: (resourceBlocks[idx] || []).slice(0, 8),
+      etaWeeks: Number.isFinite(etaValues[idx]) ? Math.max(1, Math.min(52, Math.round(etaValues[idx]))) : 4,
+    }));
+
+    if (!summary && !steps.length) return null;
+
+    return {
+      summary: String(summary || 'Ruta recuperada parcialmente desde respuesta de Gemini.').slice(0, 800),
+      estimatedMonths,
+      steps,
+    };
+  }
+
+  private extractBrokenJsonString(text: string, key: string): string {
+    const keyIdx = text.indexOf(`"${key}"`);
+    if (keyIdx < 0) return '';
+    const colonIdx = text.indexOf(':', keyIdx);
+    if (colonIdx < 0) return '';
+    const firstQuote = text.indexOf('"', colonIdx + 1);
+    if (firstQuote < 0) return '';
+
+    let out = '';
+    let escaped = false;
+    for (let i = firstQuote + 1; i < text.length; i += 1) {
+      const ch = text[i];
+      if (escaped) {
+        out += ch;
+        escaped = false;
+        continue;
+      }
+      if (ch === '\\') {
+        escaped = true;
+        continue;
+      }
+      if (ch === '"') {
+        break;
+      }
+      if (ch === '\n' || ch === '\r' || ch === '\t') {
+        out += ' ';
+        continue;
+      }
+      out += ch;
+    }
+    return out.replace(/\s+/g, ' ').trim();
+  }
+
+  private extractBrokenJsonStringArray(text: string, key: string): string[] {
+    const keyIdx = text.indexOf(`"${key}"`);
+    if (keyIdx < 0) return [];
+    const bracketStart = text.indexOf('[', keyIdx);
+    if (bracketStart < 0) return [];
+    const bracketEnd = text.indexOf(']', bracketStart + 1);
+    const arrBody = (bracketEnd >= 0 ? text.slice(bracketStart + 1, bracketEnd) : text.slice(bracketStart + 1)).trim();
+    if (!arrBody) return [];
+
+    const values: string[] = [];
+    const regex = /"([^"\\]*(?:\\.[^"\\]*)*)"/g;
+    let m: RegExpExecArray | null = null;
+    while ((m = regex.exec(arrBody)) !== null) {
+      const value = m[1]
+        .replace(/\\n|\\r|\\t/g, ' ')
+        .replace(/\\"/g, '"')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (value) values.push(value);
+    }
+    return [...new Set(values)].slice(0, 20);
+  }
+
+  private extractBrokenJsonNumber(text: string, key: string): number {
+    const keyIdx = text.indexOf(`"${key}"`);
+    if (keyIdx < 0) return NaN;
+    const tail = text.slice(keyIdx);
+    const m = tail.match(new RegExp(`"${key}"\\s*:\\s*(-?\\d+(?:\\.\\d+)?)`));
+    return m ? Number(m[1]) : NaN;
+  }
+
+  private extractAllBrokenJsonStringsByKey(text: string, key: string): string[] {
+    const values: string[] = [];
+    const regex = new RegExp(`"${key}"\\s*:\\s*"([^"\\\\]*(?:\\\\.[^"\\\\]*)*)"`, 'g');
+    let m: RegExpExecArray | null = null;
+    while ((m = regex.exec(text)) !== null) {
+      const value = m[1]
+        .replace(/\\n|\\r|\\t/g, ' ')
+        .replace(/\\"/g, '"')
+        .replace(/\s+/g, ' ')
+        .trim();
+      if (value) values.push(value);
+    }
+    return values;
+  }
+
+  private extractAllBrokenJsonArraysByKey(text: string, key: string): string[][] {
+    const blocks: string[][] = [];
+    const regex = new RegExp(`"${key}"\\s*:\\s*\\[([^\\]]*)`, 'g');
+    let m: RegExpExecArray | null = null;
+    while ((m = regex.exec(text)) !== null) {
+      const body = String(m[1] || '');
+      const values: string[] = [];
+      const itemRegex = /"([^"\\]*(?:\\.[^"\\]*)*)"/g;
+      let item: RegExpExecArray | null = null;
+      while ((item = itemRegex.exec(body)) !== null) {
+        const value = item[1]
+          .replace(/\\n|\\r|\\t/g, ' ')
+          .replace(/\\"/g, '"')
+          .replace(/\s+/g, ' ')
+          .trim();
+        if (value) values.push(value);
+      }
+      blocks.push([...new Set(values)]);
+    }
+    return blocks;
+  }
+
+  private extractAllBrokenJsonNumbersByKey(text: string, key: string): number[] {
+    const values: number[] = [];
+    const regex = new RegExp(`"${key}"\\s*:\\s*(-?\\d+(?:\\.\\d+)?)`, 'g');
+    let m: RegExpExecArray | null = null;
+    while ((m = regex.exec(text)) !== null) {
+      const value = Number(m[1]);
+      if (Number.isFinite(value)) values.push(value);
+    }
+    return values;
+  }
+
+  private logParseFailure(scope: string, raw: string | null) {
+    if (String(process.env.GEMINI_DEBUG || '').toLowerCase() !== 'true') return;
+    const preview = String(raw || '')
+      .replace(/\s+/g, ' ')
+      .slice(0, 500);
+    console.error(`[RecruitingService] parse failure scope=${scope} raw_preview=${preview}`);
   }
 
   private computeMissingSkills(cvSkills: string[], marketSkills: string[]): string[] {

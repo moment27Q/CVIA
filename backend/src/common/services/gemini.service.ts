@@ -28,6 +28,15 @@ export interface CvInsights {
 export class GeminiService {
   private readonly key = process.env.GEMINI_API_KEY || '';
   private readonly model = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
+  private readonly debug = String(process.env.GEMINI_DEBUG || '').toLowerCase() === 'true';
+  private readonly fallbackModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
+
+  constructor() {
+    if (this.debug) {
+      const keyLoaded = this.key ? `yes(len=${this.key.length})` : 'no';
+      console.log(`[GeminiService] debug=on model=${this.model} key_loaded=${keyLoaded}`);
+    }
+  }
 
   async generateJobApplication(input: GenerateInput) {
     if (!this.key) {
@@ -149,32 +158,66 @@ export class GeminiService {
 
   async runStructuredPrompt(prompt: string, maxOutputTokens = 900, temperature = 0.8): Promise<string | null> {
     if (!this.key) return null;
-    return this.callModel(prompt, maxOutputTokens, temperature);
+    return this.callModel(prompt, maxOutputTokens, temperature, true);
   }
 
-  private async callModel(prompt: string, maxOutputTokens: number, temperature = 0.45): Promise<string | null> {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${this.model}:generateContent?key=${this.key}`;
+  private async callModel(
+    prompt: string,
+    maxOutputTokens: number,
+    temperature = 0.45,
+    forceJson = false,
+  ): Promise<string | null> {
+    const modelsToTry = [...new Set([this.model, ...this.fallbackModels])];
+    let lastError: any = null;
 
-    try {
-      const response = await axios.post(
-        url,
-        {
-          contents: [{ role: 'user', parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature,
-            topP: 0.95,
-            maxOutputTokens,
+    for (const modelName of modelsToTry) {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${this.key}`;
+      try {
+        const response = await axios.post(
+          url,
+          {
+            contents: [{ role: 'user', parts: [{ text: prompt }] }],
+            generationConfig: {
+              temperature,
+              topP: 0.95,
+              maxOutputTokens,
+              ...(forceJson ? { responseMimeType: 'application/json' } : {}),
+            },
           },
-        },
-        { timeout: 25000 },
-      );
+          { timeout: 25000 },
+        );
 
-      const raw =
-        response.data?.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text || '').join('') || '';
-      return raw || null;
-    } catch {
-      return null;
+        const raw =
+          response.data?.candidates?.[0]?.content?.parts?.map((p: { text?: string }) => p.text || '').join('') || '';
+        if (this.debug && !raw) {
+          console.error(`[GeminiService] empty response model=${modelName} payload=${JSON.stringify(response.data || {})}`);
+        }
+        return raw || null;
+      } catch (error: any) {
+        lastError = error;
+        const status = error?.response?.status;
+        if (status === 404) {
+          if (this.debug) {
+            console.error(`[GeminiService] model not found: ${modelName}. Trying next fallback model...`);
+          }
+          continue;
+        }
+        break;
+      }
     }
+
+    if (this.debug && lastError) {
+      const status = lastError?.response?.status;
+      const statusText = lastError?.response?.statusText;
+      const responseData = lastError?.response?.data;
+      const message = lastError?.message || 'Unknown error';
+      const detail =
+        typeof responseData === 'string' ? responseData : responseData ? JSON.stringify(responseData) : '';
+      console.error(
+        `[GeminiService] request failed status=${status || '-'} statusText=${statusText || '-'} message=${message}${detail ? ` detail=${detail}` : ''}`,
+      );
+    }
+    return null;
   }
 
   private buildPrompt(input: GenerateInput): string {

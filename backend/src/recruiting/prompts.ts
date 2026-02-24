@@ -2,6 +2,9 @@ export function buildMatchSystemPrompt(input: {
   cvText: string;
   jobDescription: string;
   jobTitle?: string;
+  skillsUsuario: string[];
+  experienciaUsuario: string;
+  skillsJob: string[];
   similarAcceptedCases: Array<{
     candidateSummary: string;
     jobSummary: string;
@@ -19,14 +22,36 @@ export function buildMatchSystemPrompt(input: {
     : 'No hay casos previos.';
 
   return [
-    'Eres un Recruiter AI senior.',
-    'Responde SOLO JSON valido con esta forma:',
-    '{"compatibilityScore":0,"decision":"strong_match|possible_match|weak_match","reasons":[],"missingSkills":[],"interviewFocus":[]}',
-    'Usa el contexto de casos aceptados para calibrar el score.',
-    `JOB TITLE: ${input.jobTitle || 'No especificado'}`,
-    `JOB DESCRIPTION: ${input.jobDescription}`,
-    `CV: ${input.cvText}`,
-    `CASOS RAG (aceptados):\n${examples}`,
+    'Eres un asesor laboral experto.',
+    '',
+    'Tu sistema utiliza embeddings para recuperar:',
+    '- Respuestas anteriores del usuario',
+    '- Feedback positivo',
+    '- Patrones de preferencia',
+    '',
+    'Debes analizar el contexto recuperado y:',
+    '- Evitar repetir estructuras similares.',
+    '- Mejorar claridad respecto a respuestas pasadas.',
+    '- Ajustar estilo segun preferencias detectadas.',
+    '- No copiar respuestas anteriores.',
+    '- Generar una explicacion diferente pero mas optimizada.',
+    '',
+    'Contexto recuperado por embeddings:',
+    examples,
+    '',
+    'Datos del candidato:',
+    `Skills: ${input.skillsUsuario.join(', ') || 'No detectadas'}`,
+    `Experiencia: ${input.experienciaUsuario}`,
+    '',
+    'Datos del trabajo:',
+    `Titulo: ${input.jobTitle || 'No especificado'}`,
+    `Requisitos: ${input.skillsJob.join(', ') || input.jobDescription.slice(0, 800)}`,
+    '',
+    `CV completo: ${input.cvText.slice(0, 7000)}`,
+    `Descripcion del trabajo: ${input.jobDescription.slice(0, 7000)}`,
+    '',
+    'Responde en JSON con este formato exacto:',
+    '{"match_summary":"","matching_skills":[],"missing_skills":[],"improvement_tip":""}',
   ].join('\n');
 }
 
@@ -85,6 +110,7 @@ export function buildEvolvingCareerPathPrompt(input: {
   missingSkills: string[];
   keyDifference: string;
   improveTopic: string;
+  experienceSummary: string;
 }) {
   const historicalText = input.historicalCases.length
     ? input.historicalCases
@@ -96,19 +122,56 @@ export function buildEvolvingCareerPathPrompt(input: {
     : 'Sin casos historicos exitosos disponibles.';
 
   return [
-    'Actua como un Mentor de Carrera experto.',
-    'Responde SOLO JSON valido con esta forma:',
-    '{"summary":"","estimatedMonths":0,"gapAnalysis":{"currentSkills":[],"marketSkills":[],"missingSkills":[]},"steps":[{"title":"","goal":"","skills":[],"resources":[],"etaWeeks":0}]}',
+    'Eres un mentor tecnico senior especializado en desarrollo profesional en tecnologia.',
+    'Tu funcion es generar una ruta personalizada y concreta para que el usuario alcance su meta profesional.',
+    'Debes basarte en:',
+    '1. Las habilidades actuales detectadas por el sistema.',
+    '2. Las brechas ya calculadas internamente.',
+    '3. Informacion complementaria obtenida desde la API de Gemini para validar tendencias actuales del mercado.',
     '',
-    `El usuario quiere ser ${input.targetRole}.`,
-    `Sus habilidades actuales son: ${input.cvSkills.join(', ') || 'No detectadas'}.`,
-    `LA VERDAD DEL MERCADO (Contexto Recuperado): En nuestra base de datos, los candidatos exitosos para este rol dominan estas tecnologias: ${input.marketSkills.join(', ') || 'Sin datos'}.`,
+    'Reglas estrictas:',
+    '- No dar consejos genericos.',
+    '- No repetir habilidades que el usuario ya domina.',
+    '- No inventar experiencia.',
+    '- Cada habilidad faltante debe tener: que aprender, nivel requerido, curso recomendado, proyecto practico.',
+    '- Ordenar por prioridad logica.',
+    '- Generar checklist accionable.',
+    '- Respuesta clara y estructurada.',
     '',
-    `Contexto Historico: Aqui tienes como ayudamos a usuarios similares en el pasado:\n${historicalText}`,
-    `Instruccion de Diferenciacion: Analiza los casos anteriores, pero NO LOS COPIES. El usuario actual tiene una diferencia clave: ${input.keyDifference}. Tu mision es refinar la estrategia anterior para cubrir esa brecha especifica.`,
-    `Instruccion de Mejora: Si detectaste que en los casos pasados falto profundidad en ${input.improveTopic}, profundiza mas en esta nueva respuesta.`,
+    'Contexto recuperado por embeddings (casos historicos):',
+    historicalText,
+    `Instruccion de Diferenciacion: NO copies casos previos. Diferencia clave del usuario: ${input.keyDifference}.`,
+    `Instruccion de Mejora: profundiza especificamente en ${input.improveTopic}.`,
     '',
-    `Brecha detectada: ${input.missingSkills.join(', ') || 'sin brecha explicita, reforzar stack objetivo'}.`,
-    'Devuelve una ruta paso a paso accionable, priorizando tecnologias del contexto recuperado.',
+    'Datos del usuario:',
+    `Habilidades actuales: ${input.cvSkills.join(', ') || 'No detectadas'}`,
+    `Experiencia: ${input.experienceSummary}`,
+    '',
+    'Brechas detectadas por el sistema:',
+    `${input.missingSkills.join(', ') || 'Sin brecha explicita'}`,
+    '',
+    'Tendencias de mercado validadas internamente:',
+    `${input.marketSkills.join(', ') || 'Sin datos suficientes'}`,
+    '',
+    'Rol objetivo:',
+    `${input.targetRole}`,
+    '',
+    'Devuelve la respuesta en formato JSON exacto:',
+    '{',
+    '  "target_role": "",',
+    '  "priority_skills_to_learn": [',
+    '    {',
+    '      "skill": "",',
+    '      "why_important": "",',
+    '      "level_required": "",',
+    '      "recommended_course_type": "",',
+    '      "practice_project": "",',
+    '      "estimated_weeks": 0',
+    '    }',
+    '  ],',
+    '  "learning_order": [],',
+    '  "milestone_checklist": [],',
+    '  "final_goal_validation": ""',
+    '}',
   ].join('\n');
 }
