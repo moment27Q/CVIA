@@ -689,7 +689,57 @@
       "detected_seniority": "senior",
       "description": "HR Specialist delle gestione della dell rapporto collaborazione manager specialist",
       "processed_timestamp": "2026-02-24T06:56:51.362Z"
+    },
+    {
+      "title": "Buscar \"automatizacion\" en Computrabajo (Argentina)",
+      "company": "Computrabajo",
+      "location": "Argentina",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "automatizacion automatizacion diseno software ingles",
+      "processed_timestamp": "2026-02-24T16:51:01.834Z"
+    },
+    {
+      "title": "Buscar \"automatizacion\" en Indeed (Argentina)",
+      "company": "Indeed",
+      "location": "Argentina",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "automatizacion automatizacion diseno software ingles",
+      "processed_timestamp": "2026-02-24T16:51:01.835Z"
+    },
+    {
+      "title": "Buscar \"automatizacion\" en Bumeran (Argentina)",
+      "company": "Bumeran",
+      "location": "Argentina",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "automatizacion automatizacion diseno software ingles",
+      "processed_timestamp": "2026-02-24T16:51:01.835Z"
+    },
+    {
+      "title": "Buscar \"automatizacion\" en LinkedIn (Argentina)",
+      "company": "LinkedIn",
+      "location": "Argentina",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "automatizacion automatizacion diseno software ingles",
+      "processed_timestamp": "2026-02-24T16:51:01.835Z"
+    },
+    {
+      "title": "Buscar \"automatizacion\" en Glassdoor (Argentina)",
+      "company": "Glassdoor",
+      "location": "Argentina",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "automatizacion automatizacion diseno software ingles",
+      "processed_timestamp": "2026-02-24T16:51:01.835Z"
     }
   ],
-  "updatedAt": "2026-02-24T06:57:05.943Z"
+  "updatedAt": "2026-02-24T17:11:39.903Z"
 }

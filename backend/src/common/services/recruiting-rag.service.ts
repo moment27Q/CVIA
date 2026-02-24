@@ -62,6 +62,15 @@ interface EvolvingCareerCase {
   quality: number;
 }
 
+export interface CareerPathRagMatch {
+  refId: string;
+  matchedRole: string;
+  content: string;
+  coreSkills: string[];
+  optionalSkills: string[];
+  careerGoal: string;
+}
+
 @Injectable()
 export class RecruitingRagService {
   private readonly filePath = path.join(process.cwd(), 'data', 'recruiting-rag.json');
@@ -186,6 +195,107 @@ export class RecruitingRagService {
     const db = await this.readDb();
     const row = (db.learningResourceCache || []).find((x) => x.key === key);
     return row?.payload || null;
+  }
+
+  async getCareerPathRagByRole(targetRole: string): Promise<CareerPathRagMatch> {
+    if (!this.hasPgConfig) {
+      throw new Error('DATABASE_URL/PGDATABASE is required for career_path RAG');
+    }
+
+    const partial = await this.query(
+      `SELECT ref_id, content, metadata, created_at
+       FROM recruiting_case_vectors
+       WHERE case_type = 'career_path_template'
+         AND (
+           LOWER(ref_id) LIKE '%' || LOWER($1) || '%'
+           OR LOWER(COALESCE(metadata->>'role', '')) LIKE '%' || LOWER($1) || '%'
+           OR LOWER(COALESCE(metadata->>'career_goal', '')) LIKE '%' || LOWER($1) || '%'
+         )
+       ORDER BY created_at DESC
+       LIMIT 1`,
+      [targetRole],
+    );
+
+    let picked = partial.rows[0] as any;
+
+    if (!picked) {
+      const recent = await this.query(
+        `SELECT ref_id, content, metadata, created_at
+         FROM recruiting_case_vectors
+         WHERE case_type = 'career_path_template'
+         ORDER BY created_at DESC
+         LIMIT 5`,
+        [],
+      );
+
+      if (recent.rows.length) {
+        const q = this.normalize(targetRole);
+        picked = recent.rows
+          .map((r: any) => {
+            const metadata = (r.metadata || {}) as Record<string, unknown>;
+            const role = String(metadata.role || '');
+            const goal = String(metadata.career_goal || '');
+            const haystack = this.normalize(`${r.ref_id || ''} ${role} ${goal} ${r.content || ''}`);
+            return {
+              row: r,
+              score: this.tokenScore(q, haystack),
+            };
+          })
+          .sort((a: { score: number }, b: { score: number }) => b.score - a.score)[0]?.row;
+      }
+    }
+
+    if (!picked) {
+      throw new Error(`Unable to match career_path RAG for target_role="${targetRole}"`);
+    }
+
+    const metadata = (picked.metadata || {}) as Record<string, unknown>;
+    const coreSkills = Array.isArray(metadata.core_skills)
+      ? metadata.core_skills.map((x: unknown) => String(x)).filter(Boolean)
+      : [];
+    const optionalSkills = Array.isArray(metadata.optional_skills)
+      ? metadata.optional_skills.map((x: unknown) => String(x)).filter(Boolean)
+      : [];
+    const matchedRole = String(metadata.role || picked.ref_id || targetRole);
+    const careerGoal = String(metadata.career_goal || '').trim();
+
+    return {
+      refId: String(picked.ref_id || ''),
+      matchedRole,
+      content: String(picked.content || ''),
+      coreSkills,
+      optionalSkills,
+      careerGoal,
+    };
+  }
+
+  async saveCareerPathResultOnly(input: {
+    userId: string;
+    targetRole: string;
+    summary: string;
+    estimatedMonths: number;
+    steps: Array<{ title: string; goal: string; skills: string[]; resources: string[]; etaWeeks: number }>;
+  }): Promise<string> {
+    if (!this.hasPgConfig) {
+      throw new Error('DATABASE_URL/PGDATABASE is required to persist career_path result');
+    }
+
+    const result = await this.query(
+      `INSERT INTO career_paths (external_user_id, current_profile, target_role, summary, estimated_months, steps)
+       VALUES ($1, $2, $3, $4, $5, $6::jsonb)
+       RETURNING id`,
+      [
+        input.userId,
+        '',
+        input.targetRole,
+        input.summary,
+        Number.isFinite(input.estimatedMonths) ? input.estimatedMonths : null,
+        JSON.stringify(input.steps || []),
+      ],
+    );
+
+    const id = result.rows[0]?.id;
+    return `career_path_${id}`;
   }
 
   async saveLearningResourceCache(

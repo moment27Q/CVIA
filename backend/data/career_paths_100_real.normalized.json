@@ -1,0 +1,1298 @@
+﻿[
+    {
+        "role":  "Backend Developer Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "JavaScript",
+                            "Node.js",
+                            "Express",
+                            "REST API",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Docker",
+                                "Git",
+                                "Postman"
+                            ],
+        "career_goal":  "Backend Developer Semi Senior"
+    },
+    {
+        "role":  "Backend Developer Semi Senior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Node.js",
+                            "Express",
+                            "PostgreSQL",
+                            "MongoDB",
+                            "JWT",
+                            "Clean Architecture"
+                        ],
+        "optional_skills":  [
+                                "Docker",
+                                "AWS",
+                                "CI/CD"
+                            ],
+        "career_goal":  "Backend Developer Senior"
+    },
+    {
+        "role":  "Backend Developer Senior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Node.js",
+                            "Microservices",
+                            "Docker",
+                            "Kubernetes",
+                            "Cloud Architecture"
+                        ],
+        "optional_skills":  [
+                                "AWS",
+                                "Terraform",
+                                "System Design"
+                            ],
+        "career_goal":  "Software Architect"
+    },
+    {
+        "role":  "Frontend Developer Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "HTML",
+                            "CSS",
+                            "JavaScript",
+                            "Git"
+                        ],
+        "optional_skills":  [
+                                "Figma",
+                                "Responsive Design"
+                            ],
+        "career_goal":  "Frontend Developer"
+    },
+    {
+        "role":  "Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "TypeScript",
+                            "CSS",
+                            "APIs"
+                        ],
+        "optional_skills":  [
+                                "Next.js",
+                                "Testing"
+                            ],
+        "career_goal":  "Senior Frontend Developer"
+    },
+    {
+        "role":  "Senior Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "Performance",
+                            "Architecture"
+                        ],
+        "optional_skills":  [
+                                "Microfrontends"
+                            ],
+        "career_goal":  "Frontend Architect"
+    },
+    {
+        "role":  "Full Stack Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "JavaScript",
+                            "Node.js",
+                            "React",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Docker"
+                            ],
+        "career_goal":  "Senior Full Stack Developer"
+    },
+    {
+        "role":  "Mobile Developer Android",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Kotlin",
+                            "Android SDK"
+                        ],
+        "optional_skills":  [
+                                "Firebase"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Mobile Developer iOS",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Swift",
+                            "iOS SDK"
+                        ],
+        "optional_skills":  [
+                                "SwiftUI"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Data Analyst Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Excel",
+                            "SQL",
+                            "Power BI"
+                        ],
+        "optional_skills":  [
+                                "Python"
+                            ],
+        "career_goal":  "Data Analyst"
+    },
+    {
+        "role":  "Data Analyst",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "SQL",
+                            "Power BI",
+                            "Python"
+                        ],
+        "optional_skills":  [
+                                "Statistics"
+                            ],
+        "career_goal":  "Senior Data Analyst"
+    },
+    {
+        "role":  "Data Scientist Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Python",
+                            "Pandas",
+                            "Statistics"
+                        ],
+        "optional_skills":  [
+                                "ML"
+                            ],
+        "career_goal":  "Data Scientist"
+    },
+    {
+        "role":  "Data Scientist",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Machine Learning",
+                            "Python",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Deep Learning"
+                            ],
+        "career_goal":  "Senior Data Scientist"
+    },
+    {
+        "role":  "DevOps Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Linux",
+                            "Git",
+                            "Docker"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "DevOps Engineer"
+    },
+    {
+        "role":  "DevOps Engineer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Docker",
+                            "Kubernetes",
+                            "AWS"
+                        ],
+        "optional_skills":  [
+                                "Terraform"
+                            ],
+        "career_goal":  "Senior DevOps Engineer"
+    },
+    {
+        "role":  "QA Tester",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Testing Manual",
+                            "Test Cases"
+                        ],
+        "optional_skills":  [
+                                "Selenium"
+                            ],
+        "career_goal":  "QA Automation"
+    },
+    {
+        "role":  "QA Automation",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Selenium",
+                            "Java",
+                            "Testing"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "QA Lead"
+    },
+    {
+        "role":  "UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Figma",
+                            "Design Systems"
+                        ],
+        "optional_skills":  [
+                                "UX"
+                            ],
+        "career_goal":  "UX/UI Designer"
+    },
+    {
+        "role":  "UX/UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "UX Research",
+                            "Prototyping"
+                        ],
+        "optional_skills":  [
+                                "Usability Testing"
+                            ],
+        "career_goal":  "Product Designer"
+    },
+    {
+        "role":  "Product Manager Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Scrum",
+                            "Roadmaps"
+                        ],
+        "optional_skills":  [
+                                "Analytics"
+                            ],
+        "career_goal":  "Product Manager"
+    },
+    {
+        "role":  "Product Manager",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Product Strategy",
+                            "Stakeholders"
+                        ],
+        "optional_skills":  [
+                                "Data"
+                            ],
+        "career_goal":  "Senior Product Manager"
+    },
+    {
+        "role":  "Cybersecurity Analyst",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Networking",
+                            "Security Basics"
+                        ],
+        "optional_skills":  [
+                                "SIEM"
+                            ],
+        "career_goal":  "Security Engineer"
+    },
+    {
+        "role":  "Security Engineer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Pentesting",
+                            "Cloud Security"
+                        ],
+        "optional_skills":  [
+                                "Certifications"
+                            ],
+        "career_goal":  "Security Architect"
+    },
+    {
+        "role":  "Frontend Developer Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "HTML",
+                            "CSS",
+                            "JavaScript",
+                            "Git"
+                        ],
+        "optional_skills":  [
+                                "Figma",
+                                "Responsive Design"
+                            ],
+        "career_goal":  "Frontend Developer"
+    },
+    {
+        "role":  "Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "TypeScript",
+                            "CSS",
+                            "APIs"
+                        ],
+        "optional_skills":  [
+                                "Next.js",
+                                "Testing"
+                            ],
+        "career_goal":  "Senior Frontend Developer"
+    },
+    {
+        "role":  "Senior Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "Performance",
+                            "Architecture"
+                        ],
+        "optional_skills":  [
+                                "Microfrontends"
+                            ],
+        "career_goal":  "Frontend Architect"
+    },
+    {
+        "role":  "Full Stack Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "JavaScript",
+                            "Node.js",
+                            "React",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Docker"
+                            ],
+        "career_goal":  "Senior Full Stack Developer"
+    },
+    {
+        "role":  "Mobile Developer Android",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Kotlin",
+                            "Android SDK"
+                        ],
+        "optional_skills":  [
+                                "Firebase"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Mobile Developer iOS",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Swift",
+                            "iOS SDK"
+                        ],
+        "optional_skills":  [
+                                "SwiftUI"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Data Analyst Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Excel",
+                            "SQL",
+                            "Power BI"
+                        ],
+        "optional_skills":  [
+                                "Python"
+                            ],
+        "career_goal":  "Data Analyst"
+    },
+    {
+        "role":  "Data Analyst",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "SQL",
+                            "Power BI",
+                            "Python"
+                        ],
+        "optional_skills":  [
+                                "Statistics"
+                            ],
+        "career_goal":  "Senior Data Analyst"
+    },
+    {
+        "role":  "Data Scientist Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Python",
+                            "Pandas",
+                            "Statistics"
+                        ],
+        "optional_skills":  [
+                                "ML"
+                            ],
+        "career_goal":  "Data Scientist"
+    },
+    {
+        "role":  "Data Scientist",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Machine Learning",
+                            "Python",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Deep Learning"
+                            ],
+        "career_goal":  "Senior Data Scientist"
+    },
+    {
+        "role":  "DevOps Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Linux",
+                            "Git",
+                            "Docker"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "DevOps Engineer"
+    },
+    {
+        "role":  "DevOps Engineer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Docker",
+                            "Kubernetes",
+                            "AWS"
+                        ],
+        "optional_skills":  [
+                                "Terraform"
+                            ],
+        "career_goal":  "Senior DevOps Engineer"
+    },
+    {
+        "role":  "QA Tester",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Testing Manual",
+                            "Test Cases"
+                        ],
+        "optional_skills":  [
+                                "Selenium"
+                            ],
+        "career_goal":  "QA Automation"
+    },
+    {
+        "role":  "QA Automation",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Selenium",
+                            "Java",
+                            "Testing"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "QA Lead"
+    },
+    {
+        "role":  "UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Figma",
+                            "Design Systems"
+                        ],
+        "optional_skills":  [
+                                "UX"
+                            ],
+        "career_goal":  "UX/UI Designer"
+    },
+    {
+        "role":  "UX/UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "UX Research",
+                            "Prototyping"
+                        ],
+        "optional_skills":  [
+                                "Usability Testing"
+                            ],
+        "career_goal":  "Product Designer"
+    },
+    {
+        "role":  "Product Manager Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Scrum",
+                            "Roadmaps"
+                        ],
+        "optional_skills":  [
+                                "Analytics"
+                            ],
+        "career_goal":  "Product Manager"
+    },
+    {
+        "role":  "Product Manager",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Product Strategy",
+                            "Stakeholders"
+                        ],
+        "optional_skills":  [
+                                "Data"
+                            ],
+        "career_goal":  "Senior Product Manager"
+    },
+    {
+        "role":  "Cybersecurity Analyst",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Networking",
+                            "Security Basics"
+                        ],
+        "optional_skills":  [
+                                "SIEM"
+                            ],
+        "career_goal":  "Security Engineer"
+    },
+    {
+        "role":  "Security Engineer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Pentesting",
+                            "Cloud Security"
+                        ],
+        "optional_skills":  [
+                                "Certifications"
+                            ],
+        "career_goal":  "Security Architect"
+    },
+    {
+        "role":  "Frontend Developer Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "HTML",
+                            "CSS",
+                            "JavaScript",
+                            "Git"
+                        ],
+        "optional_skills":  [
+                                "Figma",
+                                "Responsive Design"
+                            ],
+        "career_goal":  "Frontend Developer"
+    },
+    {
+        "role":  "Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "TypeScript",
+                            "CSS",
+                            "APIs"
+                        ],
+        "optional_skills":  [
+                                "Next.js",
+                                "Testing"
+                            ],
+        "career_goal":  "Senior Frontend Developer"
+    },
+    {
+        "role":  "Senior Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "Performance",
+                            "Architecture"
+                        ],
+        "optional_skills":  [
+                                "Microfrontends"
+                            ],
+        "career_goal":  "Frontend Architect"
+    },
+    {
+        "role":  "Full Stack Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "JavaScript",
+                            "Node.js",
+                            "React",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Docker"
+                            ],
+        "career_goal":  "Senior Full Stack Developer"
+    },
+    {
+        "role":  "Mobile Developer Android",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Kotlin",
+                            "Android SDK"
+                        ],
+        "optional_skills":  [
+                                "Firebase"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Mobile Developer iOS",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Swift",
+                            "iOS SDK"
+                        ],
+        "optional_skills":  [
+                                "SwiftUI"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Data Analyst Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Excel",
+                            "SQL",
+                            "Power BI"
+                        ],
+        "optional_skills":  [
+                                "Python"
+                            ],
+        "career_goal":  "Data Analyst"
+    },
+    {
+        "role":  "Data Analyst",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "SQL",
+                            "Power BI",
+                            "Python"
+                        ],
+        "optional_skills":  [
+                                "Statistics"
+                            ],
+        "career_goal":  "Senior Data Analyst"
+    },
+    {
+        "role":  "Data Scientist Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Python",
+                            "Pandas",
+                            "Statistics"
+                        ],
+        "optional_skills":  [
+                                "ML"
+                            ],
+        "career_goal":  "Data Scientist"
+    },
+    {
+        "role":  "Data Scientist",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Machine Learning",
+                            "Python",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Deep Learning"
+                            ],
+        "career_goal":  "Senior Data Scientist"
+    },
+    {
+        "role":  "DevOps Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Linux",
+                            "Git",
+                            "Docker"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "DevOps Engineer"
+    },
+    {
+        "role":  "DevOps Engineer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Docker",
+                            "Kubernetes",
+                            "AWS"
+                        ],
+        "optional_skills":  [
+                                "Terraform"
+                            ],
+        "career_goal":  "Senior DevOps Engineer"
+    },
+    {
+        "role":  "QA Tester",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Testing Manual",
+                            "Test Cases"
+                        ],
+        "optional_skills":  [
+                                "Selenium"
+                            ],
+        "career_goal":  "QA Automation"
+    },
+    {
+        "role":  "QA Automation",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Selenium",
+                            "Java",
+                            "Testing"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "QA Lead"
+    },
+    {
+        "role":  "UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Figma",
+                            "Design Systems"
+                        ],
+        "optional_skills":  [
+                                "UX"
+                            ],
+        "career_goal":  "UX/UI Designer"
+    },
+    {
+        "role":  "UX/UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "UX Research",
+                            "Prototyping"
+                        ],
+        "optional_skills":  [
+                                "Usability Testing"
+                            ],
+        "career_goal":  "Product Designer"
+    },
+    {
+        "role":  "Product Manager Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Scrum",
+                            "Roadmaps"
+                        ],
+        "optional_skills":  [
+                                "Analytics"
+                            ],
+        "career_goal":  "Product Manager"
+    },
+    {
+        "role":  "Product Manager",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Product Strategy",
+                            "Stakeholders"
+                        ],
+        "optional_skills":  [
+                                "Data"
+                            ],
+        "career_goal":  "Senior Product Manager"
+    },
+    {
+        "role":  "Cybersecurity Analyst",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Networking",
+                            "Security Basics"
+                        ],
+        "optional_skills":  [
+                                "SIEM"
+                            ],
+        "career_goal":  "Security Engineer"
+    },
+    {
+        "role":  "Security Engineer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Pentesting",
+                            "Cloud Security"
+                        ],
+        "optional_skills":  [
+                                "Certifications"
+                            ],
+        "career_goal":  "Security Architect"
+    },
+    {
+        "role":  "Frontend Developer Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "HTML",
+                            "CSS",
+                            "JavaScript",
+                            "Git"
+                        ],
+        "optional_skills":  [
+                                "Figma",
+                                "Responsive Design"
+                            ],
+        "career_goal":  "Frontend Developer"
+    },
+    {
+        "role":  "Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "TypeScript",
+                            "CSS",
+                            "APIs"
+                        ],
+        "optional_skills":  [
+                                "Next.js",
+                                "Testing"
+                            ],
+        "career_goal":  "Senior Frontend Developer"
+    },
+    {
+        "role":  "Senior Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "Performance",
+                            "Architecture"
+                        ],
+        "optional_skills":  [
+                                "Microfrontends"
+                            ],
+        "career_goal":  "Frontend Architect"
+    },
+    {
+        "role":  "Full Stack Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "JavaScript",
+                            "Node.js",
+                            "React",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Docker"
+                            ],
+        "career_goal":  "Senior Full Stack Developer"
+    },
+    {
+        "role":  "Mobile Developer Android",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Kotlin",
+                            "Android SDK"
+                        ],
+        "optional_skills":  [
+                                "Firebase"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Mobile Developer iOS",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Swift",
+                            "iOS SDK"
+                        ],
+        "optional_skills":  [
+                                "SwiftUI"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Data Analyst Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Excel",
+                            "SQL",
+                            "Power BI"
+                        ],
+        "optional_skills":  [
+                                "Python"
+                            ],
+        "career_goal":  "Data Analyst"
+    },
+    {
+        "role":  "Data Analyst",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "SQL",
+                            "Power BI",
+                            "Python"
+                        ],
+        "optional_skills":  [
+                                "Statistics"
+                            ],
+        "career_goal":  "Senior Data Analyst"
+    },
+    {
+        "role":  "Data Scientist Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Python",
+                            "Pandas",
+                            "Statistics"
+                        ],
+        "optional_skills":  [
+                                "ML"
+                            ],
+        "career_goal":  "Data Scientist"
+    },
+    {
+        "role":  "Data Scientist",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Machine Learning",
+                            "Python",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Deep Learning"
+                            ],
+        "career_goal":  "Senior Data Scientist"
+    },
+    {
+        "role":  "DevOps Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Linux",
+                            "Git",
+                            "Docker"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "DevOps Engineer"
+    },
+    {
+        "role":  "DevOps Engineer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Docker",
+                            "Kubernetes",
+                            "AWS"
+                        ],
+        "optional_skills":  [
+                                "Terraform"
+                            ],
+        "career_goal":  "Senior DevOps Engineer"
+    },
+    {
+        "role":  "QA Tester",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Testing Manual",
+                            "Test Cases"
+                        ],
+        "optional_skills":  [
+                                "Selenium"
+                            ],
+        "career_goal":  "QA Automation"
+    },
+    {
+        "role":  "QA Automation",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Selenium",
+                            "Java",
+                            "Testing"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "QA Lead"
+    },
+    {
+        "role":  "UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Figma",
+                            "Design Systems"
+                        ],
+        "optional_skills":  [
+                                "UX"
+                            ],
+        "career_goal":  "UX/UI Designer"
+    },
+    {
+        "role":  "UX/UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "UX Research",
+                            "Prototyping"
+                        ],
+        "optional_skills":  [
+                                "Usability Testing"
+                            ],
+        "career_goal":  "Product Designer"
+    },
+    {
+        "role":  "Product Manager Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Scrum",
+                            "Roadmaps"
+                        ],
+        "optional_skills":  [
+                                "Analytics"
+                            ],
+        "career_goal":  "Product Manager"
+    },
+    {
+        "role":  "Product Manager",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Product Strategy",
+                            "Stakeholders"
+                        ],
+        "optional_skills":  [
+                                "Data"
+                            ],
+        "career_goal":  "Senior Product Manager"
+    },
+    {
+        "role":  "Cybersecurity Analyst",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Networking",
+                            "Security Basics"
+                        ],
+        "optional_skills":  [
+                                "SIEM"
+                            ],
+        "career_goal":  "Security Engineer"
+    },
+    {
+        "role":  "Security Engineer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Pentesting",
+                            "Cloud Security"
+                        ],
+        "optional_skills":  [
+                                "Certifications"
+                            ],
+        "career_goal":  "Security Architect"
+    },
+    {
+        "role":  "Frontend Developer Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "HTML",
+                            "CSS",
+                            "JavaScript",
+                            "Git"
+                        ],
+        "optional_skills":  [
+                                "Figma",
+                                "Responsive Design"
+                            ],
+        "career_goal":  "Frontend Developer"
+    },
+    {
+        "role":  "Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "TypeScript",
+                            "CSS",
+                            "APIs"
+                        ],
+        "optional_skills":  [
+                                "Next.js",
+                                "Testing"
+                            ],
+        "career_goal":  "Senior Frontend Developer"
+    },
+    {
+        "role":  "Senior Frontend Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "React",
+                            "Performance",
+                            "Architecture"
+                        ],
+        "optional_skills":  [
+                                "Microfrontends"
+                            ],
+        "career_goal":  "Frontend Architect"
+    },
+    {
+        "role":  "Full Stack Developer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "JavaScript",
+                            "Node.js",
+                            "React",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Docker"
+                            ],
+        "career_goal":  "Senior Full Stack Developer"
+    },
+    {
+        "role":  "Mobile Developer Android",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Kotlin",
+                            "Android SDK"
+                        ],
+        "optional_skills":  [
+                                "Firebase"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Mobile Developer iOS",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Swift",
+                            "iOS SDK"
+                        ],
+        "optional_skills":  [
+                                "SwiftUI"
+                            ],
+        "career_goal":  "Senior Mobile Developer"
+    },
+    {
+        "role":  "Data Analyst Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Excel",
+                            "SQL",
+                            "Power BI"
+                        ],
+        "optional_skills":  [
+                                "Python"
+                            ],
+        "career_goal":  "Data Analyst"
+    },
+    {
+        "role":  "Data Analyst",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "SQL",
+                            "Power BI",
+                            "Python"
+                        ],
+        "optional_skills":  [
+                                "Statistics"
+                            ],
+        "career_goal":  "Senior Data Analyst"
+    },
+    {
+        "role":  "Data Scientist Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Python",
+                            "Pandas",
+                            "Statistics"
+                        ],
+        "optional_skills":  [
+                                "ML"
+                            ],
+        "career_goal":  "Data Scientist"
+    },
+    {
+        "role":  "Data Scientist",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Machine Learning",
+                            "Python",
+                            "SQL"
+                        ],
+        "optional_skills":  [
+                                "Deep Learning"
+                            ],
+        "career_goal":  "Senior Data Scientist"
+    },
+    {
+        "role":  "DevOps Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Linux",
+                            "Git",
+                            "Docker"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "DevOps Engineer"
+    },
+    {
+        "role":  "DevOps Engineer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Docker",
+                            "Kubernetes",
+                            "AWS"
+                        ],
+        "optional_skills":  [
+                                "Terraform"
+                            ],
+        "career_goal":  "Senior DevOps Engineer"
+    },
+    {
+        "role":  "QA Tester",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Testing Manual",
+                            "Test Cases"
+                        ],
+        "optional_skills":  [
+                                "Selenium"
+                            ],
+        "career_goal":  "QA Automation"
+    },
+    {
+        "role":  "QA Automation",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Selenium",
+                            "Java",
+                            "Testing"
+                        ],
+        "optional_skills":  [
+                                "CI/CD"
+                            ],
+        "career_goal":  "QA Lead"
+    },
+    {
+        "role":  "UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Figma",
+                            "Design Systems"
+                        ],
+        "optional_skills":  [
+                                "UX"
+                            ],
+        "career_goal":  "UX/UI Designer"
+    },
+    {
+        "role":  "UX/UI Designer",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "UX Research",
+                            "Prototyping"
+                        ],
+        "optional_skills":  [
+                                "Usability Testing"
+                            ],
+        "career_goal":  "Product Designer"
+    },
+    {
+        "role":  "Product Manager Junior",
+        "target_country":  "PerÃº",
+        "core_skills":  [
+                            "Scrum",
+                            "Roadmaps"
+                        ],
+        "optional_skills":  [
+                                "Analytics"
+                            ],
+        "career_goal":  "Product Manager"
+    }
+]

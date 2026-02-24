@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dist/main.js",
     "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts",
-    "build": "tsc -p tsconfig.build.json"
+    "build": "tsc -p tsconfig.build.json",
+    "import:career-paths": "ts-node scripts/import-career-paths.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.4.8",

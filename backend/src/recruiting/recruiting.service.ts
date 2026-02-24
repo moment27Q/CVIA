@@ -1,6 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { GeminiService } from '../common/services/gemini.service';
-import { CvParserService } from '../common/services/cv-parser.service';
 import { RecruitingRagService } from '../common/services/recruiting-rag.service';
 import { FeedbackDto } from './dto-feedback.dto';
 import { GetLearningResourcesDto } from './dto-get-learning-resources.dto';
@@ -11,10 +10,48 @@ import { buildCareerPathGapPrompt, buildCareerPathSystemPrompt, buildEvolvingCar
 
 @Injectable()
 export class RecruitingService {
+  private readonly knownCvSkills = [
+    'java',
+    'python',
+    'javascript',
+    'typescript',
+    'node',
+    'node.js',
+    'react',
+    'angular',
+    'vue',
+    'sql',
+    'postgresql',
+    'mysql',
+    'mongodb',
+    'spring',
+    'spring boot',
+    'docker',
+    'kubernetes',
+    'aws',
+    'azure',
+    'gcp',
+    'git',
+    'html',
+    'css',
+    'tailwind',
+    'php',
+    'laravel',
+    'django',
+    'fastapi',
+    'rest',
+    'graphql',
+    'microservicios',
+    'testing',
+    'jest',
+    'cypress',
+    'linux',
+    'redis',
+  ];
+
   constructor(
     private readonly geminiService: GeminiService,
     private readonly ragService: RecruitingRagService,
-    private readonly cvParserService: CvParserService,
   ) {}
 
   async matchCv(dto: MatchCvDto) {
@@ -81,60 +118,73 @@ export class RecruitingService {
     };
   }
 
-  async generateCareerPathFromCv(dto: GenerateCareerPathFromCvDto, cvFile?: any) {
-    const cvText = await this.cvParserService.parseCv(dto.cvText || '', cvFile);
-    if (cvText.length < 80) {
-      throw new BadRequestException(
-        'No se pudo leer contenido suficiente del CV. Sube un PDF/TXT/MD/CSV o pega el texto del CV.',
-      );
+  async generateCareerPathFromCv(dto: GenerateCareerPathFromCvDto) {
+    const cvText = String(dto.cvText || '');
+    const normalizedCv = cvText.toLowerCase().trim();
+    if (!normalizedCv || normalizedCv.length < 50) {
+      throw new BadRequestException('CV text is empty or not processed correctly');
     }
 
-    const insights = await this.geminiService.extractCvInsights(cvText, dto.targetRole);
-    const cvSkills = this.extractTechnicalSkills(`${cvText}\n${(insights.keywords || []).join(' ')}`).slice(0, 20);
-    const marketSkills = await this.ragService.findSuccessfulRoleSkills(dto.targetRole, 18);
-    const historicalCases = await this.ragService.findTopSuccessfulCareerCases(
-      `${dto.targetRole}\n${cvText}\n${cvSkills.join(' ')}`,
-      3,
-    );
-    const missingSkills = this.computeMissingSkills(cvSkills, marketSkills).slice(0, 14);
+    console.log('Using career_path_template RAG');
+    const rag = await this.ragService.getCareerPathRagByRole(dto.targetRole);
+    console.log(`Matched role: ${rag.matchedRole}`);
 
-    const keyDifference = this.detectKeyDifference(cvSkills, missingSkills, insights.englishLevel);
-    const improveTopic = this.detectImproveTopic(historicalCases, missingSkills);
-    const experienceSummary = this.extractExperienceSummary(cvText);
+    const coreSkills = this.normalizeSkillList(rag.coreSkills);
+    const optionalSkills = this.normalizeSkillList(rag.optionalSkills);
+    const catalog = [...new Set([...coreSkills, ...optionalSkills])];
+    const cvSkills = this.matchCvSkillsByCatalogNormalized(normalizedCv, catalog);
 
-    const prompt = buildEvolvingCareerPathPrompt({
-      targetRole: dto.targetRole,
-      cvSkills,
-      historicalCases,
-      marketSkills,
-      missingSkills,
-      keyDifference,
-      improveTopic,
-      experienceSummary,
-    });
+    if (!cvSkills.length) {
+      console.error('Extracted CV skills: [] (empty after normalization and inclusion matching)');
+      throw new BadRequestException('No technical skills detected from CV text');
+    }
+    console.log(`Extracted CV skills: [${cvSkills.join(', ')}]`);
+    console.log(`Total detected skills: ${cvSkills.length}`);
+    console.log(`Template core skills: [${coreSkills.join(', ')}]`);
 
-    const raw = await this.geminiService.runStructuredPrompt(prompt, 2200, 0.8);
-    const parsed = this.parseCareerPath(raw);
-    const withFallback = parsed.steps.length
-      ? parsed
-      : this.buildFallbackCareerPath(dto.targetRole, cvSkills, marketSkills, missingSkills);
+    const missingCore = coreSkills.filter((skill) => !cvSkills.includes(skill));
+    const missingOptional = optionalSkills.filter((skill) => !cvSkills.includes(skill));
 
-    const pathId = await this.ragService.saveCareerPath({
+    console.log(`Missing core skills: [${missingCore.join(', ')}]`);
+    console.log(`Missing optional skills: [${missingOptional.join(', ')}]`);
+
+    const steps = missingCore.map((skill, idx) => ({
+      title: `Prioridad ${idx + 1}: ${skill}`,
+      goal: `Cerrar brecha de ${skill} para avanzar de ${rag.matchedRole} hacia ${rag.careerGoal || dto.targetRole}.`,
+      skills: [skill],
+      resources: optionalSkills.length
+        ? [`Relacionar ${skill} con ${optionalSkills.slice(0, 3).join(', ')}`]
+        : [],
+      etaWeeks: 4,
+    }));
+
+    const estimatedMonths = Math.max(1, Math.ceil((steps.length * 4) / 4));
+    const summary =
+      missingCore.length > 0
+        ? `Roadmap generado desde career_path RAG para ${rag.matchedRole}. Meta siguiente: ${rag.careerGoal || dto.targetRole}.`
+        : `No se detectaron brechas frente a core_skills del rol ${rag.matchedRole}.`;
+
+    const pathId = await this.ragService.saveCareerPathResultOnly({
       userId: dto.userId || 'anonymous',
       targetRole: dto.targetRole,
-      summary: withFallback.summary,
-      steps: withFallback.steps,
+      summary,
+      estimatedMonths,
+      steps,
     });
 
     return {
       pathId,
+      ragContextUsed: 1,
+      matchedRole: rag.matchedRole,
+      coreSkills,
+      optionalSkills,
       cvSkills,
-      marketSkills,
-      missingSkills,
-      ragContextUsed: historicalCases.length,
-      keyDifference,
-      improveTopic,
-      ...withFallback,
+      missingSkills: missingCore,
+      missingOptionalSkills: missingOptional,
+      summary,
+      estimatedMonths,
+      steps,
+      careerGoal: rag.careerGoal || dto.targetRole,
     };
   }
 
@@ -771,6 +821,20 @@ export class RecruitingService {
     });
   }
 
+  private matchCvSkillsByCatalogNormalized(normalizedCv: string, catalog: string[]): string[] {
+    const out: string[] = [];
+    for (const skill of catalog) {
+      const normalizedSkill = this.normalize(skill);
+      if (!normalizedSkill) continue;
+      if (normalizedCv.includes(normalizedSkill)) out.push(normalizedSkill);
+    }
+    return [...new Set(out)];
+  }
+
+  private normalizeSkillList(skills: string[]): string[] {
+    return [...new Set((skills || []).map((s) => this.normalize(s)).filter(Boolean))];
+  }
+
   private normalize(value: string): string {
     return String(value || '')
       .toLowerCase()
@@ -783,45 +847,7 @@ export class RecruitingService {
 
   private extractTechnicalSkills(text: string): string[] {
     const normalized = this.normalize(text);
-    const lexicon = [
-      'java',
-      'python',
-      'javascript',
-      'typescript',
-      'node',
-      'node.js',
-      'react',
-      'angular',
-      'vue',
-      'sql',
-      'postgresql',
-      'mysql',
-      'mongodb',
-      'spring',
-      'spring boot',
-      'docker',
-      'kubernetes',
-      'aws',
-      'azure',
-      'gcp',
-      'git',
-      'html',
-      'css',
-      'tailwind',
-      'php',
-      'laravel',
-      'django',
-      'fastapi',
-      'rest',
-      'graphql',
-      'microservicios',
-      'testing',
-      'jest',
-      'cypress',
-      'linux',
-      'redis',
-    ];
-    return lexicon.filter((skill) => normalized.includes(this.normalize(skill)));
+    return this.knownCvSkills.filter((skill) => normalized.includes(skill.toLowerCase()));
   }
 
   private buildFallbackCareerPath(

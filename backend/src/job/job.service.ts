@@ -62,6 +62,36 @@ export interface EmployabilityAnalysisResult {
   training_dataset: TrainingDatasetRow[];
 }
 
+export interface ProcessedJobRow {
+  job_id: string;
+  title: string;
+  company: string;
+  location: string;
+  category: string;
+  role_slug: string;
+  seniority: string;
+  skills_required: string[];
+  tech_stack: string[];
+  sector_detected: string;
+  description_clean: string;
+  embedding_text: string;
+}
+
+export interface ProcessedJobsOutput {
+  processed_jobs: ProcessedJobRow[];
+  detected_market_summary: {
+    roles_detected: string[];
+    categories_detected: string[];
+    seniority_distribution: Record<string, number>;
+  };
+}
+
+interface NormalizedTechOutput {
+  skills_required: string[];
+  extracted_stack: string[];
+  raw_detected_phrases: string[];
+}
+
 @Injectable()
 export class JobService {
   private readonly datasetFilePath = path.join(process.cwd(), 'data', 'stored-jobs-dataset.json');
@@ -189,6 +219,7 @@ export class JobService {
       experienceProfile,
     });
     await this.mergeAndPersistTrainingDataset(analysis.training_dataset);
+    const processedJobsOutput = this.buildProcessedJobsOutput(uniqueJobs);
 
     const region = dto.country?.trim() || dto.location?.trim() || 'tu pais';
 
@@ -203,6 +234,7 @@ export class JobService {
       providerStatus: search.providers,
       note: `Lista en ${region}, ordenada de mas reciente a mas antigua, con enlaces directos por portal/palabra clave.`,
       employabilityAnalysis: analysis,
+      processedJobsOutput,
     };
   }
 
@@ -507,18 +539,144 @@ export class JobService {
     };
   }
 
+  private buildProcessedJobsOutput(jobs: MatchedJob[]): ProcessedJobsOutput {
+    const processed = this.dedupeJobs(jobs).map((job) => {
+      const rawDescription = job.tags.join(' ').trim();
+      const descriptionClean = this.cleanFreeText(rawDescription);
+      const normalizedTech = this.normalizeTechFromDescription(descriptionClean);
+      const roleSlug = this.buildRoleSlug(job.title);
+      const category = this.detectCategory(descriptionClean, normalizedTech.skills_required);
+      const sectorDetected = this.detectSector(descriptionClean, normalizedTech.skills_required);
+      const seniority = this.detectProcessingSeniority(rawDescription);
+      const jobId = this.buildJobId(job);
+
+      return {
+        job_id: jobId,
+        title: job.title,
+        company: job.company,
+        location: job.location,
+        category,
+        role_slug: roleSlug,
+        seniority,
+        skills_required: normalizedTech.skills_required,
+        tech_stack: normalizedTech.extracted_stack,
+        sector_detected: sectorDetected,
+        description_clean: descriptionClean,
+        embedding_text: this.cleanFreeText(
+          `${job.title}. ${job.company}. ${job.location}. categoria:${category}. seniority:${seniority}. sector:${sectorDetected}. skills:${normalizedTech.skills_required.join(', ')}. stack:${normalizedTech.extracted_stack.join(', ')}.`,
+        ),
+      };
+    });
+
+    const rolesDetected = [...new Set(processed.map((x) => x.role_slug).filter(Boolean))];
+    const categoriesDetected = [...new Set(processed.map((x) => x.category).filter(Boolean))];
+    const seniorityDistribution: Record<string, number> = {};
+    processed.forEach((row) => {
+      seniorityDistribution[row.seniority] = (seniorityDistribution[row.seniority] || 0) + 1;
+    });
+
+    return {
+      processed_jobs: processed,
+      detected_market_summary: {
+        roles_detected: rolesDetected,
+        categories_detected: categoriesDetected,
+        seniority_distribution: seniorityDistribution,
+      },
+    };
+  }
+
   private toTrainingDatasetRow(job: MatchedJob): TrainingDatasetRow {
-    const description = `${job.title} ${job.tags.join(' ')}`.trim();
-    const skills = this.extractSkillTokens(description);
+    const description = this.cleanFreeText(job.tags.join(' '));
+    const normalizedTech = this.normalizeTechFromDescription(description);
     return {
       title: job.title,
       company: job.company,
       location: job.location,
-      skills_required: skills,
-      extracted_stack: skills,
-      detected_seniority: this.detectSeniority(`${job.title} ${description}`),
+      skills_required: normalizedTech.skills_required,
+      extracted_stack: normalizedTech.extracted_stack,
+      detected_seniority: this.detectSeniority(description),
       description: description.slice(0, 400),
       processed_timestamp: new Date().toISOString(),
+    };
+  }
+
+  private normalizeTechFromDescription(description: string): NormalizedTechOutput {
+    const normalized = this.normalize(description);
+    const aliases: Record<string, string[]> = {
+      'Node.js': ['node.js', 'node js', 'node'],
+      NestJS: ['nestjs'],
+      Express: ['express'],
+      TypeScript: ['typescript', 'ts'],
+      JavaScript: ['javascript', 'js'],
+      React: ['react'],
+      Vue: ['vue'],
+      Angular: ['angular'],
+      Java: ['java'],
+      Spring: ['spring'],
+      'Spring Boot': ['spring boot'],
+      Python: ['python'],
+      Django: ['django'],
+      FastAPI: ['fastapi'],
+      PHP: ['php'],
+      Laravel: ['laravel'],
+      SQL: ['sql'],
+      PostgreSQL: ['postgresql', 'postgres'],
+      MySQL: ['mysql'],
+      MongoDB: ['mongodb', 'mongo db'],
+      Redis: ['redis'],
+      Docker: ['docker'],
+      Kubernetes: ['kubernetes', 'k8s'],
+      AWS: ['aws', 'amazon web services'],
+      Azure: ['azure'],
+      GCP: ['gcp', 'google cloud'],
+      GraphQL: ['graphql'],
+      REST: ['rest', 'restful', 'api rest'],
+      Linux: ['linux'],
+      Git: ['git'],
+      HTML: ['html'],
+      CSS: ['css'],
+      'Power BI': ['power bi', 'powerbi'],
+      Excel: ['excel'],
+      ETL: ['etl'],
+    };
+
+    const detected = new Set<string>();
+    const rawPhrases: string[] = [];
+    for (const [canonical, terms] of Object.entries(aliases)) {
+      for (const term of terms) {
+        const t = this.normalize(term);
+        if (!t) continue;
+        const escaped = t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const pattern = new RegExp(`(^|\\s)${escaped}(\\s|$)`);
+        if (pattern.test(normalized)) {
+          detected.add(canonical);
+          rawPhrases.push(term);
+          break;
+        }
+      }
+    }
+
+    const skillsRequired = [...detected];
+    const structuralSet = new Set([
+      'Node.js', 'NestJS', 'Express', 'React', 'Vue', 'Angular', 'Spring', 'Spring Boot',
+      'Django', 'FastAPI', 'Laravel', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis',
+      'Docker', 'Kubernetes', 'AWS', 'Azure', 'GCP',
+    ]);
+    let extractedStack = skillsRequired.filter((x) => structuralSet.has(x));
+
+    if (!skillsRequired.length) {
+      extractedStack = [];
+    } else if (
+      extractedStack.length === skillsRequired.length &&
+      extractedStack.every((x, idx) => x === skillsRequired[idx])
+    ) {
+      extractedStack = extractedStack.filter((x) => !['REST', 'SQL', 'Git', 'Linux'].includes(x));
+    }
+
+    return {
+      skills_required: skillsRequired,
+      extracted_stack: extractedStack,
+      raw_detected_phrases: [...new Set(rawPhrases)],
     };
   }
 
@@ -532,6 +690,81 @@ export class JobService {
       'power bi', 'excel', 'etl',
     ];
     return lexicon.filter((x) => normalized.includes(this.normalize(x))).slice(0, 20);
+  }
+
+  private extractTechStack(text: string): string[] {
+    const normalized = this.normalize(text);
+    const stackLexicon = [
+      'node.js', 'node', 'nestjs', 'express', 'react', 'vue', 'angular', 'typescript', 'javascript',
+      'java', 'spring boot', 'spring', 'python', 'django', 'fastapi', 'php', 'laravel',
+      'postgresql', 'mysql', 'mongodb', 'redis', 'docker', 'kubernetes', 'aws', 'azure', 'gcp',
+      'graphql', 'rest', 'linux', 'git', 'power bi', 'etl',
+    ];
+    return stackLexicon.filter((x) => normalized.includes(this.normalize(x))).slice(0, 20);
+  }
+
+  private detectCategory(description: string, skills: string[]): string {
+    const text = this.normalize(description);
+    const skillText = this.normalize(skills.join(' '));
+    const joined = `${text} ${skillText}`.trim();
+    if (/\b(data|analyst|analytics|bi|machine learning|ml|scientist|etl|power bi)\b/.test(joined)) return 'data';
+    if (/\b(devops|sre|cloud|infraestructura|kubernetes|docker|terraform|ci cd)\b/.test(joined)) return 'devops';
+    if (/\b(iot|internet of things|embedded|firmware|arduino|sensores)\b/.test(joined)) return 'iot';
+    if (/\b(agro|agricola|riego|cultivo|ganadero)\b/.test(joined)) return 'agro';
+    if (/\b(industrial|mantenimiento|planta|produccion|automatizacion industrial)\b/.test(joined)) return 'industrial';
+    if (/\b(software|developer|desarrollador|frontend|backend|full stack|qa|tester)\b/.test(joined)) return 'software';
+    return 'otro';
+  }
+
+  private detectSector(description: string, skills: string[]): string {
+    const text = this.normalize(description);
+    const skillText = this.normalize(skills.join(' '));
+    const joined = `${text} ${skillText}`.trim();
+    if (/\b(agro|agricola|riego|cultivo|agroindustria)\b/.test(joined)) return 'agro';
+    if (/\b(industrial|planta|manufactura|produccion|mineria|mantenimiento)\b/.test(joined)) return 'industrial';
+    if (/\b(devops|sre|cloud|docker|kubernetes)\b/.test(joined)) return 'devops';
+    if (/\b(data|analytics|machine learning|bi|scientist|etl)\b/.test(joined)) return 'data';
+    if (/\b(iot|internet of things|embedded|firmware|arduino|sensores)\b/.test(joined)) return 'iot';
+    if (/\b(software|tecnologia|it|developer|backend|frontend)\b/.test(joined)) return 'software';
+    return 'otro';
+  }
+
+  private detectProcessingSeniority(description: string): string {
+    const text = this.normalize(description);
+    if (/\b(senior|lead|principal|arquitecto|manager|jefe)\b/.test(text)) return 'senior';
+    if (/\b(semi senior|semisenior|ssr|intermedio|mid)\b/.test(text)) return 'semi-senior';
+    if (/\b(junior|trainee|intern|practicante|entry)\b/.test(text)) return 'junior';
+    return 'no_especificado';
+  }
+
+  private buildRoleSlug(title: string): string {
+    const n = this.normalize(title)
+      .replace(/[^\w\s-]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .split(' ')
+      .filter((x) => x && x.length > 1)
+      .slice(0, 5)
+      .join('_');
+    return n || 'rol_no_definido';
+  }
+
+  private buildJobId(job: MatchedJob): string {
+    const base = `${this.normalize(job.title)}|${this.normalize(job.company)}|${this.normalize(job.location)}|${this.normalize(job.url)}`;
+    let hash = 0;
+    for (let i = 0; i < base.length; i += 1) {
+      hash = (hash * 31 + base.charCodeAt(i)) >>> 0;
+    }
+    return `job_${hash.toString(16)}`;
+  }
+
+  private cleanFreeText(text: string): string {
+    return String(text || '')
+      .replace(/\s+/g, ' ')
+      .replace(/[^\w\s.,:;()/#+-]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .slice(0, 1200);
   }
 
   private detectSeniority(text: string): string {

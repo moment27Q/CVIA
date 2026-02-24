@@ -1,5 +1,6 @@
-import { Body, Controller, HttpCode, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, HttpCode, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import pdfParse from 'pdf-parse';
 import { FeedbackDto } from './dto-feedback.dto';
 import { GetLearningResourcesDto } from './dto-get-learning-resources.dto';
 import { GenerateCareerPathDto } from './dto-generate-career-path.dto';
@@ -22,9 +23,35 @@ export class RecruitingController {
   }
 
   @Post('career-path-from-cv')
-  @UseInterceptors(FileInterceptor('cvFile'))
-  async careerPathFromCv(@UploadedFile() cvFile: any, @Body() dto: GenerateCareerPathFromCvDto) {
-    return this.recruitingService.generateCareerPathFromCv(dto, cvFile);
+  @UseInterceptors(FileInterceptor('file'))
+  async careerPathFromCv(@UploadedFile() file: Express.Multer.File, @Body() dto: GenerateCareerPathFromCvDto) {
+    let cvText = String(dto.cvText || '');
+
+    if (file) {
+      try {
+        const data = await pdfParse(file.buffer);
+        cvText = String(data?.text || '').trim();
+        console.log('PDF text length:', cvText.length);
+        console.log('PDF preview (first 200 chars):', cvText.substring(0, 200));
+        if (cvText.length < 100) {
+          throw new BadRequestException('CV text is empty or not processed correctly');
+        }
+      } catch (error) {
+        if (error instanceof BadRequestException) {
+          throw error;
+        }
+        throw new BadRequestException('CV text is empty or not processed correctly');
+      }
+    } else {
+      cvText = cvText.trim();
+      console.log('CV text length:', cvText.length);
+      console.log('CV preview:', cvText.substring(0, 200));
+      if (!cvText || cvText.length < 50) {
+        throw new BadRequestException('CV text is empty or not processed correctly');
+      }
+    }
+
+    return this.recruitingService.generateCareerPathFromCv({ ...dto, cvText });
   }
 
   @Post('feedback')

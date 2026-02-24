@@ -1,0 +1,1298 @@
+[
+  {
+    "role": "Backend Developer Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "JavaScript",
+      "Node.js",
+      "Express",
+      "REST APIs",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Docker",
+      "Git",
+      "Postman"
+    ],
+    "career_goal": "Backend Developer Semi Senior"
+  },
+  {
+    "role": "Backend Developer Semi Senior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Node.js",
+      "Express",
+      "PostgreSQL",
+      "MongoDB",
+      "JWT",
+      "Clean Architecture"
+    ],
+    "nice_to_have": [
+      "Docker",
+      "AWS",
+      "CI/CD"
+    ],
+    "career_goal": "Backend Developer Senior"
+  },
+  {
+    "role": "Backend Developer Senior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Node.js",
+      "Microservices",
+      "Docker",
+      "Kubernetes",
+      "Cloud Architecture"
+    ],
+    "nice_to_have": [
+      "AWS",
+      "Terraform",
+      "System Design"
+    ],
+    "career_goal": "Software Architect"
+  },
+  {
+    "role": "Frontend Developer Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Git"
+    ],
+    "nice_to_have": [
+      "Figma",
+      "Responsive Design"
+    ],
+    "career_goal": "Frontend Developer"
+  },
+  {
+    "role": "Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "TypeScript",
+      "CSS",
+      "APIs"
+    ],
+    "nice_to_have": [
+      "Next.js",
+      "Testing"
+    ],
+    "career_goal": "Senior Frontend Developer"
+  },
+  {
+    "role": "Senior Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "Performance",
+      "Architecture"
+    ],
+    "nice_to_have": [
+      "Microfrontends"
+    ],
+    "career_goal": "Frontend Architect"
+  },
+  {
+    "role": "Full Stack Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "JavaScript",
+      "Node.js",
+      "React",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Docker"
+    ],
+    "career_goal": "Senior Full Stack Developer"
+  },
+  {
+    "role": "Mobile Developer Android",
+    "target_country": "Perú",
+    "required_skills": [
+      "Kotlin",
+      "Android SDK"
+    ],
+    "nice_to_have": [
+      "Firebase"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Mobile Developer iOS",
+    "target_country": "Perú",
+    "required_skills": [
+      "Swift",
+      "iOS SDK"
+    ],
+    "nice_to_have": [
+      "SwiftUI"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Data Analyst Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Excel",
+      "SQL",
+      "Power BI"
+    ],
+    "nice_to_have": [
+      "Python"
+    ],
+    "career_goal": "Data Analyst"
+  },
+  {
+    "role": "Data Analyst",
+    "target_country": "Perú",
+    "required_skills": [
+      "SQL",
+      "Power BI",
+      "Python"
+    ],
+    "nice_to_have": [
+      "Statistics"
+    ],
+    "career_goal": "Senior Data Analyst"
+  },
+  {
+    "role": "Data Scientist Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Python",
+      "Pandas",
+      "Statistics"
+    ],
+    "nice_to_have": [
+      "ML"
+    ],
+    "career_goal": "Data Scientist"
+  },
+  {
+    "role": "Data Scientist",
+    "target_country": "Perú",
+    "required_skills": [
+      "Machine Learning",
+      "Python",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Deep Learning"
+    ],
+    "career_goal": "Senior Data Scientist"
+  },
+  {
+    "role": "DevOps Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Linux",
+      "Git",
+      "Docker"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "DevOps Engineer"
+  },
+  {
+    "role": "DevOps Engineer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Docker",
+      "Kubernetes",
+      "AWS"
+    ],
+    "nice_to_have": [
+      "Terraform"
+    ],
+    "career_goal": "Senior DevOps Engineer"
+  },
+  {
+    "role": "QA Tester",
+    "target_country": "Perú",
+    "required_skills": [
+      "Testing Manual",
+      "Test Cases"
+    ],
+    "nice_to_have": [
+      "Selenium"
+    ],
+    "career_goal": "QA Automation"
+  },
+  {
+    "role": "QA Automation",
+    "target_country": "Perú",
+    "required_skills": [
+      "Selenium",
+      "Java",
+      "Testing"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "QA Lead"
+  },
+  {
+    "role": "UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Figma",
+      "Design Systems"
+    ],
+    "nice_to_have": [
+      "UX"
+    ],
+    "career_goal": "UX/UI Designer"
+  },
+  {
+    "role": "UX/UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "UX Research",
+      "Prototyping"
+    ],
+    "nice_to_have": [
+      "Usability Testing"
+    ],
+    "career_goal": "Product Designer"
+  },
+  {
+    "role": "Product Manager Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Scrum",
+      "Roadmaps"
+    ],
+    "nice_to_have": [
+      "Analytics"
+    ],
+    "career_goal": "Product Manager"
+  },
+  {
+    "role": "Product Manager",
+    "target_country": "Perú",
+    "required_skills": [
+      "Product Strategy",
+      "Stakeholders"
+    ],
+    "nice_to_have": [
+      "Data"
+    ],
+    "career_goal": "Senior Product Manager"
+  },
+  {
+    "role": "Cybersecurity Analyst",
+    "target_country": "Perú",
+    "required_skills": [
+      "Networking",
+      "Security Basics"
+    ],
+    "nice_to_have": [
+      "SIEM"
+    ],
+    "career_goal": "Security Engineer"
+  },
+  {
+    "role": "Security Engineer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Pentesting",
+      "Cloud Security"
+    ],
+    "nice_to_have": [
+      "Certifications"
+    ],
+    "career_goal": "Security Architect"
+  },
+  {
+    "role": "Frontend Developer Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Git"
+    ],
+    "nice_to_have": [
+      "Figma",
+      "Responsive Design"
+    ],
+    "career_goal": "Frontend Developer"
+  },
+  {
+    "role": "Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "TypeScript",
+      "CSS",
+      "APIs"
+    ],
+    "nice_to_have": [
+      "Next.js",
+      "Testing"
+    ],
+    "career_goal": "Senior Frontend Developer"
+  },
+  {
+    "role": "Senior Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "Performance",
+      "Architecture"
+    ],
+    "nice_to_have": [
+      "Microfrontends"
+    ],
+    "career_goal": "Frontend Architect"
+  },
+  {
+    "role": "Full Stack Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "JavaScript",
+      "Node.js",
+      "React",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Docker"
+    ],
+    "career_goal": "Senior Full Stack Developer"
+  },
+  {
+    "role": "Mobile Developer Android",
+    "target_country": "Perú",
+    "required_skills": [
+      "Kotlin",
+      "Android SDK"
+    ],
+    "nice_to_have": [
+      "Firebase"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Mobile Developer iOS",
+    "target_country": "Perú",
+    "required_skills": [
+      "Swift",
+      "iOS SDK"
+    ],
+    "nice_to_have": [
+      "SwiftUI"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Data Analyst Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Excel",
+      "SQL",
+      "Power BI"
+    ],
+    "nice_to_have": [
+      "Python"
+    ],
+    "career_goal": "Data Analyst"
+  },
+  {
+    "role": "Data Analyst",
+    "target_country": "Perú",
+    "required_skills": [
+      "SQL",
+      "Power BI",
+      "Python"
+    ],
+    "nice_to_have": [
+      "Statistics"
+    ],
+    "career_goal": "Senior Data Analyst"
+  },
+  {
+    "role": "Data Scientist Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Python",
+      "Pandas",
+      "Statistics"
+    ],
+    "nice_to_have": [
+      "ML"
+    ],
+    "career_goal": "Data Scientist"
+  },
+  {
+    "role": "Data Scientist",
+    "target_country": "Perú",
+    "required_skills": [
+      "Machine Learning",
+      "Python",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Deep Learning"
+    ],
+    "career_goal": "Senior Data Scientist"
+  },
+  {
+    "role": "DevOps Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Linux",
+      "Git",
+      "Docker"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "DevOps Engineer"
+  },
+  {
+    "role": "DevOps Engineer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Docker",
+      "Kubernetes",
+      "AWS"
+    ],
+    "nice_to_have": [
+      "Terraform"
+    ],
+    "career_goal": "Senior DevOps Engineer"
+  },
+  {
+    "role": "QA Tester",
+    "target_country": "Perú",
+    "required_skills": [
+      "Testing Manual",
+      "Test Cases"
+    ],
+    "nice_to_have": [
+      "Selenium"
+    ],
+    "career_goal": "QA Automation"
+  },
+  {
+    "role": "QA Automation",
+    "target_country": "Perú",
+    "required_skills": [
+      "Selenium",
+      "Java",
+      "Testing"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "QA Lead"
+  },
+  {
+    "role": "UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Figma",
+      "Design Systems"
+    ],
+    "nice_to_have": [
+      "UX"
+    ],
+    "career_goal": "UX/UI Designer"
+  },
+  {
+    "role": "UX/UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "UX Research",
+      "Prototyping"
+    ],
+    "nice_to_have": [
+      "Usability Testing"
+    ],
+    "career_goal": "Product Designer"
+  },
+  {
+    "role": "Product Manager Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Scrum",
+      "Roadmaps"
+    ],
+    "nice_to_have": [
+      "Analytics"
+    ],
+    "career_goal": "Product Manager"
+  },
+  {
+    "role": "Product Manager",
+    "target_country": "Perú",
+    "required_skills": [
+      "Product Strategy",
+      "Stakeholders"
+    ],
+    "nice_to_have": [
+      "Data"
+    ],
+    "career_goal": "Senior Product Manager"
+  },
+  {
+    "role": "Cybersecurity Analyst",
+    "target_country": "Perú",
+    "required_skills": [
+      "Networking",
+      "Security Basics"
+    ],
+    "nice_to_have": [
+      "SIEM"
+    ],
+    "career_goal": "Security Engineer"
+  },
+  {
+    "role": "Security Engineer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Pentesting",
+      "Cloud Security"
+    ],
+    "nice_to_have": [
+      "Certifications"
+    ],
+    "career_goal": "Security Architect"
+  },
+  {
+    "role": "Frontend Developer Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Git"
+    ],
+    "nice_to_have": [
+      "Figma",
+      "Responsive Design"
+    ],
+    "career_goal": "Frontend Developer"
+  },
+  {
+    "role": "Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "TypeScript",
+      "CSS",
+      "APIs"
+    ],
+    "nice_to_have": [
+      "Next.js",
+      "Testing"
+    ],
+    "career_goal": "Senior Frontend Developer"
+  },
+  {
+    "role": "Senior Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "Performance",
+      "Architecture"
+    ],
+    "nice_to_have": [
+      "Microfrontends"
+    ],
+    "career_goal": "Frontend Architect"
+  },
+  {
+    "role": "Full Stack Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "JavaScript",
+      "Node.js",
+      "React",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Docker"
+    ],
+    "career_goal": "Senior Full Stack Developer"
+  },
+  {
+    "role": "Mobile Developer Android",
+    "target_country": "Perú",
+    "required_skills": [
+      "Kotlin",
+      "Android SDK"
+    ],
+    "nice_to_have": [
+      "Firebase"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Mobile Developer iOS",
+    "target_country": "Perú",
+    "required_skills": [
+      "Swift",
+      "iOS SDK"
+    ],
+    "nice_to_have": [
+      "SwiftUI"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Data Analyst Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Excel",
+      "SQL",
+      "Power BI"
+    ],
+    "nice_to_have": [
+      "Python"
+    ],
+    "career_goal": "Data Analyst"
+  },
+  {
+    "role": "Data Analyst",
+    "target_country": "Perú",
+    "required_skills": [
+      "SQL",
+      "Power BI",
+      "Python"
+    ],
+    "nice_to_have": [
+      "Statistics"
+    ],
+    "career_goal": "Senior Data Analyst"
+  },
+  {
+    "role": "Data Scientist Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Python",
+      "Pandas",
+      "Statistics"
+    ],
+    "nice_to_have": [
+      "ML"
+    ],
+    "career_goal": "Data Scientist"
+  },
+  {
+    "role": "Data Scientist",
+    "target_country": "Perú",
+    "required_skills": [
+      "Machine Learning",
+      "Python",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Deep Learning"
+    ],
+    "career_goal": "Senior Data Scientist"
+  },
+  {
+    "role": "DevOps Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Linux",
+      "Git",
+      "Docker"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "DevOps Engineer"
+  },
+  {
+    "role": "DevOps Engineer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Docker",
+      "Kubernetes",
+      "AWS"
+    ],
+    "nice_to_have": [
+      "Terraform"
+    ],
+    "career_goal": "Senior DevOps Engineer"
+  },
+  {
+    "role": "QA Tester",
+    "target_country": "Perú",
+    "required_skills": [
+      "Testing Manual",
+      "Test Cases"
+    ],
+    "nice_to_have": [
+      "Selenium"
+    ],
+    "career_goal": "QA Automation"
+  },
+  {
+    "role": "QA Automation",
+    "target_country": "Perú",
+    "required_skills": [
+      "Selenium",
+      "Java",
+      "Testing"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "QA Lead"
+  },
+  {
+    "role": "UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Figma",
+      "Design Systems"
+    ],
+    "nice_to_have": [
+      "UX"
+    ],
+    "career_goal": "UX/UI Designer"
+  },
+  {
+    "role": "UX/UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "UX Research",
+      "Prototyping"
+    ],
+    "nice_to_have": [
+      "Usability Testing"
+    ],
+    "career_goal": "Product Designer"
+  },
+  {
+    "role": "Product Manager Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Scrum",
+      "Roadmaps"
+    ],
+    "nice_to_have": [
+      "Analytics"
+    ],
+    "career_goal": "Product Manager"
+  },
+  {
+    "role": "Product Manager",
+    "target_country": "Perú",
+    "required_skills": [
+      "Product Strategy",
+      "Stakeholders"
+    ],
+    "nice_to_have": [
+      "Data"
+    ],
+    "career_goal": "Senior Product Manager"
+  },
+  {
+    "role": "Cybersecurity Analyst",
+    "target_country": "Perú",
+    "required_skills": [
+      "Networking",
+      "Security Basics"
+    ],
+    "nice_to_have": [
+      "SIEM"
+    ],
+    "career_goal": "Security Engineer"
+  },
+  {
+    "role": "Security Engineer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Pentesting",
+      "Cloud Security"
+    ],
+    "nice_to_have": [
+      "Certifications"
+    ],
+    "career_goal": "Security Architect"
+  },
+  {
+    "role": "Frontend Developer Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Git"
+    ],
+    "nice_to_have": [
+      "Figma",
+      "Responsive Design"
+    ],
+    "career_goal": "Frontend Developer"
+  },
+  {
+    "role": "Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "TypeScript",
+      "CSS",
+      "APIs"
+    ],
+    "nice_to_have": [
+      "Next.js",
+      "Testing"
+    ],
+    "career_goal": "Senior Frontend Developer"
+  },
+  {
+    "role": "Senior Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "Performance",
+      "Architecture"
+    ],
+    "nice_to_have": [
+      "Microfrontends"
+    ],
+    "career_goal": "Frontend Architect"
+  },
+  {
+    "role": "Full Stack Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "JavaScript",
+      "Node.js",
+      "React",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Docker"
+    ],
+    "career_goal": "Senior Full Stack Developer"
+  },
+  {
+    "role": "Mobile Developer Android",
+    "target_country": "Perú",
+    "required_skills": [
+      "Kotlin",
+      "Android SDK"
+    ],
+    "nice_to_have": [
+      "Firebase"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Mobile Developer iOS",
+    "target_country": "Perú",
+    "required_skills": [
+      "Swift",
+      "iOS SDK"
+    ],
+    "nice_to_have": [
+      "SwiftUI"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Data Analyst Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Excel",
+      "SQL",
+      "Power BI"
+    ],
+    "nice_to_have": [
+      "Python"
+    ],
+    "career_goal": "Data Analyst"
+  },
+  {
+    "role": "Data Analyst",
+    "target_country": "Perú",
+    "required_skills": [
+      "SQL",
+      "Power BI",
+      "Python"
+    ],
+    "nice_to_have": [
+      "Statistics"
+    ],
+    "career_goal": "Senior Data Analyst"
+  },
+  {
+    "role": "Data Scientist Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Python",
+      "Pandas",
+      "Statistics"
+    ],
+    "nice_to_have": [
+      "ML"
+    ],
+    "career_goal": "Data Scientist"
+  },
+  {
+    "role": "Data Scientist",
+    "target_country": "Perú",
+    "required_skills": [
+      "Machine Learning",
+      "Python",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Deep Learning"
+    ],
+    "career_goal": "Senior Data Scientist"
+  },
+  {
+    "role": "DevOps Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Linux",
+      "Git",
+      "Docker"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "DevOps Engineer"
+  },
+  {
+    "role": "DevOps Engineer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Docker",
+      "Kubernetes",
+      "AWS"
+    ],
+    "nice_to_have": [
+      "Terraform"
+    ],
+    "career_goal": "Senior DevOps Engineer"
+  },
+  {
+    "role": "QA Tester",
+    "target_country": "Perú",
+    "required_skills": [
+      "Testing Manual",
+      "Test Cases"
+    ],
+    "nice_to_have": [
+      "Selenium"
+    ],
+    "career_goal": "QA Automation"
+  },
+  {
+    "role": "QA Automation",
+    "target_country": "Perú",
+    "required_skills": [
+      "Selenium",
+      "Java",
+      "Testing"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "QA Lead"
+  },
+  {
+    "role": "UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Figma",
+      "Design Systems"
+    ],
+    "nice_to_have": [
+      "UX"
+    ],
+    "career_goal": "UX/UI Designer"
+  },
+  {
+    "role": "UX/UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "UX Research",
+      "Prototyping"
+    ],
+    "nice_to_have": [
+      "Usability Testing"
+    ],
+    "career_goal": "Product Designer"
+  },
+  {
+    "role": "Product Manager Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Scrum",
+      "Roadmaps"
+    ],
+    "nice_to_have": [
+      "Analytics"
+    ],
+    "career_goal": "Product Manager"
+  },
+  {
+    "role": "Product Manager",
+    "target_country": "Perú",
+    "required_skills": [
+      "Product Strategy",
+      "Stakeholders"
+    ],
+    "nice_to_have": [
+      "Data"
+    ],
+    "career_goal": "Senior Product Manager"
+  },
+  {
+    "role": "Cybersecurity Analyst",
+    "target_country": "Perú",
+    "required_skills": [
+      "Networking",
+      "Security Basics"
+    ],
+    "nice_to_have": [
+      "SIEM"
+    ],
+    "career_goal": "Security Engineer"
+  },
+  {
+    "role": "Security Engineer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Pentesting",
+      "Cloud Security"
+    ],
+    "nice_to_have": [
+      "Certifications"
+    ],
+    "career_goal": "Security Architect"
+  },
+  {
+    "role": "Frontend Developer Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Git"
+    ],
+    "nice_to_have": [
+      "Figma",
+      "Responsive Design"
+    ],
+    "career_goal": "Frontend Developer"
+  },
+  {
+    "role": "Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "TypeScript",
+      "CSS",
+      "APIs"
+    ],
+    "nice_to_have": [
+      "Next.js",
+      "Testing"
+    ],
+    "career_goal": "Senior Frontend Developer"
+  },
+  {
+    "role": "Senior Frontend Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "React",
+      "Performance",
+      "Architecture"
+    ],
+    "nice_to_have": [
+      "Microfrontends"
+    ],
+    "career_goal": "Frontend Architect"
+  },
+  {
+    "role": "Full Stack Developer",
+    "target_country": "Perú",
+    "required_skills": [
+      "JavaScript",
+      "Node.js",
+      "React",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Docker"
+    ],
+    "career_goal": "Senior Full Stack Developer"
+  },
+  {
+    "role": "Mobile Developer Android",
+    "target_country": "Perú",
+    "required_skills": [
+      "Kotlin",
+      "Android SDK"
+    ],
+    "nice_to_have": [
+      "Firebase"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Mobile Developer iOS",
+    "target_country": "Perú",
+    "required_skills": [
+      "Swift",
+      "iOS SDK"
+    ],
+    "nice_to_have": [
+      "SwiftUI"
+    ],
+    "career_goal": "Senior Mobile Developer"
+  },
+  {
+    "role": "Data Analyst Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Excel",
+      "SQL",
+      "Power BI"
+    ],
+    "nice_to_have": [
+      "Python"
+    ],
+    "career_goal": "Data Analyst"
+  },
+  {
+    "role": "Data Analyst",
+    "target_country": "Perú",
+    "required_skills": [
+      "SQL",
+      "Power BI",
+      "Python"
+    ],
+    "nice_to_have": [
+      "Statistics"
+    ],
+    "career_goal": "Senior Data Analyst"
+  },
+  {
+    "role": "Data Scientist Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Python",
+      "Pandas",
+      "Statistics"
+    ],
+    "nice_to_have": [
+      "ML"
+    ],
+    "career_goal": "Data Scientist"
+  },
+  {
+    "role": "Data Scientist",
+    "target_country": "Perú",
+    "required_skills": [
+      "Machine Learning",
+      "Python",
+      "SQL"
+    ],
+    "nice_to_have": [
+      "Deep Learning"
+    ],
+    "career_goal": "Senior Data Scientist"
+  },
+  {
+    "role": "DevOps Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Linux",
+      "Git",
+      "Docker"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "DevOps Engineer"
+  },
+  {
+    "role": "DevOps Engineer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Docker",
+      "Kubernetes",
+      "AWS"
+    ],
+    "nice_to_have": [
+      "Terraform"
+    ],
+    "career_goal": "Senior DevOps Engineer"
+  },
+  {
+    "role": "QA Tester",
+    "target_country": "Perú",
+    "required_skills": [
+      "Testing Manual",
+      "Test Cases"
+    ],
+    "nice_to_have": [
+      "Selenium"
+    ],
+    "career_goal": "QA Automation"
+  },
+  {
+    "role": "QA Automation",
+    "target_country": "Perú",
+    "required_skills": [
+      "Selenium",
+      "Java",
+      "Testing"
+    ],
+    "nice_to_have": [
+      "CI/CD"
+    ],
+    "career_goal": "QA Lead"
+  },
+  {
+    "role": "UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "Figma",
+      "Design Systems"
+    ],
+    "nice_to_have": [
+      "UX"
+    ],
+    "career_goal": "UX/UI Designer"
+  },
+  {
+    "role": "UX/UI Designer",
+    "target_country": "Perú",
+    "required_skills": [
+      "UX Research",
+      "Prototyping"
+    ],
+    "nice_to_have": [
+      "Usability Testing"
+    ],
+    "career_goal": "Product Designer"
+  },
+  {
+    "role": "Product Manager Junior",
+    "target_country": "Perú",
+    "required_skills": [
+      "Scrum",
+      "Roadmaps"
+    ],
+    "nice_to_have": [
+      "Analytics"
+    ],
+    "career_goal": "Product Manager"
+  }
+]
