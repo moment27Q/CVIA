@@ -3,8 +3,9 @@ import { GeminiService } from '../common/services/gemini.service';
 import { RecruitingRagService } from '../common/services/recruiting-rag.service';
 import { FeedbackDto } from './dto-feedback.dto';
 import { GenerateCareerPathDto } from './dto-generate-career-path.dto';
+import { GenerateCareerPathFromCvDto } from './dto-generate-career-path-from-cv.dto';
 import { MatchCvDto } from './dto-match-cv.dto';
-import { buildCareerPathSystemPrompt, buildMatchSystemPrompt } from './prompts';
+import { buildCareerPathGapPrompt, buildCareerPathSystemPrompt, buildMatchSystemPrompt } from './prompts';
 
 @Injectable()
 export class RecruitingService {
@@ -65,6 +66,43 @@ export class RecruitingService {
       pathId,
       ragContextUsed: priorSuccessfulPaths.length,
       ...parsed,
+    };
+  }
+
+  async generateCareerPathFromCv(dto: GenerateCareerPathFromCvDto) {
+    const insights = await this.geminiService.extractCvInsights(dto.cvText, dto.targetRole);
+    const cvSkills = this.extractTechnicalSkills(`${dto.cvText}\n${(insights.keywords || []).join(' ')}`).slice(0, 20);
+    const marketSkills = await this.ragService.findSuccessfulRoleSkills(dto.targetRole, 18);
+    const missingSkills = this.computeMissingSkills(cvSkills, marketSkills).slice(0, 14);
+
+    const prompt = buildCareerPathGapPrompt({
+      targetRole: dto.targetRole,
+      cvSkills,
+      marketSkills,
+      missingSkills,
+      cvText: dto.cvText,
+    });
+
+    const raw = await this.geminiService.runStructuredPrompt(prompt, 1400);
+    const parsed = this.parseCareerPath(raw);
+    const withFallback = parsed.steps.length
+      ? parsed
+      : this.buildFallbackCareerPath(dto.targetRole, cvSkills, marketSkills, missingSkills);
+
+    const pathId = await this.ragService.saveCareerPath({
+      userId: dto.userId || 'anonymous',
+      targetRole: dto.targetRole,
+      summary: withFallback.summary,
+      steps: withFallback.steps,
+    });
+
+    return {
+      pathId,
+      cvSkills,
+      marketSkills,
+      missingSkills,
+      ragContextUsed: marketSkills.length,
+      ...withFallback,
     };
   }
 
@@ -145,5 +183,107 @@ export class RecruitingService {
         steps: [],
       };
     }
+  }
+
+  private computeMissingSkills(cvSkills: string[], marketSkills: string[]): string[] {
+    const cvNorm = cvSkills.map((s) => this.normalize(s));
+    return marketSkills.filter((skill) => {
+      const n = this.normalize(skill);
+      if (!n) return false;
+      return !cvNorm.some((cv) => cv === n || cv.includes(n) || n.includes(cv));
+    });
+  }
+
+  private normalize(value: string): string {
+    return String(value || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9+#.\s-]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  private extractTechnicalSkills(text: string): string[] {
+    const normalized = this.normalize(text);
+    const lexicon = [
+      'java',
+      'python',
+      'javascript',
+      'typescript',
+      'node',
+      'node.js',
+      'react',
+      'angular',
+      'vue',
+      'sql',
+      'postgresql',
+      'mysql',
+      'mongodb',
+      'spring',
+      'spring boot',
+      'docker',
+      'kubernetes',
+      'aws',
+      'azure',
+      'gcp',
+      'git',
+      'html',
+      'css',
+      'tailwind',
+      'php',
+      'laravel',
+      'django',
+      'fastapi',
+      'rest',
+      'graphql',
+      'microservicios',
+      'testing',
+      'jest',
+      'cypress',
+      'linux',
+      'redis',
+    ];
+    return lexicon.filter((skill) => normalized.includes(this.normalize(skill)));
+  }
+
+  private buildFallbackCareerPath(
+    targetRole: string,
+    cvSkills: string[],
+    marketSkills: string[],
+    missingSkills: string[],
+  ) {
+    const prioritized = (missingSkills.length ? missingSkills : marketSkills).slice(0, 9);
+    const blockA = prioritized.slice(0, 3);
+    const blockB = prioritized.slice(3, 6);
+    const blockC = prioritized.slice(6, 9);
+
+    return {
+      summary: `Ruta generada con contexto de mercado para ${targetRole}. Se priorizan brechas detectadas segun perfiles exitosos.`,
+      estimatedMonths: 6,
+      steps: [
+        {
+          title: 'Paso 1: Fundamentos y refuerzo',
+          goal: `Consolidar base tecnica y cubrir primeras brechas: ${blockA.join(', ') || 'fundamentos del rol'}.`,
+          skills: blockA.length ? blockA : cvSkills.slice(0, 3),
+          resources: ['Documentacion oficial', 'Curso base del stack', 'Katas/ejercicios'],
+          etaWeeks: 4,
+        },
+        {
+          title: 'Paso 2: Stack objetivo',
+          goal: `Dominar herramientas y patrones del puesto: ${blockB.join(', ') || 'stack principal del rol'}.`,
+          skills: blockB.length ? blockB : marketSkills.slice(0, 3),
+          resources: ['Proyecto guiado', 'Repositorio de buenas practicas', 'Code reviews'],
+          etaWeeks: 6,
+        },
+        {
+          title: 'Paso 3: Proyecto demostrable',
+          goal: `Construir un proyecto portfolio aplicando: ${blockC.join(', ') || 'skills del mercado'}.`,
+          skills: blockC.length ? blockC : marketSkills.slice(3, 6),
+          resources: ['Proyecto end-to-end', 'README tecnico', 'Deploy publico'],
+          etaWeeks: 6,
+        },
+      ],
+    };
   }
 }

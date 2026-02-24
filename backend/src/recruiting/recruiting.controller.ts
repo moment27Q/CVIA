@@ -1,6 +1,7 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { FeedbackDto } from './dto-feedback.dto';
 import { GenerateCareerPathDto } from './dto-generate-career-path.dto';
+import { GenerateCareerPathFromCvDto } from './dto-generate-career-path-from-cv.dto';
 import { MatchCvDto } from './dto-match-cv.dto';
 import { RecruitingService } from './recruiting.service';
 
@@ -16,6 +17,11 @@ export class RecruitingController {
   @Post('career-path')
   async careerPath(@Body() dto: GenerateCareerPathDto) {
     return this.recruitingService.generateCareerPath(dto);
+  }
+
+  @Post('career-path-from-cv')
+  async careerPathFromCv(@Body() dto: GenerateCareerPathFromCvDto) {
+    return this.recruitingService.generateCareerPathFromCv(dto);
   }
 
   @Post('feedback')

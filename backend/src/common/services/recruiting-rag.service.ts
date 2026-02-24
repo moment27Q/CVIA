@@ -99,6 +99,36 @@ export class RecruitingRagService {
       }));
   }
 
+  async findSuccessfulRoleSkills(targetRole: string, limit = 12): Promise<string[]> {
+    if (this.hasPgConfig) {
+      return this.findSuccessfulRoleSkillsPg(targetRole, limit);
+    }
+
+    const db = await this.readDb();
+    const q = this.normalize(targetRole);
+    const accepted = db.matchCases.filter((c) => c.verdict === 'accepted');
+    const sorted = accepted
+      .map((c) => ({
+        ...c,
+        relevance: this.tokenScore(q, this.normalize(`${c.jobSummary} ${c.whyAccepted}`)),
+      }))
+      .sort((a, b) => b.relevance + b.quality - (a.relevance + a.quality))
+      .slice(0, 30);
+
+    const freq = new Map<string, number>();
+    for (const row of sorted) {
+      const skills = this.extractSkillsFromText(`${row.candidateSummary} ${row.jobSummary} ${row.whyAccepted}`);
+      for (const s of skills) {
+        freq.set(s, (freq.get(s) || 0) + 1);
+      }
+    }
+
+    return [...freq.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, limit)
+      .map(([skill]) => skill);
+  }
+
   async saveMatchPrediction(input: {
     candidateSummary: string;
     jobSummary: string;
@@ -340,6 +370,47 @@ export class RecruitingRagService {
       .map((p: CareerPathCandidate) => ({ targetRole: p.targetRole, summary: p.summary, successfulSteps: p.successfulSteps }));
   }
 
+  private async findSuccessfulRoleSkillsPg(targetRole: string, limit: number): Promise<string[]> {
+    const rows = await this.query(
+      `SELECT metadata, content
+       FROM recruiting_case_vectors
+       WHERE case_type = 'match_case'
+       ORDER BY created_at DESC
+       LIMIT 500`,
+      [],
+    );
+
+    const q = this.normalize(targetRole);
+    const ranked = rows.rows
+      .map((r: any) => {
+        const m = (r.metadata || {}) as Record<string, unknown>;
+        const verdict = String(m.verdict || 'unknown');
+        const quality = Number(m.quality || 0);
+        const candidateSummary = String(m.candidateSummary || '');
+        const jobSummary = String(m.jobSummary || '');
+        const whyAccepted = String(m.whyAccepted || '');
+        const content = String(r.content || '');
+        const relevance = this.tokenScore(q, this.normalize(`${jobSummary} ${content}`));
+        return { verdict, quality, candidateSummary, jobSummary, whyAccepted, content, relevance };
+      })
+      .filter((x) => x.verdict === 'accepted')
+      .sort((a, b) => b.relevance + b.quality - (a.relevance + a.quality))
+      .slice(0, 40);
+
+    const freq = new Map<string, number>();
+    for (const row of ranked) {
+      const skills = this.extractSkillsFromText(`${row.candidateSummary} ${row.jobSummary} ${row.whyAccepted} ${row.content}`);
+      for (const s of skills) {
+        freq.set(s, (freq.get(s) || 0) + 1);
+      }
+    }
+
+    return [...freq.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, limit)
+      .map(([skill]) => skill);
+  }
+
   private async query(sql: string, params: unknown[]) {
     const pool = this.getPool();
     return pool.query(sql, params as any[]);
@@ -381,6 +452,62 @@ export class RecruitingRagService {
       .replace(/[^a-z0-9+\s-]/g, ' ')
       .replace(/\s+/g, ' ')
       .trim();
+  }
+
+  private extractSkillsFromText(text: string): string[] {
+    const normalized = this.normalize(text);
+    const skillLexicon = [
+      'java',
+      'python',
+      'javascript',
+      'typescript',
+      'node',
+      'node.js',
+      'react',
+      'angular',
+      'vue',
+      'sql',
+      'postgresql',
+      'mysql',
+      'mongodb',
+      'spring boot',
+      'docker',
+      'kubernetes',
+      'aws',
+      'azure',
+      'gcp',
+      'git',
+      'html',
+      'css',
+      'tailwind',
+      'php',
+      'laravel',
+      'django',
+      'fastapi',
+      'rest',
+      'microservicios',
+      'testing',
+      'cypress',
+      'jest',
+      'power bi',
+      'excel',
+      'etl',
+      'spark',
+      'pandas',
+      'spring',
+      'spring boot',
+      'express',
+      'nestjs',
+      'redis',
+      'graphql',
+      'linux',
+      'ci/cd',
+      'jenkins',
+      'terraform',
+    ];
+
+    const found = skillLexicon.filter((skill) => normalized.includes(this.normalize(skill)));
+    return [...new Set(found)].slice(0, 40);
   }
 
   private async readDb(): Promise<RecruitingRagDb> {
