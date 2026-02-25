@@ -132,11 +132,15 @@ export class RecruitingService {
     const coreSkills = this.normalizeSkillList(rag.coreSkills);
     const optionalSkills = this.normalizeSkillList(rag.optionalSkills);
     const catalog = [...new Set([...coreSkills, ...optionalSkills])];
-    const cvSkills = this.matchCvSkillsByCatalogNormalized(normalizedCv, catalog);
+    const cvSkillsByCatalog = this.matchCvSkillsByCatalogNormalized(normalizedCv, catalog);
+    const cvSkillsGeneric = this.normalizeSkillList(this.extractTechnicalSkills(normalizedCv));
+    const cvSkills = [...new Set([...cvSkillsByCatalog, ...cvSkillsGeneric])];
 
+    if (!cvSkillsByCatalog.length) {
+      console.warn('Extracted CV skills by template catalog: [] (continuing with generic CV skills fallback)');
+    }
     if (!cvSkills.length) {
-      console.error('Extracted CV skills: [] (empty after normalization and inclusion matching)');
-      throw new BadRequestException('No technical skills detected from CV text');
+      console.warn('Extracted CV skills: [] (no technical skills found; roadmap will include full core gap)');
     }
     console.log(`Extracted CV skills: [${cvSkills.join(', ')}]`);
     console.log(`Total detected skills: ${cvSkills.length}`);
