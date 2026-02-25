@@ -3,6 +3,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import pdfParse from 'pdf-parse';
 import { FeedbackDto } from './dto-feedback.dto';
 import { GetLearningResourcesDto } from './dto-get-learning-resources.dto';
+import { AnalyzeCvLearningDto } from './dto-analyze-cv-learning.dto';
 import { GenerateCareerPathDto } from './dto-generate-career-path.dto';
 import { GenerateCareerPathFromCvDto } from './dto-generate-career-path-from-cv.dto';
 import { MatchCvDto } from './dto-match-cv.dto';
@@ -15,6 +16,11 @@ export class RecruitingController {
   @Post('match')
   async matchCv(@Body() dto: MatchCvDto) {
     return this.recruitingService.matchCv(dto);
+  }
+
+  @Post('match-learning')
+  async matchCvLearning(@Body() dto: AnalyzeCvLearningDto) {
+    return this.recruitingService.analyzeCvLearning(dto);
   }
 
   @Post('career-path')

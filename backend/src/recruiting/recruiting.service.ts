@@ -1,12 +1,19 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { GeminiService } from '../common/services/gemini.service';
 import { RecruitingRagService } from '../common/services/recruiting-rag.service';
+import { AnalyzeCvLearningDto } from './dto-analyze-cv-learning.dto';
 import { FeedbackDto } from './dto-feedback.dto';
 import { GetLearningResourcesDto } from './dto-get-learning-resources.dto';
 import { GenerateCareerPathDto } from './dto-generate-career-path.dto';
 import { GenerateCareerPathFromCvDto } from './dto-generate-career-path-from-cv.dto';
 import { MatchCvDto } from './dto-match-cv.dto';
-import { buildCareerPathGapPrompt, buildCareerPathSystemPrompt, buildEvolvingCareerPathPrompt, buildMatchSystemPrompt } from './prompts';
+import {
+  buildCareerPathGapPrompt,
+  buildCareerPathSystemPrompt,
+  buildEvolvingCareerPathPrompt,
+  buildLearningCvMatchPrompt,
+  buildMatchSystemPrompt,
+} from './prompts';
 
 @Injectable()
 export class RecruitingService {
@@ -47,6 +54,18 @@ export class RecruitingService {
     'cypress',
     'linux',
     'redis',
+    'flutter',
+    'dart',
+    'kotlin',
+    'swift',
+    'swiftui',
+    'android sdk',
+    'ios sdk',
+    'firebase',
+    'figma',
+    'ui ux',
+    'react native',
+    'xcode',
   ];
 
   constructor(
@@ -90,6 +109,130 @@ export class RecruitingService {
       skillsJob,
       experienciaUsuario,
       ...parsed,
+    };
+  }
+
+  async analyzeCvLearning(dto: AnalyzeCvLearningDto) {
+    const cvText = String(dto.cvText || '').trim();
+    if (!cvText || cvText.length < 50) {
+      throw new BadRequestException('CV text is empty or not processed correctly');
+    }
+
+    const extractedSkills = this.normalizeSkillList(this.extractTechnicalSkills(cvText));
+    const similarAcceptedCases = await this.ragService.findAcceptedCases(cvText, 80);
+    const historicalJobCounts = this.buildHistoricalJobCounts(similarAcceptedCases);
+    const topHistoricalJobs = [...historicalJobCounts.values()]
+      .sort((a, b) => b.count - a.count)
+      .slice(0, 10)
+      .map((x) => ({ title: x.title, count: x.count }));
+
+    const prompt = buildLearningCvMatchPrompt({
+      cvText,
+      extractedSkills,
+      historicalCases: similarAcceptedCases,
+      topHistoricalJobs,
+    });
+
+    const raw = await this.geminiService.runStructuredPrompt(prompt, 1800, 0.35);
+    const parsed = this.parseLearningCvMatch(raw);
+
+    const parsedJobs = Array.isArray(parsed.matchedJobs) ? parsed.matchedJobs : [];
+    const normalizedJobs = parsedJobs.map((job) => {
+      const title = String(job?.title || '').trim() || 'Software Developer';
+      const similarCVsCount = this.countSimilarForTitle(title, historicalJobCounts);
+      const fallbackLevel = this.detectLevelFromTitle(title);
+      return {
+        title,
+        matchPercentage: this.clampInt(job?.matchPercentage, 45, 98, Math.min(95, 55 + similarCVsCount * 6)),
+        level: String(job?.level || fallbackLevel).trim() || fallbackLevel,
+        reason: String(job?.reason || '').trim() || 'Coincidencia estimada por skills del CV y demanda de mercado.',
+        basedOn: similarCVsCount > 0 ? 'historial' : 'base',
+        similarCVsCount,
+        missingSkills: this.normalizeSkillList(
+          Array.isArray(job?.missingSkills) ? job.missingSkills.map((x: unknown) => String(x)) : [],
+        ).slice(0, 8),
+      };
+    });
+
+    const usedTitles = new Set(normalizedJobs.map((x) => this.normalize(x.title)));
+    for (const row of topHistoricalJobs) {
+      if (normalizedJobs.length >= 5) break;
+      const normalizedTitle = this.normalize(row.title);
+      if (!normalizedTitle || usedTitles.has(normalizedTitle)) continue;
+      usedTitles.add(normalizedTitle);
+      normalizedJobs.push({
+        title: row.title,
+        matchPercentage: this.clampInt(45 + row.count * 6, 45, 92, 60),
+        level: this.detectLevelFromTitle(row.title),
+        reason: `Patron detectado en historial para perfiles similares (${row.count} casos).`,
+        basedOn: 'historial',
+        similarCVsCount: row.count,
+        missingSkills: [],
+      });
+    }
+
+    const baseFallbackTitles = [
+      'Backend Developer Junior',
+      'Frontend Developer Junior',
+      'Full Stack Developer Junior',
+      'Mobile Developer Junior',
+      'QA Tester',
+      'Data Analyst Junior',
+    ];
+    for (const title of baseFallbackTitles) {
+      if (normalizedJobs.length >= 5) break;
+      const normalizedTitle = this.normalize(title);
+      if (!normalizedTitle || usedTitles.has(normalizedTitle)) continue;
+      usedTitles.add(normalizedTitle);
+      normalizedJobs.push({
+        title,
+        matchPercentage: 45,
+        level: this.detectLevelFromTitle(title),
+        reason: 'Estimacion basada en conocimiento base del mercado.',
+        basedOn: 'base',
+        similarCVsCount: 0,
+        missingSkills: [],
+      });
+    }
+
+    const matchedJobs = normalizedJobs
+      .sort((a, b) => b.matchPercentage - a.matchPercentage)
+      .slice(0, 5)
+      .map((x) => ({
+        title: x.title,
+        matchPercentage: x.matchPercentage,
+        level: x.level,
+        reason: x.reason,
+        basedOn: x.basedOn,
+        similarCVsCount: x.similarCVsCount,
+        missingSkills: x.missingSkills,
+      }));
+
+    const profileSummary =
+      String(parsed.profileSummary || '').trim() ||
+      `Perfil con enfoque en ${extractedSkills.slice(0, 4).join(', ') || 'habilidades tecnicas iniciales'}.`;
+    const skills = this.normalizeSkillList(
+      Array.isArray(parsed.skills) && parsed.skills.length
+        ? parsed.skills.map((x: unknown) => String(x))
+        : extractedSkills,
+    ).slice(0, 30);
+    const totalHistoricalCVs = similarAcceptedCases.length;
+
+    await this.ragService.saveMatchPrediction({
+      candidateSummary: cvText.slice(0, 700),
+      jobSummary: matchedJobs.map((x) => x.title).join(' | ').slice(0, 700),
+      whyAccepted: matchedJobs
+        .map((x) => `${x.title}: ${x.reason}`)
+        .join(' | ')
+        .slice(0, 900),
+      verdict: 'unknown',
+    });
+
+    return {
+      profileSummary,
+      skills,
+      matchedJobs,
+      totalHistoricalCVs,
     };
   }
 
@@ -233,6 +376,146 @@ export class RecruitingService {
       user_level: dto.user_level,
       data: parsed,
     };
+  }
+
+  private parseLearningCvMatch(raw: string | null): {
+    profileSummary: string;
+    skills: string[];
+    matchedJobs: Array<{
+      title: string;
+      matchPercentage: number;
+      level: string;
+      reason: string;
+      basedOn: string;
+      similarCVsCount: number;
+      missingSkills: string[];
+    }>;
+    totalHistoricalCVs: number;
+  } {
+    if (!raw) {
+      return {
+        profileSummary: '',
+        skills: [],
+        matchedJobs: [],
+        totalHistoricalCVs: 0,
+      };
+    }
+
+    try {
+      const parsed = this.parseJsonObject(raw);
+      const matchedJobs = Array.isArray(parsed.matchedJobs)
+        ? parsed.matchedJobs.map((item: any) => ({
+            title: String(item?.title || '').trim(),
+            matchPercentage: this.clampInt(item?.matchPercentage, 1, 100, 50),
+            level: String(item?.level || '').trim(),
+            reason: String(item?.reason || '').trim(),
+            basedOn: String(item?.basedOn || '').trim(),
+            similarCVsCount: this.clampInt(item?.similarCVsCount, 0, 999, 0),
+            missingSkills: Array.isArray(item?.missingSkills)
+              ? item.missingSkills.map((x: unknown) => String(x)).filter(Boolean).slice(0, 10)
+              : [],
+          }))
+        : [];
+
+      return {
+        profileSummary: String(parsed.profileSummary || '').trim(),
+        skills: Array.isArray(parsed.skills) ? parsed.skills.map((x: unknown) => String(x)).filter(Boolean).slice(0, 40) : [],
+        matchedJobs,
+        totalHistoricalCVs: this.clampInt(parsed.totalHistoricalCVs, 0, 99999, 0),
+      };
+    } catch {
+      this.logParseFailure('learning_match', raw);
+      return {
+        profileSummary: this.extractBrokenJsonString(raw, 'profileSummary'),
+        skills: this.extractBrokenJsonStringArray(raw, 'skills'),
+        matchedJobs: [],
+        totalHistoricalCVs: this.clampInt(this.extractBrokenJsonNumber(raw, 'totalHistoricalCVs'), 0, 99999, 0),
+      };
+    }
+  }
+
+  private buildHistoricalJobCounts(cases: Array<{ jobSummary: string }>): Map<string, { title: string; count: number }> {
+    const counts = new Map<string, { title: string; count: number }>();
+    for (const row of cases) {
+      const title = this.inferJobTitleFromSummary(row.jobSummary);
+      const normalizedTitle = this.normalize(title);
+      if (!normalizedTitle) continue;
+      const current = counts.get(normalizedTitle);
+      if (current) {
+        current.count += 1;
+      } else {
+        counts.set(normalizedTitle, { title, count: 1 });
+      }
+    }
+    return counts;
+  }
+
+  private countSimilarForTitle(title: string, counts: Map<string, { title: string; count: number }>): number {
+    const normalizedTitle = this.normalize(title);
+    if (!normalizedTitle) return 0;
+
+    const exact = counts.get(normalizedTitle);
+    if (exact) return exact.count;
+
+    let partial = 0;
+    for (const [key, value] of counts.entries()) {
+      if (key.includes(normalizedTitle) || normalizedTitle.includes(key)) {
+        partial += value.count;
+      }
+    }
+    return partial;
+  }
+
+  private inferJobTitleFromSummary(jobSummary: string): string {
+    const raw = String(jobSummary || '').trim();
+    if (!raw) return '';
+
+    const firstLine = raw.split(/\r?\n/)[0].trim();
+    if (
+      firstLine &&
+      firstLine.length <= 90 &&
+      /(developer|engineer|analyst|designer|manager|qa|devops|scientist|architect|mobile|frontend|backend|full stack|ios|android)/i.test(
+        firstLine,
+      )
+    ) {
+      return firstLine;
+    }
+
+    const normalized = this.normalize(raw);
+    const dictionary = [
+      'backend developer',
+      'frontend developer',
+      'full stack developer',
+      'mobile developer ios',
+      'mobile developer android',
+      'mobile developer',
+      'qa automation',
+      'qa tester',
+      'devops engineer',
+      'data analyst',
+      'data scientist',
+      'product manager',
+      'ui designer',
+      'ux ui designer',
+      'security engineer',
+      'cybersecurity analyst',
+    ];
+    const found = dictionary.find((role) => normalized.includes(this.normalize(role)));
+    return found ? found.replace(/\b\w/g, (c) => c.toUpperCase()) : '';
+  }
+
+  private detectLevelFromTitle(title: string): string {
+    const normalized = this.normalize(title);
+    if (/\b(senior|sr)\b/.test(normalized)) return 'Senior';
+    if (/\b(semi senior|ssr|mid)\b/.test(normalized)) return 'Semi Senior';
+    if (/\b(lead|staff|principal)\b/.test(normalized)) return 'Lead';
+    return 'Junior';
+  }
+
+  private clampInt(value: unknown, min: number, max: number, fallback: number): number {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return fallback;
+    return Math.max(min, Math.min(max, Math.round(n)));
   }
 
   private parseMatch(raw: string | null) {

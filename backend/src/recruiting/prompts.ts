@@ -55,6 +55,69 @@ export function buildMatchSystemPrompt(input: {
   ].join('\n');
 }
 
+export function buildLearningCvMatchPrompt(input: {
+  cvText: string;
+  extractedSkills: string[];
+  historicalCases: Array<{
+    candidateSummary: string;
+    jobSummary: string;
+    whyAccepted: string;
+  }>;
+  topHistoricalJobs: Array<{ title: string; count: number }>;
+}) {
+  const historicalExamples = input.historicalCases.length
+    ? input.historicalCases
+        .slice(0, 12)
+        .map(
+          (c, idx) =>
+            `Caso ${idx + 1}\nCV: ${c.candidateSummary}\nPuesto asignado: ${c.jobSummary}\nRazon: ${c.whyAccepted}`,
+        )
+        .join('\n\n')
+    : 'No hay CVs historicos similares suficientes.';
+
+  const groupedJobs = input.topHistoricalJobs.length
+    ? input.topHistoricalJobs.map((j, idx) => `${idx + 1}. ${j.title} (${j.count})`).join('\n')
+    : 'Sin patrones historicos claros por puesto.';
+
+  return [
+    'Eres un sistema de matching de CVs que aprende con cada analisis.',
+    'TIENES DOS FUENTES DE CONOCIMIENTO:',
+    '1. Conocimiento base del mercado laboral tecnologico.',
+    '2. Historial de CVs reales ya analizados.',
+    '',
+    'REGLAS:',
+    '- Busca primero patrones en historial para decidir puestos.',
+    '- Si hay similitud, prioriza historial.',
+    '- Si no hay datos suficientes, usa conocimiento base.',
+    '- Devuelve exactamente 5 puestos.',
+    '- Responde SOLO JSON valido, sin markdown ni texto adicional.',
+    '',
+    `Skills extraidas por sistema: ${input.extractedSkills.join(', ') || 'No detectadas'}`,
+    `Patrones historicos por puesto:\n${groupedJobs}`,
+    `Casos historicos similares:\n${historicalExamples}`,
+    '',
+    `CV A ANALIZAR:\n${input.cvText.slice(0, 9000)}`,
+    '',
+    'Devuelve SOLO este JSON:',
+    '{',
+    '  "profileSummary": "resumen del perfil",',
+    '  "skills": ["skill1", "skill2"],',
+    '  "matchedJobs": [',
+    '    {',
+    '      "title": "Puesto",',
+    '      "matchPercentage": 85,',
+    '      "level": "Junior",',
+    '      "reason": "razon basada en historial o conocimiento base",',
+    '      "basedOn": "historial",',
+    '      "similarCVsCount": 8,',
+    '      "missingSkills": ["skill faltante 1", "skill faltante 2"]',
+    '    }',
+    '  ],',
+    '  "totalHistoricalCVs": 45',
+    '}',
+  ].join('\n');
+}
+
 export function buildCareerPathSystemPrompt(input: {
   currentProfile: string;
   targetRole: string;
