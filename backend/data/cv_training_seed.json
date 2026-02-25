@@ -1,0 +1,562 @@
+[
+  {
+    "cv_text": "Estudiante de Ingeniería de Sistemas de la UNI, 5to ciclo. Conocimientos en Java, Python, MySQL, Git. Proyecto académico: sistema de matrícula web con Spring Boot y MySQL. Inglés básico. Vivo en San Juan de Lurigancho.",
+    "extracted_skills": ["Java", "Python", "MySQL", "Git", "Spring Boot"],
+    "suggested_role": "Backend Developer Trainee",
+    "matched_role": "Backend Developer Trainee",
+    "match_percentage": 58,
+    "level": "Trainee",
+    "missing_skills": ["APIs REST", "Docker", "Pruebas unitarias"],
+    "full_result": {
+      "profileSummary": "Estudiante de UNI con base en Java y MySQL, proyectos académicos de sistemas web.",
+      "skills": ["Java", "Python", "MySQL", "Git", "Spring Boot"],
+      "matchedJobs": [
+        { "title": "Backend Developer Trainee", "matchPercentage": 58, "level": "Trainee", "reason": "Java + Spring Boot + MySQL es stack backend clásico en empresas peruanas como BCP, Interbank", "missingSkills": ["APIs REST", "Docker", "JUnit"] },
+        { "title": "Analista de Sistemas Trainee", "matchPercentage": 50, "level": "Trainee", "reason": "Perfil de sistemas web común en empresas públicas peruanas", "missingSkills": ["UML", "Documentación técnica", "Oracle"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 35, "level": "Trainee", "reason": "Conocimientos técnicos generales aplicables a testing", "missingSkills": ["Selenium", "Postman", "Casos de prueba"] },
+        { "title": "Data Analyst Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Python y MySQL pueden orientarse a análisis", "missingSkills": ["Power BI", "pandas", "Excel avanzado"] },
+        { "title": "Frontend Developer Trainee", "matchPercentage": 20, "level": "Trainee", "reason": "Sin experiencia en desarrollo frontend web", "missingSkills": ["HTML", "CSS", "JavaScript", "React"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Egresado de la PUCP, Ingeniería Informática. React, Node.js, PostgreSQL, TypeScript, Docker, Git. Practicante 6 meses en Rimac Seguros en área de transformación digital. Nivel de inglés B2.",
+    "extracted_skills": ["React", "Node.js", "PostgreSQL", "TypeScript", "Docker", "Git"],
+    "suggested_role": "Fullstack Developer Junior",
+    "matched_role": "Fullstack Developer Junior",
+    "match_percentage": 83,
+    "level": "Junior",
+    "missing_skills": ["CI/CD", "AWS o Azure", "Testing automatizado"],
+    "full_result": {
+      "profileSummary": "Egresado PUCP con prácticas en Rimac, stack fullstack moderno y experiencia corporativa peruana.",
+      "skills": ["React", "Node.js", "PostgreSQL", "TypeScript", "Docker", "Git"],
+      "matchedJobs": [
+        { "title": "Fullstack Developer Junior", "matchPercentage": 83, "level": "Junior", "reason": "React + Node.js + PostgreSQL con experiencia en empresa peruana grande como Rimac", "missingSkills": ["CI/CD", "AWS", "Testing"] },
+        { "title": "Frontend Developer Junior", "matchPercentage": 75, "level": "Junior", "reason": "React + TypeScript es muy demandado en startups peruanas como Crehana, Kushki", "missingSkills": ["Next.js", "Redux", "Figma"] },
+        { "title": "Backend Developer Junior", "matchPercentage": 70, "level": "Junior", "reason": "Node.js + PostgreSQL + Docker es stack backend demandado", "missingSkills": ["Microservicios", "Redis", "RabbitMQ"] },
+        { "title": "DevOps Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Docker mencionado como inicio en infraestructura", "missingSkills": ["Kubernetes", "Terraform", "AWS completo"] },
+        { "title": "QA Tester Junior", "matchPercentage": 35, "level": "Trainee", "reason": "Experiencia en empresa grande da visión de calidad", "missingSkills": ["Selenium", "Cypress", "Postman"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Estudiante de la Universidad César Vallejo, Ingeniería de Software, 7mo ciclo. Flutter, Dart, Firebase, SQLite, Figma, Git. Desarrollé app para delivery de comida en Lima como proyecto de curso. Android e iOS.",
+    "extracted_skills": ["Flutter", "Dart", "Firebase", "SQLite", "Figma", "Git"],
+    "suggested_role": "Mobile Developer Junior",
+    "matched_role": "Mobile Developer Junior",
+    "match_percentage": 78,
+    "level": "Junior",
+    "missing_skills": ["REST APIs", "State management (Bloc/Provider)", "Testing en Flutter"],
+    "full_result": {
+      "profileSummary": "Estudiante UCV con app de delivery desarrollada, enfoque cross-platform con Flutter.",
+      "skills": ["Flutter", "Dart", "Firebase", "SQLite", "Figma", "Git"],
+      "matchedJobs": [
+        { "title": "Mobile Developer Junior", "matchPercentage": 78, "level": "Junior", "reason": "Flutter es muy demandado en startups de delivery y fintech peruanas como Yape, Rappi Perú", "missingSkills": ["REST APIs", "Bloc/Provider", "Testing"] },
+        { "title": "UI/UX Designer Junior", "matchPercentage": 55, "level": "Junior", "reason": "Figma + diseño de app mobile detectado", "missingSkills": ["User Research", "Design Systems", "Adobe XD"] },
+        { "title": "Frontend Developer Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Sin experiencia web frontend", "missingSkills": ["React", "JavaScript", "HTML/CSS"] },
+        { "title": "Backend Developer Trainee", "matchPercentage": 25, "level": "Trainee", "reason": "Firebase como backend básico presente", "missingSkills": ["Node.js", "SQL relacional", "APIs REST"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Proyecto real de app da visión de calidad", "missingSkills": ["Flutter testing", "Appium", "Casos de prueba"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Técnico del SENATI en Desarrollo de Sistemas. PHP, CodeIgniter, MySQL, HTML, CSS, JavaScript, Bootstrap. Proyecto: sistema de control de almacén para empresa textil en Gamarra. Git básico.",
+    "extracted_skills": ["PHP", "CodeIgniter", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap"],
+    "suggested_role": "Backend Developer Junior",
+    "matched_role": "Backend Developer Junior",
+    "match_percentage": 68,
+    "level": "Junior",
+    "missing_skills": ["Framework moderno (Laravel/Node.js)", "APIs REST", "Git avanzado"],
+    "full_result": {
+      "profileSummary": "Técnico SENATI con experiencia en sistema real para empresa en Gamarra, stack PHP clásico.",
+      "skills": ["PHP", "CodeIgniter", "MySQL", "HTML", "CSS", "JavaScript"],
+      "matchedJobs": [
+        { "title": "Backend Developer Junior", "matchPercentage": 68, "level": "Junior", "reason": "PHP + MySQL sigue siendo muy usado en PYMEs peruanas y empresas tradicionales", "missingSkills": ["Laravel", "APIs REST", "Docker"] },
+        { "title": "Fullstack Developer Junior", "matchPercentage": 60, "level": "Junior", "reason": "PHP + HTML/CSS/JS completa el stack web básico demandado en PYMEs", "missingSkills": ["Framework moderno", "Git avanzado", "Seguridad web"] },
+        { "title": "Analista Programador", "matchPercentage": 65, "level": "Junior", "reason": "Perfil clásico de analista programador muy buscado en empresas peruanas medianas", "missingSkills": ["Oracle o SQL Server", "Documentación UML", "PL/SQL"] },
+        { "title": "Frontend Developer Trainee", "matchPercentage": 40, "level": "Trainee", "reason": "HTML/CSS/JS + Bootstrap presentes", "missingSkills": ["React", "TypeScript", "Webpack"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Experiencia en sistema real da visión de pruebas", "missingSkills": ["Casos de prueba formales", "Postman", "Selenium"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Bachiller en Economía de la UNMSM. Excel avanzado, SPSS, Power BI, SQL básico, Python con pandas. Tesis sobre análisis de la informalidad laboral en Lima Metropolitana. Inglés B1.",
+    "extracted_skills": ["Excel", "SPSS", "Power BI", "SQL", "Python", "pandas", "estadística"],
+    "suggested_role": "Data Analyst Junior",
+    "matched_role": "Data Analyst Junior",
+    "match_percentage": 77,
+    "level": "Junior",
+    "missing_skills": ["SQL avanzado", "Tableau", "Machine Learning básico"],
+    "full_result": {
+      "profileSummary": "Economista UNMSM con tesis empírica, buen perfil para análisis en banca o consultoría peruana.",
+      "skills": ["Excel", "SPSS", "Power BI", "SQL", "Python", "pandas"],
+      "matchedJobs": [
+        { "title": "Data Analyst Junior", "matchPercentage": 77, "level": "Junior", "reason": "Excel + Power BI + Python es muy demandado en BCP, BBVA, Scotiabank Perú para análisis", "missingSkills": ["SQL avanzado", "Tableau", "ML básico"] },
+        { "title": "Business Intelligence Junior", "matchPercentage": 65, "level": "Junior", "reason": "Power BI y SQL básico son core en BI de empresas peruanas grandes", "missingSkills": ["SQL Server", "ETL", "Data Warehouse"] },
+        { "title": "Analista de Riesgo Trainee", "matchPercentage": 60, "level": "Junior", "reason": "Perfil de economía + estadística muy valorado en banca peruana para riesgo crediticio", "missingSkills": ["SAS", "Modelos de scoring", "Regulación SBS"] },
+        { "title": "Consultor BI Trainee", "matchPercentage": 55, "level": "Junior", "reason": "Power BI + Excel avanzado es base en consultoras como EY, Deloitte Perú", "missingSkills": ["Power Query avanzado", "DAX", "Presentación ejecutiva"] },
+        { "title": "Data Scientist Trainee", "matchPercentage": 40, "level": "Trainee", "reason": "Python + pandas + estadística es base de data science", "missingSkills": ["scikit-learn", "Feature Engineering", "ML avanzado"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Egresado de Ingeniería Industrial de la UPC. Lean Manufacturing, Six Sigma Yellow Belt, Excel avanzado, SAP MM básico, Power BI, gestión de proyectos. Practicante en Gloria S.A. área de operaciones.",
+    "extracted_skills": ["Lean Manufacturing", "Six Sigma", "Excel", "SAP MM", "Power BI", "gestión de proyectos"],
+    "suggested_role": "Analista de Procesos Junior",
+    "matched_role": "Analista de Procesos Junior",
+    "match_percentage": 80,
+    "level": "Junior",
+    "missing_skills": ["SAP avanzado", "Automatización de procesos (RPA)", "Tableau"],
+    "full_result": {
+      "profileSummary": "Industrial de UPC con experiencia en Gloria, perfil ideal para mejora de procesos en manufactura peruana.",
+      "skills": ["Lean", "Six Sigma", "Excel", "SAP MM", "Power BI"],
+      "matchedJobs": [
+        { "title": "Analista de Procesos Junior", "matchPercentage": 80, "level": "Junior", "reason": "Lean + Six Sigma + SAP es lo que buscan Alicorp, Gloria, Backus en mejora continua", "missingSkills": ["SAP avanzado", "RPA", "Tableau"] },
+        { "title": "Business Analyst Junior", "matchPercentage": 68, "level": "Junior", "reason": "SAP + Power BI + Excel avanzado es stack BA en empresas industriales peruanas", "missingSkills": ["SQL", "BPMN", "Jira"] },
+        { "title": "Consultor SAP Junior", "matchPercentage": 60, "level": "Junior", "reason": "SAP MM básico con prácticas en empresa industrial grande", "missingSkills": ["Certificación SAP", "SAP SD", "SAP FI"] },
+        { "title": "Analista de Supply Chain", "matchPercentage": 65, "level": "Junior", "reason": "Lean + SAP MM es core en logística de empresas como Saga, Wong, Tottus", "missingSkills": ["WMS", "Forecasting", "KPIs logísticos"] },
+        { "title": "Data Analyst Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Power BI + Excel avanzado son base de análisis", "missingSkills": ["Python", "SQL", "Estadística inferencial"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Estudiante de Contabilidad de la Universidad Continental, 8vo ciclo. Excel avanzado, SAP FI básico, contabilidad general, SUNAT online, SOL SUNAT, PDT. Practicante en estudio contable en Huancayo.",
+    "extracted_skills": ["Excel", "SAP FI", "contabilidad", "SUNAT", "PDT", "SOL SUNAT"],
+    "suggested_role": "Analista Contable Trainee",
+    "matched_role": "Analista Contable Trainee",
+    "match_percentage": 72,
+    "level": "Trainee",
+    "missing_skills": ["Contabilidad de costos", "NIIF", "SAP FI avanzado"],
+    "full_result": {
+      "profileSummary": "Estudiante de contabilidad con manejo de herramientas tributarias peruanas y prácticas reales.",
+      "skills": ["Excel", "SAP FI", "SUNAT", "PDT", "SOL SUNAT"],
+      "matchedJobs": [
+        { "title": "Analista Contable Trainee", "matchPercentage": 72, "level": "Trainee", "reason": "SAP FI + SUNAT + PDT es lo básico para contabilidad en PYMEs y empresas peruanas", "missingSkills": ["NIIF", "Costos", "SAP FI avanzado"] },
+        { "title": "Asistente Tributario Trainee", "matchPercentage": 65, "level": "Trainee", "reason": "SOL SUNAT + PDT es el perfil exacto para asistente tributario en estudios contables peruanos", "missingSkills": ["IGV Justo", "Drawback", "ITAN"] },
+        { "title": "Analista de Finanzas Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Excel avanzado y contabilidad básica son base financiera", "missingSkills": ["Modelamiento financiero", "Análisis de estados financieros", "Power BI"] },
+        { "title": "Data Analyst Trainee", "matchPercentage": 25, "level": "Trainee", "reason": "Excel avanzado es único punto de entrada a datos", "missingSkills": ["Python", "SQL", "Power BI"] },
+        { "title": "Business Analyst Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "SAP + Excel pueden orientarse a análisis de negocio", "missingSkills": ["BPMN", "Jira", "Power BI"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Egresado de la Universidad San Martín de Porres, Ingeniería de Computación y Sistemas. Android con Kotlin, Firebase, Retrofit, Room, MVVM, Git. Proyecto: app de pagos con integración a Yape API. Inglés A2.",
+    "extracted_skills": ["Kotlin", "Android", "Firebase", "Retrofit", "Room", "MVVM", "Git"],
+    "suggested_role": "Mobile Developer Android Junior",
+    "matched_role": "Mobile Developer Android Junior",
+    "match_percentage": 84,
+    "level": "Junior",
+    "missing_skills": ["Jetpack Compose", "Hilt (inyección de dependencias)", "Testing con Espresso"],
+    "full_result": {
+      "profileSummary": "Desarrollador Android de USMP con proyecto de pagos móviles, muy alineado al ecosistema fintech peruano.",
+      "skills": ["Kotlin", "Android", "Firebase", "Retrofit", "Room", "MVVM"],
+      "matchedJobs": [
+        { "title": "Mobile Developer Android Junior", "matchPercentage": 84, "level": "Junior", "reason": "Kotlin + MVVM + Retrofit es exactamente lo que busca Yape, Plin, BCP App en sus equipos mobile", "missingSkills": ["Jetpack Compose", "Hilt", "Espresso"] },
+        { "title": "Mobile Developer Junior", "matchPercentage": 72, "level": "Junior", "reason": "Android sólido con arquitectura limpia", "missingSkills": ["Flutter/React Native", "iOS básico", "CI/CD"] },
+        { "title": "Backend Developer Trainee", "matchPercentage": 35, "level": "Trainee", "reason": "Firebase y APIs REST dan base de integración backend", "missingSkills": ["Node.js", "Spring Boot", "SQL relacional"] },
+        { "title": "QA Tester Mobile", "matchPercentage": 40, "level": "Junior", "reason": "Conocimiento nativo Android facilita QA móvil", "missingSkills": ["Appium", "Espresso", "Test plans mobile"] },
+        { "title": "Fintech Developer Junior", "matchPercentage": 70, "level": "Junior", "reason": "Proyecto con integración a Yape API es muy relevante para el ecosistema fintech peruano", "missingSkills": ["PCI DSS básico", "OAuth2", "Cifrado en tránsito"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Técnico en Diseño Gráfico del IDAT. Figma, Adobe Illustrator, Photoshop, After Effects, Canva. Freelance diseñando piezas para redes sociales de PYMEs en Lima. Sin conocimientos de programación.",
+    "extracted_skills": ["Figma", "Illustrator", "Photoshop", "After Effects", "Canva"],
+    "suggested_role": "UI/UX Designer Junior",
+    "matched_role": "UI/UX Designer Junior",
+    "match_percentage": 70,
+    "level": "Junior",
+    "missing_skills": ["User Research", "Prototipado en Figma avanzado", "Design Systems", "Adobe XD"],
+    "full_result": {
+      "profileSummary": "Diseñador gráfico del IDAT con experiencia freelance en marcas peruanas, transición a UI/UX digital.",
+      "skills": ["Figma", "Illustrator", "Photoshop", "After Effects", "Canva"],
+      "matchedJobs": [
+        { "title": "UI/UX Designer Junior", "matchPercentage": 70, "level": "Junior", "reason": "Figma + Photoshop es base de diseño digital en agencias peruanas como Phantasia, Circus Grey", "missingSkills": ["User Research", "Prototipado", "Design Systems"] },
+        { "title": "Motion Designer Junior", "matchPercentage": 68, "level": "Junior", "reason": "After Effects + Illustrator es lo que buscan agencias de publicidad en Lima", "missingSkills": ["Cinema 4D", "Lottie", "Animación web"] },
+        { "title": "Social Media Designer", "matchPercentage": 78, "level": "Junior", "reason": "Canva + Photoshop + Illustrator es exactamente el perfil para community management en PYMEs peruanas", "missingSkills": ["Estrategia de contenido", "Analítica de RRSS", "Copywriting"] },
+        { "title": "Product Designer Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Figma es la herramienta core pero falta experiencia en producto digital", "missingSkills": ["User Testing", "Wireframing UX", "Métricas de producto"] },
+        { "title": "Frontend Developer Trainee", "matchPercentage": 10, "level": "Trainee", "reason": "Sin conocimientos de programación", "missingSkills": ["HTML", "CSS", "JavaScript"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Bachiller en Administración de la UP. Marketing digital, Google Ads, Meta Ads, SEO, Google Analytics 4, HubSpot CRM, Excel, Canva. Practicante en Falabella Perú área de ecommerce.",
+    "extracted_skills": ["Google Ads", "Meta Ads", "SEO", "Google Analytics", "HubSpot", "Excel", "Canva"],
+    "suggested_role": "Marketing Digital Junior",
+    "matched_role": "Marketing Digital Junior",
+    "match_percentage": 82,
+    "level": "Junior",
+    "missing_skills": ["Programmatic Advertising", "Email Marketing avanzado", "SQL para analítica"],
+    "full_result": {
+      "profileSummary": "Marketero digital de la UP con prácticas en Falabella, buen perfil para ecommerce y retail peruano.",
+      "skills": ["Google Ads", "Meta Ads", "SEO", "Google Analytics", "HubSpot"],
+      "matchedJobs": [
+        { "title": "Marketing Digital Junior", "matchPercentage": 82, "level": "Junior", "reason": "Google Ads + Meta Ads + Analytics es el stack exacto para ecommerce en Falabella, Ripley, Saga Perú", "missingSkills": ["Programmatic", "Email Marketing", "SQL analítica"] },
+        { "title": "SEM/PPC Specialist Trainee", "matchPercentage": 72, "level": "Junior", "reason": "Google Ads + Meta Ads es core para agencias de performance en Lima", "missingSkills": ["Google DV360", "TikTok Ads", "Attribution modeling"] },
+        { "title": "Analista de Ecommerce Junior", "matchPercentage": 70, "level": "Junior", "reason": "GA4 + HubSpot + experiencia en Falabella es perfil ideal para retail digital peruano", "missingSkills": ["Power BI", "Marketplace (MercadoLibre)", "UX ecommerce"] },
+        { "title": "Data Analyst Marketing Trainee", "matchPercentage": 55, "level": "Junior", "reason": "GA4 + Excel con orientación a datos de marketing", "missingSkills": ["Python", "SQL", "Power BI"] },
+        { "title": "CRM Specialist Trainee", "matchPercentage": 60, "level": "Junior", "reason": "HubSpot CRM mencionado con base de marketing", "missingSkills": ["Marketing automation", "Segmentación avanzada", "SQL"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Estudiante de Ingeniería de Software de la UNSA Arequipa, 6to ciclo. Python, Django, PostgreSQL, REST APIs, Git, Linux básico. Proyecto: plataforma de gestión de turnos para clínica en Arequipa.",
+    "extracted_skills": ["Python", "Django", "PostgreSQL", "REST APIs", "Git", "Linux"],
+    "suggested_role": "Backend Developer Junior",
+    "matched_role": "Backend Developer Junior",
+    "match_percentage": 79,
+    "level": "Junior",
+    "missing_skills": ["Docker", "Testing con pytest", "Celery/Redis para tareas asíncronas"],
+    "full_result": {
+      "profileSummary": "Estudiante de UNSA Arequipa con proyecto real en salud, buen stack Python/Django para backend.",
+      "skills": ["Python", "Django", "PostgreSQL", "REST APIs", "Git", "Linux"],
+      "matchedJobs": [
+        { "title": "Backend Developer Junior", "matchPercentage": 79, "level": "Junior", "reason": "Python + Django + PostgreSQL es muy demandado en startups peruanas y proyectos del Estado (MINSA, EsSalud)", "missingSkills": ["Docker", "pytest", "Celery"] },
+        { "title": "Desarrollador Python Junior", "matchPercentage": 75, "level": "Junior", "reason": "Django + REST APIs es el perfil exacto para sistemas de salud y gobierno peruano", "missingSkills": ["FastAPI", "Microservicios", "AWS"] },
+        { "title": "Data Engineer Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Python + PostgreSQL es base de ingeniería de datos", "missingSkills": ["Apache Spark", "Airflow", "Kafka"] },
+        { "title": "Fullstack Developer Trainee", "matchPercentage": 40, "level": "Trainee", "reason": "Backend sólido pero falta frontend", "missingSkills": ["React", "HTML/CSS", "JavaScript"] },
+        { "title": "DevOps Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Linux básico es inicio hacia DevOps", "missingSkills": ["Docker", "CI/CD", "Kubernetes"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Egresado de la Universidad de Lima, Ingeniería de Sistemas. .NET C#, SQL Server, Azure DevOps, Git, SSRS. 1 año de experiencia en empresa de seguros en Lima. Metodología Scrum.",
+    "extracted_skills": [".NET", "C#", "SQL Server", "Azure DevOps", "Git", "SSRS", "Scrum"],
+    "suggested_role": "Backend Developer Junior",
+    "matched_role": "Backend Developer Junior",
+    "match_percentage": 81,
+    "level": "Junior",
+    "missing_skills": ["Azure cloud services", "Microservicios con .NET", "Unit testing con xUnit"],
+    "full_result": {
+      "profileSummary": "Desarrollador .NET con experiencia en seguros peruanos, muy alineado al stack Microsoft usado en banca y seguros.",
+      "skills": [".NET", "C#", "SQL Server", "Azure DevOps", "SSRS", "Scrum"],
+      "matchedJobs": [
+        { "title": "Backend Developer Junior", "matchPercentage": 81, "level": "Junior", "reason": ".NET + SQL Server es el stack dominante en banca peruana (BCP, Interbank, Scotiabank) y seguros (Pacífico, Mapfre)", "missingSkills": ["Azure cloud", "Microservicios", "xUnit"] },
+        { "title": "Analista de Sistemas Junior", "matchPercentage": 75, "level": "Junior", "reason": "C# + SQL Server + SSRS reportes es el perfil clásico de analista en empresas peruanas medianas y grandes", "missingSkills": ["Power BI", "UML", "Oracle"] },
+        { "title": "Desarrollador .NET Mid", "matchPercentage": 65, "level": "Junior", "reason": "1 año de experiencia en producción con stack .NET completo", "missingSkills": ["Azure Functions", "Entity Framework avanzado", "CQRS"] },
+        { "title": "QA Tester Junior", "matchPercentage": 40, "level": "Junior", "reason": "Experiencia en empresa de seguros da visión de calidad en sistemas financieros", "missingSkills": ["Selenium", "Postman", "Casos de prueba formales"] },
+        { "title": "DevOps Junior", "matchPercentage": 45, "level": "Junior", "reason": "Azure DevOps es punto de entrada natural a DevOps en ecosistema Microsoft", "missingSkills": ["Azure completo", "Docker", "Terraform"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Técnico en Electrónica e Informática del TECSUP. Arduino, Raspberry Pi, Python, C++, redes industriales, PLC Siemens básico. Proyecto: sistema de monitoreo de temperatura para planta industrial en Lurín.",
+    "extracted_skills": ["Arduino", "Raspberry Pi", "Python", "C++", "PLC", "redes industriales"],
+    "suggested_role": "Embedded Systems Developer Junior",
+    "matched_role": "Embedded Systems Developer Junior",
+    "match_percentage": 76,
+    "level": "Junior",
+    "missing_skills": ["RTOS", "Protocolos industriales (MODBUS/OPC-UA)", "Certificación PLC"],
+    "full_result": {
+      "profileSummary": "Técnico TECSUP con experiencia en automatización industrial, perfil valorado en minería y manufactura peruana.",
+      "skills": ["Arduino", "Raspberry Pi", "Python", "C++", "PLC", "redes industriales"],
+      "matchedJobs": [
+        { "title": "Embedded Systems Developer Junior", "matchPercentage": 76, "level": "Junior", "reason": "Arduino + PLC + Python es muy demandado en empresas mineras como Antamina, Cerro Verde y manufactura peruana", "missingSkills": ["RTOS", "MODBUS", "PLC certificación"] },
+        { "title": "Automatización Industrial Trainee", "matchPercentage": 72, "level": "Junior", "reason": "PLC Siemens + redes industriales es core en planta de Lurín, Villa El Salvador, Ate", "missingSkills": ["Siemens TIA Portal avanzado", "SCADA", "Instrumentación"] },
+        { "title": "IoT Developer Junior", "matchPercentage": 68, "level": "Junior", "reason": "Arduino + Raspberry Pi + Python es el stack IoT más común en proyectos peruanos de smart buildings", "missingSkills": ["MQTT", "AWS IoT", "Edge computing"] },
+        { "title": "Data Engineer Trainee", "matchPercentage": 35, "level": "Trainee", "reason": "Python + sensores industriales puede orientarse a ingeniería de datos industriales", "missingSkills": ["SQL", "Apache Kafka", "Time series databases"] },
+        { "title": "Backend Developer Trainee", "matchPercentage": 25, "level": "Trainee", "reason": "Python presente pero sin orientación web", "missingSkills": ["Django/FastAPI", "SQL", "REST APIs"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Abogado recién egresado de la UNMSM con diplomado en Derecho Informático. Manejo de herramientas legales online (Tribunal Constitucional, SUNAT virtual), Excel básico, Word avanzado. Sin experiencia técnica.",
+    "extracted_skills": ["Word", "Excel", "herramientas legales", "SUNAT virtual"],
+    "suggested_role": "Legal Tech Trainee",
+    "matched_role": "Legal Tech Trainee",
+    "match_percentage": 28,
+    "level": "Trainee",
+    "missing_skills": ["SQL básico", "Manejo de datos", "Herramientas digitales de negocio"],
+    "full_result": {
+      "profileSummary": "Abogado con diplomado en derecho informático, perfil de transición a roles legales en tecnología.",
+      "skills": ["Word", "Excel", "herramientas legales"],
+      "matchedJobs": [
+        { "title": "Legal Tech Trainee", "matchPercentage": 28, "level": "Trainee", "reason": "Derecho informático + herramientas digitales, roles emergentes en startups peruanas de legaltech", "missingSkills": ["SQL básico", "Gestión documental digital", "RGPD Perú"] },
+        { "title": "Compliance Analyst Trainee", "matchPercentage": 35, "level": "Trainee", "reason": "Perfil legal valorado en banca peruana para cumplimiento regulatorio SBS", "missingSkills": ["Normativa SBS/SMV", "Power BI", "Gestión de riesgos"] },
+        { "title": "Business Analyst Trainee", "matchPercentage": 22, "level": "Trainee", "reason": "Pensamiento analítico legal puede aplicarse a análisis de negocio", "missingSkills": ["SQL", "Power BI", "BPMN", "Herramientas tech"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 18, "level": "Trainee", "reason": "Atención al detalle jurídico puede aplicarse a control de calidad", "missingSkills": ["Postman", "Selenium", "Casos de prueba técnicos"] },
+        { "title": "Product Manager Trainee", "matchPercentage": 20, "level": "Trainee", "reason": "Visión de regulación es valiosa en productos fintech peruanos", "missingSkills": ["Product frameworks", "User Stories", "Métricas de producto"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Estudiante de Ingeniería Civil de la UNI, 9no ciclo. AutoCAD, Revit, S10 Presupuestos, MS Project, Excel avanzado. Practicante en empresa constructora en proyecto de Metro de Lima línea 2.",
+    "extracted_skills": ["AutoCAD", "Revit", "S10", "MS Project", "Excel"],
+    "suggested_role": "BIM Coordinator Trainee",
+    "matched_role": "BIM Coordinator Trainee",
+    "match_percentage": 70,
+    "level": "Trainee",
+    "missing_skills": ["BIM 360", "Navisworks", "Gestión BIM LOD 300+"],
+    "full_result": {
+      "profileSummary": "Estudiante UNI con prácticas en Metro Lima L2, perfil de construcción digitalizada muy demandado.",
+      "skills": ["AutoCAD", "Revit", "S10", "MS Project", "Excel"],
+      "matchedJobs": [
+        { "title": "BIM Coordinator Trainee", "matchPercentage": 70, "level": "Trainee", "reason": "Revit + AutoCAD es la base BIM exigida en proyectos de infraestructura como Metro Lima, Majes Siguas", "missingSkills": ["BIM 360", "Navisworks", "Clash detection"] },
+        { "title": "Asistente de Presupuestos", "matchPercentage": 75, "level": "Junior", "reason": "S10 + Excel avanzado es exactamente el perfil para presupuestos en constructoras peruanas como COSAPI, Graña", "missingSkills": ["APU avanzados", "Expediente técnico", "CAPECO normas"] },
+        { "title": "Asistente de Proyectos Junior", "matchPercentage": 65, "level": "Junior", "reason": "MS Project + Excel + experiencia en obra grande es valorado en contratistas", "missingSkills": ["PMI/PMP básico", "Curva S", "Gestión de riesgos de obra"] },
+        { "title": "Dibujante CAD Junior", "matchPercentage": 68, "level": "Junior", "reason": "AutoCAD es el estándar en obras de construcción y consultoras peruanas", "missingSkills": ["AutoCAD Civil 3D", "Planos as-built", "Normas E030"] },
+        { "title": "Data Analyst Trainee", "matchPercentage": 25, "level": "Trainee", "reason": "Excel avanzado es único punto de entrada a datos", "missingSkills": ["SQL", "Power BI", "Python"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Enfermera egresada de la UPCH. Historia clínica electrónica, manejo de sistema HIS, Excel básico, Word. Interesada en Health IT. Sin experiencia en tecnología pero con 2 años en clínica privada.",
+    "extracted_skills": ["Historia clínica electrónica", "HIS", "Excel", "Word", "salud"],
+    "suggested_role": "Health IT Analyst Trainee",
+    "matched_role": "Health IT Analyst Trainee",
+    "match_percentage": 40,
+    "level": "Trainee",
+    "missing_skills": ["SQL básico", "HL7/FHIR", "Power BI para salud"],
+    "full_result": {
+      "profileSummary": "Enfermera con experiencia clínica real, perfil de transición a salud digital muy valorado en EsSalud y clínicas privadas.",
+      "skills": ["Historia clínica electrónica", "HIS", "Excel"],
+      "matchedJobs": [
+        { "title": "Health IT Analyst Trainee", "matchPercentage": 40, "level": "Trainee", "reason": "HIS + experiencia clínica es el perfil ideal para implementaciones de telemedicina en EsSalud, Clínica Internacional", "missingSkills": ["SQL", "HL7/FHIR", "Power BI"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 35, "level": "Trainee", "reason": "Atención al detalle clínico es muy valorada en QA de software médico", "missingSkills": ["Casos de prueba", "Postman", "Selenium"] },
+        { "title": "Business Analyst Trainee", "matchPercentage": 32, "level": "Trainee", "reason": "Conocimiento de procesos hospitalarios es valioso para análisis de negocio en salud", "missingSkills": ["BPMN", "SQL", "Jira"] },
+        { "title": "Data Analyst Trainee", "matchPercentage": 28, "level": "Trainee", "reason": "Excel básico con datos de salud como punto de entrada", "missingSkills": ["Python", "SQL", "Power BI"] },
+        { "title": "Product Manager Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Visión del usuario final en salud es muy valiosa en healthtech", "missingSkills": ["Product frameworks", "User Stories", "Métricas"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Egresado de Ciencias de la Comunicación de la UL. Community Manager, Meta Business Suite, TikTok Ads, Canva, CapCut, copywriting, gestión de crisis en redes. Trabajé con 5 marcas peruanas en Lima.",
+    "extracted_skills": ["Community Management", "Meta Business Suite", "TikTok Ads", "Canva", "CapCut", "copywriting"],
+    "suggested_role": "Social Media Manager Junior",
+    "matched_role": "Social Media Manager Junior",
+    "match_percentage": 83,
+    "level": "Junior",
+    "missing_skills": ["Google Ads", "Analítica avanzada", "Estrategia de contenido omnicanal"],
+    "full_result": {
+      "profileSummary": "Comunicador con experiencia en marcas peruanas, perfil digital con producción de contenido y gestión de comunidades.",
+      "skills": ["Community Management", "Meta Ads", "TikTok Ads", "Canva", "CapCut"],
+      "matchedJobs": [
+        { "title": "Social Media Manager Junior", "matchPercentage": 83, "level": "Junior", "reason": "Meta + TikTok + Canva + CapCut es el stack exacto en agencias peruanas como McCann, Grey, Circus", "missingSkills": ["Google Ads", "Analítica", "Omnicanal"] },
+        { "title": "Content Creator Junior", "matchPercentage": 78, "level": "Junior", "reason": "CapCut + Canva + copywriting es lo que buscan marcas DTC peruanas en sus equipos de contenido", "missingSkills": ["Video avanzado (Premiere)", "SEO de contenido", "Podcast"] },
+        { "title": "Marketing Digital Junior", "matchPercentage": 65, "level": "Junior", "reason": "TikTok Ads + Meta Ads con base de comunicación", "missingSkills": ["Google Ads", "Analytics 4", "SEM"] },
+        { "title": "Brand Manager Trainee", "matchPercentage": 55, "level": "Junior", "reason": "Gestión de 5 marcas peruanas da experiencia de branding práctico", "missingSkills": ["Investigación de mercado", "Brand guidelines", "Media planning"] },
+        { "title": "UI/UX Designer Trainee", "matchPercentage": 25, "level": "Trainee", "reason": "Canva + sensibilidad visual básica", "missingSkills": ["Figma", "User Research", "Diseño de producto"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Bachiller en Ingeniería de Minas de la UNSA. Python básico, Excel avanzado, AutoCAD Mine, Vulcan Mapping básico, análisis de datos de producción minera. Practicante en Cerro Verde, Arequipa.",
+    "extracted_skills": ["Python", "Excel", "AutoCAD Mine", "Vulcan", "análisis de datos mineros"],
+    "suggested_role": "Mining Data Analyst Trainee",
+    "matched_role": "Mining Data Analyst Trainee",
+    "match_percentage": 65,
+    "level": "Junior",
+    "missing_skills": ["SQL", "Power BI", "Minería de datos con Python (pandas)"],
+    "full_result": {
+      "profileSummary": "Ingeniero de minas con base analítica, perfil de transición a datos en minería peruana.",
+      "skills": ["Python", "Excel", "AutoCAD Mine", "Vulcan", "datos mineros"],
+      "matchedJobs": [
+        { "title": "Mining Data Analyst Trainee", "matchPercentage": 65, "level": "Junior", "reason": "Python + Excel + datos de producción minera es perfil emergente muy demandado en Cerro Verde, Antamina, Las Bambas", "missingSkills": ["SQL", "Power BI", "pandas"] },
+        { "title": "Planificación Minera Junior", "matchPercentage": 70, "level": "Junior", "reason": "Vulcan + AutoCAD Mine + experiencia en Cerro Verde es stack estándar en planificación minera peruana", "missingSkills": ["Whittle", "NPV Scheduler", "Geo-estadística"] },
+        { "title": "Data Analyst Junior", "matchPercentage": 55, "level": "Junior", "reason": "Python + Excel con datos reales es base sólida para análisis", "missingSkills": ["SQL avanzado", "Power BI", "Estadística inferencial"] },
+        { "title": "Business Intelligence Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Excel avanzado + necesidad de reportes en minería", "missingSkills": ["Power BI", "SQL", "ETL"] },
+        { "title": "Backend Developer Trainee", "matchPercentage": 20, "level": "Trainee", "reason": "Python básico presente pero sin orientación web", "missingSkills": ["Django", "APIs", "SQL relacional"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Estudiante de Ingeniería de Software de la UTP, 8vo ciclo. React, JavaScript, HTML, CSS, Tailwind CSS, Git, Node.js básico. Desarrollé landing pages para 3 PYMEs de Miraflores como freelance.",
+    "extracted_skills": ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS", "Git", "Node.js"],
+    "suggested_role": "Frontend Developer Junior",
+    "matched_role": "Frontend Developer Junior",
+    "match_percentage": 76,
+    "level": "Junior",
+    "missing_skills": ["TypeScript", "Next.js", "Testing con Jest"],
+    "full_result": {
+      "profileSummary": "Estudiante UTP con experiencia freelance real en PYMEs de Lima, stack frontend moderno.",
+      "skills": ["React", "JavaScript", "HTML", "CSS", "Tailwind", "Git"],
+      "matchedJobs": [
+        { "title": "Frontend Developer Junior", "matchPercentage": 76, "level": "Junior", "reason": "React + Tailwind + experiencia freelance con clientes reales es muy valorado en startups limeñas", "missingSkills": ["TypeScript", "Next.js", "Testing"] },
+        { "title": "Fullstack Developer Trainee", "matchPercentage": 55, "level": "Trainee", "reason": "Node.js básico + React da base fullstack", "missingSkills": ["Express", "Base de datos", "Docker"] },
+        { "title": "UI/UX Developer Junior", "matchPercentage": 60, "level": "Junior", "reason": "Tailwind + React + diseño de landing pages muestra sensibilidad visual + código", "missingSkills": ["Figma", "Animaciones CSS avanzadas", "UX básico"] },
+        { "title": "WordPress Developer Junior", "matchPercentage": 50, "level": "Junior", "reason": "Perfil web con clientes PYME frecuentemente trabaja con WordPress en Lima", "missingSkills": ["PHP/WordPress", "WooCommerce", "SEO técnico"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 28, "level": "Trainee", "reason": "Experiencia con clientes reales da visión de calidad", "missingSkills": ["Cypress", "Postman", "Casos de prueba"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Psicóloga egresada de la PUCP con especialización en Psicología Organizacional. Manejo de Excel, SPSS, entrevistas por competencias, assessment center, clima organizacional. Practicante en Reclutamiento en Telefónica del Perú.",
+    "extracted_skills": ["Excel", "SPSS", "reclutamiento", "assessment center", "clima organizacional", "RRHH"],
+    "suggested_role": "HR Tech Analyst Trainee",
+    "matched_role": "HR Tech Analyst Trainee",
+    "match_percentage": 55,
+    "level": "Junior",
+    "missing_skills": ["ATS (Workday/SAP SuccessFactors)", "Power BI para RRHH", "Python básico"],
+    "full_result": {
+      "profileSummary": "Psicóloga organizacional PUCP con prácticas en Telefónica, perfil de transición a HR Tech y People Analytics.",
+      "skills": ["Excel", "SPSS", "reclutamiento", "assessment", "clima organizacional"],
+      "matchedJobs": [
+        { "title": "HR Tech Analyst Trainee", "matchPercentage": 55, "level": "Junior", "reason": "RRHH + SPSS + Excel es la base para People Analytics en empresas grandes peruanas como Telefónica, BCP", "missingSkills": ["Workday/SAP SF", "Power BI", "Python"] },
+        { "title": "Talent Acquisition Specialist Junior", "matchPercentage": 78, "level": "Junior", "reason": "Entrevistas por competencias + assessment center en Telefónica es perfil senior de reclutamiento", "missingSkills": ["LinkedIn Recruiter", "ATS avanzado", "Employer Branding"] },
+        { "title": "People Analytics Trainee", "matchPercentage": 50, "level": "Junior", "reason": "SPSS + Excel con datos de RRHH es la base de people analytics", "missingSkills": ["Power BI", "Python", "Estadística avanzada"] },
+        { "title": "Business Analyst Trainee", "matchPercentage": 38, "level": "Trainee", "reason": "Perfil analítico de psicología puede orientarse a análisis de negocio", "missingSkills": ["SQL", "BPMN", "Jira"] },
+        { "title": "UX Researcher Trainee", "matchPercentage": 42, "level": "Junior", "reason": "Experiencia en entrevistas y assessment es transferible a UX Research", "missingSkills": ["User Testing", "Figma", "Jobs to be Done"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Técnico en Redes de la Universidad Tecnológica del Perú UTP. Cisco Packet Tracer, configuración de switches Cisco y MikroTik, VPN, Firewall pfSense, Linux Ubuntu, Soporte técnico. Certificación CCNA en proceso.",
+    "extracted_skills": ["Cisco", "MikroTik", "VPN", "pfSense", "Linux", "soporte técnico", "CCNA"],
+    "suggested_role": "Network Administrator Junior",
+    "matched_role": "Network Administrator Junior",
+    "match_percentage": 80,
+    "level": "Junior",
+    "missing_skills": ["CCNA completada", "BGP/OSPF avanzado", "Monitoreo con Zabbix/Nagios"],
+    "full_result": {
+      "profileSummary": "Técnico en redes UTP con stack Cisco + MikroTik muy común en empresas e ISPs peruanos.",
+      "skills": ["Cisco", "MikroTik", "VPN", "pfSense", "Linux"],
+      "matchedJobs": [
+        { "title": "Network Administrator Junior", "matchPercentage": 80, "level": "Junior", "reason": "MikroTik + pfSense + Cisco es exactamente lo que usan ISPs peruanos como Claro, Movistar, WOM y empresas medianas", "missingSkills": ["CCNA", "BGP", "Zabbix"] },
+        { "title": "IT Support Specialist Junior", "matchPercentage": 73, "level": "Junior", "reason": "Soporte técnico + redes + Linux es demandado en outsourcing IT peruano (IBM, Softtek, Unisys)", "missingSkills": ["ITIL", "Active Directory", "Ticketing (ServiceNow)"] },
+        { "title": "Security Engineer Trainee", "matchPercentage": 58, "level": "Junior", "reason": "pfSense (Firewall) + VPN + Linux es base de seguridad perimetral", "missingSkills": ["IDS/IPS", "SIEM", "Ethical hacking"] },
+        { "title": "SysAdmin Linux Junior", "matchPercentage": 55, "level": "Junior", "reason": "Linux Ubuntu + redes es base de administración de sistemas", "missingSkills": ["Bash scripting", "Ansible", "Containers"] },
+        { "title": "DevOps Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Linux + redes es la base de infraestructura DevOps", "missingSkills": ["Docker", "CI/CD", "Kubernetes"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Bachiller en Turismo y Hotelería de la USMP. Excel básico, Word, PowerPoint, inglés B2, atención al cliente, gestión de reservas con Opera PMS, manejo de redes sociales turísticas.",
+    "extracted_skills": ["Excel", "Opera PMS", "inglés B2", "atención al cliente", "redes sociales"],
+    "suggested_role": "Customer Success Trainee",
+    "matched_role": "Customer Success Trainee",
+    "match_percentage": 45,
+    "level": "Trainee",
+    "missing_skills": ["CRM (HubSpot/Salesforce)", "Herramientas de soporte (Zendesk)", "Analítica básica"],
+    "full_result": {
+      "profileSummary": "Turismo con inglés B2 y Opera PMS, perfil de transición a roles de customer success en startups peruanas.",
+      "skills": ["Excel", "Opera PMS", "inglés B2", "atención al cliente"],
+      "matchedJobs": [
+        { "title": "Customer Success Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Atención al cliente + inglés B2 es perfil buscado en startups SaaS peruanas como Culqui, Kushki, Mercado Pago Perú", "missingSkills": ["HubSpot", "Zendesk", "KPIs de CS"] },
+        { "title": "Community Manager Trainee", "matchPercentage": 48, "level": "Trainee", "reason": "Redes sociales + comunicación + inglés B2 son base para CM en turismo digital", "missingSkills": ["Meta Business Suite", "Canva", "TikTok"] },
+        { "title": "Sales Development Representative", "matchPercentage": 42, "level": "Trainee", "reason": "Atención al cliente + inglés B2 es valorado en SDR de empresas tech con clientes internacionales", "missingSkills": ["CRM", "Técnicas de venta", "Cold calling"] },
+        { "title": "Operations Analyst Trainee", "matchPercentage": 35, "level": "Trainee", "reason": "Opera PMS + Excel + gestión de reservas puede orientarse a operaciones", "missingSkills": ["SQL", "Power BI", "Procesos operativos tech"] },
+        { "title": "HR Recruiter Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Habilidades interpersonales y de comunicación valoradas en reclutamiento", "missingSkills": ["LinkedIn Recruiter", "ATS", "Entrevistas por competencias"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Estudiante de Ingeniería de Software de la UPAO Trujillo, 6to ciclo. Java, Spring Boot, Angular, MySQL, Git, Postman. Ganador de hackathon regional organizado por la Municipalidad de Trujillo. Proyecto: app de reportes ciudadanos.",
+    "extracted_skills": ["Java", "Spring Boot", "Angular", "MySQL", "Git", "Postman"],
+    "suggested_role": "Fullstack Developer Junior",
+    "matched_role": "Fullstack Developer Junior",
+    "match_percentage": 80,
+    "level": "Junior",
+    "missing_skills": ["Docker", "TypeScript", "Testing automatizado"],
+    "full_result": {
+      "profileSummary": "Estudiante UPAO con hackathon ganado y proyecto de impacto social, perfil full stack Java/Angular.",
+      "skills": ["Java", "Spring Boot", "Angular", "MySQL", "Postman"],
+      "matchedJobs": [
+        { "title": "Fullstack Developer Junior", "matchPercentage": 80, "level": "Junior", "reason": "Java Spring Boot + Angular es stack muy usado en empresas medianas y gobierno peruano (ONPE, RENIEC, municipalidades)", "missingSkills": ["Docker", "TypeScript", "Testing"] },
+        { "title": "Backend Developer Junior", "matchPercentage": 78, "level": "Junior", "reason": "Spring Boot + MySQL + Postman con hackathon ganado evidencia habilidades backend sólidas", "missingSkills": ["Microservicios", "Redis", "Docker"] },
+        { "title": "GovTech Developer Junior", "matchPercentage": 72, "level": "Junior", "reason": "App de reportes ciudadanos + hackathon municipal es perfil ideal para proyectos de Estado peruano y PCM", "missingSkills": ["Integración con RENIEC API", "Firma digital", "Interoperabilidad Gov"] },
+        { "title": "Frontend Developer Junior", "matchPercentage": 55, "level": "Junior", "reason": "Angular es framework frontend demandado en banca y gobierno", "missingSkills": ["React alternativo", "CSS avanzado", "UX básico"] },
+        { "title": "QA Tester Junior", "matchPercentage": 40, "level": "Junior", "reason": "Postman + proyecto real con hackathon da base de testing de APIs", "missingSkills": ["Selenium", "JMeter", "Casos de prueba formales"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Egresado de Administración de Negocios Internacionales de la UPC. Excel avanzado, Power BI, SQL básico, Tableau, Python con pandas. Tesis sobre predicción de exportaciones peruanas de arándanos con ML.",
+    "extracted_skills": ["Excel", "Power BI", "SQL", "Tableau", "Python", "pandas", "Machine Learning"],
+    "suggested_role": "Data Analyst Junior",
+    "matched_role": "Data Analyst Junior",
+    "match_percentage": 82,
+    "level": "Junior",
+    "missing_skills": ["scikit-learn", "SQL Server avanzado", "ETL pipelines"],
+    "full_result": {
+      "profileSummary": "Administrador UPC con tesis en ML aplicado a exportaciones, perfil mixto negocio-datos muy valorado.",
+      "skills": ["Excel", "Power BI", "Tableau", "Python", "pandas", "ML"],
+      "matchedJobs": [
+        { "title": "Data Analyst Junior", "matchPercentage": 82, "level": "Junior", "reason": "Power BI + Tableau + Python con tesis de ML es perfil premium para PromPerú, MINCETUR, exportadoras peruanas", "missingSkills": ["scikit-learn", "SQL avanzado", "ETL"] },
+        { "title": "Business Intelligence Junior", "matchPercentage": 75, "level": "Junior", "reason": "Tableau + Power BI + SQL es el stack BI demandado en consultoras como EY, PwC, KPMG Perú", "missingSkills": ["Data Warehouse", "Power Query avanzado", "DAX"] },
+        { "title": "Analista de Comercio Exterior Junior", "matchPercentage": 70, "level": "Junior", "reason": "Tesis en exportaciones peruanas + Power BI es perfil ideal para PROMPEX, Sierra Exportadora", "missingSkills": ["SIICEX", "Incoterms avanzado", "Arancel aduanero"] },
+        { "title": "Data Scientist Trainee", "matchPercentage": 58, "level": "Junior", "reason": "Python + pandas + ML en tesis es base sólida para data science", "missingSkills": ["scikit-learn avanzado", "Feature Engineering", "Model deployment"] },
+        { "title": "Product Analyst Trainee", "matchPercentage": 50, "level": "Junior", "reason": "Negocio + datos es perfil ideal para product analytics en ecommerce peruano", "missingSkills": ["A/B Testing", "Funnel analysis", "SQL avanzado"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Técnica en Farmacia egresada del SISE. Manejo de software farmacéutico (Nisira, Asismed), Excel básico, atención al cliente, dispensación de medicamentos, normativa DIGEMID. Interesada en Health IT.",
+    "extracted_skills": ["Nisira", "Asismed", "Excel", "normativa DIGEMID", "farmacia"],
+    "suggested_role": "Health IT Specialist Trainee",
+    "matched_role": "Health IT Specialist Trainee",
+    "match_percentage": 42,
+    "level": "Trainee",
+    "missing_skills": ["SQL básico", "Power BI para salud", "Sistema HIS"],
+    "full_result": {
+      "profileSummary": "Técnica en farmacia con software especializado peruano, perfil de transición a tecnología en salud.",
+      "skills": ["Nisira", "Asismed", "DIGEMID", "Excel"],
+      "matchedJobs": [
+        { "title": "Health IT Specialist Trainee", "matchPercentage": 42, "level": "Trainee", "reason": "Nisira + Asismed son software de farmacias y clínicas peruanas, conocimiento valioso para implementaciones IT en salud", "missingSkills": ["SQL", "Power BI", "HIS"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 38, "level": "Trainee", "reason": "Conocimiento de normativa DIGEMID es crucial para QA en software de salud peruano", "missingSkills": ["Casos de prueba", "Postman", "Testing funcional"] },
+        { "title": "Customer Success Trainee", "matchPercentage": 40, "level": "Trainee", "reason": "Atención al cliente + conocimiento de software especializado es perfil para soporte de software médico", "missingSkills": ["CRM", "Inglés básico", "Zendesk"] },
+        { "title": "Data Analyst Trainee", "matchPercentage": 25, "level": "Trainee", "reason": "Excel básico con datos de ventas farmacéuticas", "missingSkills": ["SQL", "Python", "Power BI"] },
+        { "title": "Business Analyst Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Conocimiento de procesos farmacéuticos puede aplicarse a análisis de negocio", "missingSkills": ["BPMN", "SQL", "Jira"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Estudiante de Ingeniería de Sistemas de la UNMSM, 4to ciclo. C, Python, algoritmos y estructuras de datos, Linux básico, Git. Participante en ICPC PUCP 2024. Sin proyectos prácticos fuera de lo académico.",
+    "extracted_skills": ["C", "Python", "algoritmos", "estructuras de datos", "Linux", "Git", "ICPC"],
+    "suggested_role": "Software Developer Trainee",
+    "matched_role": "Software Developer Trainee",
+    "match_percentage": 50,
+    "level": "Trainee",
+    "missing_skills": ["Framework web o móvil", "Base de datos", "Proyecto real con cliente"],
+    "full_result": {
+      "profileSummary": "Estudiante UNMSM con base algorítmica sólida evidenciada en ICPC, falta experiencia práctica aplicada.",
+      "skills": ["C", "Python", "algoritmos", "estructuras de datos", "Linux", "Git"],
+      "matchedJobs": [
+        { "title": "Software Developer Trainee", "matchPercentage": 50, "level": "Trainee", "reason": "Base algorítmica ICPC es muy valorada en empresas de alta exigencia técnica como IBM, Accenture Perú", "missingSkills": ["Framework", "BD", "Proyecto real"] },
+        { "title": "Backend Developer Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Python + algoritmos pueden orientarse rápidamente a backend", "missingSkills": ["Django/FastAPI", "SQL", "REST APIs"] },
+        { "title": "Data Scientist Trainee", "matchPercentage": 40, "level": "Trainee", "reason": "Python + matemáticas fuertes (ICPC) es base excelente para data science", "missingSkills": ["pandas", "scikit-learn", "SQL"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 35, "level": "Trainee", "reason": "Pensamiento algorítmico y detalle en competitive programming valorado en QA técnico", "missingSkills": ["Postman", "Selenium", "Casos de prueba"] },
+        { "title": "Embedded Systems Trainee", "matchPercentage": 38, "level": "Trainee", "reason": "C + Linux + algoritmos es base clásica de sistemas embebidos", "missingSkills": ["C++", "RTOS", "Hardware protocols"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Egresada de Psicología de la UNFV con cursos en UX Research. Entrevistas a usuarios, card sorting, árbol de contenidos, Figma básico, Notion, Miro. Proyecto UX: rediseño de app del BCP como ejercicio académico.",
+    "extracted_skills": ["UX Research", "entrevistas a usuarios", "card sorting", "Figma", "Miro", "Notion"],
+    "suggested_role": "UX Researcher Junior",
+    "matched_role": "UX Researcher Junior",
+    "match_percentage": 72,
+    "level": "Junior",
+    "missing_skills": ["Testing de usabilidad con herramientas", "Métricas UX (NPS, CSAT)", "Research en producción real"],
+    "full_result": {
+      "profileSummary": "Psicóloga reconvertida a UX Research con metodologías aplicadas a rediseño de app bancaria peruana.",
+      "skills": ["UX Research", "entrevistas", "card sorting", "Figma", "Miro"],
+      "matchedJobs": [
+        { "title": "UX Researcher Junior", "matchPercentage": 72, "level": "Junior", "reason": "UX Research + Figma + proyecto con BCP es perfil valorado en bancos peruanos y startups fintech como Yape, Plin", "missingSkills": ["Testing de usabilidad", "NPS/CSAT", "Research en producción"] },
+        { "title": "UI/UX Designer Junior", "matchPercentage": 58, "level": "Junior", "reason": "Figma + Miro + research es base del diseño centrado en usuario", "missingSkills": ["Diseño visual", "Prototipado avanzado", "Design Systems"] },
+        { "title": "Product Manager Trainee", "matchPercentage": 55, "level": "Junior", "reason": "UX Research es habilidad core de product management en tech peruano", "missingSkills": ["Roadmapping", "User Stories", "Métricas de producto"] },
+        { "title": "Customer Success Trainee", "matchPercentage": 45, "level": "Junior", "reason": "Entrevistas a usuarios + empatía + psicología es perfil ideal para CS", "missingSkills": ["CRM", "Churn analysis", "SaaS métricas"] },
+        { "title": "HR Tech Analyst Trainee", "matchPercentage": 38, "level": "Trainee", "reason": "Psicología + metodologías de investigación aplicables a people analytics", "missingSkills": ["Excel avanzado", "SPSS", "Power BI"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Técnico en Electrónica del SENATI. Mantenimiento de equipos de cómputo, redes LAN, impresoras, soporte técnico presencial y remoto (TeamViewer, AnyDesk), Windows 10/11, Active Directory básico.",
+    "extracted_skills": ["soporte técnico", "redes LAN", "mantenimiento PC", "Active Directory", "Windows", "TeamViewer"],
+    "suggested_role": "IT Support Specialist Junior",
+    "matched_role": "IT Support Specialist Junior",
+    "match_percentage": 77,
+    "level": "Junior",
+    "missing_skills": ["ITIL certificación", "ServiceNow o Jira Service", "Office 365 admin"],
+    "full_result": {
+      "profileSummary": "Técnico SENATI con soporte IT completo, perfil muy demandado en outsourcing IT y empresas con sede en Lima.",
+      "skills": ["soporte técnico", "redes LAN", "Active Directory", "Windows", "TeamViewer"],
+      "matchedJobs": [
+        { "title": "IT Support Specialist Junior", "matchPercentage": 77, "level": "Junior", "reason": "Soporte técnico + AD + redes LAN es el perfil base que busca Unisys, IBM, Indra, Atento en sus mesas de ayuda en Lima", "missingSkills": ["ITIL", "ServiceNow", "O365 admin"] },
+        { "title": "Helpdesk Analyst Junior", "matchPercentage": 72, "level": "Junior", "reason": "TeamViewer + AnyDesk + soporte remoto es lo que usan call centers y BPOs peruanos", "missingSkills": ["Ticketing formal", "SLA management", "ITIL Foundation"] },
+        { "title": "Network Engineer Trainee", "matchPercentage": 48, "level": "Trainee", "reason": "Redes LAN + soporte técnico es punto de entrada a networking", "missingSkills": ["Cisco IOS", "CCNA", "Switching/Routing"] },
+        { "title": "SysAdmin Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Active Directory + Windows Server es base de sysadmin", "missingSkills": ["PowerShell", "Windows Server avanzado", "GPO"] },
+        { "title": "DevOps Trainee", "matchPercentage": 20, "level": "Trainee", "reason": "Infraestructura básica es punto lejano de entrada a DevOps", "missingSkills": ["Linux", "Docker", "CI/CD"] }
+      ]
+    }
+  }
+]

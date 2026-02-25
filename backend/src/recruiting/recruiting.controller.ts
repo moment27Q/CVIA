@@ -1,6 +1,7 @@
-import { BadRequestException, Body, Controller, HttpCode, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, HttpCode, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import pdfParse from 'pdf-parse';
+import { AcceptSuggestedRoleDto } from './dto-accept-suggested-role.dto';
 import { FeedbackDto } from './dto-feedback.dto';
 import { GetLearningResourcesDto } from './dto-get-learning-resources.dto';
 import { AnalyzeCvLearningDto } from './dto-analyze-cv-learning.dto';
@@ -39,22 +40,14 @@ export class RecruitingController {
         cvText = String(data?.text || '').trim();
         console.log('PDF text length:', cvText.length);
         console.log('PDF preview (first 200 chars):', cvText.substring(0, 200));
-        if (cvText.length < 100) {
-          throw new BadRequestException('CV text is empty or not processed correctly');
-        }
       } catch (error) {
-        if (error instanceof BadRequestException) {
-          throw error;
-        }
-        throw new BadRequestException('CV text is empty or not processed correctly');
+        console.warn('Failed to parse PDF CV, using fallback', error);
+        cvText = '';
       }
     } else {
       cvText = cvText.trim();
       console.log('CV text length:', cvText.length);
       console.log('CV preview:', cvText.substring(0, 200));
-      if (!cvText || cvText.length < 50) {
-        throw new BadRequestException('CV text is empty or not processed correctly');
-      }
     }
 
     return this.recruitingService.generateCareerPathFromCv({ ...dto, cvText });
@@ -69,5 +62,16 @@ export class RecruitingController {
   @Post('get-learning-resources')
   async getLearningResources(@Body() dto: GetLearningResourcesDto) {
     return this.recruitingService.getLearningResources(dto);
+  }
+
+  @Get('learning-stats')
+  async getLearningStats() {
+    return this.recruitingService.getLearningStats();
+  }
+
+  @Post('accept-suggested-role')
+  @HttpCode(200)
+  async acceptSuggestedRole(@Body() dto: AcceptSuggestedRoleDto) {
+    return this.recruitingService.acceptSuggestedRole(Number(dto.analysisId));
   }
 }

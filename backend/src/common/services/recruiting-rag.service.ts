@@ -202,7 +202,25 @@ export class RecruitingRagService {
       throw new Error('DATABASE_URL/PGDATABASE is required for career_path RAG');
     }
 
-    const partial = await this.query(
+    const normalizedTarget = this.normalize(targetRole);
+    const exact = await this.query(
+      `SELECT ref_id, content, metadata, created_at
+       FROM recruiting_case_vectors
+       WHERE case_type = 'career_path_template'
+         AND (
+           LOWER(ref_id) = LOWER($1)
+           OR LOWER(COALESCE(metadata->>'role', '')) = LOWER($1)
+           OR LOWER(COALESCE(metadata->>'career_goal', '')) = LOWER($1)
+         )
+       ORDER BY created_at DESC
+       LIMIT 1`,
+      [targetRole],
+    );
+
+    let picked = exact.rows[0] as any;
+
+    if (!picked) {
+      const partial = await this.query(
       `SELECT ref_id, content, metadata, created_at
        FROM recruiting_case_vectors
        WHERE case_type = 'career_path_template'
@@ -213,32 +231,35 @@ export class RecruitingRagService {
          )
        ORDER BY created_at DESC
        LIMIT 1`,
-      [targetRole],
-    );
-
-    let picked = partial.rows[0] as any;
+        [targetRole],
+      );
+      picked = partial.rows[0] as any;
+    }
 
     if (!picked) {
-      const recent = await this.query(
+      const all = await this.query(
         `SELECT ref_id, content, metadata, created_at
          FROM recruiting_case_vectors
          WHERE case_type = 'career_path_template'
-         ORDER BY created_at DESC
-         LIMIT 5`,
+         ORDER BY created_at DESC`,
         [],
       );
 
-      if (recent.rows.length) {
-        const q = this.normalize(targetRole);
-        picked = recent.rows
+      if (all.rows.length) {
+        picked = all.rows
           .map((r: any) => {
             const metadata = (r.metadata || {}) as Record<string, unknown>;
             const role = String(metadata.role || '');
             const goal = String(metadata.career_goal || '');
             const haystack = this.normalize(`${r.ref_id || ''} ${role} ${goal} ${r.content || ''}`);
+            const roleNorm = this.normalize(`${r.ref_id || ''} ${role} ${goal}`);
+            const bonus =
+              roleNorm.includes(normalizedTarget) || normalizedTarget.includes(roleNorm)
+                ? 0.35
+                : 0;
             return {
               row: r,
-              score: this.tokenScore(q, haystack),
+              score: this.tokenScore(normalizedTarget, haystack) + bonus,
             };
           })
           .sort((a: { score: number }, b: { score: number }) => b.score - a.score)[0]?.row;
@@ -647,7 +668,7 @@ export class RecruitingRagService {
       }));
   }
 
-  private async query(sql: string, params: unknown[]) {
+  async query(sql: string, params: unknown[]) {
     const pool = this.getPool();
     return pool.query(sql, params as any[]);
   }

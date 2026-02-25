@@ -59,6 +59,22 @@ export default function CareerPathRoadmap({
     [steps, normalizedMarketSkills],
   );
 
+  const getStepMonth = (step, idx) => {
+    const month = Number(step?.month);
+    if (Number.isFinite(month) && month > 0) return month;
+    return idx + 1;
+  };
+
+  const getStepAction = (step) =>
+    String(step?.action || step?.goal || step?.description || '').trim() || 'Accion no especificada.';
+
+  const getStepTitle = (step, idx) => {
+    const month = getStepMonth(step, idx);
+    const action = getStepAction(step);
+    const shortAction = action.length > 40 ? `${action.slice(0, 40)}...` : action;
+    return `Mes ${month}: ${shortAction}`;
+  };
+
   const handleToggle = (idx) => {
     setStatusMap((prev) => {
       const updated = { ...prev, [idx]: nextStatus(prev[idx] || 'pending') };
@@ -135,18 +151,25 @@ export default function CareerPathRoadmap({
       </div>
 
       <ol className="relative space-y-6 border-l-2 border-slate-200 pl-5">
+        {steps.length === 0 && (
+          <li className="text-sm text-slate-600">Aun no hay pasos de roadmap disponibles.</li>
+        )}
         {steps.map((step, idx) => {
           const status = statusMap[idx] || 'pending';
           const isDataRecommended = (step.skills || []).some((skill) =>
             normalizedMarketSkills.has(String(skill).toLowerCase().trim()),
           );
+          const action = getStepAction(step);
+          const title = getStepTitle(step, idx);
+          const month = getStepMonth(step, idx);
+          const resource = String(step?.resource || '').trim();
 
           return (
             <li key={`${step.title}-${idx}`} className="relative">
               <span className="absolute -left-[29px] top-6 h-4 w-4 rounded-full border-2 border-white bg-cyan-500 shadow" />
               <article className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
                 <div className="mb-2 flex flex-wrap items-center gap-2">
-                  <h3 className="text-base font-semibold text-slate-900">{step.title || `Paso ${idx + 1}`}</h3>
+                  <h3 className="text-base font-semibold text-slate-900">{title}</h3>
                   {isDataRecommended && (
                     <span className="rounded-full border border-cyan-200 bg-cyan-50 px-2 py-0.5 text-[11px] font-bold uppercase tracking-wide text-cyan-700">
                       IA Insight: Recomendado por Datos
@@ -157,7 +180,12 @@ export default function CareerPathRoadmap({
                   </span>
                 </div>
 
-                <p className="mb-3 text-sm leading-relaxed text-slate-700">{step.goal || step.description || 'Sin descripcion.'}</p>
+                <p className="mb-2 text-sm leading-relaxed text-slate-700">{action}</p>
+                {resource && (
+                  <p className="mb-3 text-xs font-medium text-slate-600">
+                    Recurso recomendado: <span className="font-semibold text-slate-700">{resource}</span>
+                  </p>
+                )}
 
                 {(step.skills || []).length > 0 && (
                   <div className="mb-3 flex flex-wrap gap-2">
@@ -170,7 +198,7 @@ export default function CareerPathRoadmap({
                 )}
 
                 <div className="flex flex-wrap items-center justify-between gap-3">
-                  <p className="text-xs font-medium text-slate-500">ETA: {step.etaWeeks || 4} semanas</p>
+                  <p className="text-xs font-medium text-slate-500">ETA: Mes {month}</p>
                   <div className="flex flex-wrap gap-2">
                     <button
                       type="button"

@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { CvLearningService } from '../common/services/cv-learning.service';
 import { CvParserService } from '../common/services/cv-parser.service';
 import { GeminiService } from '../common/services/gemini.service';
 import { RecruitingRagService } from '../common/services/recruiting-rag.service';
@@ -8,6 +9,6 @@ import { RecruitingService } from './recruiting.service';
 
 @Module({
   controllers: [RecruitingController, LearningResourcesController],
-  providers: [RecruitingService, GeminiService, RecruitingRagService, CvParserService],
+  providers: [RecruitingService, GeminiService, RecruitingRagService, CvParserService, CvLearningService],
 })
 export class RecruitingModule {}

@@ -1,4 +1,5 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { CvLearningService } from '../common/services/cv-learning.service';
 import { GeminiService } from '../common/services/gemini.service';
 import { RecruitingRagService } from '../common/services/recruiting-rag.service';
 import { AnalyzeCvLearningDto } from './dto-analyze-cv-learning.dto';
@@ -14,6 +15,51 @@ import {
   buildLearningCvMatchPrompt,
   buildMatchSystemPrompt,
 } from './prompts';
+
+export interface RoadmapStep {
+  month?: number;
+  action?: string;
+  resource?: string;
+}
+
+export interface RoadmapToTarget {
+  targetRole?: string;
+  isRealistic?: boolean;
+  estimatedTime?: string;
+  currentGapPercentage?: number;
+  gapSkills?: string[];
+  steps?: RoadmapStep[];
+  keyProjects?: string[];
+  advice?: string;
+}
+
+export interface CurrentMatch {
+  title?: string;
+  matchPercentage?: number;
+  level?: string;
+  reason?: string;
+}
+
+export interface MatchedJob {
+  title?: string;
+  matchPercentage?: number;
+  level?: string;
+  reason?: string;
+  missingSkills?: string[];
+  basedOn?: 'historial' | 'conocimiento_base';
+}
+
+export interface GeminiCvAnalysis {
+  analysisId?: number | null;
+  profileSummary?: string;
+  skills: string[];
+  currentMatch?: CurrentMatch | null;
+  matchedJobs: MatchedJob[];
+  roadmapToTarget?: RoadmapToTarget | null;
+  suggestedRole?: string;
+  totalHistoricalCVs?: number;
+  similarCVsFound?: number;
+}
 
 @Injectable()
 export class RecruitingService {
@@ -71,6 +117,7 @@ export class RecruitingService {
   constructor(
     private readonly geminiService: GeminiService,
     private readonly ragService: RecruitingRagService,
+    private readonly learningService: CvLearningService,
   ) {}
 
   async matchCv(dto: MatchCvDto) {
@@ -115,7 +162,12 @@ export class RecruitingService {
   async analyzeCvLearning(dto: AnalyzeCvLearningDto) {
     const cvText = String(dto.cvText || '').trim();
     if (!cvText || cvText.length < 50) {
-      throw new BadRequestException('CV text is empty or not processed correctly');
+      return {
+        profileSummary: '',
+        skills: [],
+        matchedJobs: [],
+        totalHistoricalCVs: 0,
+      };
     }
 
     const extractedSkills = this.normalizeSkillList(this.extractTechnicalSkills(cvText));
@@ -262,77 +314,136 @@ export class RecruitingService {
   }
 
   async generateCareerPathFromCv(dto: GenerateCareerPathFromCvDto) {
-    const cvText = String(dto.cvText || '');
-    const normalizedCv = cvText.toLowerCase().trim();
-    if (!normalizedCv || normalizedCv.length < 50) {
-      throw new BadRequestException('CV text is empty or not processed correctly');
+    try {
+      const cvText = String(dto.cvText || '').trim();
+      const normalizedCv = cvText.toLowerCase().trim();
+      const fallbackTargetRole = String(dto.targetRole || 'Software Developer');
+
+      const geminiResult = await this.analyzeWithGeminiAndLearn(cvText, fallbackTargetRole);
+      console.log(`Gemini suggested role: ${geminiResult.suggestedRole}`);
+      console.log(`Gemini extracted skills: [${(geminiResult.skills || []).join(', ')}]`);
+      console.log(`Similar CVs found in history: ${geminiResult.similarCVsFound}`);
+
+      const roleToSearch = String(fallbackTargetRole || geminiResult.suggestedRole || 'Software Developer');
+      const rag = await this.ragService.getCareerPathRagByRole(roleToSearch);
+      console.log(`Matched role: ${rag.matchedRole}`);
+
+      let coreSkills = this.normalizeSkillList(rag.coreSkills);
+      let optionalSkills = this.normalizeSkillList(rag.optionalSkills);
+      const targetNormalized = this.normalize(fallbackTargetRole);
+      const matchedNormalized = this.normalize(rag.matchedRole || '');
+      const ragLooksAligned =
+        !!targetNormalized &&
+        !!matchedNormalized &&
+        (matchedNormalized.includes(targetNormalized) || targetNormalized.includes(matchedNormalized));
+      if (!ragLooksAligned) {
+        const fallbackRoleSkills = this.getFallbackRoleSkills(fallbackTargetRole);
+        if (fallbackRoleSkills) {
+          coreSkills = this.normalizeSkillList(fallbackRoleSkills.coreSkills);
+          optionalSkills = this.normalizeSkillList(fallbackRoleSkills.optionalSkills);
+        }
+      }
+      const cvSkills = [
+        ...new Set([
+          ...this.normalizeSkillList(geminiResult.skills || []),
+          ...this.matchCvSkillsByCatalogNormalized(normalizedCv, [...coreSkills, ...optionalSkills]),
+        ]),
+      ];
+
+      console.log(`Extracted CV skills: [${cvSkills.join(', ')}]`);
+      const missingCore = coreSkills.filter((skill) => !cvSkills.includes(skill));
+      const missingOptional = optionalSkills.filter((skill) => !cvSkills.includes(skill));
+      const prioritizedMissingSkills = missingCore;
+
+      const fallbackSteps = prioritizedMissingSkills.map((skill, idx) => ({
+        month: idx + 1,
+        title: `Mes ${idx + 1}: ${skill}`,
+        action: `Implementa un proyecto enfocado en ${skill} alineado al rol ${fallbackTargetRole}. Publica avances semanales en GitHub y documenta decisiones tecnicas.`,
+        resource: `Ruta oficial y practica guiada de ${skill} (${fallbackTargetRole})`,
+        goal: `Desarrollar dominio aplicado en ${skill} para avanzar hacia ${fallbackTargetRole}.`,
+        skills: [skill],
+        resources: optionalSkills.length ? [`Conectar ${skill} con ${optionalSkills.slice(0, 3).join(', ')}`] : [],
+        etaWeeks: 4,
+      }));
+      const historicalRoadmapSteps =
+        Array.isArray(geminiResult.roadmapToTarget?.steps) && geminiResult.roadmapToTarget?.steps?.length
+          ? geminiResult.roadmapToTarget?.steps || []
+          : [];
+      const historicalLooksGeneric = historicalRoadmapSteps.every((step: any) => {
+        const action = String(step?.action || step?.goal || '').toLowerCase();
+        return action.includes('cerrar brecha de');
+      });
+      const shouldUseHistoricalRoadmap = historicalRoadmapSteps.length > 0 && !historicalLooksGeneric;
+      const roadmapSteps =
+        shouldUseHistoricalRoadmap
+          ? historicalRoadmapSteps
+          : fallbackSteps;
+
+      const estimatedMonths = Math.max(1, Math.ceil((roadmapSteps.length * 4) / 4));
+      const summary =
+        shouldUseHistoricalRoadmap
+          ? `Roadmap generado con pasos historicos personalizados para ${fallbackTargetRole}.`
+          : prioritizedMissingSkills.length > 0
+          ? `Roadmap generado desde career_path RAG para ${rag.matchedRole}. Meta siguiente: ${rag.careerGoal || roleToSearch}.`
+          : `No se detectaron brechas frente a core_skills del rol ${rag.matchedRole}.`;
+
+      const pathId = await this.ragService.saveCareerPathResultOnly({
+        userId: dto.userId || 'anonymous',
+        targetRole: fallbackTargetRole,
+        summary,
+        estimatedMonths,
+        steps: roadmapSteps as any[],
+      });
+
+      return {
+        pathId,
+        analysisId: geminiResult.analysisId ?? null,
+        ragContextUsed: 1,
+        matchedRole: rag.matchedRole,
+        coreSkills,
+        optionalSkills,
+        cvSkills,
+        missingSkills: prioritizedMissingSkills,
+        missingOptionalSkills: missingOptional,
+        summary,
+        estimatedMonths,
+        steps: roadmapSteps,
+        careerGoal: rag.careerGoal || roleToSearch,
+        roadmapToTarget: geminiResult.roadmapToTarget ?? null,
+        currentMatch: geminiResult.currentMatch,
+        gemini: geminiResult,
+      };
+    } catch (error) {
+      console.error('generateCareerPathFromCv failed, using fallback response', error);
+      const fallbackRole = String(dto.targetRole || 'Software Developer');
+      return {
+        pathId: null,
+        analysisId: null,
+        ragContextUsed: 0,
+        matchedRole: fallbackRole,
+        coreSkills: [],
+        optionalSkills: [],
+        cvSkills: [],
+        missingSkills: [],
+        missingOptionalSkills: [],
+        summary: 'No se pudo procesar el CV en este intento.',
+        estimatedMonths: 0,
+        steps: [],
+        careerGoal: fallbackRole,
+        roadmapToTarget: null,
+        currentMatch: null,
+        gemini: {
+          skills: [],
+          suggestedRole: fallbackRole,
+          currentMatch: null,
+          matchedJobs: [],
+          roadmapToTarget: null,
+          profileSummary: '',
+          totalHistoricalCVs: 0,
+          similarCVsFound: 0,
+        } as GeminiCvAnalysis,
+      };
     }
-
-    console.log('Using career_path_template RAG');
-    const rag = await this.ragService.getCareerPathRagByRole(dto.targetRole);
-    console.log(`Matched role: ${rag.matchedRole}`);
-
-    const coreSkills = this.normalizeSkillList(rag.coreSkills);
-    const optionalSkills = this.normalizeSkillList(rag.optionalSkills);
-    const catalog = [...new Set([...coreSkills, ...optionalSkills])];
-    const cvSkillsByCatalog = this.matchCvSkillsByCatalogNormalized(normalizedCv, catalog);
-    const cvSkillsGeneric = this.normalizeSkillList(this.extractTechnicalSkills(normalizedCv));
-    const cvSkills = [...new Set([...cvSkillsByCatalog, ...cvSkillsGeneric])];
-
-    if (!cvSkillsByCatalog.length) {
-      console.warn('Extracted CV skills by template catalog: [] (continuing with generic CV skills fallback)');
-    }
-    if (!cvSkills.length) {
-      console.warn('Extracted CV skills: [] (no technical skills found; roadmap will include full core gap)');
-    }
-    console.log(`Extracted CV skills: [${cvSkills.join(', ')}]`);
-    console.log(`Total detected skills: ${cvSkills.length}`);
-    console.log(`Template core skills: [${coreSkills.join(', ')}]`);
-
-    const missingCore = coreSkills.filter((skill) => !cvSkills.includes(skill));
-    const missingOptional = optionalSkills.filter((skill) => !cvSkills.includes(skill));
-
-    console.log(`Missing core skills: [${missingCore.join(', ')}]`);
-    console.log(`Missing optional skills: [${missingOptional.join(', ')}]`);
-
-    const steps = missingCore.map((skill, idx) => ({
-      title: `Prioridad ${idx + 1}: ${skill}`,
-      goal: `Cerrar brecha de ${skill} para avanzar de ${rag.matchedRole} hacia ${rag.careerGoal || dto.targetRole}.`,
-      skills: [skill],
-      resources: optionalSkills.length
-        ? [`Relacionar ${skill} con ${optionalSkills.slice(0, 3).join(', ')}`]
-        : [],
-      etaWeeks: 4,
-    }));
-
-    const estimatedMonths = Math.max(1, Math.ceil((steps.length * 4) / 4));
-    const summary =
-      missingCore.length > 0
-        ? `Roadmap generado desde career_path RAG para ${rag.matchedRole}. Meta siguiente: ${rag.careerGoal || dto.targetRole}.`
-        : `No se detectaron brechas frente a core_skills del rol ${rag.matchedRole}.`;
-
-    const pathId = await this.ragService.saveCareerPathResultOnly({
-      userId: dto.userId || 'anonymous',
-      targetRole: dto.targetRole,
-      summary,
-      estimatedMonths,
-      steps,
-    });
-
-    return {
-      pathId,
-      ragContextUsed: 1,
-      matchedRole: rag.matchedRole,
-      coreSkills,
-      optionalSkills,
-      cvSkills,
-      missingSkills: missingCore,
-      missingOptionalSkills: missingOptional,
-      summary,
-      estimatedMonths,
-      steps,
-      careerGoal: rag.careerGoal || dto.targetRole,
-    };
   }
 
   async registerFeedback(dto: FeedbackDto) {
@@ -376,6 +487,270 @@ export class RecruitingService {
       user_level: dto.user_level,
       data: parsed,
     };
+  }
+
+  async getLearningStats() {
+    return this.learningService.getLearningStats();
+  }
+
+  async acceptSuggestedRole(analysisId: number) {
+    const accepted = await this.learningService.acceptAnalysis(analysisId);
+    return {
+      ok: accepted,
+      analysisId,
+      accepted,
+    };
+  }
+
+  private async analyzeWithGeminiAndLearn(cvText: string, targetRole: string): Promise<GeminiCvAnalysis> {
+    const safeCvText = String(cvText || '').trim();
+    const safeTargetRole = String(targetRole || 'Software Developer').trim() || 'Software Developer';
+    const quickSkills = this.normalizeSkillList(this.extractTechnicalSkills(safeCvText));
+
+    const trainingContext = await this.learningService.getTrainingContext(quickSkills);
+    const stats = await this.learningService.getLearningStats();
+    const hasTrainingData = trainingContext.length > 0;
+    console.log(`Training context: ${hasTrainingData ? 'YES' : 'NO'} (${stats.totalCVsAnalyzed} CVs in history)`);
+    const contextRows: Array<{
+      skills?: string[];
+      role?: string;
+      targetRole?: string;
+      matchPercentage?: number;
+      level?: string;
+      missingSkills?: string[];
+      roadmapEstimatedTime?: string;
+      roadmapToTarget?: RoadmapToTarget | null;
+      acceptedByUser?: boolean;
+    }> = hasTrainingData
+      ? (() => {
+          try {
+            return JSON.parse(trainingContext);
+          } catch {
+            return [];
+          }
+        })()
+      : [];
+
+    const quickSkillSet = new Set(quickSkills.map((s) => this.normalize(s)).filter(Boolean));
+    const roleMap = new Map<
+      string,
+      {
+        title: string;
+        weightedScore: number;
+        weightedPct: number;
+        weightedCount: number;
+        similarRows: number;
+        level: string;
+        missing: Map<string, number>;
+      }
+    >();
+    const similarRows: Array<{
+      similarity: number;
+      row: {
+        skills?: string[];
+        role?: string;
+        targetRole?: string;
+        matchPercentage?: number;
+        level?: string;
+        missingSkills?: string[];
+        roadmapEstimatedTime?: string;
+        roadmapToTarget?: RoadmapToTarget | null;
+        acceptedByUser?: boolean;
+      };
+    }> = [];
+
+    for (const row of contextRows) {
+      const title = String(row?.role || '').trim();
+      if (!title) continue;
+      const key = this.normalize(title);
+      if (!key) continue;
+      const rowSkills = this.normalizeSkillList(Array.isArray(row?.skills) ? row.skills : []);
+      const rowSkillSet = new Set(rowSkills.map((s) => this.normalize(s)).filter(Boolean));
+      const intersection = [...quickSkillSet].filter((skill) => rowSkillSet.has(skill)).length;
+      const union = new Set([...quickSkillSet, ...rowSkillSet]).size || 1;
+      const similarity = intersection / union;
+      if (similarity <= 0) continue;
+      similarRows.push({ similarity, row });
+      if (!roleMap.has(key)) {
+        roleMap.set(key, {
+          title,
+          weightedScore: 0,
+          weightedPct: 0,
+          weightedCount: 0,
+          similarRows: 0,
+          level: String(row?.level || 'Junior').trim() || 'Junior',
+          missing: new Map<string, number>(),
+        });
+      }
+      const current = roleMap.get(key)!;
+      const historicalPct = this.clampInt(row?.matchPercentage, 0, 100, 60);
+      const acceptanceBoost = row?.acceptedByUser ? 1.15 : 1;
+      const qualityScore = similarity * 100 * acceptanceBoost;
+      current.weightedScore += qualityScore;
+      current.weightedPct += historicalPct * similarity * acceptanceBoost;
+      current.weightedCount += similarity * acceptanceBoost;
+      current.similarRows += 1;
+      for (const skill of row?.missingSkills || []) {
+        const n = this.normalize(String(skill));
+        if (!n) continue;
+        current.missing.set(n, (current.missing.get(n) || 0) + 1);
+      }
+    }
+
+    const matchedJobs: MatchedJob[] = [...roleMap.values()]
+      .sort((a, b) => b.weightedScore - a.weightedScore)
+      .slice(0, 5)
+      .map((x) => ({
+        title: x.title,
+        matchPercentage: this.clampInt(x.weightedPct / Math.max(0.0001, x.weightedCount), 35, 95, 60),
+        level: x.level || 'Junior',
+        reason: `Basado en similitud de skills con ${x.similarRows} CVs del historial.`,
+        missingSkills: [...x.missing.entries()]
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 3)
+          .map(([skill]) => skill),
+        basedOn: 'historial',
+      }));
+
+    if (!matchedJobs.length) {
+      matchedJobs.push({
+        title: safeTargetRole,
+        matchPercentage: 50,
+        level: 'Junior',
+        reason: 'Sin suficientes casos historicos; usando estimacion base local.',
+        missingSkills: [],
+        basedOn: 'conocimiento_base',
+      });
+    }
+
+    const targetRows = similarRows
+      .sort((a, b) => b.similarity - a.similarity)
+      .map((x) => x.row)
+      .filter((x) => x?.roadmapToTarget && Array.isArray(x.roadmapToTarget?.steps))
+      .filter(
+        (x) => this.normalize(String(x?.targetRole || '')) === this.normalize(safeTargetRole),
+      );
+
+    const historicalRoadmapSteps = Array.isArray(targetRows[0]?.roadmapToTarget?.steps)
+      ? (targetRows[0]?.roadmapToTarget?.steps || []).slice(0, 8)
+      : [];
+
+    const targetRowsByRole = contextRows.filter(
+      (x) => this.normalize(String(x?.targetRole || '')) === this.normalize(safeTargetRole),
+    );
+    const targetMissingMap = new Map<string, number>();
+    for (const row of targetRowsByRole) {
+      for (const skill of row?.missingSkills || []) {
+        const n = this.normalize(String(skill));
+        if (!n) continue;
+        targetMissingMap.set(n, (targetMissingMap.get(n) || 0) + 1);
+      }
+    }
+    const targetGapSkills = [...targetMissingMap.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([skill]) => skill);
+
+    const roadmapToTarget: RoadmapToTarget | null = targetRowsByRole.length
+      ? {
+          targetRole: safeTargetRole,
+          isRealistic: true,
+          estimatedTime: String(targetRowsByRole[0]?.roadmapEstimatedTime || '').trim() || '6-12 meses',
+          currentGapPercentage: 40,
+          gapSkills: targetGapSkills,
+          steps: historicalRoadmapSteps,
+          keyProjects: [],
+          advice: `Basado en historial, avanza primero por ${matchedJobs[0]?.title || 'un rol intermedio'} antes de ${safeTargetRole}.`,
+        }
+      : null;
+
+    const result: GeminiCvAnalysis = {
+      analysisId: null,
+      skills: quickSkills,
+      suggestedRole: String(matchedJobs[0]?.title || safeTargetRole),
+      currentMatch: {
+        title: String(matchedJobs[0]?.title || safeTargetRole),
+        matchPercentage: matchedJobs[0]?.matchPercentage || 50,
+        level: String(matchedJobs[0]?.level || 'Junior'),
+        reason: String(matchedJobs[0]?.reason || ''),
+      },
+      matchedJobs,
+      roadmapToTarget,
+      profileSummary: `Perfil detectado con ${quickSkills.length} skills tecnicas. Recomendacion basada en historial interno.`,
+      totalHistoricalCVs: stats.totalCVsAnalyzed,
+      similarCVsFound: similarRows.length,
+    };
+    const analysisId = await this.learningService.saveAnalysis({
+      cvText: safeCvText,
+      extractedSkills: result.skills || [],
+      suggestedRole: result.currentMatch?.title || safeTargetRole,
+      matchedRole: result.matchedJobs?.[0]?.title || safeTargetRole,
+      matchPercentage: result.matchedJobs?.[0]?.matchPercentage || 0,
+      level: result.matchedJobs?.[0]?.level || 'Junior',
+      missingSkills: result.matchedJobs?.[0]?.missingSkills || [],
+      targetRole: safeTargetRole,
+      roadmapToTarget: (result.roadmapToTarget || null) as Record<string, unknown> | null,
+      fullResult: result as unknown as object,
+    });
+    result.analysisId = analysisId;
+
+    console.log(`Analysis saved to training history. Total: ${stats.totalCVsAnalyzed + 1} CVs`);
+    return result;
+  }
+
+  private async callGeminiWithRetry(prompt: string, maxRetries = 3): Promise<string> {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        const result = await this.geminiService.generate(prompt);
+        if (result && result.trim().length > 0) return result;
+        throw new Error('empty_response');
+      } catch (error: any) {
+        const message = error?.message || '';
+        const detail = error?.detail || JSON.stringify(error) || '';
+        const fullText = message + detail;
+
+        const is429 =
+          fullText.includes('429') ||
+          fullText.includes('quota') ||
+          fullText.includes('RESOURCE_EXHAUSTED') ||
+          fullText.includes('Too Many Requests');
+        const hardQuotaZero =
+          /limit:\s*0/i.test(fullText) ||
+          /GenerateRequestsPerDayPerProjectPerModel-FreeTier/i.test(fullText);
+
+        if (is429 && hardQuotaZero) {
+          console.error('[Gemini] cuota en 0 (limit: 0). Se aborta sin reintentos.');
+          throw new Error('quota_limit_zero');
+        }
+
+        if (is429 && attempt < maxRetries) {
+          // Extraer segundos exactos del mensaje de Gemini
+          const matchSeconds =
+            fullText.match(/retry in (\d+(?:\.\d+)?)s/i) ||
+            fullText.match(/"retryDelay"\s*:\s*"(\d+)s"/i) ||
+            fullText.match(/retryDelay.*?(\d+)/i);
+
+          const waitSeconds = matchSeconds
+            ? Math.ceil(parseFloat(matchSeconds[1])) + 3
+            : attempt * 20;
+
+          console.log(
+            `[Gemini] 429 quota exceeded - esperando ${waitSeconds}s antes de reintentar (intento ${attempt}/${maxRetries})`
+          );
+
+          await new Promise((r) => setTimeout(r, waitSeconds * 1000));
+          continue;
+        }
+
+        if (attempt === maxRetries) {
+          console.error(`[Gemini] Falló después de ${maxRetries} intentos:`, message);
+          throw new Error('max_retries_exceeded');
+        }
+
+        throw error;
+      }
+    }
+    throw new Error('max_retries_exceeded');
   }
 
   private parseLearningCvMatch(raw: string | null): {
@@ -510,6 +885,43 @@ export class RecruitingService {
     if (/\b(semi senior|ssr|mid)\b/.test(normalized)) return 'Semi Senior';
     if (/\b(lead|staff|principal)\b/.test(normalized)) return 'Lead';
     return 'Junior';
+  }
+
+  private getFallbackRoleSkills(targetRole: string): { coreSkills: string[]; optionalSkills: string[] } | null {
+    const role = this.normalize(targetRole);
+    if (!role) return null;
+
+    if (role.includes('frontend')) {
+      return {
+        coreSkills: ['html', 'css', 'javascript', 'typescript', 'react', 'git'],
+        optionalSkills: ['vue', 'angular', 'tailwind', 'testing', 'rest api'],
+      };
+    }
+    if (role.includes('backend')) {
+      return {
+        coreSkills: ['node.js', 'sql', 'rest api', 'git', 'docker'],
+        optionalSkills: ['express', 'postgresql', 'mongodb', 'testing', 'aws'],
+      };
+    }
+    if (role.includes('full stack') || role.includes('fullstack')) {
+      return {
+        coreSkills: ['javascript', 'node.js', 'sql', 'react', 'git'],
+        optionalSkills: ['typescript', 'express', 'postgresql', 'docker', 'rest api'],
+      };
+    }
+    if (role.includes('data analyst')) {
+      return {
+        coreSkills: ['sql', 'excel', 'python', 'power bi', 'estadistica'],
+        optionalSkills: ['tableau', 'pandas', 'numpy', 'visualizacion de datos'],
+      };
+    }
+    if (role.includes('mobile')) {
+      return {
+        coreSkills: ['kotlin', 'swift', 'git', 'apis rest', 'firebase'],
+        optionalSkills: ['flutter', 'dart', 'android sdk', 'ios sdk'],
+      };
+    }
+    return null;
   }
 
   private clampInt(value: unknown, min: number, max: number, fallback: number): number {

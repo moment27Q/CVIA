@@ -1,0 +1,218 @@
+[
+  {
+    "cv_text": "Estudiante de Ingeniería de Software de la UNI, 5to ciclo. Java, Python, MySQL, Git, Spring Boot básico. Proyecto académico: sistema de matrícula web.",
+    "extracted_skills": ["Java", "Python", "MySQL", "Git", "Spring Boot"],
+    "suggested_role": "Backend Developer Trainee",
+    "matched_role": "Backend Developer Trainee",
+    "match_percentage": 58,
+    "level": "Trainee",
+    "target_role": "Backend Developer Junior",
+    "missing_skills": ["APIs REST", "Docker", "Pruebas unitarias"],
+    "roadmap_to_target": {
+      "target": "Backend Developer Junior",
+      "estimated_time": "6 meses",
+      "gap_skills": ["REST APIs con Spring Boot", "Docker básico", "JUnit testing", "Postman para pruebas"],
+      "steps": [
+        { "month": 1, "action": "Construir una API REST completa con Spring Boot + MySQL y documentarla con Swagger", "resource": "Curso Spring Boot en Udemy o YouTube canal Amigoscode" },
+        { "month": 2, "action": "Aprender Docker: crear Dockerfile y docker-compose para tu proyecto", "resource": "Docker for Beginners - freeCodeCamp" },
+        { "month": 3, "action": "Agregar pruebas unitarias con JUnit y Mockito a tu proyecto", "resource": "Testing Spring Boot - Baeldung.com" },
+        { "month": 4, "action": "Subir proyecto a GitHub con README completo y desplegarlo en Railway o Render", "resource": "Railway.app (gratis para proyectos personales)" },
+        { "month": 5, "action": "Practicar Postman y documentar todos los endpoints de tu API", "resource": "Postman Learning Center" },
+        { "month": 6, "action": "Aplicar a practicas en BCP, Interbank, Rimac o startups como Crehana con tu proyecto en GitHub", "resource": "LinkedIn, Bumeran, Computrabajo Perú" }
+      ],
+      "key_projects": ["API REST de gestión de usuarios con Spring Boot + MySQL + Docker", "Sistema CRUD con autenticación JWT"]
+    },
+    "full_result": {
+      "profileSummary": "Estudiante UNI con base en Java y MySQL, a 6 meses de ser Backend Junior con dedicación.",
+      "skills": ["Java", "Python", "MySQL", "Git", "Spring Boot"],
+      "matchedJobs": [
+        { "title": "Backend Developer Trainee", "matchPercentage": 58, "level": "Trainee", "reason": "Java + Spring Boot + MySQL es stack backend clásico en BCP, Interbank", "missingSkills": ["APIs REST", "Docker", "JUnit"] },
+        { "title": "Analista de Sistemas Trainee", "matchPercentage": 50, "level": "Trainee", "reason": "Perfil de sistemas web común en empresas públicas peruanas", "missingSkills": ["UML", "Oracle", "Documentación"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 35, "level": "Trainee", "reason": "Conocimientos técnicos generales aplicables a testing", "missingSkills": ["Selenium", "Postman", "Casos de prueba"] },
+        { "title": "Data Analyst Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Python y MySQL pueden orientarse a análisis", "missingSkills": ["Power BI", "pandas", "Excel avanzado"] },
+        { "title": "Frontend Developer Trainee", "matchPercentage": 20, "level": "Trainee", "reason": "Sin experiencia frontend", "missingSkills": ["HTML", "CSS", "JavaScript"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Estudiante de la César Vallejo, Ingeniería de Software, 7mo ciclo. Flutter, Dart, Firebase, SQLite, Figma, Git. App de delivery de comida para proyecto de curso.",
+    "extracted_skills": ["Flutter", "Dart", "Firebase", "SQLite", "Figma", "Git"],
+    "suggested_role": "Mobile Developer Junior",
+    "matched_role": "Mobile Developer Junior",
+    "match_percentage": 78,
+    "level": "Junior",
+    "target_role": "Mobile Developer Mid",
+    "missing_skills": ["REST APIs", "Bloc/Provider", "Testing en Flutter"],
+    "roadmap_to_target": {
+      "target": "Mobile Developer Mid",
+      "estimated_time": "12 meses",
+      "gap_skills": ["State management con Bloc", "REST APIs con Dio", "Flutter Testing", "CI/CD con Codemagic", "Clean Architecture"],
+      "steps": [
+        { "month": 1, "action": "Implementar Bloc o Riverpod en tu app de delivery actual", "resource": "Flutter Bloc - Felix Angelov en pub.dev" },
+        { "month": 2, "action": "Migrar Firebase a API REST propia con Dio + interceptores", "resource": "Resocoder Clean Architecture Flutter" },
+        { "month": 3, "action": "Agregar widget testing y unit testing a tu app", "resource": "Flutter Testing Guide - docs.flutter.dev" },
+        { "month": 4, "action": "Implementar Clean Architecture completa en un nuevo proyecto", "resource": "Reso Coder - Flutter TDD Clean Architecture" },
+        { "month": 5, "action": "Publicar app real en Play Store (puede ser la de delivery mejorada)", "resource": "Google Play Console - cuenta $25 única vez" },
+        { "month": 6, "action": "Configurar CI/CD con GitHub Actions o Codemagic", "resource": "Codemagic.io - gratis hasta 500 minutos/mes" },
+        { "month": 7, "action": "Conseguir primera práctica o trabajo en empresa con app publicada como portfolio", "resource": "Yape, Rappi Perú, startups de delivery en Lima" },
+        { "month": 12, "action": "Con 6+ meses de experiencia laboral ya eres Mobile Developer Mid", "resource": "Linkedin - actualizar perfil con logros medibles" }
+      ],
+      "key_projects": ["App Flutter con Clean Architecture + Bloc + API REST propia", "App publicada en Play Store con +100 descargas"]
+    },
+    "full_result": {
+      "profileSummary": "Estudiante UCV con app de delivery, a 12 meses de ser Mobile Mid con proyectos reales.",
+      "skills": ["Flutter", "Dart", "Firebase", "SQLite", "Figma"],
+      "matchedJobs": [
+        { "title": "Mobile Developer Junior", "matchPercentage": 78, "level": "Junior", "reason": "Flutter muy demandado en Yape, Rappi, startups peruanas", "missingSkills": ["REST APIs", "Bloc", "Testing"] },
+        { "title": "UI/UX Designer Junior", "matchPercentage": 55, "level": "Junior", "reason": "Figma + diseño de app mobile", "missingSkills": ["User Research", "Design Systems", "Adobe XD"] },
+        { "title": "Frontend Developer Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Sin experiencia web frontend", "missingSkills": ["React", "JavaScript", "HTML/CSS"] },
+        { "title": "Backend Developer Trainee", "matchPercentage": 25, "level": "Trainee", "reason": "Firebase como backend básico", "missingSkills": ["Node.js", "SQL relacional", "APIs REST"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "App real da visión de calidad", "missingSkills": ["Appium", "Casos de prueba", "Flutter testing"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Bachiller en Economía UNMSM. Excel avanzado, SPSS, Power BI, SQL básico, Python con pandas. Tesis sobre informalidad laboral en Lima.",
+    "extracted_skills": ["Excel", "SPSS", "Power BI", "SQL", "Python", "pandas"],
+    "suggested_role": "Data Analyst Junior",
+    "matched_role": "Data Analyst Junior",
+    "match_percentage": 77,
+    "level": "Junior",
+    "target_role": "Data Scientist Junior",
+    "missing_skills": ["SQL avanzado", "Tableau", "Machine Learning básico"],
+    "roadmap_to_target": {
+      "target": "Data Scientist Junior",
+      "estimated_time": "9 meses",
+      "gap_skills": ["scikit-learn", "Feature Engineering", "SQL avanzado", "Visualización con matplotlib/seaborn", "Modelos supervisados"],
+      "steps": [
+        { "month": 1, "action": "Completar SQL avanzado: JOINs complejos, CTEs, window functions con data peruana (INEI datasets)", "resource": "Mode Analytics SQL Tutorial - gratuito" },
+        { "month": 2, "action": "Aprender scikit-learn: regresión, clasificación, clustering con tu tesis como dataset", "resource": "Kaggle Learn - Machine Learning (gratuito)" },
+        { "month": 3, "action": "Construir un modelo de predicción end-to-end con datos del INEI o SUNAT", "resource": "Kaggle datasets Perú + Jupyter Notebook" },
+        { "month": 4, "action": "Aprender Feature Engineering: encoding, scaling, manejo de nulos con pandas avanzado", "resource": "Feature Engineering for ML - Udemy" },
+        { "month": 5, "action": "Subir 3 proyectos de ML a GitHub con notebooks limpios y README explicativo", "resource": "GitHub + nbviewer para presentar notebooks" },
+        { "month": 6, "action": "Participar en una competencia de Kaggle (nivel principiante)", "resource": "Kaggle Competitions - Titanic, House Prices" },
+        { "month": 9, "action": "Aplicar a posiciones de Data Scientist Trainee/Junior en BCP Analytics, BBVA Data, Belcorp", "resource": "LinkedIn con portfolio de GitHub visible" }
+      ],
+      "key_projects": ["Modelo de predicción de churn para empresa peruana con scikit-learn", "Dashboard interactivo con Power BI + datos INEI"]
+    },
+    "full_result": {
+      "profileSummary": "Economista con base analítica sólida, a 9 meses de Data Scientist Junior.",
+      "skills": ["Excel", "SPSS", "Power BI", "SQL", "Python", "pandas"],
+      "matchedJobs": [
+        { "title": "Data Analyst Junior", "matchPercentage": 77, "level": "Junior", "reason": "Excel + Power BI + Python demandado en BCP, BBVA, Scotiabank", "missingSkills": ["SQL avanzado", "Tableau", "ML"] },
+        { "title": "Business Intelligence Junior", "matchPercentage": 65, "level": "Junior", "reason": "Power BI + SQL básico en empresas peruanas grandes", "missingSkills": ["SQL Server", "ETL", "Data Warehouse"] },
+        { "title": "Analista de Riesgo Trainee", "matchPercentage": 60, "level": "Junior", "reason": "Economía + estadística valorado en banca peruana", "missingSkills": ["SAS", "Scoring models", "Regulación SBS"] },
+        { "title": "Data Scientist Trainee", "matchPercentage": 40, "level": "Trainee", "reason": "Python + pandas + estadística es base de data science", "missingSkills": ["scikit-learn", "Feature Engineering", "ML modelos"] },
+        { "title": "Consultor BI Trainee", "matchPercentage": 55, "level": "Junior", "reason": "Power BI + Excel avanzado en EY, Deloitte Perú", "missingSkills": ["DAX avanzado", "Power Query", "Presentación ejecutiva"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Técnico SENATI en Desarrollo de Sistemas. PHP, CodeIgniter, MySQL, HTML, CSS, JavaScript, Bootstrap. Sistema de almacén para empresa textil en Gamarra.",
+    "extracted_skills": ["PHP", "CodeIgniter", "MySQL", "HTML", "CSS", "JavaScript", "Bootstrap"],
+    "suggested_role": "Backend Developer Junior",
+    "matched_role": "Backend Developer Junior",
+    "match_percentage": 68,
+    "level": "Junior",
+    "target_role": "Fullstack Developer Mid",
+    "missing_skills": ["Laravel", "APIs REST", "React o Vue"],
+    "roadmap_to_target": {
+      "target": "Fullstack Developer Mid",
+      "estimated_time": "18 meses",
+      "gap_skills": ["Laravel avanzado", "REST APIs", "React o Vue.js", "Docker", "Git Flow", "Testing"],
+      "steps": [
+        { "month": 1, "action": "Migrar tu proyecto de CodeIgniter a Laravel: rutas, Eloquent ORM, Blade", "resource": "Laracasts.com - Laravel from Scratch (gratuito primeros cursos)" },
+        { "month": 2, "action": "Construir API REST completa con Laravel + autenticación JWT o Sanctum", "resource": "Laravel API Tutorial - Traversy Media YouTube" },
+        { "month": 3, "action": "Aprender React: componentes, hooks, estado, fetch a tu API Laravel", "resource": "React - freeCodeCamp o Midudev YouTube" },
+        { "month": 4, "action": "Conectar tu frontend React con tu API Laravel en un proyecto completo", "resource": "Proyecto personal: sistema de inventario fullstack" },
+        { "month": 6, "action": "Dockerizar tu proyecto fullstack con docker-compose", "resource": "Docker Compose para LAMP stack - YouTube" },
+        { "month": 9, "action": "Conseguir trabajo como Junior en empresa con tu proyecto fullstack en GitHub", "resource": "Bumeran, Computrabajo, LinkedIn Perú" },
+        { "month": 18, "action": "Con 9 meses de experiencia laboral + proyectos ya eres Fullstack Mid", "resource": "Actualizar perfil LinkedIn con logros y tecnologías" }
+      ],
+      "key_projects": ["Sistema fullstack con Laravel API + React frontend + MySQL + Docker", "Proyecto real desplegado en Heroku o DigitalOcean"]
+    },
+    "full_result": {
+      "profileSummary": "Técnico SENATI con sistema real en Gamarra, a 18 meses de Fullstack Mid.",
+      "skills": ["PHP", "CodeIgniter", "MySQL", "HTML", "CSS", "JavaScript"],
+      "matchedJobs": [
+        { "title": "Backend Developer Junior", "matchPercentage": 68, "level": "Junior", "reason": "PHP + MySQL muy usado en PYMEs peruanas", "missingSkills": ["Laravel", "APIs REST", "Docker"] },
+        { "title": "Fullstack Developer Junior", "matchPercentage": 60, "level": "Junior", "reason": "PHP + HTML/CSS/JS completa stack web básico", "missingSkills": ["Framework moderno", "Git avanzado", "Seguridad web"] },
+        { "title": "Analista Programador", "matchPercentage": 65, "level": "Junior", "reason": "Perfil clásico buscado en empresas medianas peruanas", "missingSkills": ["Oracle o SQL Server", "UML", "PL/SQL"] },
+        { "title": "Frontend Developer Trainee", "matchPercentage": 40, "level": "Trainee", "reason": "HTML/CSS/JS + Bootstrap presentes", "missingSkills": ["React", "TypeScript", "Webpack"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 30, "level": "Trainee", "reason": "Sistema real da visión de pruebas", "missingSkills": ["Postman", "Selenium", "Casos de prueba"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Estudiante UTP 8vo ciclo. React, JavaScript, HTML, CSS, Tailwind CSS, Git, Node.js básico. Landing pages para 3 PYMEs de Miraflores como freelance.",
+    "extracted_skills": ["React", "JavaScript", "HTML", "CSS", "Tailwind CSS", "Git", "Node.js"],
+    "suggested_role": "Frontend Developer Junior",
+    "matched_role": "Frontend Developer Junior",
+    "match_percentage": 76,
+    "level": "Junior",
+    "target_role": "Frontend Developer Mid",
+    "missing_skills": ["TypeScript", "Next.js", "Testing con Jest"],
+    "roadmap_to_target": {
+      "target": "Frontend Developer Mid",
+      "estimated_time": "12 meses",
+      "gap_skills": ["TypeScript", "Next.js", "Jest/Testing Library", "Redux o Zustand", "Performance web"],
+      "steps": [
+        { "month": 1, "action": "Migrar uno de tus proyectos de JavaScript a TypeScript completo", "resource": "TypeScript Handbook - typescriptlang.org (gratuito)" },
+        { "month": 2, "action": "Aprender Next.js: SSR, SSG, API routes, Image Optimization", "resource": "Next.js Learn - nextjs.org/learn (gratuito oficial)" },
+        { "month": 3, "action": "Rehacer una de las landing pages en Next.js + TypeScript + Tailwind", "resource": "Proyecto personal con Vercel para deployment gratuito" },
+        { "month": 4, "action": "Agregar Jest + React Testing Library a tu proyecto Next.js", "resource": "Testing Library Docs - testing-library.com" },
+        { "month": 5, "action": "Aprender Zustand o Redux Toolkit para manejo de estado global", "resource": "Zustand docs - GitHub pmndrs/zustand" },
+        { "month": 6, "action": "Conseguir primer trabajo Junior con portfolio en Vercel y GitHub", "resource": "Startups limeñas: Crehana, Kushki, Comparabien" },
+        { "month": 12, "action": "Con 6 meses de experiencia laboral y TypeScript sólido ya eres Frontend Mid", "resource": "Actualizar LinkedIn con métricas de impacto" }
+      ],
+      "key_projects": ["Landing page en Next.js + TypeScript + Tailwind con score 90+ en Lighthouse", "App con estado global Zustand + testing 80%+ coverage"]
+    },
+    "full_result": {
+      "profileSummary": "Estudiante UTP con freelance real, a 12 meses de Frontend Mid.",
+      "skills": ["React", "JavaScript", "HTML", "CSS", "Tailwind", "Git"],
+      "matchedJobs": [
+        { "title": "Frontend Developer Junior", "matchPercentage": 76, "level": "Junior", "reason": "React + Tailwind + freelance real valorado en startups limeñas", "missingSkills": ["TypeScript", "Next.js", "Testing"] },
+        { "title": "Fullstack Developer Trainee", "matchPercentage": 55, "level": "Trainee", "reason": "Node.js básico + React da base fullstack", "missingSkills": ["Express", "Base de datos", "Docker"] },
+        { "title": "UI/UX Developer Junior", "matchPercentage": 60, "level": "Junior", "reason": "Tailwind + React + landing pages muestra sensibilidad visual", "missingSkills": ["Figma", "Animaciones", "UX básico"] },
+        { "title": "WordPress Developer Junior", "matchPercentage": 50, "level": "Junior", "reason": "Perfil web con clientes PYME trabaja con WordPress", "missingSkills": ["PHP/WordPress", "WooCommerce", "SEO técnico"] },
+        { "title": "QA Tester Trainee", "matchPercentage": 28, "level": "Trainee", "reason": "Clientes reales dan visión de calidad", "missingSkills": ["Cypress", "Postman", "Casos de prueba"] }
+      ]
+    }
+  },
+  {
+    "cv_text": "Egresado PUCP Ingeniería Informática. React, Node.js, PostgreSQL, TypeScript, Docker, Git. Practicante 6 meses en Rimac Seguros en transformación digital. Inglés B2.",
+    "extracted_skills": ["React", "Node.js", "PostgreSQL", "TypeScript", "Docker", "Git"],
+    "suggested_role": "Fullstack Developer Junior",
+    "matched_role": "Fullstack Developer Junior",
+    "match_percentage": 83,
+    "level": "Junior",
+    "target_role": "Backend Developer Mid",
+    "missing_skills": ["CI/CD", "AWS o Azure", "Testing automatizado"],
+    "roadmap_to_target": {
+      "target": "Backend Developer Mid",
+      "estimated_time": "12 meses",
+      "gap_skills": ["AWS basics (EC2, S3, RDS)", "CI/CD con GitHub Actions", "Jest + Supertest", "Redis", "Arquitectura limpia"],
+      "steps": [
+        { "month": 1, "action": "Obtener certificación AWS Cloud Practitioner (más fácil y reconocida)", "resource": "AWS Skill Builder - gratuito + examen $100" },
+        { "month": 2, "action": "Configurar pipeline CI/CD para tu proyecto Node.js con GitHub Actions", "resource": "GitHub Actions Docs - gratuito" },
+        { "month": 3, "action": "Agregar tests de integración con Jest + Supertest a tu API", "resource": "Node.js Testing - testingjavascript.com" },
+        { "month": 4, "action": "Implementar Redis para caché en tu API Node.js", "resource": "Redis Labs - redis.io/docs" },
+        { "month": 5, "action": "Refactorizar proyecto a Clean Architecture con repositorios y servicios", "resource": "Node.js Clean Architecture - Thiago Marinho GitHub" },
+        { "month": 6, "action": "Desplegar en AWS EC2 + RDS con tu pipeline CI/CD funcionando", "resource": "AWS Free Tier - 12 meses gratis" },
+        { "month": 12, "action": "Con certificación AWS + CI/CD + experiencia en Rimac ya clasificas como Backend Mid", "resource": "Empresas objetivo: Interbank Tech, BCP Labs, Yape" }
+      ],
+      "key_projects": ["API Node.js desplegada en AWS con CI/CD + Redis + tests 85%+ coverage", "Sistema con Clean Architecture documentado en GitHub"]
+    },
+    "full_result": {
+      "profileSummary": "PUCP con Rimac, a 12 meses de Backend Mid con certificación AWS.",
+      "skills": ["React", "Node.js", "PostgreSQL", "TypeScript", "Docker"],
+      "matchedJobs": [
+        { "title": "Fullstack Developer Junior", "matchPercentage": 83, "level": "Junior", "reason": "React + Node.js + PostgreSQL con Rimac es perfil muy sólido", "missingSkills": ["CI/CD", "AWS", "Testing"] },
+        { "title": "Frontend Developer Junior", "matchPercentage": 75, "level": "Junior", "reason": "React + TypeScript muy demandado en startups peruanas", "missingSkills": ["Next.js", "Redux", "Figma"] },
+        { "title": "Backend Developer Junior", "matchPercentage": 70, "level": "Junior", "reason": "Node.js + PostgreSQL + Docker es stack backend demandado", "missingSkills": ["Microservicios", "Redis", "AWS"] },
+        { "title": "DevOps Trainee", "matchPercentage": 45, "level": "Trainee", "reason": "Docker mencionado como inicio en infraestructura", "missingSkills": ["Kubernetes", "Terraform", "AWS completo"] },
+        { "title": "QA Tester Junior", "matchPercentage": 35, "level": "Trainee", "reason": "Experiencia en empresa grande da visión de calidad", "missingSkills": ["Selenium", "Cypress", "Postman"] }
+      ]
+    }
+  }
+]

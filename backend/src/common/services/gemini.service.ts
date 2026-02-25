@@ -29,7 +29,7 @@ export class GeminiService {
   private readonly key = process.env.GEMINI_API_KEY || '';
   private readonly model = process.env.GEMINI_MODEL || 'gemini-1.5-flash';
   private readonly debug = String(process.env.GEMINI_DEBUG || '').toLowerCase() === 'true';
-  private readonly fallbackModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
+  private readonly fallbackModels = ['gemini-1.5-flash', 'gemini-2.0-flash', 'gemini-flash-latest'];
 
   constructor() {
     if (this.debug) {
@@ -161,11 +161,18 @@ export class GeminiService {
     return this.callModel(prompt, maxOutputTokens, temperature, true);
   }
 
+  async generate(prompt: string): Promise<string> {
+    if (!this.key) return '';
+    const raw = await this.callModel(prompt, 1800, 0.45, false, true);
+    return String(raw || '');
+  }
+
   private async callModel(
     prompt: string,
     maxOutputTokens: number,
     temperature = 0.45,
     forceJson = false,
+    throwOnError = false,
   ): Promise<string | null> {
     const modelsToTry = [...new Set([this.model, ...this.fallbackModels])];
     let lastError: any = null;
@@ -202,6 +209,9 @@ export class GeminiService {
           }
           continue;
         }
+        if (throwOnError) {
+          throw error;
+        }
         break;
       }
     }
@@ -216,6 +226,9 @@ export class GeminiService {
       console.error(
         `[GeminiService] request failed status=${status || '-'} statusText=${statusText || '-'} message=${message}${detail ? ` detail=${detail}` : ''}`,
       );
+    }
+    if (throwOnError && lastError) {
+      throw lastError;
     }
     return null;
   }

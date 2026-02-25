@@ -1,5 +1,12 @@
 import { useMemo, useState } from 'react';
-import { exportPremiumPdf, generateApplication, generateCareerPathFromCv, getLearningResources, matchJobsByCv } from './api';
+import {
+  acceptSuggestedRole,
+  exportPremiumPdf,
+  generateApplication,
+  generateCareerPathFromCv,
+  getLearningResources,
+  matchJobsByCv,
+} from './api';
 import CareerPathRoadmap from './components/CareerPathRoadmap';
 
 const initial = {
@@ -48,6 +55,8 @@ export default function App() {
   const [careerError, setCareerError] = useState('');
   const [careerResult, setCareerResult] = useState(null);
   const [careerCvFile, setCareerCvFile] = useState(null);
+  const [acceptingSuggestion, setAcceptingSuggestion] = useState(false);
+  const [acceptSuggestionMessage, setAcceptSuggestionMessage] = useState('');
 
   const canExportPdf = useMemo(() => form.plan === 'premium' && result, [form.plan, result]);
 
@@ -135,6 +144,7 @@ export default function App() {
     setCareerLoading(true);
     setCareerError('');
     setCareerResult(null);
+    setAcceptSuggestionMessage('');
 
     try {
       const data = await generateCareerPathFromCv({
@@ -151,13 +161,49 @@ export default function App() {
     }
   };
 
+  const onAcceptSuggestion = async () => {
+    const analysisId = Number(careerResult?.analysisId || careerResult?.gemini?.analysisId || 0);
+    if (!analysisId) {
+      setAcceptSuggestionMessage('No se encontro analysisId para confirmar.');
+      return;
+    }
+
+    setAcceptingSuggestion(true);
+    setAcceptSuggestionMessage('');
+    try {
+      const data = await acceptSuggestedRole({ analysisId });
+      if (data?.accepted) {
+        setAcceptSuggestionMessage('Sugerencia aceptada y guardada para entrenamiento.');
+      } else {
+        setAcceptSuggestionMessage('No se pudo marcar como aceptada.');
+      }
+    } catch (err) {
+      setAcceptSuggestionMessage(err?.message || 'No se pudo aceptar la sugerencia.');
+    } finally {
+      setAcceptingSuggestion(false);
+    }
+  };
+
   const matchPercent = useMemo(() => {
     if (!careerResult) return 0;
+    const currentMatchScore = Number(careerResult?.currentMatch?.matchPercentage ?? careerResult?.gemini?.currentMatch?.matchPercentage);
+    if (Number.isFinite(currentMatchScore) && currentMatchScore > 0) {
+      return Math.max(0, Math.min(100, Math.round(currentMatchScore)));
+    }
     const market = (careerResult.marketSkills || []).length;
     const missing = (careerResult.missingSkills || []).length;
     if (!market) return 50;
     const score = Math.round(((market - missing) / market) * 100);
     return Math.max(0, Math.min(100, score));
+  }, [careerResult]);
+
+  const roadmapSteps = useMemo(() => {
+    if (!careerResult) return [];
+    const backendRoadmapSteps = careerResult?.roadmapToTarget?.steps;
+    if (Array.isArray(backendRoadmapSteps) && backendRoadmapSteps.length > 0) {
+      return backendRoadmapSteps;
+    }
+    return Array.isArray(careerResult.steps) ? careerResult.steps : [];
   }, [careerResult]);
 
   return (
@@ -408,16 +454,46 @@ export default function App() {
             {!careerResult && <p className="muted">Aqui veras tu roadmap tipo timeline con pasos accionables.</p>}
 
             {careerResult && (
-              <CareerPathRoadmap
-                currentRole="Perfil actual del CV"
-                targetRole={careerForm.targetRole}
-                matchPercent={matchPercent}
-                marketSkills={careerResult.marketSkills || []}
-                missingSkills={careerResult.missingSkills || []}
-                steps={careerResult.steps || []}
-                userLevel="junior"
-                onRequestResources={getLearningResources}
-              />
+              <>
+                <div className="mb-4 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm">
+                  <p>
+                    <strong>Rol sugerido:</strong>{' '}
+                    {careerResult?.currentMatch?.title || careerResult?.gemini?.suggestedRole || 'No disponible'}
+                  </p>
+                  <p>
+                    <strong>Rol de template usado:</strong> {careerResult?.matchedRole || 'No disponible'}
+                  </p>
+                  <p>
+                    <strong>Skills extraidas:</strong>{' '}
+                    {Array.isArray(careerResult?.cvSkills) && careerResult.cvSkills.length
+                      ? careerResult.cvSkills.join(', ')
+                      : Array.isArray(careerResult?.gemini?.skills) && careerResult.gemini.skills.length
+                        ? careerResult.gemini.skills.join(', ')
+                        : 'No detectadas'}
+                  </p>
+                  <p>
+                    <strong>CVs similares encontrados:</strong>{' '}
+                    {careerResult?.gemini?.similarCVsFound ?? careerResult?.similarCVsFound ?? 0}
+                  </p>
+                  <button disabled={acceptingSuggestion} onClick={onAcceptSuggestion} type="button">
+                    {acceptingSuggestion ? 'Aceptando...' : 'Aceptar sugerencia'}
+                  </button>
+                  {acceptSuggestionMessage && <p className="muted">{acceptSuggestionMessage}</p>}
+                </div>
+
+                <CareerPathRoadmap
+                  currentRole={
+                    careerResult?.currentMatch?.title || careerResult?.gemini?.suggestedRole || 'Perfil actual del CV'
+                  }
+                  targetRole={careerForm.targetRole}
+                  matchPercent={matchPercent}
+                  marketSkills={careerResult.marketSkills || []}
+                  missingSkills={careerResult.missingSkills || []}
+                  steps={roadmapSteps}
+                  userLevel="junior"
+                  onRequestResources={getLearningResources}
+                />
+              </>
             )}
           </article>
         </section>

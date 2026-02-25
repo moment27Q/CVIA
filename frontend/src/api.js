@@ -80,3 +80,17 @@ export async function getLearningResources(payload) {
   }
   return data;
 }
+
+export async function acceptSuggestedRole(payload) {
+  const res = await fetch(`${API_BASE}/api/recruiting/accept-suggested-role`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data?.message || 'Error al aceptar rol sugerido');
+  }
+  return data;
+}
