@@ -1294,7 +1294,242 @@
       "detected_seniority": "no_especificado",
       "description": "Buscar data science en Glassdoor (Peru). Glassdoor. Peru. data science data science data science practica",
       "processed_timestamp": "2026-02-26T03:59:24.397Z"
+    },
+    {
+      "title": "Buscar \"data analist\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20data%20analist%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data analist en Computrabajo (Peru). Computrabajo. Peru. data analist data analist data analist practica",
+      "processed_timestamp": "2026-02-26T04:49:15.669Z"
+    },
+    {
+      "title": "Buscar \"data analist\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=data%20analist&l=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data analist en Indeed (Peru). Indeed. Peru. data analist data analist data analist practica",
+      "processed_timestamp": "2026-02-26T04:49:15.672Z"
+    },
+    {
+      "title": "Buscar \"data analist\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20data%20analist%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data analist en Bumeran (Peru). Bumeran. Peru. data analist data analist data analist practica",
+      "processed_timestamp": "2026-02-26T04:49:15.672Z"
+    },
+    {
+      "title": "Buscar \"data analist\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=data%20analist&location=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data analist en LinkedIn (Peru). LinkedIn. Peru. data analist data analist data analist practica",
+      "processed_timestamp": "2026-02-26T04:49:15.673Z"
+    },
+    {
+      "title": "Buscar \"data analist\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=data%20analist&locT=C&locId=1",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data analist en Glassdoor (Peru). Glassdoor. Peru. data analist data analist data analist practica",
+      "processed_timestamp": "2026-02-26T04:49:15.673Z"
+    },
+    {
+      "title": "Buscar \"node\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20node%20Peru",
+      "skills_required": [
+        "Node.js",
+        "Python",
+        "SQL"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en Computrabajo (Peru). Computrabajo. Peru. node node node.js python sql",
+      "processed_timestamp": "2026-02-26T04:51:17.545Z"
+    },
+    {
+      "title": "Buscar \"node\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=node&l=Peru",
+      "skills_required": [
+        "Node.js",
+        "Python",
+        "SQL"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en Indeed (Peru). Indeed. Peru. node node node.js python sql",
+      "processed_timestamp": "2026-02-26T04:51:17.545Z"
+    },
+    {
+      "title": "Buscar \"node\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20node%20Peru",
+      "skills_required": [
+        "Node.js",
+        "Python",
+        "SQL"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en Bumeran (Peru). Bumeran. Peru. node node node.js python sql",
+      "processed_timestamp": "2026-02-26T04:51:17.545Z"
+    },
+    {
+      "title": "Buscar \"node\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=node&location=Peru",
+      "skills_required": [
+        "Node.js",
+        "Python",
+        "SQL"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en LinkedIn (Peru). LinkedIn. Peru. node node node.js python sql",
+      "processed_timestamp": "2026-02-26T04:51:17.546Z"
+    },
+    {
+      "title": "Buscar \"node\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=node&locT=C&locId=1",
+      "skills_required": [
+        "Node.js",
+        "Python",
+        "SQL"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en Glassdoor (Peru). Glassdoor. Peru. node node node.js python sql",
+      "processed_timestamp": "2026-02-26T04:51:17.546Z"
+    },
+    {
+      "title": "Buscar \"cientifico de datos junior\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20cientifico%20de%20datos%20junior%20Peru",
+      "skills_required": [
+        "Node.js",
+        "Python"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar cientifico de datos junior en Computrabajo (Peru). Computrabajo. Peru. cientifico de datos junior cientifico de datos junior node node.js python",
+      "processed_timestamp": "2026-02-26T04:51:17.549Z"
+    },
+    {
+      "title": "Buscar \"cientifico de datos junior\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=cientifico%20de%20datos%20junior&l=Peru",
+      "skills_required": [
+        "Node.js",
+        "Python"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar cientifico de datos junior en Indeed (Peru). Indeed. Peru. cientifico de datos junior cientifico de datos junior node node.js python",
+      "processed_timestamp": "2026-02-26T04:51:17.549Z"
+    },
+    {
+      "title": "Buscar \"cientifico de datos junior\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20cientifico%20de%20datos%20junior%20Peru",
+      "skills_required": [
+        "Node.js",
+        "Python"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar cientifico de datos junior en Bumeran (Peru). Bumeran. Peru. cientifico de datos junior cientifico de datos junior node node.js python",
+      "processed_timestamp": "2026-02-26T04:51:17.550Z"
+    },
+    {
+      "title": "Buscar \"cientifico de datos junior\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=cientifico%20de%20datos%20junior&location=Peru",
+      "skills_required": [
+        "Node.js",
+        "Python"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar cientifico de datos junior en LinkedIn (Peru). LinkedIn. Peru. cientifico de datos junior cientifico de datos junior node node.js python",
+      "processed_timestamp": "2026-02-26T04:51:17.551Z"
+    },
+    {
+      "title": "Buscar \"cientifico de datos junior\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=cientifico%20de%20datos%20junior&locT=C&locId=1",
+      "skills_required": [
+        "Node.js",
+        "Python"
+      ],
+      "extracted_stack": [
+        "Node.js"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar cientifico de datos junior en Glassdoor (Peru). Glassdoor. Peru. cientifico de datos junior cientifico de datos junior node node.js python",
+      "processed_timestamp": "2026-02-26T04:51:17.551Z"
     }
   ],
-  "updatedAt": "2026-02-26T03:59:25.619Z"
+  "updatedAt": "2026-02-26T04:51:19.215Z"
 }

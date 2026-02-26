@@ -333,31 +333,16 @@ export class RecruitingService {
       ]);
       const initialCoverage = this.computeTemplateCoverage(fastCvSkills, initialRag.coreSkills, initialRag.optionalSkills);
       const bestBySkills = await this.ragService.findBestCareerPathTemplateBySkills({
-        targetRole: fallbackTargetRole,
+        targetRole: '',
         cvSkills: fastCvSkills,
       });
 
-      const useBestBySkills =
-        !!bestBySkills &&
-        ((bestBySkills.score || 0) > 0 && (initialCoverage < 45 || this.isGenericTargetRole(fallbackTargetRole)));
+      const useBestBySkills = !!bestBySkills && (bestBySkills.score || 0) > 0;
       const rag = useBestBySkills ? bestBySkills : initialRag;
       console.log(`Matched role: ${rag.matchedRole}`);
 
       let coreSkills = this.normalizeSkillList(rag.coreSkills);
       let optionalSkills = this.normalizeSkillList(rag.optionalSkills);
-      const targetNormalized = this.normalize(fallbackTargetRole);
-      const matchedNormalized = this.normalize(rag.matchedRole || '');
-      const ragLooksAligned =
-        !!targetNormalized &&
-        !!matchedNormalized &&
-        (matchedNormalized.includes(targetNormalized) || targetNormalized.includes(matchedNormalized));
-      if (!ragLooksAligned) {
-        const fallbackRoleSkills = this.getFallbackRoleSkills(fallbackTargetRole);
-        if (fallbackRoleSkills) {
-          coreSkills = this.normalizeSkillList(fallbackRoleSkills.coreSkills);
-          optionalSkills = this.normalizeSkillList(fallbackRoleSkills.optionalSkills);
-        }
-      }
       const cvSkills = [
         ...new Set([
           ...this.normalizeSkillList(geminiResult.skills || []),
@@ -370,6 +355,26 @@ export class RecruitingService {
       const missingOptional = optionalSkills.filter((skill) => !cvSkills.includes(skill));
       const prioritizedMissingSkills = missingCore;
       const suggestedMatchScore = this.computeTemplateCoverage(cvSkills, coreSkills, optionalSkills);
+
+      let targetRoleTemplate = rag;
+      try {
+        targetRoleTemplate = await this.ragService.getCareerPathRagByRole(fallbackTargetRole);
+      } catch {
+        // Keep current matched template when target role has no explicit template in DB.
+      }
+      const targetRoleCoreSkills = this.normalizeSkillList(targetRoleTemplate.coreSkills || []);
+      const targetRoleOptionalSkills = this.normalizeSkillList(targetRoleTemplate.optionalSkills || []);
+      const targetRoleMissingCore = targetRoleCoreSkills.filter((skill) => !cvSkills.includes(skill));
+      const targetRoleMissingOptional = targetRoleOptionalSkills.filter((skill) => !cvSkills.includes(skill));
+      const targetRoleMissingSkills = [
+        ...targetRoleMissingCore,
+        ...targetRoleMissingOptional.filter((skill) => !targetRoleMissingCore.includes(skill)),
+      ];
+      const targetRoleMatchScore = this.computeTemplateCoverage(
+        cvSkills,
+        targetRoleCoreSkills,
+        targetRoleOptionalSkills,
+      );
 
       const fallbackSteps = prioritizedMissingSkills.map((skill, idx) => ({
         month: idx + 1,
@@ -421,6 +426,11 @@ export class RecruitingService {
         cvSkills,
         missingSkills: prioritizedMissingSkills,
         missingOptionalSkills: missingOptional,
+        targetRoleTemplateUsed: targetRoleTemplate.matchedRole,
+        targetRoleMatchScore,
+        targetRoleMissingSkills: targetRoleMissingSkills.slice(0, 16),
+        targetRoleMissingCoreSkills: targetRoleMissingCore.slice(0, 16),
+        targetRoleMissingOptionalSkills: targetRoleMissingOptional.slice(0, 16),
         summary,
         estimatedMonths,
         steps: roadmapSteps,

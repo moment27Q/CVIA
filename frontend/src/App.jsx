@@ -188,6 +188,10 @@ export default function App() {
 
   const matchPercent = useMemo(() => {
     if (!careerResult) return 0;
+    const targetRoleScore = Number(careerResult?.targetRoleMatchScore);
+    if (Number.isFinite(targetRoleScore) && targetRoleScore > 0) {
+      return Math.max(0, Math.min(100, Math.round(targetRoleScore)));
+    }
     const currentMatchScore = Number(careerResult?.currentMatch?.matchPercentage ?? careerResult?.gemini?.currentMatch?.matchPercentage);
     if (Number.isFinite(currentMatchScore) && currentMatchScore > 0) {
       return Math.max(0, Math.min(100, Math.round(currentMatchScore)));
@@ -604,6 +608,12 @@ export default function App() {
                     <strong>CVs similares encontrados:</strong>{' '}
                     {careerResult?.gemini?.similarCVsFound ?? careerResult?.similarCVsFound ?? 0}
                   </p>
+                  <p>
+                    <strong>Te falta para el rol objetivo:</strong>{' '}
+                    {Array.isArray(careerResult?.targetRoleMissingSkills) && careerResult.targetRoleMissingSkills.length
+                      ? careerResult.targetRoleMissingSkills.slice(0, 8).join(', ')
+                      : 'No se detectaron brechas claras para el rol objetivo.'}
+                  </p>
                   <button disabled={acceptingSuggestion} onClick={onAcceptSuggestion} type="button">
                     {acceptingSuggestion ? 'Aceptando...' : 'Aceptar sugerencia'}
                   </button>
@@ -621,7 +631,7 @@ export default function App() {
                   targetRole={careerForm.targetRole}
                   matchPercent={matchPercent}
                   marketSkills={careerResult.marketSkills || []}
-                  missingSkills={careerResult.missingSkills || []}
+                  missingSkills={careerResult.targetRoleMissingSkills || careerResult.missingSkills || []}
                   steps={roadmapSteps}
                   userLevel="junior"
                   onRequestResources={getLearningResources}
