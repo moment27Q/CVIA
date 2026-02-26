@@ -69,6 +69,7 @@ export interface CareerPathRagMatch {
   coreSkills: string[];
   optionalSkills: string[];
   careerGoal: string;
+  score?: number;
 }
 
 @Injectable()
@@ -288,6 +289,78 @@ export class RecruitingRagService {
       optionalSkills,
       careerGoal,
     };
+  }
+
+  async findBestCareerPathTemplateBySkills(input: {
+    targetRole: string;
+    cvSkills: string[];
+  }): Promise<CareerPathRagMatch | null> {
+    if (!this.hasPgConfig) {
+      return null;
+    }
+
+    const rows = await this.query(
+      `SELECT ref_id, content, metadata
+       FROM recruiting_case_vectors
+       WHERE case_type = 'career_path_template'
+       ORDER BY created_at DESC
+       LIMIT 1500`,
+      [],
+    );
+
+    if (!rows.rows.length) return null;
+
+    const normalizedTarget = this.normalize(String(input.targetRole || ''));
+    const normalizedCvSkills = [...new Set((input.cvSkills || []).map((s) => this.normalize(String(s))).filter(Boolean))];
+    if (!normalizedCvSkills.length && !normalizedTarget) return null;
+
+    const ranked = rows.rows
+      .map((row: any) => {
+        const metadata = (row.metadata || {}) as Record<string, unknown>;
+        const role = String(metadata.role || row.ref_id || '').trim();
+        const goal = String(metadata.career_goal || '').trim();
+        const coreSkills = Array.isArray(metadata.core_skills)
+          ? metadata.core_skills.map((x: unknown) => String(x)).filter(Boolean)
+          : [];
+        const optionalSkills = Array.isArray(metadata.optional_skills)
+          ? metadata.optional_skills.map((x: unknown) => String(x)).filter(Boolean)
+          : [];
+
+        const normalizedCore = [...new Set(coreSkills.map((s) => this.normalize(s)).filter(Boolean))];
+        const normalizedOptional = [...new Set(optionalSkills.map((s) => this.normalize(s)).filter(Boolean))];
+        const weightedTotal = normalizedCore.length + normalizedOptional.length * 0.5;
+        let weightedHits = 0;
+
+        for (const skill of normalizedCore) {
+          if (normalizedCvSkills.some((cv) => cv === skill || cv.includes(skill) || skill.includes(cv))) {
+            weightedHits += 1;
+          }
+        }
+        for (const skill of normalizedOptional) {
+          if (normalizedCvSkills.some((cv) => cv === skill || cv.includes(skill) || skill.includes(cv))) {
+            weightedHits += 0.5;
+          }
+        }
+
+        const skillsScore = weightedTotal > 0 ? weightedHits / weightedTotal : 0;
+        const roleText = this.normalize(`${role} ${goal} ${row.ref_id || ''}`);
+        const roleScore = normalizedTarget ? this.tokenScore(normalizedTarget, roleText) : 0;
+        const exactRoleBonus = normalizedTarget && roleText.includes(normalizedTarget) ? 0.15 : 0;
+        const score = skillsScore * 0.75 + roleScore * 0.25 + exactRoleBonus;
+
+        return {
+          refId: String(row.ref_id || ''),
+          matchedRole: role,
+          content: String(row.content || ''),
+          coreSkills,
+          optionalSkills,
+          careerGoal: goal,
+          score,
+        } as CareerPathRagMatch;
+      })
+      .sort((a, b) => (b.score || 0) - (a.score || 0));
+
+    return ranked[0] || null;
   }
 
   async saveCareerPathResultOnly(input: {

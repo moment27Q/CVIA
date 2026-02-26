@@ -456,10 +456,19 @@ export default function App() {
             {careerResult && (
               <>
                 <div className="mb-4 rounded-xl border border-slate-200 bg-slate-50 p-3 text-sm">
-                  <p>
-                    <strong>Rol sugerido:</strong>{' '}
-                    {careerResult?.currentMatch?.title || careerResult?.gemini?.suggestedRole || 'No disponible'}
-                  </p>
+                  {(() => {
+                    const finalSuggestedRole =
+                      careerResult?.suggestedRole ||
+                      careerResult?.matchedRole ||
+                      careerResult?.currentMatch?.title ||
+                      careerResult?.gemini?.suggestedRole ||
+                      'No disponible';
+                    return (
+                      <p>
+                        <strong>Rol sugerido:</strong> {finalSuggestedRole}
+                      </p>
+                    );
+                  })()}
                   <p>
                     <strong>Rol de template usado:</strong> {careerResult?.matchedRole || 'No disponible'}
                   </p>
@@ -483,7 +492,11 @@ export default function App() {
 
                 <CareerPathRoadmap
                   currentRole={
-                    careerResult?.currentMatch?.title || careerResult?.gemini?.suggestedRole || 'Perfil actual del CV'
+                    careerResult?.suggestedRole ||
+                    careerResult?.matchedRole ||
+                    careerResult?.currentMatch?.title ||
+                    careerResult?.gemini?.suggestedRole ||
+                    'Perfil actual del CV'
                   }
                   targetRole={careerForm.targetRole}
                   matchPercent={matchPercent}

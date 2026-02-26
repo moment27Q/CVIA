@@ -325,7 +325,22 @@ export class RecruitingService {
       console.log(`Similar CVs found in history: ${geminiResult.similarCVsFound}`);
 
       const roleToSearch = String(fallbackTargetRole || geminiResult.suggestedRole || 'Software Developer');
-      const rag = await this.ragService.getCareerPathRagByRole(roleToSearch);
+      const initialRag = await this.ragService.getCareerPathRagByRole(roleToSearch);
+
+      const fastCvSkills = this.normalizeSkillList([
+        ...(geminiResult.skills || []),
+        ...this.matchCvSkillsByCatalogNormalized(normalizedCv, this.knownCvSkills),
+      ]);
+      const initialCoverage = this.computeTemplateCoverage(fastCvSkills, initialRag.coreSkills, initialRag.optionalSkills);
+      const bestBySkills = await this.ragService.findBestCareerPathTemplateBySkills({
+        targetRole: fallbackTargetRole,
+        cvSkills: fastCvSkills,
+      });
+
+      const useBestBySkills =
+        !!bestBySkills &&
+        ((bestBySkills.score || 0) > 0 && (initialCoverage < 45 || this.isGenericTargetRole(fallbackTargetRole)));
+      const rag = useBestBySkills ? bestBySkills : initialRag;
       console.log(`Matched role: ${rag.matchedRole}`);
 
       let coreSkills = this.normalizeSkillList(rag.coreSkills);
@@ -354,6 +369,7 @@ export class RecruitingService {
       const missingCore = coreSkills.filter((skill) => !cvSkills.includes(skill));
       const missingOptional = optionalSkills.filter((skill) => !cvSkills.includes(skill));
       const prioritizedMissingSkills = missingCore;
+      const suggestedMatchScore = this.computeTemplateCoverage(cvSkills, coreSkills, optionalSkills);
 
       const fallbackSteps = prioritizedMissingSkills.map((skill, idx) => ({
         month: idx + 1,
@@ -410,8 +426,25 @@ export class RecruitingService {
         steps: roadmapSteps,
         careerGoal: rag.careerGoal || roleToSearch,
         roadmapToTarget: geminiResult.roadmapToTarget ?? null,
-        currentMatch: geminiResult.currentMatch,
-        gemini: geminiResult,
+        currentMatch: {
+          title: rag.matchedRole,
+          matchPercentage: suggestedMatchScore,
+          level: this.detectLevelFromTitle(rag.matchedRole),
+          reason:
+            suggestedMatchScore >= 70
+              ? 'Rol sugerido por alta similitud de skills entre CV y templates entrenados.'
+              : 'Rol sugerido por similitud parcial con templates entrenados.',
+        },
+        suggestedRole: rag.matchedRole,
+        gemini: {
+          ...geminiResult,
+          suggestedRole: rag.matchedRole,
+          currentMatch: {
+            ...(geminiResult.currentMatch || {}),
+            title: rag.matchedRole,
+            matchPercentage: suggestedMatchScore,
+          },
+        },
       };
     } catch (error) {
       console.error('generateCareerPathFromCv failed, using fallback response', error);
@@ -1620,6 +1653,44 @@ export class RecruitingService {
     }
 
     return missingSkills[0] || 'proyectos de impacto y portafolio';
+  }
+
+  private computeTemplateCoverage(cvSkills: string[], coreSkills: string[], optionalSkills: string[]): number {
+    const cv = new Set(this.normalizeSkillList(cvSkills || []));
+    const core = this.normalizeSkillList(coreSkills || []);
+    const optional = this.normalizeSkillList(optionalSkills || []);
+    const weightedTotal = core.length + optional.length * 0.5;
+    if (!weightedTotal) return 50;
+
+    let weightedHits = 0;
+    for (const skill of core) {
+      if ([...cv].some((x) => x === skill || x.includes(skill) || skill.includes(x))) weightedHits += 1;
+    }
+    for (const skill of optional) {
+      if ([...cv].some((x) => x === skill || x.includes(skill) || skill.includes(x))) weightedHits += 0.5;
+    }
+    return Math.max(0, Math.min(100, Math.round((weightedHits / weightedTotal) * 100)));
+  }
+
+  private isGenericTargetRole(role: string): boolean {
+    const normalized = this.normalize(role);
+    if (!normalized) return true;
+    const genericMarkers = [
+      'especialista ti',
+      'ti',
+      'it specialist',
+      'informatica',
+      'sistemas',
+      'tecnologia',
+      'technology',
+      'developer',
+      'programador',
+      'desarrollador',
+    ];
+    return genericMarkers.some((marker) => {
+      const m = this.normalize(marker);
+      return normalized === m || normalized.startsWith(`${m} `) || normalized.endsWith(` ${m}`) || normalized.includes(m);
+    });
   }
 
   private parseLearningResources(raw: string | null, skillName: string) {
