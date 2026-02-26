@@ -1234,7 +1234,67 @@
       "detected_seniority": "junior",
       "description": "Buscar frontend developer junior en Glassdoor (Peru). Glassdoor. Peru. frontend developer junior frontend developer junior git html css",
       "processed_timestamp": "2026-02-26T03:37:09.006Z"
+    },
+    {
+      "title": "Buscar \"data science\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20data%20science%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data science en Computrabajo (Peru). Computrabajo. Peru. data science data science data science practica",
+      "processed_timestamp": "2026-02-26T03:59:24.396Z"
+    },
+    {
+      "title": "Buscar \"data science\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=data%20science&l=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data science en Indeed (Peru). Indeed. Peru. data science data science data science practica",
+      "processed_timestamp": "2026-02-26T03:59:24.396Z"
+    },
+    {
+      "title": "Buscar \"data science\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20data%20science%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data science en Bumeran (Peru). Bumeran. Peru. data science data science data science practica",
+      "processed_timestamp": "2026-02-26T03:59:24.396Z"
+    },
+    {
+      "title": "Buscar \"data science\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=data%20science&location=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data science en LinkedIn (Peru). LinkedIn. Peru. data science data science data science practica",
+      "processed_timestamp": "2026-02-26T03:59:24.397Z"
+    },
+    {
+      "title": "Buscar \"data science\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=data%20science&locT=C&locId=1",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar data science en Glassdoor (Peru). Glassdoor. Peru. data science data science data science practica",
+      "processed_timestamp": "2026-02-26T03:59:24.397Z"
     }
   ],
-  "updatedAt": "2026-02-26T03:37:10.390Z"
+  "updatedAt": "2026-02-26T03:59:25.619Z"
 }

@@ -220,18 +220,38 @@ export default function App() {
       ? jobsResult.employabilityAnalysis.ranked_jobs
       : [];
     const buckets = jobsResult?.employabilityAnalysis?.recommendation_buckets || {};
+    const isPlaceholder = (title) => /^buscar\s+["'`]/i.test(String(title || '').trim());
+    const roleTokens = String(cvForm?.desiredRole || '')
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .split(/\s+/)
+      .filter((x) => x && x.length >= 3);
+
     const bestSkillMatchJobs = Array.isArray(buckets.best_skill_match_jobs) && buckets.best_skill_match_jobs.length
       ? buckets.best_skill_match_jobs
       : rankedJobs.slice(0, 10);
     const targetRoleMatchJobs = Array.isArray(buckets.target_role_match_jobs) && buckets.target_role_match_jobs.length
       ? buckets.target_role_match_jobs
-      : rankedJobs.slice(0, 10);
+      : (() => {
+          const byRole = rankedJobs.filter((job) => {
+            if (!roleTokens.length) return true;
+            const haystack = `${job?.title || ''} ${job?.company || ''}`
+              .toLowerCase()
+              .normalize('NFD')
+              .replace(/[\u0300-\u036f]/g, '');
+            return roleTokens.some((token) => haystack.includes(token));
+          });
+          const real = byRole.filter((job) => !isPlaceholder(job?.title)).slice(0, 10);
+          if (real.length) return real;
+          return byRole.filter((job) => isPlaceholder(job?.title)).slice(0, 10);
+        })();
 
     return {
       bestSkillMatchJobs,
       targetRoleMatchJobs,
     };
-  }, [jobsResult]);
+  }, [jobsResult, cvForm?.desiredRole]);
 
   return (
     <main className="page">
@@ -472,6 +492,7 @@ export default function App() {
                   <>
                     <h3>Trabajos alineados a tu rol objetivo</h3>
                     <p className="muted">Rol objetivo usado: {cvForm.desiredRole || 'No especificado'}</p>
+                    <p className="muted">Ordenado de mayor probabilidad de aceptacion hacia puestos con mayor experiencia requerida.</p>
                     {!jobBuckets.targetRoleMatchJobs.length && <p className="muted">Sin resultados alineados al rol objetivo.</p>}
                     <div className="jobs-list">
                       {jobBuckets.targetRoleMatchJobs.map((job, idx) => (
@@ -482,6 +503,9 @@ export default function App() {
                           </p>
                           <p>
                             <strong>Compatibilidad:</strong> {job.compatibility_score}% | <strong>Nivel:</strong> {job.match_level}
+                          </p>
+                          <p className="muted">
+                            <strong>Experiencia requerida:</strong> {job.required_experience || 'unknown'}
                           </p>
                           <p className="muted">{job.reason}</p>
                           {job.source_url && (

@@ -34,6 +34,7 @@ export interface RankedJobRow {
   location?: string;
   source?: string;
   source_url?: string;
+  required_experience?: 'junior' | 'mid' | 'senior' | 'unknown';
   compatibility_score: number;
   match_level: 'Alto' | 'Medio' | 'Bajo';
   matching_skills: string[];
@@ -232,6 +233,18 @@ export class JobService {
       experienceProfile,
       learningProfile,
     );
+    let targetRoleSearch: JobSearchResult = { jobs: [], providers: [] };
+    if (desiredRole) {
+      const targetRoleKeywords = this.extractRoleSearchKeywords(desiredRole);
+      targetRoleSearch = await this.jobSearchService.searchPublicJobs(
+        targetRoleKeywords,
+        dto.location,
+        dto.country,
+        desiredRole,
+        experienceProfile,
+        learningProfile,
+      );
+    }
     let roleDrivenSearch: JobSearchResult = { jobs: [], providers: [] };
     if (bestFitRolePreview?.role) {
       roleDrivenSearch = await this.jobSearchService.searchPublicJobs(
@@ -244,7 +257,11 @@ export class JobService {
       );
     }
 
-    const uniqueJobs = this.dedupeJobs([...(primarySearch.jobs || []), ...(roleDrivenSearch.jobs || [])]);
+    const uniqueJobs = this.dedupeJobs([
+      ...(primarySearch.jobs || []),
+      ...(targetRoleSearch.jobs || []),
+      ...(roleDrivenSearch.jobs || []),
+    ]);
     await this.searchMemoryService.learnFromResults(country, experienceProfile.level, keywords, uniqueJobs);
     const storedJobsDataset = await this.readStoredJobsDataset();
     const analysis = await this.buildEmployabilityAnalysis({
@@ -269,6 +286,10 @@ export class JobService {
     const region = dto.country?.trim() || dto.location?.trim() || 'tu pais';
     const providerStatus = [
       ...(primarySearch.providers || []),
+      ...((targetRoleSearch.providers || []).map((p) => ({
+        ...p,
+        provider: `${p.provider} (target role)`,
+      })) as any[]),
       ...((roleDrivenSearch.providers || []).map((p) => ({
         ...p,
         provider: `${p.provider} (best-fit role)`,
@@ -478,6 +499,7 @@ export class JobService {
           location: job.location,
           source: job.source,
           source_url: job.source_url,
+          required_experience: this.normalizeExperienceLabel(job.detected_seniority),
           compatibility_score: Math.max(0, Math.min(100, score)),
           match_level: level,
           matching_skills: matching.slice(0, 10),
@@ -602,6 +624,7 @@ export class JobService {
               location: String(row?.location || '').slice(0, 120),
               source: String(row?.source || '').slice(0, 80),
               source_url: String(row?.source_url || '').slice(0, 500),
+              required_experience: this.normalizeExperienceLabel(String(row?.required_experience || row?.detected_seniority || 'unknown')),
               skills_required: Array.isArray(row?.skills_required)
                 ? row.skills_required.map((x: unknown) => String(x)).slice(0, 20)
                 : [],
@@ -624,7 +647,7 @@ export class JobService {
     const ranked = this.dedupeRankedJobs(rankedJobs).slice(0, 120);
 
     const bestSkillMatch = ranked.filter((x) => x.match_level !== 'Bajo').slice(0, 10);
-    const roleAligned = ranked
+    const roleAlignedCandidates = ranked
       .map((job) => {
         const titleNorm = this.normalize(job.title);
         const companyNorm = this.normalize(job.company);
@@ -632,20 +655,31 @@ export class JobService {
         const overlap = targetTokens.length
           ? targetTokens.filter((token) => haystack.includes(token)).length / targetTokens.length
           : 0;
-        const levelBonus =
-          job.match_level === 'Alto' ? 10 : job.match_level === 'Medio' ? 4 : -8;
-        const blendedScore = job.compatibility_score * 0.75 + overlap * 100 * 0.25 + levelBonus;
+        const levelBonus = job.match_level === 'Alto' ? 10 : job.match_level === 'Medio' ? 4 : -8;
+        const experiencePenalty = this.getExperiencePenalty(job.required_experience);
+        const blendedScore = job.compatibility_score * 0.75 + overlap * 100 * 0.25 + levelBonus - experiencePenalty;
         const isPlaceholder = this.isPortalSearchPlaceholder(job.title);
-        return { job, blendedScore, overlap, isPlaceholder };
+        return { job, blendedScore, overlap, isPlaceholder, experiencePenalty };
       })
       .filter((row) => (normalizedTarget ? row.overlap > 0 : true))
+      .sort((a, b) => {
+        if (b.blendedScore !== a.blendedScore) return b.blendedScore - a.blendedScore;
+        return a.experiencePenalty - b.experiencePenalty;
+      });
+
+    const roleAlignedReal = roleAlignedCandidates
       .filter((row) => !row.isPlaceholder)
-      .sort((a, b) => b.blendedScore - a.blendedScore)
+      .slice(0, 10)
+      .map((row) => row.job);
+    const roleAlignedFallbackPlaceholders = roleAlignedCandidates
+      .filter((row) => row.isPlaceholder)
       .slice(0, 10)
       .map((row) => row.job);
 
-    const fallbackRoleAligned = roleAligned.length
-      ? roleAligned
+    const fallbackRoleAligned = roleAlignedReal.length
+      ? roleAlignedReal
+      : roleAlignedFallbackPlaceholders.length
+        ? roleAlignedFallbackPlaceholders
       : ranked
           .filter((x) => !this.isPortalSearchPlaceholder(x.title))
           .filter((x) => x.match_level !== 'Bajo')
@@ -659,6 +693,35 @@ export class JobService {
 
   private isPortalSearchPlaceholder(title: string): boolean {
     return /^buscar\s+["'`]/i.test(String(title || '').trim());
+  }
+
+  private extractRoleSearchKeywords(role: string): string[] {
+    const normalized = this.normalize(role);
+    const stop = new Set(['de', 'del', 'la', 'el', 'en', 'para', 'y', 'con']);
+    const tokens = normalized
+      .split(' ')
+      .map((x) => x.trim())
+      .filter((x) => x.length >= 3 && !stop.has(x));
+
+    const compactRole = normalized.replace(/\s+/g, ' ').trim();
+    return [...new Set([compactRole, ...tokens])].slice(0, 8);
+  }
+
+  private normalizeExperienceLabel(value: string): 'junior' | 'mid' | 'senior' | 'unknown' {
+    const normalized = this.normalize(String(value || ''));
+    if (!normalized) return 'unknown';
+    if (/\b(practicante|practica|intern|trainee|junior|entry)\b/.test(normalized)) return 'junior';
+    if (/\b(semi senior|semisenior|ssr|mid|intermedio)\b/.test(normalized)) return 'mid';
+    if (/\b(senior|lead|principal|arquitecto|manager|jefe|head)\b/.test(normalized)) return 'senior';
+    return 'unknown';
+  }
+
+  private getExperiencePenalty(level?: string): number {
+    const normalized = this.normalizeExperienceLabel(String(level || 'unknown'));
+    if (normalized === 'junior') return 0;
+    if (normalized === 'mid') return 8;
+    if (normalized === 'senior') return 16;
+    return 5;
   }
 
   private buildProcessedJobsOutput(jobs: MatchedJob[]): ProcessedJobsOutput {

@@ -13,7 +13,7 @@
         "html5": 2,
         "css3": 2,
         "interfaces": 2,
-        "html": 4,
+        "html": 6,
         "python": 6
       },
       "sourceWeights": {
@@ -24,8 +24,8 @@
         "glassdoor": 8,
         "theirstack": 8
       },
-      "updates": 21,
-      "updatedAt": "2026-02-26T03:37:08.999Z"
+      "updates": 26,
+      "updatedAt": "2026-02-26T03:59:24.389Z"
     },
     "united states|intern": {
       "keywordWeights": {
