@@ -1,0 +1,359 @@
+[
+  {
+    "role": "Frontend Developer Junior",
+    "target_country": "Perú",
+    "required_skills": ["HTML", "CSS", "JavaScript", "React", "Git"],
+    "nice_to_have": ["TypeScript", "Figma", "Tailwind CSS"],
+    "career_goal": "Frontend Developer Semi Senior"
+  },
+  {
+    "role": "Data Analyst Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "SQL", "Excel", "Power BI", "Estadística básica"],
+    "nice_to_have": ["Tableau", "Google Data Studio", "DAX"],
+    "career_goal": "Data Analyst Semi Senior"
+  },
+  {
+    "role": "DevOps Engineer Junior",
+    "target_country": "Perú",
+    "required_skills": ["Linux", "Docker", "Git", "CI/CD", "AWS básico"],
+    "nice_to_have": ["Kubernetes", "Terraform", "Jenkins"],
+    "career_goal": "DevOps Engineer Semi Senior"
+  },
+  {
+    "role": "QA Engineer Junior",
+    "target_country": "Perú",
+    "required_skills": ["Testing manual", "Casos de prueba", "Postman", "SQL", "Jira"],
+    "nice_to_have": ["Selenium", "Cypress", "Automatización de pruebas"],
+    "career_goal": "QA Engineer Semi Senior"
+  },
+  {
+    "role": "Mobile Developer Junior (Android)",
+    "target_country": "Perú",
+    "required_skills": ["Kotlin", "Android Studio", "REST APIs", "Git", "XML Layouts"],
+    "nice_to_have": ["Jetpack Compose", "Firebase", "MVVM"],
+    "career_goal": "Mobile Developer Semi Senior"
+  },
+  {
+    "role": "Mobile Developer Junior (iOS)",
+    "target_country": "Perú",
+    "required_skills": ["Swift", "Xcode", "UIKit", "REST APIs", "Git"],
+    "nice_to_have": ["SwiftUI", "CoreData", "Firebase"],
+    "career_goal": "Mobile Developer Semi Senior"
+  },
+  {
+    "role": "Data Engineer Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "SQL", "ETL", "AWS S3", "Pandas"],
+    "nice_to_have": ["Apache Spark", "Airflow", "Redshift"],
+    "career_goal": "Data Engineer Semi Senior"
+  },
+  {
+    "role": "Cloud Engineer Junior",
+    "target_country": "Perú",
+    "required_skills": ["AWS", "Linux", "Redes básicas", "Docker", "IAM"],
+    "nice_to_have": ["Azure", "GCP", "Terraform"],
+    "career_goal": "Cloud Engineer Semi Senior"
+  },
+  {
+    "role": "Fullstack Developer Junior",
+    "target_country": "Perú",
+    "required_skills": ["React", "Node.js", "SQL", "REST APIs", "Git"],
+    "nice_to_have": ["TypeScript", "Docker", "GraphQL"],
+    "career_goal": "Fullstack Developer Semi Senior"
+  },
+  {
+    "role": "Machine Learning Engineer Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "scikit-learn", "Pandas", "NumPy", "SQL"],
+    "nice_to_have": ["TensorFlow", "PyTorch", "MLflow"],
+    "career_goal": "Machine Learning Engineer Semi Senior"
+  },
+  {
+    "role": "Analista de Sistemas Junior",
+    "target_country": "Perú",
+    "required_skills": ["Levantamiento de requerimientos", "UML", "SQL", "Excel", "Jira"],
+    "nice_to_have": ["BPMN", "Power BI", "Confluence"],
+    "career_goal": "Analista de Sistemas Senior"
+  },
+  {
+    "role": "Desarrollador PHP Junior",
+    "target_country": "Perú",
+    "required_skills": ["PHP", "Laravel", "MySQL", "HTML/CSS", "REST APIs"],
+    "nice_to_have": ["Vue.js", "Docker", "Redis"],
+    "career_goal": "Desarrollador PHP Semi Senior"
+  },
+  {
+    "role": "Desarrollador Java Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java", "Spring Boot", "SQL", "REST APIs", "Maven"],
+    "nice_to_have": ["Microservicios", "Docker", "Kafka"],
+    "career_goal": "Desarrollador Java Semi Senior"
+  },
+  {
+    "role": "Desarrollador Python Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "Django o FastAPI", "SQL", "REST APIs", "Git"],
+    "nice_to_have": ["Celery", "Docker", "Redis"],
+    "career_goal": "Desarrollador Python Semi Senior"
+  },
+  {
+    "role": "Scrum Master Junior",
+    "target_country": "Perú",
+    "required_skills": ["Metodologías ágiles", "Scrum", "Jira", "Facilitación", "Gestión de impedimentos"],
+    "nice_to_have": ["Certificación PSM I", "Kanban", "Confluence"],
+    "career_goal": "Scrum Master Senior"
+  },
+  {
+    "role": "Product Owner Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión de backlog", "User stories", "Jira", "Análisis de negocio", "Comunicación con stakeholders"],
+    "nice_to_have": ["OKRs", "Roadmapping", "Figma"],
+    "career_goal": "Product Owner Senior"
+  },
+  {
+    "role": "UI/UX Designer Junior",
+    "target_country": "Perú",
+    "required_skills": ["Figma", "Diseño de wireframes", "Prototipado", "UX Research básico", "Design Systems"],
+    "nice_to_have": ["Adobe XD", "Illustrator", "Animación en Figma"],
+    "career_goal": "UI/UX Designer Senior"
+  },
+  {
+    "role": "Ciberseguridad Analista Junior",
+    "target_country": "Perú",
+    "required_skills": ["Redes TCP/IP", "Linux", "SIEM básico", "Análisis de logs", "OWASP Top 10"],
+    "nice_to_have": ["CEH", "Splunk", "Pentesting básico"],
+    "career_goal": "Analista de Ciberseguridad Semi Senior"
+  },
+  {
+    "role": "Administrador de Base de Datos Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL Server", "MySQL", "Backup y restauración", "Optimización de queries", "PL/SQL"],
+    "nice_to_have": ["PostgreSQL", "MongoDB", "Performance Tuning"],
+    "career_goal": "DBA Senior"
+  },
+  {
+    "role": "Soporte TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Soporte técnico", "Windows Server", "Active Directory", "Redes LAN/WAN", "Ticketing"],
+    "nice_to_have": ["ITIL Foundation", "PowerShell", "Office 365 Admin"],
+    "career_goal": "Especialista en Infraestructura TI"
+  },
+  {
+    "role": "Desarrollador .NET Junior",
+    "target_country": "Perú",
+    "required_skills": ["C#", ".NET Core", "SQL Server", "REST APIs", "Entity Framework"],
+    "nice_to_have": ["Azure", "Blazor", "Microservicios"],
+    "career_goal": "Desarrollador .NET Semi Senior"
+  },
+  {
+    "role": "Analista de Datos BI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Power BI", "SQL", "Excel avanzado", "DAX", "Modelado de datos"],
+    "nice_to_have": ["Tableau", "Azure Synapse", "Python"],
+    "career_goal": "Analista BI Senior"
+  },
+  {
+    "role": "Arquitecto de Software Junior",
+    "target_country": "Perú",
+    "required_skills": ["Diseño de sistemas", "Patrones de diseño", "Microservicios", "REST APIs", "Cloud básico"],
+    "nice_to_have": ["Event-driven architecture", "DDD", "ArchiMate"],
+    "career_goal": "Arquitecto de Software Senior"
+  },
+  {
+    "role": "Desarrollador Salesforce Junior",
+    "target_country": "Perú",
+    "required_skills": ["Apex", "Visualforce", "SOQL", "Salesforce Admin", "Lightning Components"],
+    "nice_to_have": ["Salesforce Certified Developer", "Flows", "Integración con APIs"],
+    "career_goal": "Desarrollador Salesforce Semi Senior"
+  },
+  {
+    "role": "Especialista SAP Junior",
+    "target_country": "Perú",
+    "required_skills": ["SAP FI/CO", "SAP MM", "ABAP básico", "Procesos de negocio ERP", "SQL"],
+    "nice_to_have": ["SAP S/4HANA", "SAP Fiori", "LSMW"],
+    "career_goal": "Consultor SAP Senior"
+  },
+  {
+    "role": "Game Developer Junior",
+    "target_country": "Perú",
+    "required_skills": ["Unity", "C#", "Git", "Física básica en juegos", "UI en Unity"],
+    "nice_to_have": ["Unreal Engine", "Blender", "Publicación en Google Play"],
+    "career_goal": "Game Developer Senior"
+  },
+  {
+    "role": "Especialista en Automatización RPA Junior",
+    "target_country": "Perú",
+    "required_skills": ["UiPath o Automation Anywhere", "Lógica de programación", "Excel", "Mapeo de procesos", "SQL básico"],
+    "nice_to_have": ["Python", "Power Automate", "Certificación UiPath"],
+    "career_goal": "Especialista RPA Semi Senior"
+  },
+  {
+    "role": "Analista Funcional Junior",
+    "target_country": "Perú",
+    "required_skills": ["Análisis de requerimientos", "BPMN", "SQL", "Excel", "Documentación técnica"],
+    "nice_to_have": ["Jira", "Confluence", "UML"],
+    "career_goal": "Analista Funcional Senior"
+  },
+  {
+    "role": "Desarrollador React Native Junior",
+    "target_country": "Perú",
+    "required_skills": ["React Native", "JavaScript", "REST APIs", "Git", "Expo"],
+    "nice_to_have": ["TypeScript", "Redux", "Firebase"],
+    "career_goal": "Desarrollador React Native Semi Senior"
+  },
+  {
+    "role": "Ingeniero de Datos Junior (Fintech)",
+    "target_country": "Perú",
+    "required_skills": ["Python", "SQL", "AWS Glue", "S3", "Modelado de datos"],
+    "nice_to_have": ["Snowflake", "dbt", "Kafka"],
+    "career_goal": "Ingeniero de Datos Senior"
+  },
+  {
+    "role": "Analista de Ciberseguridad SOC Junior",
+    "target_country": "Perú",
+    "required_skills": ["Monitoreo de seguridad", "SIEM", "Análisis de amenazas", "Redes", "Linux"],
+    "nice_to_have": ["Splunk", "QRadar", "Certificación CompTIA Security+"],
+    "career_goal": "Analista SOC Senior"
+  },
+  {
+    "role": "Especialista en E-commerce Junior",
+    "target_country": "Perú",
+    "required_skills": ["Shopify o WooCommerce", "SEO básico", "Google Analytics", "HTML/CSS básico", "Gestión de catálogos"],
+    "nice_to_have": ["Magento", "Meta Ads", "Google Ads"],
+    "career_goal": "Especialista E-commerce Senior"
+  },
+  {
+    "role": "Consultor ERP Junior",
+    "target_country": "Perú",
+    "required_skills": ["Oracle NetSuite o SAP", "Procesos contables", "SQL básico", "Soporte funcional", "Excel avanzado"],
+    "nice_to_have": ["Implementación ERP", "ABAP básico", "Gestión de proyectos"],
+    "career_goal": "Consultor ERP Senior"
+  },
+  {
+    "role": "Desarrollador Blockchain Junior",
+    "target_country": "Perú",
+    "required_skills": ["Solidity", "Ethereum", "Web3.js", "JavaScript", "Smart Contracts"],
+    "nice_to_have": ["Hardhat", "IPFS", "DeFi concepts"],
+    "career_goal": "Desarrollador Blockchain Senior"
+  },
+  {
+    "role": "Especialista en Cloud AWS Junior",
+    "target_country": "Perú",
+    "required_skills": ["AWS EC2", "S3", "RDS", "IAM", "Lambda"],
+    "nice_to_have": ["AWS Certified Cloud Practitioner", "CloudFormation", "EKS"],
+    "career_goal": "Cloud Architect AWS"
+  },
+  {
+    "role": "Especialista en Inteligencia Artificial Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "Machine Learning", "NLP básico", "scikit-learn", "SQL"],
+    "nice_to_have": ["LangChain", "OpenAI API", "Vector databases"],
+    "career_goal": "AI Engineer Senior"
+  },
+  {
+    "role": "Analista de Seguridad de Aplicaciones Junior",
+    "target_country": "Perú",
+    "required_skills": ["OWASP Top 10", "Pruebas de penetración básicas", "Burp Suite", "SQL Injection", "Git"],
+    "nice_to_have": ["CEH", "OSCP en curso", "Secure Code Review"],
+    "career_goal": "AppSec Engineer Senior"
+  },
+  {
+    "role": "Soporte de Software Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL básico", "Análisis de errores en logs", "Comunicación con clientes", "Excel", "Jira o ServiceNow"],
+    "nice_to_have": ["Scripting básico", "ITIL", "APIs REST básico"],
+    "career_goal": "Analista de Soporte Senior"
+  },
+  {
+    "role": "Desarrollador Angular Junior",
+    "target_country": "Perú",
+    "required_skills": ["Angular", "TypeScript", "HTML/CSS", "REST APIs", "Git"],
+    "nice_to_have": ["NgRx", "Jasmine/Karma", "Docker"],
+    "career_goal": "Desarrollador Angular Semi Senior"
+  },
+  {
+    "role": "Desarrollador Vue.js Junior",
+    "target_country": "Perú",
+    "required_skills": ["Vue.js", "JavaScript", "HTML/CSS", "REST APIs", "Git"],
+    "nice_to_have": ["Vuex/Pinia", "Nuxt.js", "TypeScript"],
+    "career_goal": "Desarrollador Vue.js Semi Senior"
+  },
+  {
+    "role": "Especialista en Marketing Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Google Ads", "Meta Ads", "SEO", "Google Analytics", "Copywriting"],
+    "nice_to_have": ["Email marketing", "HubSpot", "A/B Testing"],
+    "career_goal": "Especialista en Marketing Digital Senior"
+  },
+  {
+    "role": "Administrador de Redes Junior",
+    "target_country": "Perú",
+    "required_skills": ["Cisco CCNA", "TCP/IP", "VLAN", "Switches y routers", "Monitoreo de red"],
+    "nice_to_have": ["CCNP en curso", "Fortinet", "Wireshark"],
+    "career_goal": "Administrador de Redes Senior"
+  },
+  {
+    "role": "Especialista en Automatización de Pruebas Junior",
+    "target_country": "Perú",
+    "required_skills": ["Selenium", "Java o Python", "TestNG o JUnit", "Git", "Casos de prueba"],
+    "nice_to_have": ["Cypress", "Playwright", "BDD con Cucumber"],
+    "career_goal": "QA Automation Engineer Senior"
+  },
+  {
+    "role": "Analista Programador Junior (.NET)",
+    "target_country": "Perú",
+    "required_skills": ["C#", "ASP.NET", "SQL Server", "HTML/CSS", "Git"],
+    "nice_to_have": ["Angular", "Azure DevOps", "Docker"],
+    "career_goal": "Analista Programador Senior"
+  },
+  {
+    "role": "Desarrollador Ruby on Rails Junior",
+    "target_country": "Perú",
+    "required_skills": ["Ruby", "Rails", "PostgreSQL", "REST APIs", "Git"],
+    "nice_to_have": ["Sidekiq", "Redis", "Docker"],
+    "career_goal": "Desarrollador Ruby on Rails Semi Senior"
+  },
+  {
+    "role": "Científico de Datos Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "Estadística", "Visualización de datos", "Pandas", "SQL"],
+    "nice_to_have": ["R", "Spark", "Modelos predictivos"],
+    "career_goal": "Científico de Datos Senior"
+  },
+  {
+    "role": "Especialista en Infraestructura Junior",
+    "target_country": "Perú",
+    "required_skills": ["VMware", "Windows Server", "Active Directory", "Backup", "Redes"],
+    "nice_to_have": ["Hyper-V", "PowerShell", "ITIL Foundation"],
+    "career_goal": "Arquitecto de Infraestructura"
+  },
+  {
+    "role": "Desarrollador Odoo Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "Odoo framework", "PostgreSQL", "XML Views", "REST APIs"],
+    "nice_to_have": ["Odoo 16/17", "JavaScript OWL", "Docker"],
+    "career_goal": "Consultor / Desarrollador Odoo Senior"
+  },
+  {
+    "role": "Analista de Procesos TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Modelado BPMN", "Análisis de procesos", "Excel avanzado", "Documentación", "Jira"],
+    "nice_to_have": ["Six Sigma básico", "Power Automate", "Bizagi"],
+    "career_goal": "Analista de Procesos TI Senior"
+  },
+  {
+    "role": "Desarrollador Shopify Junior",
+    "target_country": "Perú",
+    "required_skills": ["Liquid", "HTML/CSS", "JavaScript", "Shopify CLI", "REST APIs Shopify"],
+    "nice_to_have": ["React", "GraphQL Shopify", "Metafields"],
+    "career_goal": "Desarrollador Shopify Senior"
+  },
+  {
+    "role": "Especialista en Ciberseguridad Cloud Junior",
+    "target_country": "Perú",
+    "required_skills": ["AWS Security", "IAM", "Análisis de vulnerabilidades", "Zero Trust básico", "Linux"],
+    "nice_to_have": ["AWS Security Specialty", "Prisma Cloud", "CSPM tools"],
+    "career_goal": "Cloud Security Engineer Senior"
+  }
+]

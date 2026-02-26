@@ -1,0 +1,359 @@
+[
+  {
+    "role": "Backend Developer Semi Senior",
+    "target_country": "Perú",
+    "required_skills": ["Node.js", "Express", "PostgreSQL", "REST APIs", "Docker", "Git"],
+    "nice_to_have": ["Microservicios", "Redis", "Kafka", "AWS"],
+    "career_goal": "Backend Developer Senior"
+  },
+  {
+    "role": "Frontend Developer Semi Senior",
+    "target_country": "Perú",
+    "required_skills": ["React", "TypeScript", "Redux", "REST APIs", "CSS avanzado", "Git"],
+    "nice_to_have": ["Next.js", "GraphQL", "Testing con Jest"],
+    "career_goal": "Frontend Developer Senior / Tech Lead"
+  },
+  {
+    "role": "Data Scientist Semi Senior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "Machine Learning", "SQL", "Pandas", "Visualización de datos", "Estadística"],
+    "nice_to_have": ["MLflow", "PySpark", "Deep Learning"],
+    "career_goal": "Lead Data Scientist"
+  },
+  {
+    "role": "Tech Lead Backend",
+    "target_country": "Perú",
+    "required_skills": ["Node.js o Java", "Arquitectura de microservicios", "Docker", "Kubernetes", "Liderazgo técnico", "Code Review"],
+    "nice_to_have": ["AWS Solutions Architect", "DDD", "Event Sourcing"],
+    "career_goal": "Software Architect"
+  },
+  {
+    "role": "Ingeniero de Confiabilidad del Sitio (SRE) Junior",
+    "target_country": "Perú",
+    "required_skills": ["Linux", "Kubernetes", "Monitoreo con Prometheus/Grafana", "Python o Bash", "Docker"],
+    "nice_to_have": ["SLO/SLI/SLA", "Chaos Engineering", "AWS"],
+    "career_goal": "SRE Senior"
+  },
+  {
+    "role": "Desarrollador Flutter Junior",
+    "target_country": "Perú",
+    "required_skills": ["Flutter", "Dart", "REST APIs", "Git", "Gestión de estado básico"],
+    "nice_to_have": ["Firebase", "BLoC pattern", "Publicación en stores"],
+    "career_goal": "Desarrollador Flutter Semi Senior"
+  },
+  {
+    "role": "Especialista en Power Platform Junior",
+    "target_country": "Perú",
+    "required_skills": ["Power Apps", "Power Automate", "Power BI", "SharePoint", "Dataverse"],
+    "nice_to_have": ["Power Pages", "Azure Logic Apps", "Certificación PL-900"],
+    "career_goal": "Especialista Power Platform Senior"
+  },
+  {
+    "role": "Consultor de Transformación Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión del cambio", "BPMN", "Análisis de procesos", "Excel avanzado", "Presentaciones ejecutivas"],
+    "nice_to_have": ["ITIL", "Lean Six Sigma", "Power BI"],
+    "career_goal": "Consultor de Transformación Digital Senior"
+  },
+  {
+    "role": "Analista de Marketing Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Google Analytics 4", "Google Ads", "Meta Ads", "SEO On-Page", "Email Marketing"],
+    "nice_to_have": ["HubSpot", "Klaviyo", "CRO básico"],
+    "career_goal": "Gerente de Marketing Digital"
+  },
+  {
+    "role": "Especialista en Automatización de Marketing Junior",
+    "target_country": "Perú",
+    "required_skills": ["HubSpot o Marketo", "Email Marketing", "CRM básico", "Segmentación de audiencias", "Reporting"],
+    "nice_to_have": ["Salesforce Marketing Cloud", "Zapier", "A/B Testing"],
+    "career_goal": "Marketing Automation Specialist Senior"
+  },
+  {
+    "role": "Desarrollador Magento Junior",
+    "target_country": "Perú",
+    "required_skills": ["PHP", "Magento 2", "MySQL", "HTML/CSS", "REST APIs"],
+    "nice_to_have": ["Elasticsearch", "Varnish", "Adobe Commerce Cloud"],
+    "career_goal": "Desarrollador Magento Senior"
+  },
+  {
+    "role": "Analista de Riesgos TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["ISO 27001 básico", "Análisis de riesgos", "Excel", "Gestión de incidentes", "Documentación de controles"],
+    "nice_to_have": ["CISM en curso", "COBIT", "GRC tools"],
+    "career_goal": "Especialista en Riesgos TI Senior"
+  },
+  {
+    "role": "Desarrollador Kotlin Multiplatform Junior",
+    "target_country": "Perú",
+    "required_skills": ["Kotlin", "Android", "KMM básico", "REST APIs", "Git"],
+    "nice_to_have": ["Compose Multiplatform", "Ktor", "Coroutines"],
+    "career_goal": "Desarrollador KMM Senior"
+  },
+  {
+    "role": "Especialista en Integración de Sistemas Junior",
+    "target_country": "Perú",
+    "required_skills": ["APIs REST", "XML/JSON", "SQL", "Postman", "Documentación técnica"],
+    "nice_to_have": ["MuleSoft", "Azure Service Bus", "GraphQL"],
+    "career_goal": "Arquitecto de Integración"
+  },
+  {
+    "role": "Analista de Operaciones TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["ITIL Foundation", "Gestión de incidentes", "ServiceNow o Remedy", "Monitoreo de infraestructura", "SQL básico"],
+    "nice_to_have": ["CMDB", "Automatización con scripts", "ITSM avanzado"],
+    "career_goal": "Gerente de Operaciones TI"
+  },
+  {
+    "role": "Especialista en Inteligencia de Negocios Junior",
+    "target_country": "Perú",
+    "required_skills": ["Power BI", "SQL Server", "Data Warehouse básico", "DAX", "ETL básico"],
+    "nice_to_have": ["SSAS", "SSRS", "Azure Data Factory"],
+    "career_goal": "Arquitecto de Datos BI"
+  },
+  {
+    "role": "Ingeniero de Firmware Junior",
+    "target_country": "Perú",
+    "required_skills": ["C/C++ embebido", "Microcontroladores", "Protocolos I2C/SPI/UART", "RTOS básico", "Git"],
+    "nice_to_have": ["FreeRTOS", "STM32", "Yocto Linux"],
+    "career_goal": "Ingeniero de Firmware Senior"
+  },
+  {
+    "role": "Especialista en Low-Code Junior",
+    "target_country": "Perú",
+    "required_skills": ["OutSystems o Mendix", "Modelado de procesos", "SQL básico", "REST APIs", "Git"],
+    "nice_to_have": ["OutSystems Certified", "Integraciones con SAP", "Power Apps"],
+    "career_goal": "Especialista Low-Code Senior"
+  },
+  {
+    "role": "Analista de Créditos y Riesgos Junior (Fintech)",
+    "target_country": "Perú",
+    "required_skills": ["Python o R", "SQL", "Modelos de scoring básico", "Excel avanzado", "Estadística"],
+    "nice_to_have": ["Machine Learning aplicado a riesgo", "SAS", "Tableau"],
+    "career_goal": "Analista de Riesgos Cuantitativos Senior"
+  },
+  {
+    "role": "Desarrollador de Integraciones Bancarias Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o .NET", "Web Services SOAP/REST", "ISO 8583", "SQL", "Git"],
+    "nice_to_have": ["MQ Series", "Swift messaging", "PCI-DSS básico"],
+    "career_goal": "Especialista en Integraciones Bancarias Senior"
+  },
+  {
+    "role": "Especialista en GIS Junior",
+    "target_country": "Perú",
+    "required_skills": ["ArcGIS o QGIS", "SQL espacial", "Python básico", "Análisis cartográfico", "PostGIS"],
+    "nice_to_have": ["ArcGIS Online", "Leaflet.js", "Geopandas"],
+    "career_goal": "Analista GIS Senior"
+  },
+  {
+    "role": "Desarrollador de Reportes Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL Server Reporting Services", "Crystal Reports o JasperReports", "SQL", "Excel avanzado", "Power BI básico"],
+    "nice_to_have": ["Power BI Embedded", "SSAS", "DAX"],
+    "career_goal": "Especialista en Reporting Senior"
+  },
+  {
+    "role": "Consultor de Ciberseguridad Junior",
+    "target_country": "Perú",
+    "required_skills": ["ISO 27001", "Análisis de vulnerabilidades", "Gestión de riesgos", "OWASP", "Redes"],
+    "nice_to_have": ["CISA en curso", "Pentesting", "Nessus/Qualys"],
+    "career_goal": "Consultor de Ciberseguridad Senior"
+  },
+  {
+    "role": "Especialista en Voz IP Junior",
+    "target_country": "Perú",
+    "required_skills": ["Asterisk o Cisco CUCM", "Protocolos SIP/RTP", "Redes TCP/IP", "Configuración de troncales", "Linux básico"],
+    "nice_to_have": ["Avaya", "FreePBX", "QoS en redes"],
+    "career_goal": "Arquitecto de Comunicaciones Unificadas"
+  },
+  {
+    "role": "Desarrollador de Automatizaciones n8n/Make Junior",
+    "target_country": "Perú",
+    "required_skills": ["n8n o Make (Integromat)", "REST APIs", "Webhooks", "JSON", "Lógica de flujos"],
+    "nice_to_have": ["Zapier", "JavaScript básico", "SQL básico"],
+    "career_goal": "Especialista en Automatización No-Code Senior"
+  },
+  {
+    "role": "Analista de Experiencia de Usuario Junior",
+    "target_country": "Perú",
+    "required_skills": ["UX Research", "Entrevistas a usuarios", "Figma", "Análisis de usabilidad", "Customer Journey"],
+    "nice_to_have": ["Hotjar", "Maze", "A/B Testing"],
+    "career_goal": "UX Lead"
+  },
+  {
+    "role": "Especialista en Accessibility (a11y) Junior",
+    "target_country": "Perú",
+    "required_skills": ["WCAG 2.1", "HTML semántico", "ARIA", "Testing con lectores de pantalla", "CSS accesible"],
+    "nice_to_have": ["axe DevTools", "NVDA/JAWS", "Auditorías de accesibilidad"],
+    "career_goal": "Accessibility Engineer Senior"
+  },
+  {
+    "role": "Desarrollador de APIs GraphQL Junior",
+    "target_country": "Perú",
+    "required_skills": ["GraphQL", "Node.js o Python", "Apollo Server", "SQL o NoSQL", "Git"],
+    "nice_to_have": ["Subscriptions en tiempo real", "DataLoader", "Federación de GraphQL"],
+    "career_goal": "Desarrollador GraphQL Senior"
+  },
+  {
+    "role": "Ingeniero de Plataforma Junior",
+    "target_country": "Perú",
+    "required_skills": ["Kubernetes", "Helm", "CI/CD", "Docker", "Linux"],
+    "nice_to_have": ["ArgoCD", "Flux", "Crossplane"],
+    "career_goal": "Platform Engineer Senior"
+  },
+  {
+    "role": "Desarrollador de Chatbots Junior",
+    "target_country": "Perú",
+    "required_skills": ["Dialogflow o Rasa", "Python o Node.js", "REST APIs", "NLP básico", "Integración con WhatsApp Business API"],
+    "nice_to_have": ["LangChain", "OpenAI API", "Twilio"],
+    "career_goal": "Especialista en Conversational AI"
+  },
+  {
+    "role": "Analista de E-commerce y Marketplace Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión de Mercado Libre o Falabella.com", "Excel avanzado", "Google Analytics", "Pricing", "Gestión de inventario"],
+    "nice_to_have": ["Shopify", "Power BI", "Publicidad en marketplace"],
+    "career_goal": "Jefe de E-commerce"
+  },
+  {
+    "role": "Especialista en Pagos Digitales Junior",
+    "target_country": "Perú",
+    "required_skills": ["APIs de pasarelas de pago (Niubiz, Izipay, Culqi)", "REST APIs", "PCI-DSS básico", "SQL", "Documentación técnica"],
+    "nice_to_have": ["ISO 8583", "Tokenización", "3DS2"],
+    "career_goal": "Especialista en Pagos Digitales Senior"
+  },
+  {
+    "role": "Desarrollador de Microservicios Java Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java 17+", "Spring Boot", "Spring Cloud", "Docker", "REST APIs"],
+    "nice_to_have": ["Kafka", "Resilience4j", "OpenTelemetry"],
+    "career_goal": "Desarrollador Java Senior"
+  },
+  {
+    "role": "Analista de Monitoreo y Observabilidad Junior",
+    "target_country": "Perú",
+    "required_skills": ["Grafana", "Prometheus", "ELK Stack básico", "Alertas", "Linux"],
+    "nice_to_have": ["Datadog", "OpenTelemetry", "New Relic"],
+    "career_goal": "Especialista en Observabilidad Senior"
+  },
+  {
+    "role": "Desarrollador de Extensiones WordPress Junior",
+    "target_country": "Perú",
+    "required_skills": ["PHP", "WordPress", "JavaScript", "MySQL", "HTML/CSS"],
+    "nice_to_have": ["WooCommerce", "Elementor hooks", "REST API WordPress"],
+    "career_goal": "Desarrollador WordPress Senior"
+  },
+  {
+    "role": "Especialista en Telecom y OSS/BSS Junior",
+    "target_country": "Perú",
+    "required_skills": ["Procesos de facturación telecom", "SQL", "Sistemas OSS/BSS básico", "ITIL", "Excel"],
+    "nice_to_have": ["TM Forum", "Amdocs o Comverse", "Python para reportes"],
+    "career_goal": "Consultor OSS/BSS Senior"
+  },
+  {
+    "role": "Desarrollador de Dashboards Junior",
+    "target_country": "Perú",
+    "required_skills": ["Power BI o Tableau", "SQL", "Python o R básico", "Visualización de datos", "Excel"],
+    "nice_to_have": ["D3.js", "Dash (Plotly)", "Google Looker Studio"],
+    "career_goal": "Data Visualization Engineer"
+  },
+  {
+    "role": "Especialista en Seguridad en la Nube Junior",
+    "target_country": "Perú",
+    "required_skills": ["AWS Security Hub", "Políticas IAM", "Análisis de configuraciones", "Linux", "Python básico"],
+    "nice_to_have": ["CSPM", "Wiz o Prisma Cloud", "AWS Security Specialty"],
+    "career_goal": "Cloud Security Architect"
+  },
+  {
+    "role": "Desarrollador de Plataformas Educativas Junior",
+    "target_country": "Perú",
+    "required_skills": ["Moodle o Chamilo", "PHP", "MySQL", "HTML/CSS", "SCORM básico"],
+    "nice_to_have": ["LTI", "xAPI/Tin Can", "React para frontend"],
+    "career_goal": "Arquitecto de Plataformas LMS"
+  },
+  {
+    "role": "Ingeniero de MLOps Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "MLflow o Kubeflow", "Docker", "CI/CD para modelos ML", "AWS SageMaker básico"],
+    "nice_to_have": ["Vertex AI", "DVC", "Evidently AI"],
+    "career_goal": "MLOps Engineer Senior"
+  },
+  {
+    "role": "Analista de Producto Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Análisis de métricas de producto", "SQL", "Google Analytics 4", "Mixpanel o Amplitude", "Figma básico"],
+    "nice_to_have": ["A/B Testing", "Cohort analysis", "Hotjar"],
+    "career_goal": "Product Manager Senior"
+  },
+  {
+    "role": "Especialista en Contenidos SEO Junior",
+    "target_country": "Perú",
+    "required_skills": ["SEO On-Page y Off-Page", "Google Search Console", "Ahrefs o SEMrush", "Redacción de contenidos", "WordPress"],
+    "nice_to_have": ["SEO técnico", "Link building", "Core Web Vitals"],
+    "career_goal": "SEO Lead"
+  },
+  {
+    "role": "Desarrollador de Integraciones Contables Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "API REST", "Excel avanzado", "Procesos contables básicos", "SUNAT XML (SIRE/PLE)"],
+    "nice_to_have": ["SAP FI básico", ".NET o Python", "UBL 2.1 (facturación electrónica)"],
+    "career_goal": "Especialista en Integraciones ERP Contables"
+  },
+  {
+    "role": "Especialista en Facturación Electrónica Junior",
+    "target_country": "Perú",
+    "required_skills": ["UBL 2.1", "SUNAT API", "XML", "PHP o .NET o Java", "SQL"],
+    "nice_to_have": ["OSE (Operador de Servicios Electrónicos)", "Nubefact o Facturalo", "REST APIs"],
+    "career_goal": "Arquitecto de Soluciones de Facturación Electrónica"
+  },
+  {
+    "role": "Desarrollador de Soluciones IoT Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python o C++", "MQTT", "Raspberry Pi o Arduino", "AWS IoT básico", "REST APIs"],
+    "nice_to_have": ["Edge computing", "Node-RED", "Protocolos industriales (Modbus, OPC-UA)"],
+    "career_goal": "Arquitecto de Soluciones IoT"
+  },
+  {
+    "role": "Desarrollador de Soluciones FinTech Junior",
+    "target_country": "Perú",
+    "required_skills": ["Node.js o Python", "REST APIs", "SQL", "Seguridad básica en APIs", "Git"],
+    "nice_to_have": ["Open Banking APIs", "PSD2", "Yape/Plin API integración"],
+    "career_goal": "FinTech Solutions Architect"
+  },
+  {
+    "role": "Analista de Logística y Supply Chain TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Excel avanzado", "SQL", "ERP logístico (SAP MM o similar)", "Power BI básico", "Análisis de procesos"],
+    "nice_to_have": ["WMS sistemas", "Python para análisis", "Tableau"],
+    "career_goal": "Gerente de TI en Supply Chain"
+  },
+  {
+    "role": "Desarrollador de Soluciones para Retail Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o .NET", "SQL", "Integración con POS", "REST APIs", "Git"],
+    "nice_to_have": ["Oracle Retail", "SAP IS-Retail", "Omnichannel básico"],
+    "career_goal": "Arquitecto de Soluciones Retail"
+  },
+  {
+    "role": "Especialista en Gestión de Identidad y Accesos (IAM) Junior",
+    "target_country": "Perú",
+    "required_skills": ["Active Directory", "Azure AD", "Gestión de accesos", "SSO básico", "LDAP"],
+    "nice_to_have": ["Okta", "CyberArk", "Zero Trust"],
+    "career_goal": "IAM Architect"
+  },
+  {
+    "role": "Desarrollador de Aplicaciones Bancarias Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o .NET", "Core bancario básico", "SQL", "REST APIs", "Seguridad en aplicaciones"],
+    "nice_to_have": ["Temenos o Bantotal", "PCI-DSS", "OAuth2/OpenID Connect"],
+    "career_goal": "Arquitecto de Soluciones Bancarias"
+  },
+  {
+    "role": "Especialista en Analítica Web Junior",
+    "target_country": "Perú",
+    "required_skills": ["Google Analytics 4", "Google Tag Manager", "SQL", "Excel", "Análisis de embudos de conversión"],
+    "nice_to_have": ["BigQuery", "Looker Studio", "Hotjar"],
+    "career_goal": "Web Analytics Lead"
+  }
+]

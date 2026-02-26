@@ -1,0 +1,822 @@
+[
+  {
+    "role": "Ingeniero de Software con IA Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "Machine Learning básico", "APIs REST", "SQL", "Git"],
+    "nice_to_have": ["TensorFlow o PyTorch", "Despliegue de modelos ML", "AWS SageMaker"],
+    "career_goal": "AI Software Engineer Senior",
+    "sector": "Tecnología",
+    "salary_range_soles": "S/ 3,500 – S/ 5,500",
+    "companies_hiring": ["Encora", "Globant", "Indra Perú", "NTT DATA Perú"]
+  },
+  {
+    "role": "Analista de Datos – Sector Minería Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "SQL", "Power BI", "Análisis de series de tiempo", "Excel avanzado"],
+    "nice_to_have": ["OSIsoft PI", "Databricks", "R"],
+    "career_goal": "Lead Data Analyst – Minería",
+    "sector": "Minería",
+    "salary_range_soles": "S/ 4,000 – S/ 6,500",
+    "companies_hiring": ["Antamina", "Cerro Verde", "Southern Peru Copper", "Buenaventura"]
+  },
+  {
+    "role": "Especialista en Energía Renovable TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["SCADA para energía solar/eólica", "Python básico", "Análisis de generación eléctrica", "AutoCAD eléctrico", "SQL"],
+    "nice_to_have": ["HOMER Energy", "PVsyst", "IoT para plantas solares"],
+    "career_goal": "Ingeniero de Sistemas Energéticos Senior",
+    "sector": "Energía Renovable",
+    "salary_range_soles": "S/ 4,500 – S/ 7,000",
+    "companies_hiring": ["Engie Perú", "Enel Green Power", "Celepsa", "Kallpa Generación"]
+  },
+  {
+    "role": "Desarrollador de ERP para Agroindustria Junior",
+    "target_country": "Perú",
+    "required_skills": ["SAP o Microsoft Dynamics", "SQL", "Procesos agroindustriales básicos", "REST APIs", "Excel avanzado"],
+    "nice_to_have": ["SAP S/4HANA Agribusiness", "Trazabilidad de productos", "SENASA integraciones"],
+    "career_goal": "Arquitecto de Sistemas Agroindustriales",
+    "sector": "Agroindustria",
+    "salary_range_soles": "S/ 3,200 – S/ 5,000",
+    "companies_hiring": ["Camposol", "Danper", "Sociedad Agrícola Virú", "Agroexportadora Chavín de Huántar"]
+  },
+  {
+    "role": "Analista de Trazabilidad Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Sistemas de trazabilidad (GS1)", "RFID / códigos QR", "SQL", "Excel avanzado", "ERP básico"],
+    "nice_to_have": ["Blockchain para trazabilidad", "SAP EWM", "SENASA / DIGESA normativa"],
+    "career_goal": "Jefe de Trazabilidad y Calidad Digital",
+    "sector": "Agroindustria / Retail",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["Camposol", "Alicorp", "Lindley Coca-Cola", "Tasa"]
+  },
+  {
+    "role": "Especialista en Drones e Imágenes Satelitales Junior",
+    "target_country": "Perú",
+    "required_skills": ["Operación de drones DJI", "Procesamiento con Pix4D o DroneDeploy", "NDVI análisis", "QGIS o ArcGIS", "Python básico"],
+    "nice_to_have": ["Visión artificial con OpenCV", "Machine Learning para agricultura de precisión", "ARCC (autorización DGAC Perú)"],
+    "career_goal": "Especialista en Agricultura de Precisión Senior",
+    "sector": "AgriTech / Minería",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["Camposol", "Antamina", "AgroRural MIDAGRI", "Startups AgriTech Lima"]
+  },
+  {
+    "role": "Analista de Business Intelligence – Sector Logística Junior",
+    "target_country": "Perú",
+    "required_skills": ["Power BI", "SQL Server", "KPIs logísticos (OTIF, Fill Rate)", "Excel avanzado", "SAP básico"],
+    "nice_to_have": ["Tableau", "Python para automatización de reportes", "Análisis de inventarios"],
+    "career_goal": "Gerente de Analytics en Logística",
+    "sector": "Logística y Transporte",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["DHL Perú", "GLP Peru", "Ransa", "Neptunia", "Inchcape Shipping"]
+  },
+  {
+    "role": "Desarrollador de TMS (Transport Management System) Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o .NET", "SQL", "Integración con GPS/telemática", "REST APIs", "Git"],
+    "nice_to_have": ["Oracle TMS", "SAP TM", "Optimización de rutas (algoritmos)"],
+    "career_goal": "Arquitecto de Soluciones TMS",
+    "sector": "Logística y Transporte",
+    "salary_range_soles": "S/ 3,500 – S/ 5,500",
+    "companies_hiring": ["Ransa", "Dinet", "Contrans", "Transoceánica"]
+  },
+  {
+    "role": "Especialista en Cold Chain TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Monitoreo de temperatura IoT", "SQL", "WMS básico", "Excel avanzado", "HACCP normativa básica"],
+    "nice_to_have": ["Sensores Bluetooth/RFID", "Power BI", "DIGESA certificaciones"],
+    "career_goal": "Jefe de Tecnología en Cadena de Frío",
+    "sector": "Logística / Salud / Alimentos",
+    "salary_range_soles": "S/ 2,800 – S/ 4,800",
+    "companies_hiring": ["Alicorp", "Laive", "Kimberly-Clark Perú", "Gloria SA"]
+  },
+  {
+    "role": "Analista de Operaciones Portuarias TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["TOS (Terminal Operating System)", "SQL", "Gestión de manifiestos", "Excel avanzado", "SUNAT Aduanas básico"],
+    "nice_to_have": ["EDI (Electronic Data Interchange)", "Navis N4", "Integración con VUCE"],
+    "career_goal": "Jefe de Sistemas Portuarios",
+    "sector": "Logística Portuaria",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["DP World Callao", "APM Terminals Callao", "Neptunia", "Cosmos Agencia Marítima"]
+  },
+  {
+    "role": "Desarrollador de Apps para Sector Construcción Junior",
+    "target_country": "Perú",
+    "required_skills": ["React Native o Flutter", "BIM básico (Autodesk BIM 360)", "REST APIs", "SQL", "Git"],
+    "nice_to_have": ["Revit básico", "AutoCAD", "Integración con ERP construcción (S10, Sap2000)"],
+    "career_goal": "Tech Lead PropTech / ConTech",
+    "sector": "Construcción e Inmobiliaria",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["Cosapi", "Graña y Montero (GMD)", "GyM Ferrovías", "Constructora Aesa"]
+  },
+  {
+    "role": "Especialista BIM Junior",
+    "target_country": "Perú",
+    "required_skills": ["Revit", "Autodesk BIM 360", "Clash detection (Navisworks)", "AutoCAD", "Lectura de planos estructurales"],
+    "nice_to_have": ["Civil 3D", "Dynamo scripting", "ISO 19650"],
+    "career_goal": "BIM Manager Senior",
+    "sector": "Construcción",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["Cosapi", "ICCGSA", "JJC Contratistas", "San Martín Contratistas"]
+  },
+  {
+    "role": "Analista de PropTech Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Análisis de datos inmobiliarios", "Excel avanzado", "Power BI", "CRM básico"],
+    "nice_to_have": ["Plataformas como Urbania / Properati data", "GIS básico", "Python para análisis de mercado"],
+    "career_goal": "Product Manager PropTech",
+    "sector": "Real Estate / Construcción",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["Urbania Perú", "ASEI", "Nexo Inmobiliario", "Paz Centenario"]
+  },
+  {
+    "role": "Desarrollador de Software – Sector Farmacéutico Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o .NET o Python", "SQL", "Normativa DIGEMID básica", "REST APIs", "Git"],
+    "nice_to_have": ["HL7 FHIR para medicamentos", "SERNANP / MINSA integraciones", "GxP básico (validación de software)"],
+    "career_goal": "Arquitecto de Sistemas Farmacéuticos",
+    "sector": "Farmacéutico / Salud",
+    "salary_range_soles": "S/ 3,200 – S/ 5,500",
+    "companies_hiring": ["InRetail Pharma (Mifarma / Inkafarma)", "Química Suiza", "Roche Perú", "Bayer Perú"]
+  },
+  {
+    "role": "Analista de Cadena de Medicamentos TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["SAP MM para farma", "DIGEMID normativa", "SQL", "Trazabilidad de medicamentos", "Excel avanzado"],
+    "nice_to_have": ["Serialización GS1 para medicamentos", "ERP SAP WM para almacenes farma", "Power BI"],
+    "career_goal": "Jefe de Supply Chain Farmacéutico",
+    "sector": "Farmacéutico",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["Pfizer Perú", "Abbott Perú", "Tecnofarma", "Laboratorios Portugal"]
+  },
+  {
+    "role": "Especialista TI – Sector Pesquero Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Sistemas de control de captura (IMARPE integración)", "Excel avanzado", "ERP para pesca básico", "Power BI"],
+    "nice_to_have": ["SAP para industria pesquera", "Sensores de bodega IoT", "Normativa PRODUCE / SANIPES"],
+    "career_goal": "Gerente de Sistemas – Sector Pesquero",
+    "sector": "Pesca e Industria Pesquera",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["TASA (Tecnológica de Alimentos SA)", "Copeinca", "Exalmar", "Hayduk"]
+  },
+  {
+    "role": "Desarrollador de Plataformas Turismo Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["PHP o Node.js", "SQL", "Integración con OTAs (Booking, Expedia)", "REST APIs", "Git"],
+    "nice_to_have": ["Channel Manager APIs", "Sistemas PMS hoteleros", "MINCETUR plataforma digital"],
+    "career_goal": "Arquitecto de Soluciones TravelTech",
+    "sector": "Turismo y Hotelería",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["Casa Andina Hotels", "Inkaterra", "Decameron Perú", "PromPerú digital"]
+  },
+  {
+    "role": "Analista de Revenue Management TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Excel avanzado", "Análisis de ocupación hotelera", "Power BI", "Python básico"],
+    "nice_to_have": ["PMS Opera o Cloudbeds", "Machine Learning para pricing", "Google Analytics para hoteles"],
+    "career_goal": "Revenue Manager Senior",
+    "sector": "Hotelería y Turismo",
+    "salary_range_soles": "S/ 2,500 – S/ 4,000",
+    "companies_hiring": ["Marriott Lima", "Hilton Lima Miraflores", "Casa Andina", "Hotel Country Club Lima"]
+  },
+  {
+    "role": "Especialista en HR Tech Junior",
+    "target_country": "Perú",
+    "required_skills": ["SAP HCM o Workday básico", "Nómina digital (T-Registro SUNAT)", "SQL", "Excel avanzado", "Power BI para RRHH"],
+    "nice_to_have": ["ATS (Workday Recruiting)", "Plataformas de engagement (Culture Amp)", "Automatización de RRHH con Python"],
+    "career_goal": "HRIS Manager",
+    "sector": "Recursos Humanos / Tecnología",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["BCP", "Alicorp", "Scotiabank Perú", "Interbank", "Falabella Perú"]
+  },
+  {
+    "role": "Analista de People Analytics Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Power BI", "Python básico", "Análisis de KPIs de RRHH (rotación, engagement)", "Excel avanzado"],
+    "nice_to_have": ["R para estadística de RRHH", "Workday Analytics", "Predictive attrition models"],
+    "career_goal": "Head of People Analytics",
+    "sector": "Recursos Humanos / Analytics",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["BBVA Perú", "Rimac Seguros", "Alicorp", "Saga Falabella"]
+  },
+  {
+    "role": "Especialista en LegalTech Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión documental legal digital", "Firma digital INDECOPI", "SQL básico", "Herramientas de revisión de contratos con IA", "Excel"],
+    "nice_to_have": ["Thomson Reuters Westlaw o LEGIS.PE", "Automatización de contratos (DocuSign, ContractPodAi)", "SUNAT operaciones en línea"],
+    "career_goal": "Director Legal Digital",
+    "sector": "Legal Tech",
+    "salary_range_soles": "S/ 2,800 – S/ 4,800",
+    "companies_hiring": ["Estudio Echecopar (Baker McKenzie)", "Miranda & Amado", "Rebaza Alcázar & De Las Casas", "Payet Rey Cauvi Pérez"]
+  },
+  {
+    "role": "Analista de InsurTech Junior",
+    "target_country": "Perú",
+    "required_skills": ["Análisis actuarial básico", "SQL", "Python básico", "Productos de seguros digitales (SBS normativa)", "Excel avanzado"],
+    "nice_to_have": ["Guidewire o Majesco", "Telemática para seguros de auto", "Machine Learning para fraude en seguros"],
+    "career_goal": "Product Manager InsurTech",
+    "sector": "Seguros / InsurTech",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["Rimac Seguros", "Pacifico Seguros", "La Positiva Seguros", "Mapfre Perú"]
+  },
+  {
+    "role": "Especialista en Automatización de Procesos Contables Junior",
+    "target_country": "Perú",
+    "required_skills": ["SAP FI o Oracle Financials", "SIRE Perú (IGV, Renta)", "PDT SUNAT", "Excel avanzado", "SQL básico"],
+    "nice_to_have": ["Power Automate para contabilidad", "Python para cierres contables", "RPA (UiPath / Automation Anywhere)"],
+    "career_goal": "Controller Financiero Senior",
+    "sector": "Finanzas / Contabilidad Digital",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["EY Perú", "KPMG Perú", "PWC Perú", "Deloitte Perú"]
+  },
+  {
+    "role": "Analista de Auditoría de Sistemas Junior",
+    "target_country": "Perú",
+    "required_skills": ["COBIT 5 o 2019", "Análisis de controles TI", "SQL para auditoría", "CISA básico", "Documentación de hallazgos"],
+    "nice_to_have": ["ACL Analytics o IDEA", "ISO 27001 auditoría", "Cloud auditing (AWS/Azure)"],
+    "career_goal": "IT Audit Manager",
+    "sector": "Auditoría TI / Banca",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["EY Perú", "KPMG Perú", "BCP", "Deloitte Perú", "SBS (Superintendencia)"]
+  },
+  {
+    "role": "Desarrollador de Plataformas Microfinancieras Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o PHP", "SQL", "Procesos de microcrédito", "REST APIs", "Git"],
+    "nice_to_have": ["Bantotal o Temenos para microfinanzas", "Normativa SBS microfinanzas", "Integración con Infocorp"],
+    "career_goal": "Arquitecto de Plataformas Microfinancieras",
+    "sector": "Microfinanzas",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["MiBanco", "Compartamos Financiera", "Caja Huancayo", "Caja Piura", "Caja Arequipa"]
+  },
+  {
+    "role": "Analista de Crédito Digital Junior (Caja Municipal)",
+    "target_country": "Perú",
+    "required_skills": ["Evaluación crediticia MYPE", "SQL", "Buró Infocorp consultas", "Excel avanzado", "Herramientas de scoring digital"],
+    "nice_to_have": ["Machine Learning para microcréditos", "SBS normativa cajas municipales", "Power BI"],
+    "career_goal": "Jefe de Riesgos Crediticios – CMAC",
+    "sector": "Microfinanzas / Cajas Municipales",
+    "salary_range_soles": "S/ 2,200 – S/ 3,800",
+    "companies_hiring": ["Caja Municipal de Arequipa", "Caja Municipal de Piura", "Caja Municipal Huancayo", "Caja Ica"]
+  },
+  {
+    "role": "Ingeniero de Mantenimiento Predictivo Junior",
+    "target_country": "Perú",
+    "required_skills": ["Análisis de vibraciones", "Python para análisis de señales", "Sensores IoT industriales", "SQL", "SAP PM básico"],
+    "nice_to_have": ["OSIsoft PI Asset Framework", "Machine Learning para predictive maintenance", "ISO 55000"],
+    "career_goal": "Jefe de Mantenimiento Predictivo Senior",
+    "sector": "Manufactura / Minería",
+    "salary_range_soles": "S/ 4,000 – S/ 7,000",
+    "companies_hiring": ["Komatsu-Mitsui Perú", "Ferreyros (Caterpillar)", "Southern Peru Copper", "Tasa"]
+  },
+  {
+    "role": "Especialista en Gestión de Activos TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["ITAM (IT Asset Management)", "CMDB en ServiceNow o Jira", "Gestión de licencias de software", "Excel avanzado", "SQL básico"],
+    "nice_to_have": ["SAP Asset Management", "ISO 55000", "Cloud cost management (FinOps)"],
+    "career_goal": "IT Asset Manager Senior",
+    "sector": "TI Corporativo",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["Interbank", "Alicorp", "Telefónica Perú", "Entel Perú"]
+  },
+  {
+    "role": "Desarrollador de Plataformas Educativas Universitarias Junior",
+    "target_country": "Perú",
+    "required_skills": ["Moodle o Canvas LMS", "PHP o Python", "SQL", "Integración con sistemas académicos (SUNEDU)", "REST APIs"],
+    "nice_to_have": ["Salesforce Education Cloud", "LTI estándar", "Analítica de aprendizaje (xAPI)"],
+    "career_goal": "Director de Tecnología Educativa Universitaria",
+    "sector": "Educación Superior",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["PUCP", "UPC", "Universidad Continental", "USIL", "Tecsup"]
+  },
+  {
+    "role": "Analista de Sistemas Académicos Junior",
+    "target_country": "Perú",
+    "required_skills": ["ERP universitario (Banner o PeopleSoft)", "SQL", "Gestión de matrícula digital", "SUNEDU reportes", "Excel avanzado"],
+    "nice_to_have": ["Power BI para analítica educativa", "RENIEC integración para matrícula", "Python para reportes académicos"],
+    "career_goal": "Jefe de Sistemas Académicos",
+    "sector": "Educación Superior",
+    "salary_range_soles": "S/ 2,500 – S/ 4,000",
+    "companies_hiring": ["PUCP", "UNMSM", "UTP Perú", "Senati", "CERTUS"]
+  },
+  {
+    "role": "Especialista en Ciberseguridad para Sector Energético Junior",
+    "target_country": "Perú",
+    "required_skills": ["ICS/SCADA security", "NERC CIP básico", "Redes OT", "Análisis de vulnerabilidades industriales", "Linux"],
+    "nice_to_have": ["Dragos Platform", "Claroty", "IEC 62443 certificación en curso"],
+    "career_goal": "OT/ICS Security Architect",
+    "sector": "Energía / Minería",
+    "salary_range_soles": "S/ 5,000 – S/ 9,000",
+    "companies_hiring": ["Enel Perú", "Fenosa Perú", "Red de Energía del Perú (REP)", "Luz del Sur"]
+  },
+  {
+    "role": "Analista de Mercados de Capitales TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Python básico", "Bloomberg o Reuters Eikon básico", "Excel avanzado", "Normativa SMV Perú"],
+    "nice_to_have": ["Sistemas de trading (FIS, Murex)", "Análisis cuantitativo", "R para finanzas"],
+    "career_goal": "Quant Analyst Senior – Mercado de Capitales",
+    "sector": "Mercado de Capitales / SMV",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["BVL (Bolsa de Valores de Lima)", "Credicorp Capital", "BBVA Asset Management Perú", "Scotia Fondos"]
+  },
+  {
+    "role": "Desarrollador de Sistemas de Medios de Pago Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o .NET", "ISO 8583", "REST APIs", "Pasarelas de pago Niubiz/Izipay/Culqi", "SQL"],
+    "nice_to_have": ["EMV estándar", "3DS2 autenticación", "Visa/Mastercard certification process"],
+    "career_goal": "Arquitecto de Medios de Pago",
+    "sector": "Payments / Fintech",
+    "salary_range_soles": "S/ 4,000 – S/ 7,000",
+    "companies_hiring": ["Niubiz", "Kushki Perú", "Culqi (startup)", "VisaNet Perú"]
+  },
+  {
+    "role": "Analista de Experiencia del Empleado Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión de plataformas de onboarding digital", "Power BI para RRHH", "Excel avanzado", "Encuestas de clima con herramientas digitales", "Jira / ServiceNow HR"],
+    "nice_to_have": ["Workday Employee Experience", "Microsoft Viva", "Analítica de compromiso laboral"],
+    "career_goal": "Head of Employee Experience",
+    "sector": "Recursos Humanos Digitales",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["Interbank", "Backus AB-InBev Perú", "Kimberly-Clark Perú", "Nestlé Perú"]
+  },
+  {
+    "role": "Especialista en Ciberseguridad Financiera Junior",
+    "target_country": "Perú",
+    "required_skills": ["PCI DSS", "SWIFT CSP", "Gestión de incidentes financieros", "ISO 27001", "Análisis forense digital básico"],
+    "nice_to_have": ["Certified Ethical Hacker (CEH)", "CISM en curso", "Circular SBS G-140 Perú"],
+    "career_goal": "CISO Bancario Senior",
+    "sector": "Banca / Finanzas",
+    "salary_range_soles": "S/ 5,000 – S/ 9,000",
+    "companies_hiring": ["BCP", "BBVA Perú", "Interbank", "Scotiabank Perú", "Credicorp"]
+  },
+  {
+    "role": "Desarrollador de Aplicaciones para Sector Minero Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python o Java", "SQL", "APIs para sistemas mineros (Dispatch, Modular Mining)", "REST APIs", "Git"],
+    "nice_to_have": ["Gestión de flotas mineras", "Integración con SAP PM/MM minería", "Unity para visualización 3D minera"],
+    "career_goal": "Mining Software Architect",
+    "sector": "Minería / Mining Tech",
+    "salary_range_soles": "S/ 4,500 – S/ 8,000",
+    "companies_hiring": ["Antamina", "Las Bambas (MMG)", "Cerro Verde (Freeport)", "Gold Fields La Cima"]
+  },
+  {
+    "role": "Analista de Geomecánica Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python para análisis de datos geotécnicos", "SQL", "Software geomecánico (Rocscience básico)", "Excel avanzado", "AutoCAD básico"],
+    "nice_to_have": ["Flac3D", "Análisis de estabilidad de taludes", "IoT para instrumentación geotécnica"],
+    "career_goal": "Especialista en Geomecánica Digital Senior",
+    "sector": "Minería",
+    "salary_range_soles": "S/ 5,000 – S/ 9,000",
+    "companies_hiring": ["Southern Peru Copper", "Antapaccay (Glencore)", "Toquepala", "Buenaventura"]
+  },
+  {
+    "role": "Especialista en Sostenibilidad ESG y Datos Junior",
+    "target_country": "Perú",
+    "required_skills": ["Reporte GRI estándares", "Python o R para análisis de huella de carbono", "SQL", "Power BI", "Normativa MINAM Perú"],
+    "nice_to_have": ["CDP reporting", "SAP Sustainability Control Tower", "ISO 14001 auditoría"],
+    "career_goal": "Director de Sostenibilidad ESG",
+    "sector": "Sostenibilidad / Minería / Energía",
+    "salary_range_soles": "S/ 4,000 – S/ 7,000",
+    "companies_hiring": ["Antamina", "Grupo Breca", "Volcan Compañía Minera", "Enel Perú"]
+  },
+  {
+    "role": "Desarrollador de Plataformas para ONGs Junior",
+    "target_country": "Perú",
+    "required_skills": ["WordPress o Drupal", "PHP básico", "SQL", "Integración con sistemas de donaciones", "Google Analytics"],
+    "nice_to_have": ["Salesforce Nonprofit (NPSP)", "Integración con APCI (regulación ONGs Perú)", "Python para reportes de impacto"],
+    "career_goal": "Tech Director para ONG / Sector Social",
+    "sector": "Sector Social / ONGs",
+    "salary_range_soles": "S/ 2,000 – S/ 3,500",
+    "companies_hiring": ["CARE Perú", "WWF Perú", "Oxfam Perú", "IDB Lab proyectos"]
+  },
+  {
+    "role": "Analista de Sistemas de Salud Pública Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Python básico", "Estadística epidemiológica", "Power BI", "Datos MINSA / SUSALUD"],
+    "nice_to_have": ["R para epidemiología computacional", "IHME Global Burden of Disease tools", "GERESA reportes regionales"],
+    "career_goal": "Director de Epidemiología Digital – Ministerio de Salud",
+    "sector": "Salud Pública / GovTech",
+    "salary_range_soles": "S/ 2,500 – S/ 4,500",
+    "companies_hiring": ["MINSA", "EsSalud", "SUSALUD", "DIRIS Lima Norte"]
+  },
+  {
+    "role": "Desarrollador de Sistemas para Centros Médicos Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o .NET", "SQL", "HIS hospitalario (RIS/LIS/HIS)", "HL7 básico", "REST APIs"],
+    "nice_to_have": ["FHIR R4", "DICOM para imágenes médicas", "Telemedicina APIs"],
+    "career_goal": "Arquitecto de Sistemas Hospitalarios",
+    "sector": "Salud / HealthTech",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["Clínica Ricardo Palma", "Clínica Internacional", "Clínica San Pablo", "EsSalud TI"]
+  },
+  {
+    "role": "Especialista en Digitalización Judicial Junior",
+    "target_country": "Perú",
+    "required_skills": ["Plataforma Mesa de Partes Electrónica (MPE PJ)", "SQL básico", "Gestión documental legal digital", "Excel", "Atención a usuarios técnicos"],
+    "nice_to_have": ["SINOE (Sistema de Notificaciones Electrónicas)", "Firma digital RENIEC", "Python para automatización de alertas legales"],
+    "career_goal": "Especialista en GovTech Judicial",
+    "sector": "Sector Público / Judicial",
+    "salary_range_soles": "S/ 2,200 – S/ 3,800",
+    "companies_hiring": ["Poder Judicial Perú", "Ministerio Público", "SUNAT", "MEF (Ministerio de Economía)"]
+  },
+  {
+    "role": "Analista de Presupuesto Público TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["SIAF (Sistema Integrado de Administración Financiera)", "SQL básico", "Excel avanzado", "Ley de Contrataciones OSCE", "Power BI"],
+    "nice_to_have": ["SIGA (Sistema Integrado de Gestión Administrativa)", "SEACE", "Python para análisis presupuestal"],
+    "career_goal": "Director de Sistemas Presupuestales – Sector Público",
+    "sector": "Gobierno / Sector Público",
+    "salary_range_soles": "S/ 2,500 – S/ 4,500",
+    "companies_hiring": ["MEF", "MIDIS", "MINSA", "Municipalidades Provinciales Lima"]
+  },
+  {
+    "role": "Especialista en GovTech Municipal Junior",
+    "target_country": "Perú",
+    "required_skills": ["Sistemas de recaudación SAT municipal", "SQL", "Plataformas de trámite en línea", "Excel avanzado", "Atención ciudadana digital"],
+    "nice_to_have": ["RENAMU (Registro Nacional de Municipalidades)", "DEMUNA digital", "Python para automatización de reportes municipales"],
+    "career_goal": "Gerente de Transformación Digital Municipal",
+    "sector": "Municipalidades / GovTech",
+    "salary_range_soles": "S/ 2,000 – S/ 3,500",
+    "companies_hiring": ["MML (Municipalidad de Lima)", "SAT Lima", "SAT Trujillo", "Municipalidad de Arequipa"]
+  },
+  {
+    "role": "Desarrollador de Sistemas de Seguridad Ciudadana Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python o Java", "Videoanálisis básico (CCTV)", "SQL", "REST APIs", "Git"],
+    "nice_to_have": ["Reconocimiento facial (Hikvision/Dahua APIs)", "Plataformas Safe City", "Integración con PNP / SUCAMEC"],
+    "career_goal": "Arquitecto de Soluciones de Seguridad Urbana",
+    "sector": "Seguridad Ciudadana / GovTech",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["Municipalidades con videovigilancia", "Seguritech", "Prosegur Perú", "G4S Perú"]
+  },
+  {
+    "role": "Analista de Ciberseguridad para Sector Salud Junior",
+    "target_country": "Perú",
+    "required_skills": ["Seguridad en datos de salud (HIPAA referencial)", "OWASP para aplicaciones clínicas", "SQL", "Análisis de logs hospitalarios", "ISO 27001 básico"],
+    "nice_to_have": ["Normativa MINSA sobre protección de datos de pacientes", "Ley 29733 (Protección de Datos Personales Perú)", "SIEM para hospitales"],
+    "career_goal": "CISO Hospitalario",
+    "sector": "Salud / Ciberseguridad",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["EsSalud TI", "Clínica Anglo Americana", "Clínica Sanna", "Grupo Auna"]
+  },
+  {
+    "role": "Desarrollador de Plataformas de Streaming Local Junior",
+    "target_country": "Perú",
+    "required_skills": ["Node.js o Python", "Video streaming (WebRTC, HLS)", "SQL", "REST APIs", "Cloud básico (AWS MediaLive)"],
+    "nice_to_have": ["CDN optimization", "DRM (Digital Rights Management)", "Análisis de audiencia con GA4"],
+    "career_goal": "Tech Lead Media & Entertainment",
+    "sector": "Media / Entretenimiento Digital",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["América TV Digital", "ATV+", "Latina Digital", "RPP Noticias digital"]
+  },
+  {
+    "role": "Especialista en Publicidad Programática Junior",
+    "target_country": "Perú",
+    "required_skills": ["DSP/SSP básico (DV360, The Trade Desk)", "Google Analytics 4", "Meta Ads avanzado", "Análisis de audiencias", "Excel avanzado"],
+    "nice_to_have": ["Data Management Platform (DMP)", "Brand safety tools", "Viewability metrics (IAS, DoubleVerify)"],
+    "career_goal": "Head of Programmatic & AdTech",
+    "sector": "Publicidad Digital / AdTech",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["GroupM Perú", "IPG Mediabrands Perú", "Havas Media Lima", "Jellyfish Perú"]
+  },
+  {
+    "role": "Analista de E-commerce Marketplace B2B Junior",
+    "target_country": "Perú",
+    "required_skills": ["SAP Ariba básico o Mercado Libre B2B", "Excel avanzado", "SQL", "Análisis de proveedores digitales", "Power BI"],
+    "nice_to_have": ["Coupa", "EDI para B2B", "Gestión de catálogo digital para empresas"],
+    "career_goal": "Gerente de Compras Digitales B2B",
+    "sector": "E-commerce B2B / Procurement",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["Backus ABInBev Perú", "Alicorp", "Kimberly-Clark", "Procter & Gamble Perú"]
+  },
+  {
+    "role": "Desarrollador de Apps para Sector Retail Junior",
+    "target_country": "Perú",
+    "required_skills": ["React Native o Flutter", "REST APIs", "Integración con sistemas POS", "SQL", "Git"],
+    "nice_to_have": ["Omnichannel arquitectura", "Integración con Falabella API o Ripley API", "Loyalty programs backend"],
+    "career_goal": "Mobile Tech Lead – Retail",
+    "sector": "Retail",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["Saga Falabella", "Ripley Perú", "Oechsle", "Vivanda / Wong / Plaza Vea (InRetail)"]
+  },
+  {
+    "role": "Especialista en Gestión de Residuos Digitales Junior",
+    "target_country": "Perú",
+    "required_skills": ["Sistemas de gestión ambiental digital", "SQL", "Excel avanzado", "Normativa MINAM (Ley 27314 residuos sólidos)", "Reportes de sostenibilidad"],
+    "nice_to_have": ["SAP EHS (Environment, Health & Safety)", "IoT para gestión de residuos", "GIS para mapeo de puntos de acopio"],
+    "career_goal": "Gerente de Gestión Ambiental Digital",
+    "sector": "Medio Ambiente / Sostenibilidad",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["OEFA (fiscalización ambiental)", "Limacompost", "Tradi SA", "SIMA Perú"]
+  },
+  {
+    "role": "Analista de Sistemas de Agua y Saneamiento Junior",
+    "target_country": "Perú",
+    "required_skills": ["SCADA para sistemas de agua", "SQL", "AutoCAD básico para redes hidráulicas", "GIS para redes de agua", "Excel avanzado"],
+    "nice_to_have": ["EPANET (modelamiento hidráulico)", "Telemetría IoT para medidores", "SUNASS normativa regulatoria"],
+    "career_goal": "Jefe de Sistemas Operacionales – EPS de Agua",
+    "sector": "Agua y Saneamiento",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["SEDAPAL Lima", "SEDAPAR Arequipa", "SEDAM Huancayo", "EMAPICA"]
+  },
+  {
+    "role": "Desarrollador de Soluciones para Sector Petrolero Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python para análisis de datos petrofísicos", "SQL", "SCADA para yacimientos", "REST APIs", "Git"],
+    "nice_to_have": ["Petrel o Landmark Decision Space", "IoT sensores de pozo", "PERUPETRO normativa digital"],
+    "career_goal": "Arquitecto de Soluciones Oil & Gas",
+    "sector": "Oil & Gas / Energía",
+    "salary_range_soles": "S/ 5,000 – S/ 9,000",
+    "companies_hiring": ["Pluspetrol Perú", "Hunt Oil Perú", "Repsol Perú", "Perenco Perú"]
+  },
+  {
+    "role": "Especialista en Energía Solar – Sistemas de Monitoreo Junior",
+    "target_country": "Perú",
+    "required_skills": ["Monitoreo de plantas fotovoltaicas (SolarEdge, Fronius APIs)", "Python básico", "SQL", "SCADA solar", "Excel para análisis energético"],
+    "nice_to_have": ["OSINERGMIN normativa solar Perú", "Power BI para dashboards de generación", "Drones para inspección de paneles"],
+    "career_goal": "Ingeniero de O&M Solar Senior",
+    "sector": "Energía Solar / Renovable",
+    "salary_range_soles": "S/ 3,500 – S/ 6,500",
+    "companies_hiring": ["Enel Green Power Perú", "Engie Perú", "Solaria Perú", "GreenPower PE"]
+  },
+  {
+    "role": "Desarrollador de Plataformas para Sector Textil Junior",
+    "target_country": "Perú",
+    "required_skills": ["PHP o Python", "ERP para manufactura textil", "SQL", "Control de producción digital", "REST APIs"],
+    "nice_to_have": ["SAP PP (Production Planning)", "Gestión de tallas y colores en sistemas", "CITEX (comercio textil) integraciones"],
+    "career_goal": "Arquitecto de Sistemas Manufactura Textil",
+    "sector": "Textil / Manufactura",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["Topy Top", "Devanlay Perú (Lacoste)", "Confecciones Textimax", "Creditex"]
+  },
+  {
+    "role": "Analista de Inteligencia Competitiva Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Web scraping con Python", "SQL", "Google Analytics 4", "Análisis de competidores digitales", "Power BI"],
+    "nice_to_have": ["SEMrush / SimilarWeb", "Social listening (Brandwatch, Mention)", "NLP para análisis de reseñas"],
+    "career_goal": "Head of Market Intelligence",
+    "sector": "Inteligencia de Mercado / Retail / Banca",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["Ipsos Perú", "Kantar Perú", "Nielsen Perú", "Apoyo Consultoría"]
+  },
+  {
+    "role": "Especialista en Infraestructura para Gaming Junior",
+    "target_country": "Perú",
+    "required_skills": ["AWS GameLift o Google Cloud Gaming", "Redes de baja latencia", "Linux", "Docker", "Monitoreo con Grafana"],
+    "nice_to_have": ["Anti-cheat systems", "CDN para juegos", "Unity o Unreal networking"],
+    "career_goal": "Cloud Gaming Infrastructure Architect",
+    "sector": "Gaming / Entretenimiento",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["Teleticket TI", "Startups gaming Lima", "Betsson Perú TI", "Rush Street Gaming Perú"]
+  },
+  {
+    "role": "Desarrollador de Plataformas para Colegios Junior",
+    "target_country": "Perú",
+    "required_skills": ["PHP o Python", "SIAGIE MINEDU integración", "SQL", "Gestión de notas y asistencia digital", "REST APIs"],
+    "nice_to_have": ["MINEDU Aprendo en Casa plataforma", "Zoom / Google Meet API para clases", "Aplicativos móviles para padres"],
+    "career_goal": "Director de Tecnología Educativa K-12",
+    "sector": "Educación Escolar / EdTech",
+    "salary_range_soles": "S/ 2,500 – S/ 4,000",
+    "companies_hiring": ["Colegios Innova Schools", "Colegios San Ignacio de Recalde", "Colegio Roosevelt", "MINEDU proyectos"]
+  },
+  {
+    "role": "Analista de Fraude en E-commerce Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Análisis de transacciones sospechosas", "Python básico", "Reglas antifraude en pasarelas de pago", "Excel avanzado"],
+    "nice_to_have": ["Kount o Sift antifraude", "Machine Learning para detección de anomalías", "Visa/Mastercard dispute management"],
+    "career_goal": "Jefe de Prevención de Fraude Digital",
+    "sector": "E-commerce / Fintech",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["MercadoLibre Perú", "Falabella.com", "Linio Perú", "Niubiz"]
+  },
+  {
+    "role": "Especialista en Gestión de Proyectos Agile – Sector Banca Junior",
+    "target_country": "Perú",
+    "required_skills": ["Scrum", "SAFe básico", "Jira avanzado", "Gestión de stakeholders bancarios", "Roadmapping de productos financieros"],
+    "nice_to_have": ["SAFe SPC certificación en curso", "OKRs para banca", "Confluence"],
+    "career_goal": "RTE (Release Train Engineer) – Banca Digital",
+    "sector": "Banca / Metodologías Ágiles",
+    "salary_range_soles": "S/ 4,000 – S/ 7,000",
+    "companies_hiring": ["BCP", "BBVA Perú", "Interbank", "Scotiabank Perú"]
+  },
+  {
+    "role": "Desarrollador Backend – Sector Telecomunicaciones Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o Python", "APIs REST para telecomunicaciones", "SQL", "Docker", "Git"],
+    "nice_to_have": ["OSIPTEL normativa APIs", "Plataformas de billing telecom (Amdocs)", "Microservicios para OSS/BSS"],
+    "career_goal": "Tech Lead Telecom",
+    "sector": "Telecomunicaciones",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["Claro Perú", "Entel Perú", "Movistar Perú (Telefónica)", "Bitel Perú"]
+  },
+  {
+    "role": "Analista de Network Operations Center (NOC) Junior",
+    "target_country": "Perú",
+    "required_skills": ["Monitoreo de redes (Nagios, Zabbix)", "Redes TCP/IP", "Linux", "Escalamiento de incidentes", "ITIL básico"],
+    "nice_to_have": ["Cisco Meraki dashboards", "Python para automatización NOC", "OSIPTEL reportes de calidad"],
+    "career_goal": "NOC Team Lead Senior",
+    "sector": "Telecomunicaciones / ISP",
+    "salary_range_soles": "S/ 2,500 – S/ 4,000",
+    "companies_hiring": ["Claro Perú NOC", "Movistar Perú", "Americatel Perú", "Optical Networks Perú"]
+  },
+  {
+    "role": "Especialista en Digitalización de Archivos Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión documental (Alfresco o OpenText básico)", "SQL básico", "Digitalización masiva y OCR", "Excel", "Archivo y metadatos"],
+    "nice_to_have": ["Ley 27269 de firmas digitales Perú", "ABBYY FineReader", "ISO 15489 gestión de documentos"],
+    "career_goal": "Jefe de Gestión Documental Digital",
+    "sector": "Gestión Documental / Sector Público y Privado",
+    "salary_range_soles": "S/ 2,200 – S/ 3,800",
+    "companies_hiring": ["Archivo General de la Nación", "SBS", "Bancos privados", "Notarías digitales Lima"]
+  },
+  {
+    "role": "Desarrollador de Soluciones para Transporte Urbano Junior",
+    "target_country": "Perú",
+    "required_skills": ["Node.js o Python", "APIs de geolocalización", "SQL", "WebSockets", "REST APIs"],
+    "nice_to_have": ["Integración con ATU (Autoridad de Transporte Urbano Lima)", "GTFS (formato datos transporte público)", "Sistemas de recaudo electrónico"],
+    "career_goal": "Arquitecto de Soluciones MaaS (Mobility as a Service)",
+    "sector": "Transporte Urbano / Smart City",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["ATU Lima", "Lima Bus (corredor complementario)", "Consorcio Expreso Ancón", "Transdev Perú"]
+  },
+  {
+    "role": "Analista de Datos – Metro de Lima Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Python básico", "Análisis de demanda de pasajeros", "Power BI", "Excel avanzado"],
+    "nice_to_have": ["GTFS datos", "Análisis de aforo con IoT", "GIS para trazado de rutas"],
+    "career_goal": "Jefe de Analytics – Transporte Masivo Lima",
+    "sector": "Transporte Masivo / Smart City",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["Línea 1 Metro de Lima (CAF)", "Línea 2 Metro de Lima", "MTC Perú", "ProTransporte Lima"]
+  },
+  {
+    "role": "Especialista en Seguridad para Startups Junior",
+    "target_country": "Perú",
+    "required_skills": ["DevSecOps básico", "OWASP Top 10", "Análisis de vulnerabilidades en cloud", "Git", "Docker security"],
+    "nice_to_have": ["Snyk o Trivy", "AWS Security basics", "Penetration testing básico"],
+    "career_goal": "Security Engineering Lead en Startup",
+    "sector": "Startups / Tech",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["Yape (BCP)", "Rextie", "Prestamype", "Finsmart", "Comparabien"]
+  },
+  {
+    "role": "Analista de Experiencia de Usuario para Fintech Peruano Junior",
+    "target_country": "Perú",
+    "required_skills": ["UX Research", "Figma", "Pruebas de usabilidad con usuarios peruanos", "Análisis de customer journey en apps financieras", "NPS bancario"],
+    "nice_to_have": ["Maze.co", "Accesibilidad digital para usuarios no bancarizados", "Comportamiento usuario MYPE digital"],
+    "career_goal": "UX Lead Fintech",
+    "sector": "Fintech / UX",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["Yape", "Culqi", "BanBif digital", "Credinka", "Afluenta Perú"]
+  },
+  {
+    "role": "Desarrollador de Chatbots para Banca Peruana Junior",
+    "target_country": "Perú",
+    "required_skills": ["Dialogflow o AWS Lex", "Node.js o Python", "WhatsApp Business API (BSP peruano)", "REST APIs bancarias", "NLP básico"],
+    "nice_to_have": ["Integración con Yape/BIM para pagos conversacionales", "Procesamiento de lenguaje español peruano", "LangChain para RAG bancario"],
+    "career_goal": "Conversational AI Architect – Banca",
+    "sector": "Banca / IA Conversacional",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["BCP Plin", "BBVA Perú chatbot", "Interbank TI", "Scotiabank Perú digital"]
+  },
+  {
+    "role": "Especialista en Datos para Sector Retail Moderno Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Python", "Power BI", "Análisis de ticket promedio y conversión", "Google Analytics 4 para e-commerce"],
+    "nice_to_have": ["Forecasting de demanda con ML", "A/B testing en tiendas online", "CRM retail (Salesforce Commerce Cloud)"],
+    "career_goal": "Head of Data – Retail Omnicanal",
+    "sector": "Retail / E-commerce",
+    "salary_range_soles": "S/ 3,000 – S/ 5,000",
+    "companies_hiring": ["InRetail (Wong, Metro, Plaza Vea)", "Tottus Perú", "Makro Perú", "Promart Homecenter"]
+  },
+  {
+    "role": "Desarrollador de Soluciones para Sector Automotriz Junior",
+    "target_country": "Perú",
+    "required_skills": ["PHP o .NET", "SQL", "ERP para concesionarias (CDK Global básico)", "REST APIs", "Git"],
+    "nice_to_have": ["Integración con SUNARP para registro vehicular", "DMS (Dealer Management System)", "MTC homologaciones API"],
+    "career_goal": "Arquitecto de Sistemas Automotrices",
+    "sector": "Automotriz",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["Mitsui AutoCorp Perú", "Toyota Perú (Mitsui)", "Derco Perú", "Gildemeister Perú"]
+  },
+  {
+    "role": "Analista de Inteligencia Artificial – Sector Consumo Masivo Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "Machine Learning aplicado a ventas", "SQL", "Análisis de rutas de distribución", "Power BI"],
+    "nice_to_have": ["Algoritmos de optimización de inventarios", "Pronóstico de demanda (Prophet, SARIMA)", "SAP IBP (Integrated Business Planning)"],
+    "career_goal": "AI Lead – Consumo Masivo",
+    "sector": "Consumo Masivo / FMCG",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["Alicorp", "Backus ABInBev Perú", "Procter & Gamble Perú", "Nestlé Perú"]
+  },
+  {
+    "role": "Desarrollador Full Stack – Sector Medios de Comunicación Junior",
+    "target_country": "Perú",
+    "required_skills": ["React", "Node.js", "SQL o NoSQL", "REST APIs", "Git"],
+    "nice_to_have": ["CMS headless (Contentful o Strapi)", "CDN para contenido multimedia", "SEO técnico para noticias (Google News)"],
+    "career_goal": "Tech Lead Media Digital",
+    "sector": "Medios de Comunicación / News Tech",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["El Comercio TI", "RPP Noticias Digital", "La República", "Grupo Epensa"]
+  },
+  {
+    "role": "Especialista en Identidad Digital y Firma Electrónica Junior",
+    "target_country": "Perú",
+    "required_skills": ["Firma digital Ley 27269 Perú", "PKI básico", "RENIEC IDME integración", "REST APIs", "SQL básico"],
+    "nice_to_have": ["eIDAS referencial", "Certificados digitales INDECOPI", "DocuSign o Adobe Sign enterprise"],
+    "career_goal": "Arquitecto de Identidad Digital Nacional",
+    "sector": "Identidad Digital / GovTech / Banca",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["RENIEC Digital", "INDECOPI", "BCP Firma Digital", "Rimac Firma Electrónica"]
+  },
+  {
+    "role": "Analista de FinOps Cloud Junior",
+    "target_country": "Perú",
+    "required_skills": ["AWS Cost Explorer o Azure Cost Management", "SQL", "Power BI", "Etiquetado de recursos cloud", "Excel avanzado"],
+    "nice_to_have": ["CloudHealth by VMware", "Kubernetes cost optimization", "FinOps Foundation certificación"],
+    "career_goal": "FinOps Lead / Cloud Economist",
+    "sector": "Tecnología / Cloud",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["BCP Cloud Center", "Interbank TI", "Rimac Seguros TI", "Encora Perú"]
+  },
+  {
+    "role": "Desarrollador de Plataformas para Cámaras de Comercio Junior",
+    "target_country": "Perú",
+    "required_skills": ["PHP o Python", "CRM básico", "SQL", "Plataformas de membresías digitales", "REST APIs"],
+    "nice_to_have": ["Eventbrite API para eventos empresariales", "COMEX Perú datos", "Power BI para estadísticas comerciales"],
+    "career_goal": "Jefe de Transformación Digital – Cámara de Comercio",
+    "sector": "Asociaciones Empresariales",
+    "salary_range_soles": "S/ 2,500 – S/ 4,000",
+    "companies_hiring": ["Cámara de Comercio de Lima (CCL)", "COMEX Perú", "ADEX", "SNI (Sociedad Nacional de Industrias)"]
+  },
+  {
+    "role": "Especialista en Tecnología para el Agro (Riego Tecnificado TI) Junior",
+    "target_country": "Perú",
+    "required_skills": ["IoT para sensores de humedad de suelo", "Python básico", "SQL", "Control de riego por telemetría", "Excel avanzado"],
+    "nice_to_have": ["LoRaWAN / Sigfox para campo", "Plataformas PSI (Proyecto Subsectorial de Irrigación) datos", "Machine Learning para predicción de riego"],
+    "career_goal": "Especialista en Precision Agriculture Senior",
+    "sector": "AgriTech / Riego",
+    "salary_range_soles": "S/ 3,000 – S/ 5,500",
+    "companies_hiring": ["Proyecto Especial Olmos Tinajones", "Autodema Arequipa", "Chavimochic La Libertad", "Startups AgriTech Ica"]
+  },
+  {
+    "role": "Desarrollador de Sistemas para Sector Cemento y Construcción Junior",
+    "target_country": "Perú",
+    "required_skills": ["SAP para manufactura pesada", "SQL", "Control de calidad digital", "REST APIs", "Git"],
+    "nice_to_have": ["SAP PP/QM para producción de cemento", "Integración con laboratorios de calidad", "Power BI para producción"],
+    "career_goal": "Arquitecto de Sistemas Manufactura Pesada",
+    "sector": "Cemento / Construcción",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["UNACEM Perú", "Cementos Pacasmayo", "Yura SA Arequipa", "Caliza Cemento Inca"]
+  },
+  {
+    "role": "Analista de Customer Success – SaaS B2B Perú Junior",
+    "target_country": "Perú",
+    "required_skills": ["Onboarding de clientes empresariales", "SQL básico", "CRM (Salesforce o HubSpot)", "KPIs de retención (NRR, Churn)", "Excel"],
+    "nice_to_have": ["Gainsight o ChurnZero", "Power BI para customer health score", "Conocimiento de mercado PYME peruano"],
+    "career_goal": "Head of Customer Success",
+    "sector": "SaaS / Tech B2B Perú",
+    "salary_range_soles": "S/ 2,500 – S/ 4,500",
+    "companies_hiring": ["Alegra Perú (SaaS contable)", "Bsale Perú", "Contifico Perú", "Nubox Perú"]
+  },
+  {
+    "role": "Especialista en Tecnología para el Sector Educativo SENATI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Sistemas de gestión académica técnica", "SQL", "Simuladores industriales básicos", "Moodle personalizado", "Excel avanzado"],
+    "nice_to_have": ["Gemelos digitales para capacitación técnica", "Realidad aumentada para mecatrónica", "SAP para formación ERP"],
+    "career_goal": "Gerente de Tecnología Educativa Técnica",
+    "sector": "Educación Técnica",
+    "salary_range_soles": "S/ 2,800 – S/ 4,500",
+    "companies_hiring": ["SENATI", "Tecsup", "SENCICO", "IPAE"]
+  },
+  {
+    "role": "Desarrollador de Integración con SUNAT y Entidades del Estado Junior",
+    "target_country": "Perú",
+    "required_skills": ["Webservices SUNAT (WSDL/SOAP)", "UBL 2.1 XML", "Java o .NET o PHP", "PDT PLAME / Declaraciones", "SQL"],
+    "nice_to_have": ["RENIEC DNI validation API", "PRODUCE REMYPE integración", "SBS microfinancieras integración"],
+    "career_goal": "Arquitecto de Integraciones Gubernamentales Perú",
+    "sector": "GovTech / Integraciones Estado",
+    "salary_range_soles": "S/ 3,500 – S/ 6,000",
+    "companies_hiring": ["Nubefact", "Efact", "Greenter (OSE)", "Digiflow Perú"]
+  },
+  {
+    "role": "Analista de Activos Digitales y Criptomonedas Junior",
+    "target_country": "Perú",
+    "required_skills": ["Conocimiento de blockchain (Bitcoin/Ethereum)", "SQL", "Python básico para análisis on-chain", "Excel avanzado", "Normativa SBS sobre criptoactivos Perú"],
+    "nice_to_have": ["AML para criptomonedas (Chainalysis básico)", "DeFi protocols análisis", "CFA Crypto track"],
+    "career_goal": "Head of Digital Assets – Banca / Fintech Perú",
+    "sector": "Fintech / Criptoactivos",
+    "salary_range_soles": "S/ 3,500 – S/ 6,500",
+    "companies_hiring": ["Bitinka (exchange peruano)", "Ripio Perú", "BCP blockchain proyecto", "Kushki Crypto"]
+  },
+  {
+    "role": "Especialista en Transformación Digital para PYME Peruana Junior",
+    "target_country": "Perú",
+    "required_skills": ["Implementación de ERP básico para PYME (Alegra, Bsale, Conta.pe)", "Excel avanzado", "Diagnóstico digital de empresas", "Google Workspace admin", "Capacitación a usuarios"],
+    "nice_to_have": ["COFIDE programas de digitalización MYPE", "Facturación electrónica para PYME", "E-commerce para pequeñas empresas (Tiendanube)"],
+    "career_goal": "Consultor Senior de Transformación Digital PYME",
+    "sector": "PYME / Consultoría Digital",
+    "salary_range_soles": "S/ 2,200 – S/ 4,000",
+    "companies_hiring": ["PRODUCE MinTIC proyectos", "Cámara de Comercio de Lima", "Telefónica Empresas", "Freelance / consultoras independientes Lima"]
+  }
+]

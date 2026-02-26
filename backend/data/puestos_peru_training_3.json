@@ -1,0 +1,359 @@
+[
+  {
+    "role": "Ingeniero de Prompt Junior",
+    "target_country": "Perú",
+    "required_skills": ["Prompt Engineering", "Python básico", "OpenAI API o Claude API", "Análisis de outputs de LLMs", "Documentación técnica"],
+    "nice_to_have": ["LangChain", "RAG (Retrieval Augmented Generation)", "Evaluación de modelos LLM"],
+    "career_goal": "AI Engineer / LLM Specialist"
+  },
+  {
+    "role": "Especialista en Prevención de Fraude Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Análisis de transacciones", "Reglas de detección de fraude", "Excel avanzado", "Python básico"],
+    "nice_to_have": ["Machine Learning para detección de anomalías", "FICO Falcon", "SAS Fraud Management"],
+    "career_goal": "Especialista en Fraude Financiero Senior"
+  },
+  {
+    "role": "Desarrollador de Aplicaciones Móviles Bancarias Junior",
+    "target_country": "Perú",
+    "required_skills": ["React Native o Flutter", "REST APIs seguras", "Biometría móvil", "OAuth2", "Git"],
+    "nice_to_have": ["Open Banking Perú (SBS)", "Tokenización PCI", "Pruebas de seguridad móvil"],
+    "career_goal": "Mobile Banking Tech Lead"
+  },
+  {
+    "role": "Analista de Gobierno Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión de proyectos TI en sector público", "BPMN", "Plataforma GOB.PE", "Interoperabilidad del Estado (PIDE)", "Documentación técnica"],
+    "nice_to_have": ["PCM / SecGob normativa", "COBIT", "Arquitectura TOGAF básica"],
+    "career_goal": "Consultor de Gobierno Digital Senior"
+  },
+  {
+    "role": "Ingeniero de Datos – Sector Minería Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "SQL", "Sensores IoT industriales", "Procesamiento de series de tiempo", "AWS o Azure básico"],
+    "nice_to_have": ["OSIsoft PI System", "Historiadores de datos industriales", "Databricks"],
+    "career_goal": "Arquitecto de Datos Industrial – Mining Tech"
+  },
+  {
+    "role": "Especialista en Automatización Industrial Junior",
+    "target_country": "Perú",
+    "required_skills": ["PLC Siemens o Allen-Bradley", "SCADA", "Redes industriales Profibus/Modbus", "Instrumentación básica", "AutoCAD eléctrico"],
+    "nice_to_have": ["DCS", "Python para industria", "OPC-UA"],
+    "career_goal": "Ingeniero de Automatización Senior – Minería / Manufactura"
+  },
+  {
+    "role": "Analista de Ciberseguridad Bancaria Junior",
+    "target_country": "Perú",
+    "required_skills": ["Normativa SBS Perú (Circular G-140)", "Análisis de vulnerabilidades", "SIEM", "Gestión de incidentes", "ISO 27001"],
+    "nice_to_have": ["PCI DSS", "SWIFT CSP", "Forense digital básico"],
+    "career_goal": "CISO Adjunto en Banca Peruana"
+  },
+  {
+    "role": "Desarrollador de Plataformas HealthTech Junior",
+    "target_country": "Perú",
+    "required_skills": ["Node.js o Python", "REST APIs", "SQL", "Integración con HIS hospitalarios", "Git"],
+    "nice_to_have": ["HL7 FHIR", "Telemedicina APIs", "MINSA normativa digital"],
+    "career_goal": "Arquitecto de Soluciones HealthTech"
+  },
+  {
+    "role": "Analista de Historia Clínica Electrónica Junior",
+    "target_country": "Perú",
+    "required_skills": ["OpenMRS o sistema HIS peruano", "SQL", "Procesos clínicos básicos", "Soporte a usuarios médicos", "Excel"],
+    "nice_to_have": ["HL7 CDA", "DICOM básico", "MINSA estándares HCE"],
+    "career_goal": "Especialista en Informática en Salud"
+  },
+  {
+    "role": "Especialista en EdTech Junior",
+    "target_country": "Perú",
+    "required_skills": ["Moodle", "Producción de contenido e-learning", "SCORM", "HTML/CSS básico", "Análisis de métricas de aprendizaje"],
+    "nice_to_have": ["xAPI", "Articulate Storyline", "Canvas LMS"],
+    "career_goal": "Director de Tecnología Educativa"
+  },
+  {
+    "role": "Ingeniero de Telecomunicaciones Junior",
+    "target_country": "Perú",
+    "required_skills": ["Redes móviles 4G/5G", "Planificación de radio frecuencias", "Equipos Nokia o Ericsson", "Python para reportes", "AutoCAD"],
+    "nice_to_have": ["NSA/SA 5G", "O-RAN", "Core Network IMS"],
+    "career_goal": "Ingeniero de Red Senior – Claro / Entel / Movistar Perú"
+  },
+  {
+    "role": "Analista de Riesgos Crediticios Junior (MiBanco / Compartamos)",
+    "target_country": "Perú",
+    "required_skills": ["Modelos de scoring crediticio", "Python o R", "SQL", "Estadística", "Excel avanzado"],
+    "nice_to_have": ["SAS Credit Scoring", "Buró Infocorp Perú", "Machine Learning aplicado a créditos MYPE"],
+    "career_goal": "Jefe de Riesgos Crediticios"
+  },
+  {
+    "role": "Desarrollador de Billeteras Digitales Junior (Yape / Plin)",
+    "target_country": "Perú",
+    "required_skills": ["React Native", "APIs de pagos instantáneos", "QR interoperabilidad BCRP", "Seguridad en transacciones", "Git"],
+    "nice_to_have": ["ISO 20022", "NFC Payments", "SRC scheme peruano"],
+    "career_goal": "Tech Lead Pagos Digitales Retail Banking"
+  },
+  {
+    "role": "Especialista en Tesorería Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["SAP Treasury o Kyriba", "Gestión de flujos de caja", "SQL", "Excel avanzado", "Integración bancaria SWIFT"],
+    "nice_to_have": ["FIS Integrity", "APIs bancarias peruanas (BCP, BBVA, Scotiabank)", "Python para automatización"],
+    "career_goal": "Gerente de Tesorería Corporativa"
+  },
+  {
+    "role": "Analista de Operaciones Fintech Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión de onboarding digital", "KYC/AML básico", "SQL", "Jira", "Excel"],
+    "nice_to_have": ["Normativa SBS sobre fintech", "Jumio o Truora (identidad digital)", "Python básico"],
+    "career_goal": "Operations Manager Fintech"
+  },
+  {
+    "role": "Desarrollador de Soluciones Agroindustriales Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python o Java", "IoT agrícola básico", "SQL", "REST APIs", "Git"],
+    "nice_to_have": ["Telemetría de suelos", "Drones agrícolas software", "Plataformas AgriTech (Agrobit, etc.)"],
+    "career_goal": "Arquitecto de Soluciones AgriTech"
+  },
+  {
+    "role": "Analista de Comercio Exterior TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["SUNAT Aduanas (SIGAD)", "Declaraciones DAM", "Excel avanzado", "SQL básico", "Power BI"],
+    "nice_to_have": ["Ventanilla Única de Comercio Exterior (VUCE)", "SAP Global Trade", "Python para análisis"],
+    "career_goal": "Especialista en Digitalización Aduanera"
+  },
+  {
+    "role": "Ingeniero de Infraestructura Critica Junior",
+    "target_country": "Perú",
+    "required_skills": ["Redes OT/IT", "Protocolos industriales (DNP3, IEC 61850)", "Ciberseguridad OT básica", "Linux", "SCADA"],
+    "nice_to_have": ["ISA/IEC 62443", "Claroty o Nozomi Networks", "Sector energético peruano (COES)"],
+    "career_goal": "Especialista OT/ICS Security"
+  },
+  {
+    "role": "Analista de Inteligencia de Amenazas (Threat Intelligence) Junior",
+    "target_country": "Perú",
+    "required_skills": ["OSINT", "Análisis de malware básico", "MITRE ATT&CK", "Python básico", "Inglés técnico"],
+    "nice_to_have": ["STIX/TAXII", "Recorded Future o ThreatConnect", "Forense digital"],
+    "career_goal": "Threat Intelligence Analyst Senior"
+  },
+  {
+    "role": "Product Manager Junior – Banca Digital",
+    "target_country": "Perú",
+    "required_skills": ["Gestión de producto digital", "User stories", "SQL básico", "Métricas de producto (NPS, DAU)", "Agile/Scrum"],
+    "nice_to_have": ["Experiencia en banca retail peruana", "OKRs", "Figma"],
+    "career_goal": "Head of Product – Banca Digital"
+  },
+  {
+    "role": "Especialista en Open Banking Junior",
+    "target_country": "Perú",
+    "required_skills": ["APIs REST financieras", "OAuth2 / OpenID Connect", "Normativa SBS Open Finance Perú", "Postman", "Documentación técnica"],
+    "nice_to_have": ["PSD2 referencia", "Gestión de consentimientos", "API Management (Kong o Apigee)"],
+    "career_goal": "Arquitecto de Open Banking"
+  },
+  {
+    "role": "Desarrollador de Soluciones para AFP Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o .NET", "SQL Server", "Integración con SBS Perú", "Procesos previsionales básicos", "REST APIs"],
+    "nice_to_have": ["Normativa AFP (SBS resoluciones)", "Declaraciones PDT-PLAME", "Microservicios"],
+    "career_goal": "Especialista en Sistemas Previsionales"
+  },
+  {
+    "role": "Analista de Cumplimiento Regulatorio TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Normativa SBS / SMV Perú", "LAFT (Lavado de activos)", "KYC digital", "Excel", "Documentación de controles"],
+    "nice_to_have": ["ACAMS certificación en curso", "Sistemas AML (TONBELLER, SAS AML)", "Power BI"],
+    "career_goal": "Compliance Officer Senior"
+  },
+  {
+    "role": "Ingeniero de Redes Junior – ISP Regional Perú",
+    "target_country": "Perú",
+    "required_skills": ["BGP / OSPF", "Cisco IOS", "Fibra óptica DWDM básico", "MPLS", "Monitoreo NOC"],
+    "nice_to_have": ["CCNP routing", "Mikrotik", "OSRM Perú (Osiptel normativa)"],
+    "career_goal": "Ingeniero de Redes Senior – Carrier Grade"
+  },
+  {
+    "role": "Especialista en Marketing de Performance Junior",
+    "target_country": "Perú",
+    "required_skills": ["Google Ads", "Meta Ads", "TikTok Ads", "Google Analytics 4", "Análisis de ROI / ROAS"],
+    "nice_to_have": ["Programmatic advertising", "Data Studio reporting", "CRO"],
+    "career_goal": "Head of Performance Marketing"
+  },
+  {
+    "role": "Analista de Experiencia de Cliente Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["NPS y CSAT", "Análisis de customer journey", "Excel / Power BI", "Gestión de reclamos digitales", "SQL básico"],
+    "nice_to_have": ["Qualtrics o Medallia", "Salesforce Service Cloud", "INDECOPI normativa atención al cliente"],
+    "career_goal": "CX Director"
+  },
+  {
+    "role": "Desarrollador de Soluciones para SUNAT Junior",
+    "target_country": "Perú",
+    "required_skills": ["XML UBL 2.1", "Webservices SUNAT", "Java o .NET o PHP", "PDT PLAME / DAOT", "SQL"],
+    "nice_to_have": ["OSE (Operador de Servicios Electrónicos)", "SIRE (Sistema Integrado de Registros Electrónicos)", "API REST SUNAT"],
+    "career_goal": "Arquitecto de Cumplimiento Tributario Digital"
+  },
+  {
+    "role": "Especialista en Robótica Industrial Junior",
+    "target_country": "Perú",
+    "required_skills": ["Programación de robots ABB o FANUC o KUKA", "Integración con PLC", "AutoCAD mecánico", "Visión artificial básica", "Python básico"],
+    "nice_to_have": ["ROS (Robot Operating System)", "Cobots UR", "Computer Vision con OpenCV"],
+    "career_goal": "Ingeniero de Robótica Senior – Manufactura / Minería"
+  },
+  {
+    "role": "Analista de Big Data Junior – Retail Perú",
+    "target_country": "Perú",
+    "required_skills": ["Python", "SQL", "Hadoop o Spark básico", "Power BI", "Análisis de comportamiento de compra"],
+    "nice_to_have": ["Snowflake", "dbt", "Algoritmos de recomendación"],
+    "career_goal": "Lead Data Analyst – Retail Analytics"
+  },
+  {
+    "role": "Desarrollador de Apps para Delivery Junior",
+    "target_country": "Perú",
+    "required_skills": ["React Native o Flutter", "Mapas (Google Maps API)", "WebSockets", "REST APIs", "Git"],
+    "nice_to_have": ["Optimización de rutas", "Push notifications", "Integración con Rappi / PedidosYa / Glovo API"],
+    "career_goal": "Mobile Tech Lead – On Demand Services"
+  },
+  {
+    "role": "Especialista en Seguridad de Identidad Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Identity Providers (Okta, Keycloak)", "OAuth2 / OIDC / SAML", "MFA", "Directorio activo", "Gestión de accesos privilegiados"],
+    "nice_to_have": ["RENIEC IDME API Perú", "Reconocimiento facial KYC", "Zero Trust Architecture"],
+    "career_goal": "Identity & Access Management Architect"
+  },
+  {
+    "role": "Coordinador de Proyectos TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión de proyectos (PMI básico)", "Jira", "MS Project", "Comunicación con stakeholders", "Presupuesto de proyectos TI"],
+    "nice_to_have": ["PMP en curso", "Metodologías híbridas", "Confluence"],
+    "career_goal": "Gerente de Proyectos TI Senior"
+  },
+  {
+    "role": "Analista de Sostenibilidad y ESG Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["Reporte GRI o SASB", "Análisis de huella de carbono", "Excel avanzado", "Power BI", "SQL básico"],
+    "nice_to_have": ["SAP Sustainability", "Normativa MINAM Perú", "Python para análisis ambiental"],
+    "career_goal": "Director de Sostenibilidad Corporativa"
+  },
+  {
+    "role": "Especialista en Contenidos Digitales Junior",
+    "target_country": "Perú",
+    "required_skills": ["Redacción SEO", "WordPress", "Redes sociales", "Canva o Adobe Express", "Google Analytics"],
+    "nice_to_have": ["Video editing (Premiere básico)", "Email marketing", "Estrategia de contenidos"],
+    "career_goal": "Content Manager Senior"
+  },
+  {
+    "role": "Desarrollador de Integraciones RENIEC Junior",
+    "target_country": "Perú",
+    "required_skills": ["Webservice RENIEC (validación DNI)", "Java o .NET o PHP", "SOAP/REST", "SQL", "Seguridad en APIs"],
+    "nice_to_have": ["RENIEC AFIS biometría", "RENIEC IDME plataforma", "Firma digital INDECOPI"],
+    "career_goal": "Arquitecto de Identidad Digital Perú"
+  },
+  {
+    "role": "Especialista en Logística Digital Junior",
+    "target_country": "Perú",
+    "required_skills": ["WMS (Manhattan o SAP EWM)", "TMS básico", "SQL", "Excel avanzado", "Análisis de KPIs logísticos"],
+    "nice_to_have": ["Power BI", "Python para optimización", "RFID / trazabilidad"],
+    "career_goal": "Gerente de Operaciones Logísticas Digitales"
+  },
+  {
+    "role": "Ingeniero de Calidad de Software Junior",
+    "target_country": "Perú",
+    "required_skills": ["ISO 25010", "Pruebas de rendimiento (JMeter)", "Pruebas de seguridad básicas", "SQL", "Documentación de defectos"],
+    "nice_to_have": ["ISTQB Certified", "Gatling", "K6 load testing"],
+    "career_goal": "Quality Engineering Lead"
+  },
+  {
+    "role": "Analista de Inteligencia Comercial Junior",
+    "target_country": "Perú",
+    "required_skills": ["Power BI", "SQL", "Excel avanzado", "Análisis de mercado peruano", "Fuentes de datos Ipsos / Kantar"],
+    "nice_to_have": ["Python para scraping de datos", "Tableau", "Nielsen Market Intelligence"],
+    "career_goal": "Gerente de Inteligencia de Negocios"
+  },
+  {
+    "role": "Desarrollador de Kioscos y Puntos Digitales Junior",
+    "target_country": "Perú",
+    "required_skills": ["Electron.js o Java Desktop", "Integración con impresoras y lectores QR", "REST APIs", "SQL", "Diseño de UI básico"],
+    "nice_to_have": ["Integración con Visa Net / Niubiz POS", "Raspberry Pi deployment", "Gestión remota de dispositivos (MDM)"],
+    "career_goal": "Especialista en Soluciones de Self-Service"
+  },
+  {
+    "role": "Analista de Portafolio TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Gestión de portafolio de proyectos", "Excel avanzado", "Power BI", "Jira", "Metodología PMO"],
+    "nice_to_have": ["ServiceNow PPM", "PfMP certificación", "OKRs tecnológicos"],
+    "career_goal": "PMO Director"
+  },
+  {
+    "role": "Especialista en Gestión de Contratos TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["Ley de Contrataciones del Estado (OSCE)", "Gestión de proveedores TI", "Excel", "SAP MM básico", "Documentación contractual"],
+    "nice_to_have": ["Plataforma SEACE", "Licitaciones públicas TI", "Gestión de SLAs"],
+    "career_goal": "Gerente de Compras y Contratos TI"
+  },
+  {
+    "role": "Desarrollador de Soluciones para Seguros Junior",
+    "target_country": "Perú",
+    "required_skills": ["Java o .NET", "SQL", "Procesos de siniestros básicos", "REST APIs", "Git"],
+    "nice_to_have": ["Guidewire o Duck Creek", "Normativa SBS seguros Perú", "Microservicios"],
+    "career_goal": "Arquitecto de Sistemas Aseguradores"
+  },
+  {
+    "role": "Especialista en Infraestructura Cloud Híbrida Junior",
+    "target_country": "Perú",
+    "required_skills": ["Azure Hybrid o AWS Outposts", "VMware vSphere", "Backup en nube", "Networking VPN site-to-site", "PowerShell"],
+    "nice_to_have": ["Azure Arc", "Terraform", "Migración lift-and-shift"],
+    "career_goal": "Cloud Infrastructure Architect"
+  },
+  {
+    "role": "Analista de Datos – Sector Retail (Falabella / Ripley)",
+    "target_country": "Perú",
+    "required_skills": ["SQL", "Python o R", "Power BI o Tableau", "Análisis de inventarios y ventas", "Excel avanzado"],
+    "nice_to_have": ["Forecasting de demanda", "Segmentación de clientes RFM", "dbt"],
+    "career_goal": "Head of Retail Analytics"
+  },
+  {
+    "role": "Especialista en Transformación Ágil Junior",
+    "target_country": "Perú",
+    "required_skills": ["Scrum", "Kanban", "Facilitación de ceremonias ágiles", "Jira", "Gestión del cambio organizacional"],
+    "nice_to_have": ["SAFe (Scaled Agile)", "OKRs", "Coaching Agile"],
+    "career_goal": "Agile Coach Senior"
+  },
+  {
+    "role": "Desarrollador de Soluciones para Sector Educación Pública Junior",
+    "target_country": "Perú",
+    "required_skills": ["PHP o Java", "SQL", "Integración con SIAGIE (MINEDU)", "REST APIs", "Git"],
+    "nice_to_have": ["Plataforma PerúEduca", "Integración con RENIEC para matrícula", "Arquitectura GovTech"],
+    "career_goal": "Arquitecto de Sistemas – Sector Público Educativo"
+  },
+  {
+    "role": "Especialista en Analítica Avanzada para Salud Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "SQL", "Estadística aplicada a salud", "Power BI", "Datos del MINSA / EsSalud"],
+    "nice_to_have": ["R para epidemiología", "Modelos predictivos de enfermedades", "SUSALUD integraciones"],
+    "career_goal": "Director de Analítica en Salud Pública"
+  },
+  {
+    "role": "Especialista en Customer Data Platform (CDP) Junior",
+    "target_country": "Perú",
+    "required_skills": ["Segment o mParticle básico", "SQL", "Integración de fuentes de datos", "Python básico", "Análisis de comportamiento digital"],
+    "nice_to_have": ["Salesforce Data Cloud", "Real-time personalization", "First-party data strategy"],
+    "career_goal": "Head of Customer Intelligence"
+  },
+  {
+    "role": "Especialista en Continuidad de Negocio TI Junior",
+    "target_country": "Perú",
+    "required_skills": ["BCP / DRP", "ISO 22301 básico", "Análisis de impacto al negocio (BIA)", "Documentación de planes", "Pruebas de recuperación"],
+    "nice_to_have": ["CBCP certificación", "Cloud DR con AWS/Azure", "Normativa SBS continuidad operativa"],
+    "career_goal": "Business Continuity Manager"
+  },
+  {
+    "role": "Desarrollador de Herramientas de IA Generativa Junior",
+    "target_country": "Perú",
+    "required_skills": ["Python", "OpenAI API o Anthropic API", "LangChain o LlamaIndex", "REST APIs", "Git"],
+    "nice_to_have": ["RAG pipelines", "Fine-tuning de LLMs", "Vector databases (Pinecone, Weaviate)"],
+    "career_goal": "AI Engineer Lead – GenAI Applications"
+  },
+  {
+    "role": "Analista de Seguridad Informática – Sector Telecomunicaciones Junior",
+    "target_country": "Perú",
+    "required_skills": ["Seguridad en redes móviles", "Análisis de vulnerabilidades en infraestructura telecom", "Linux", "Python básico", "OSIPTEL normativa"],
+    "nice_to_have": ["SS7/Diameter security", "3GPP security specs", "GSMA security guidelines"],
+    "career_goal": "Telecom Security Architect"
+  }
+]

@@ -8,6 +8,8 @@
     "start:dev": "ts-node-dev --respawn --transpile-only src/main.ts",
     "build": "tsc -p tsconfig.build.json",
     "import:career-paths": "ts-node scripts/import-career-paths.ts",
+    "import:puestos-peru": "ts-node scripts/import-puestos-peru-training.ts",
+    "import:puestos-peru-2": "ts-node scripts/import-puestos-peru-training.ts puestos_peru_training_2.json",
     "seed:cv-training": "ts-node cv_training_seed.ts",
     "seed:cv-training-roadmap": "ts-node cv_training_with_roadmap.ts"
   },
