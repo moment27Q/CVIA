@@ -739,7 +739,502 @@
       "detected_seniority": "no_especificado",
       "description": "automatizacion automatizacion diseno software ingles",
       "processed_timestamp": "2026-02-24T16:51:01.835Z"
+    },
+    {
+      "title": "Buscar \"desarrollador frontend\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "desarrollador frontend desarrollador frontend automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:27:44.678Z"
+    },
+    {
+      "title": "Buscar \"desarrollador frontend\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "desarrollador frontend desarrollador frontend automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:27:44.683Z"
+    },
+    {
+      "title": "Buscar \"desarrollador frontend\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "desarrollador frontend desarrollador frontend automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:27:44.684Z"
+    },
+    {
+      "title": "Buscar \"desarrollador frontend\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "desarrollador frontend desarrollador frontend automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:27:44.684Z"
+    },
+    {
+      "title": "Buscar \"desarrollador frontend\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "desarrollador frontend desarrollador frontend automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:27:44.684Z"
+    },
+    {
+      "title": "Buscar \"analista de datos\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20analista%20de%20datos%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar analista de datos en Computrabajo (Peru). Computrabajo. Peru. analista de datos analista de datos automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:36:13.383Z"
+    },
+    {
+      "title": "Buscar \"analista de datos\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=analista%20de%20datos&l=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar analista de datos en Indeed (Peru). Indeed. Peru. analista de datos analista de datos automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:36:13.389Z"
+    },
+    {
+      "title": "Buscar \"analista de datos\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20analista%20de%20datos%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar analista de datos en Bumeran (Peru). Bumeran. Peru. analista de datos analista de datos automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:36:13.389Z"
+    },
+    {
+      "title": "Buscar \"analista de datos\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=analista%20de%20datos&location=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar analista de datos en LinkedIn (Peru). LinkedIn. Peru. analista de datos analista de datos automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:36:13.390Z"
+    },
+    {
+      "title": "Buscar \"analista de datos\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=analista%20de%20datos&locT=C&locId=1",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar analista de datos en Glassdoor (Peru). Glassdoor. Peru. analista de datos analista de datos automatizacion diseno software",
+      "processed_timestamp": "2026-02-26T02:36:13.390Z"
+    },
+    {
+      "title": "Buscar \"profesional\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20profesional%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar profesional en Computrabajo (Peru). Computrabajo. Peru. profesional profesional html5 css3 interfaces",
+      "processed_timestamp": "2026-02-26T03:02:49.670Z"
+    },
+    {
+      "title": "Buscar \"profesional\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=profesional&l=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar profesional en Indeed (Peru). Indeed. Peru. profesional profesional html5 css3 interfaces",
+      "processed_timestamp": "2026-02-26T03:02:49.671Z"
+    },
+    {
+      "title": "Buscar \"profesional\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20profesional%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar profesional en Bumeran (Peru). Bumeran. Peru. profesional profesional html5 css3 interfaces",
+      "processed_timestamp": "2026-02-26T03:02:49.671Z"
+    },
+    {
+      "title": "Buscar \"profesional\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=profesional&location=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar profesional en LinkedIn (Peru). LinkedIn. Peru. profesional profesional html5 css3 interfaces",
+      "processed_timestamp": "2026-02-26T03:02:49.672Z"
+    },
+    {
+      "title": "Buscar \"profesional\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=profesional&locT=C&locId=1",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar profesional en Glassdoor (Peru). Glassdoor. Peru. profesional profesional html5 css3 interfaces",
+      "processed_timestamp": "2026-02-26T03:02:49.672Z"
+    },
+    {
+      "title": "Buscar \"java\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20java%20Peru",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en Computrabajo (Peru). Computrabajo. Peru. java java python git excel",
+      "processed_timestamp": "2026-02-26T03:19:31.117Z"
+    },
+    {
+      "title": "Buscar \"java\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=java&l=Peru",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en Indeed (Peru). Indeed. Peru. java java python git excel",
+      "processed_timestamp": "2026-02-26T03:19:31.121Z"
+    },
+    {
+      "title": "Buscar \"java\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20java%20Peru",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en Bumeran (Peru). Bumeran. Peru. java java python git excel",
+      "processed_timestamp": "2026-02-26T03:19:31.121Z"
+    },
+    {
+      "title": "Buscar \"java\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=java&location=Peru",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en LinkedIn (Peru). LinkedIn. Peru. java java python git excel",
+      "processed_timestamp": "2026-02-26T03:19:31.122Z"
+    },
+    {
+      "title": "Buscar \"java\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=java&locT=C&locId=1",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en Glassdoor (Peru). Glassdoor. Peru. java java python git excel",
+      "processed_timestamp": "2026-02-26T03:19:31.122Z"
+    },
+    {
+      "title": "Buscar \"analista de insurtech junior\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20analista%20de%20insurtech%20junior%20Peru",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar analista de insurtech junior en Computrabajo (Peru). Computrabajo. Peru. analista de insurtech junior analista de insurtech junior java python git",
+      "processed_timestamp": "2026-02-26T03:25:55.276Z"
+    },
+    {
+      "title": "Buscar \"analista de insurtech junior\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=analista%20de%20insurtech%20junior&l=Peru",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar analista de insurtech junior en Indeed (Peru). Indeed. Peru. analista de insurtech junior analista de insurtech junior java python git",
+      "processed_timestamp": "2026-02-26T03:25:55.276Z"
+    },
+    {
+      "title": "Buscar \"analista de insurtech junior\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20analista%20de%20insurtech%20junior%20Peru",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar analista de insurtech junior en Bumeran (Peru). Bumeran. Peru. analista de insurtech junior analista de insurtech junior java python git",
+      "processed_timestamp": "2026-02-26T03:25:55.276Z"
+    },
+    {
+      "title": "Buscar \"analista de insurtech junior\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=analista%20de%20insurtech%20junior&location=Peru",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar analista de insurtech junior en LinkedIn (Peru). LinkedIn. Peru. analista de insurtech junior analista de insurtech junior java python git",
+      "processed_timestamp": "2026-02-26T03:25:55.277Z"
+    },
+    {
+      "title": "Buscar \"analista de insurtech junior\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=analista%20de%20insurtech%20junior&locT=C&locId=1",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar analista de insurtech junior en Glassdoor (Peru). Glassdoor. Peru. analista de insurtech junior analista de insurtech junior java python git",
+      "processed_timestamp": "2026-02-26T03:25:55.278Z"
+    },
+    {
+      "title": "Buscar \"git\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20git%20Peru",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar git en Computrabajo (Peru). Computrabajo. Peru. git git html css seo basico",
+      "processed_timestamp": "2026-02-26T03:37:09.005Z"
+    },
+    {
+      "title": "Buscar \"git\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=git&l=Peru",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar git en Indeed (Peru). Indeed. Peru. git git html css seo basico",
+      "processed_timestamp": "2026-02-26T03:37:09.005Z"
+    },
+    {
+      "title": "Buscar \"git\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20git%20Peru",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar git en Bumeran (Peru). Bumeran. Peru. git git html css seo basico",
+      "processed_timestamp": "2026-02-26T03:37:09.005Z"
+    },
+    {
+      "title": "Buscar \"git\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=git&location=Peru",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar git en LinkedIn (Peru). LinkedIn. Peru. git git html css seo basico",
+      "processed_timestamp": "2026-02-26T03:37:09.006Z"
+    },
+    {
+      "title": "Buscar \"git\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=git&locT=C&locId=1",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar git en Glassdoor (Peru). Glassdoor. Peru. git git html css seo basico",
+      "processed_timestamp": "2026-02-26T03:37:09.006Z"
+    },
+    {
+      "title": "Buscar \"frontend developer junior\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20frontend%20developer%20junior%20Peru",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar frontend developer junior en Computrabajo (Peru). Computrabajo. Peru. frontend developer junior frontend developer junior git html css",
+      "processed_timestamp": "2026-02-26T03:37:09.006Z"
+    },
+    {
+      "title": "Buscar \"frontend developer junior\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=frontend%20developer%20junior&l=Peru",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar frontend developer junior en Indeed (Peru). Indeed. Peru. frontend developer junior frontend developer junior git html css",
+      "processed_timestamp": "2026-02-26T03:37:09.006Z"
+    },
+    {
+      "title": "Buscar \"frontend developer junior\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20frontend%20developer%20junior%20Peru",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar frontend developer junior en Bumeran (Peru). Bumeran. Peru. frontend developer junior frontend developer junior git html css",
+      "processed_timestamp": "2026-02-26T03:37:09.006Z"
+    },
+    {
+      "title": "Buscar \"frontend developer junior\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=frontend%20developer%20junior&location=Peru",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar frontend developer junior en LinkedIn (Peru). LinkedIn. Peru. frontend developer junior frontend developer junior git html css",
+      "processed_timestamp": "2026-02-26T03:37:09.006Z"
+    },
+    {
+      "title": "Buscar \"frontend developer junior\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=frontend%20developer%20junior&locT=C&locId=1",
+      "skills_required": [
+        "Git",
+        "HTML",
+        "CSS"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Buscar frontend developer junior en Glassdoor (Peru). Glassdoor. Peru. frontend developer junior frontend developer junior git html css",
+      "processed_timestamp": "2026-02-26T03:37:09.006Z"
     }
   ],
-  "updatedAt": "2026-02-24T17:11:39.903Z"
+  "updatedAt": "2026-02-26T03:37:10.390Z"
 }

@@ -8,7 +8,7 @@ import { CvInsights, GeminiService } from '../common/services/gemini.service';
 import { PdfService } from '../common/services/pdf.service';
 import { ScraperService } from '../common/services/scraper.service';
 import { UsageService } from '../common/services/usage.service';
-import { ExperienceProfile, JobSearchService, MatchedJob } from '../common/services/job-search.service';
+import { ExperienceProfile, JobSearchResult, JobSearchService, MatchedJob } from '../common/services/job-search.service';
 import { CvParserService } from '../common/services/cv-parser.service';
 import { SearchMemoryService } from '../common/services/search-memory.service';
 
@@ -19,6 +19,8 @@ export interface TrainingDatasetRow {
   title: string;
   company: string;
   location: string;
+  source?: string;
+  source_url?: string;
   skills_required: string[];
   extracted_stack: string[];
   detected_seniority: string;
@@ -29,6 +31,9 @@ export interface TrainingDatasetRow {
 export interface RankedJobRow {
   title: string;
   company: string;
+  location?: string;
+  source?: string;
+  source_url?: string;
   compatibility_score: number;
   match_level: 'Alto' | 'Medio' | 'Bajo';
   matching_skills: string[];
@@ -60,6 +65,16 @@ export interface EmployabilityAnalysisResult {
   }>;
   action_checklist: string[];
   training_dataset: TrainingDatasetRow[];
+  recommendation_buckets: {
+    best_skill_match_jobs: RankedJobRow[];
+    target_role_match_jobs: RankedJobRow[];
+  };
+  skills_best_fit?: {
+    role: string;
+    role_match_percent: number;
+    top_job_title: string;
+    top_job_score: number;
+  };
 }
 
 export interface ProcessedJobRow {
@@ -95,6 +110,10 @@ interface NormalizedTechOutput {
 @Injectable()
 export class JobService {
   private readonly datasetFilePath = path.join(process.cwd(), 'data', 'stored-jobs-dataset.json');
+  private trainedSkillVocabularyCache: { loadedAt: number; values: string[] } | null = null;
+  private trainedRoleProfilesCache:
+    | { loadedAt: number; values: Array<{ role: string; requiredSkills: string[]; optionalSkills: string[] }> }
+    | null = null;
 
   constructor(
     private readonly scraperService: ScraperService,
@@ -193,21 +212,39 @@ export class JobService {
       );
     }
 
-    const insights = await this.extractInsightsWithFallback(cvText, dto.desiredRole);
-    const keywords = this.sanitizeKeywords(insights.keywords);
+    const insights = await this.extractInsightsWithFallback(cvText);
+    const trainedVocabulary = await this.getTrainedSkillVocabulary();
+    const cvSkillTokens = this.extractSkillTokens(cvText);
+    const cvTrainedSkillTokens = this.extractSkillsByVocabulary(cvText, trainedVocabulary);
+    const keywords = this.sanitizeKeywords(insights.keywords, trainedVocabulary);
     const desiredRole = dto.desiredRole?.trim() || insights.roles[0] || '';
+    const candidateSkills = [...new Set([...cvSkillTokens, ...cvTrainedSkillTokens, ...keywords])];
+    const apiQueryKeywords = candidateSkills.length ? candidateSkills : cvSkillTokens;
+    const bestFitRolePreview = await this.findBestFitRoleBySkills(candidateSkills);
     const experienceProfile = this.inferExperienceProfile(cvText, desiredRole, insights);
     const country = dto.country?.trim() || dto.location?.trim() || 'Peru';
     const learningProfile = await this.searchMemoryService.getProfile(country, experienceProfile.level);
-    const search = await this.jobSearchService.searchPublicJobs(
-      keywords,
+    const primarySearch = await this.jobSearchService.searchPublicJobs(
+      apiQueryKeywords,
       dto.location,
       dto.country,
       desiredRole,
       experienceProfile,
       learningProfile,
     );
-    const uniqueJobs = this.dedupeJobs(search.jobs);
+    let roleDrivenSearch: JobSearchResult = { jobs: [], providers: [] };
+    if (bestFitRolePreview?.role) {
+      roleDrivenSearch = await this.jobSearchService.searchPublicJobs(
+        [bestFitRolePreview.role, ...apiQueryKeywords].slice(0, 20),
+        dto.location,
+        dto.country,
+        bestFitRolePreview.role,
+        experienceProfile,
+        learningProfile,
+      );
+    }
+
+    const uniqueJobs = this.dedupeJobs([...(primarySearch.jobs || []), ...(roleDrivenSearch.jobs || [])]);
     await this.searchMemoryService.learnFromResults(country, experienceProfile.level, keywords, uniqueJobs);
     const storedJobsDataset = await this.readStoredJobsDataset();
     const analysis = await this.buildEmployabilityAnalysis({
@@ -215,23 +252,39 @@ export class JobService {
       targetRole: desiredRole || insights.roles[0] || 'Sin meta definida',
       jobsFromApi: uniqueJobs,
       storedJobsDataset,
-      candidateSkills: keywords,
+      candidateSkills,
       experienceProfile,
     });
+    const skillsBestFit = await this.computeSkillsBestFit(candidateSkills, analysis.ranked_jobs || []);
+    if (skillsBestFit) {
+      analysis.skills_best_fit = skillsBestFit;
+      analysis.recommendation_buckets.best_skill_match_jobs = this.sortJobsForBestFitRole(
+        analysis.recommendation_buckets.best_skill_match_jobs || analysis.ranked_jobs || [],
+        skillsBestFit.role,
+      ).slice(0, 10);
+    }
     await this.mergeAndPersistTrainingDataset(analysis.training_dataset);
     const processedJobsOutput = this.buildProcessedJobsOutput(uniqueJobs);
 
     const region = dto.country?.trim() || dto.location?.trim() || 'tu pais';
+    const providerStatus = [
+      ...(primarySearch.providers || []),
+      ...((roleDrivenSearch.providers || []).map((p) => ({
+        ...p,
+        provider: `${p.provider} (best-fit role)`,
+      })) as any[]),
+    ];
 
     return {
       extractedKeywords: keywords,
+      extractedSkillTokens: cvSkillTokens,
       extractedRoles: insights.roles || [],
       englishLevel: insights.englishLevel,
       preferredJobTypes: insights.preferredJobTypes || [],
       experienceProfile,
       totalJobsFound: uniqueJobs.length,
       jobs: uniqueJobs,
-      providerStatus: search.providers,
+      providerStatus,
       note: `Lista en ${region}, ordenada de mas reciente a mas antigua, con enlaces directos por portal/palabra clave.`,
       employabilityAnalysis: analysis,
       processedJobsOutput,
@@ -401,14 +454,30 @@ export class JobService {
 
     const rankedJobs: RankedJobRow[] = input.trainingDataset
       .map((job) => {
-        const required = [...new Set(job.skills_required.map((x) => this.normalize(x)).filter(Boolean))];
+        const derivedRequired = [
+          ...job.skills_required,
+          ...job.extracted_stack,
+          ...this.extractSkillTokens(`${job.title} ${job.description} ${job.extracted_stack.join(' ')}`),
+          ...this.extractTechStack(`${job.title} ${job.description}`),
+        ];
+        const required = [...new Set(derivedRequired.map((x) => this.normalize(x)).filter(Boolean))];
         const matching = required.filter((r) => candidateSkills.some((c) => c === r || c.includes(r) || r.includes(c)));
         const missing = required.filter((r) => !matching.includes(r));
-        const score = required.length ? Math.round((matching.length / required.length) * 100) : 35;
+
+        const skillRatio = required.length ? matching.length / required.length : 0;
+        const blendedScore = required.length
+          ? skillRatio
+          : matching.length
+            ? 0.45
+            : 0.2;
+        const score = Math.round(Math.max(0.2, Math.min(0.98, blendedScore)) * 100);
         const level: RankedJobRow['match_level'] = score >= 70 ? 'Alto' : score >= 45 ? 'Medio' : 'Bajo';
         return {
           title: job.title,
           company: job.company,
+          location: job.location,
+          source: job.source,
+          source_url: job.source_url,
           compatibility_score: Math.max(0, Math.min(100, score)),
           match_level: level,
           matching_skills: matching.slice(0, 10),
@@ -454,6 +523,8 @@ export class JobService {
       'Actualizar LinkedIn/GitHub con evidencias de cada skill completada.',
     ];
 
+    const recommendationBuckets = this.buildRecommendationBuckets(input.targetRole, rankedJobs);
+
     return {
       analysis_summary: `Se analizaron ${input.trainingDataset.length} empleos sin duplicados para ${input.targetRole}. Se priorizan brechas reales del mercado tecnologico peruano.`,
       market_insights: {
@@ -470,6 +541,7 @@ export class JobService {
       career_roadmap: roadmap,
       action_checklist: actionChecklist,
       training_dataset: input.trainingDataset,
+      recommendation_buckets: recommendationBuckets,
     };
   }
 
@@ -480,6 +552,10 @@ export class JobService {
   ): EmployabilityAnalysisResult {
     const ranked = Array.isArray(parsed.ranked_jobs) ? parsed.ranked_jobs : fallback.ranked_jobs;
     const dedupRanked = this.dedupeRankedJobs(ranked as RankedJobRow[]);
+    const recommendationBuckets = this.buildRecommendationBuckets(
+      String(parsed.career_gap_analysis?.target_role || fallback.career_gap_analysis.target_role),
+      dedupRanked.length ? dedupRanked : fallback.ranked_jobs,
+    );
 
     return {
       analysis_summary: String(parsed.analysis_summary || fallback.analysis_summary).slice(0, 1200),
@@ -524,6 +600,8 @@ export class JobService {
               title: String(row?.title || '').slice(0, 160),
               company: String(row?.company || '').slice(0, 120),
               location: String(row?.location || '').slice(0, 120),
+              source: String(row?.source || '').slice(0, 80),
+              source_url: String(row?.source_url || '').slice(0, 500),
               skills_required: Array.isArray(row?.skills_required)
                 ? row.skills_required.map((x: unknown) => String(x)).slice(0, 20)
                 : [],
@@ -536,12 +614,56 @@ export class JobService {
             }))
           : trainingDataset,
       ),
+      recommendation_buckets: recommendationBuckets,
     };
+  }
+
+  private buildRecommendationBuckets(targetRole: string, rankedJobs: RankedJobRow[]) {
+    const normalizedTarget = this.normalize(targetRole);
+    const targetTokens = normalizedTarget.split(' ').filter((x) => x && x.length >= 3);
+    const ranked = this.dedupeRankedJobs(rankedJobs).slice(0, 120);
+
+    const bestSkillMatch = ranked.filter((x) => x.match_level !== 'Bajo').slice(0, 10);
+    const roleAligned = ranked
+      .map((job) => {
+        const titleNorm = this.normalize(job.title);
+        const companyNorm = this.normalize(job.company);
+        const haystack = `${titleNorm} ${companyNorm}`.trim();
+        const overlap = targetTokens.length
+          ? targetTokens.filter((token) => haystack.includes(token)).length / targetTokens.length
+          : 0;
+        const levelBonus =
+          job.match_level === 'Alto' ? 10 : job.match_level === 'Medio' ? 4 : -8;
+        const blendedScore = job.compatibility_score * 0.75 + overlap * 100 * 0.25 + levelBonus;
+        const isPlaceholder = this.isPortalSearchPlaceholder(job.title);
+        return { job, blendedScore, overlap, isPlaceholder };
+      })
+      .filter((row) => (normalizedTarget ? row.overlap > 0 : true))
+      .filter((row) => !row.isPlaceholder)
+      .sort((a, b) => b.blendedScore - a.blendedScore)
+      .slice(0, 10)
+      .map((row) => row.job);
+
+    const fallbackRoleAligned = roleAligned.length
+      ? roleAligned
+      : ranked
+          .filter((x) => !this.isPortalSearchPlaceholder(x.title))
+          .filter((x) => x.match_level !== 'Bajo')
+          .slice(0, 10);
+
+    return {
+      best_skill_match_jobs: bestSkillMatch.length ? bestSkillMatch : ranked.slice(0, 10),
+      target_role_match_jobs: fallbackRoleAligned,
+    };
+  }
+
+  private isPortalSearchPlaceholder(title: string): boolean {
+    return /^buscar\s+["'`]/i.test(String(title || '').trim());
   }
 
   private buildProcessedJobsOutput(jobs: MatchedJob[]): ProcessedJobsOutput {
     const processed = this.dedupeJobs(jobs).map((job) => {
-      const rawDescription = job.tags.join(' ').trim();
+      const rawDescription = `${job.title} ${job.tags.join(' ')}`.trim();
       const descriptionClean = this.cleanFreeText(rawDescription);
       const normalizedTech = this.normalizeTechFromDescription(descriptionClean);
       const roleSlug = this.buildRoleSlug(job.title);
@@ -586,12 +708,16 @@ export class JobService {
   }
 
   private toTrainingDatasetRow(job: MatchedJob): TrainingDatasetRow {
-    const description = this.cleanFreeText(job.tags.join(' '));
+    const description = this.cleanFreeText(
+      `${job.title}. ${job.company}. ${job.location}. ${job.tags.join(' ')}`.trim(),
+    );
     const normalizedTech = this.normalizeTechFromDescription(description);
     return {
       title: job.title,
       company: job.company,
       location: job.location,
+      source: job.source,
+      source_url: job.url,
       skills_required: normalizedTech.skills_required,
       extracted_stack: normalizedTech.extracted_stack,
       detected_seniority: this.detectSeniority(description),
@@ -687,7 +813,7 @@ export class JobService {
       'java', 'spring', 'spring boot', 'python', 'django', 'fastapi', 'php', 'laravel',
       'sql', 'postgresql', 'mysql', 'mongodb', 'redis', 'docker', 'kubernetes', 'aws', 'azure', 'gcp',
       'graphql', 'rest', 'microservicios', 'testing', 'jest', 'cypress', 'linux', 'git', 'html', 'css',
-      'power bi', 'excel', 'etl',
+      'power bi', 'excel', 'etl', 'kotlin', 'swift', 'figma', 'tailwind', 'next.js', 'nextjs', 'firebase',
     ];
     return lexicon.filter((x) => normalized.includes(this.normalize(x))).slice(0, 20);
   }
@@ -916,22 +1042,174 @@ export class JobService {
     }
   }
 
-  private sanitizeKeywords(list: string[]): string[] {
-    const noise = new Set(['proyecto', 'titulo', 'descripcion', 'descripci', 'intermedio', 'desarrollado', 'estudiante', 'ciclo']);
+  private sanitizeKeywords(list: string[], trainedVocabulary: string[] = []): string[] {
+    const noise = new Set([
+      'proyecto', 'titulo', 'descripcion', 'descripci', 'intermedio', 'desarrollado', 'estudiante', 'ciclo',
+      'profesional', 'professional', 'buenas', 'practicas', 'maquetacion', 'interfaces', 'responsive', 'design',
+    ]);
+    const trainedSet = new Set(trainedVocabulary.map((x) => this.normalize(x)).filter(Boolean));
+
     const cleaned = list
-      .map((x) =>
-        String(x)
-          .toLowerCase()
-          .normalize('NFD')
-          .replace(/[\u0300-\u036f]/g, '')
-          .replace(/[^a-z0-9+#.\s-]/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim(),
-      )
-      .filter((x) => x && x.length >= 3 && !noise.has(x));
+      .map((x) => this.normalize(String(x)))
+      .filter((x) => x && x.length >= 3 && !noise.has(x))
+      .filter((x) => {
+        if (trainedSet.has(x)) return true;
+        const hasTechShape = /[+#.]|sql|api|aws|azure|react|angular|vue|node|python|java|docker|kubernetes|git|html|css|excel|power bi/.test(x);
+        return hasTechShape;
+      });
 
     const uniq = [...new Set(cleaned)];
-    return uniq.length ? uniq.slice(0, 14) : ['practicante', 'analista', 'asistente'];
+    return uniq.length ? uniq.slice(0, 14) : [];
+  }
+
+  private extractSkillsByVocabulary(text: string, vocabulary: string[]): string[] {
+    const normalizedText = this.normalize(text);
+    const out: string[] = [];
+    for (const raw of vocabulary) {
+      const skill = this.normalize(raw);
+      if (!skill || skill.length < 2) continue;
+      if (normalizedText.includes(skill)) out.push(skill);
+    }
+    return [...new Set(out)].slice(0, 30);
+  }
+
+  private async getTrainedSkillVocabulary(): Promise<string[]> {
+    const now = Date.now();
+    if (this.trainedSkillVocabularyCache && now - this.trainedSkillVocabularyCache.loadedAt < 10 * 60 * 1000) {
+      return this.trainedSkillVocabularyCache.values;
+    }
+
+    const dir = path.join(process.cwd(), 'data');
+    let files: string[] = [];
+    try {
+      files = await fs.readdir(dir);
+    } catch {
+      return [];
+    }
+
+    const trainingFiles = files.filter((name) => /^puestos_peru_training.*\.json$/i.test(name));
+    const values = new Set<string>();
+
+    for (const file of trainingFiles) {
+      try {
+        const raw = await fs.readFile(path.join(dir, file), 'utf8');
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) continue;
+        for (const row of parsed as Array<Record<string, unknown>>) {
+          const required = Array.isArray(row.required_skills) ? row.required_skills : [];
+          const optional = Array.isArray(row.nice_to_have) ? row.nice_to_have : [];
+          for (const skill of [...required, ...optional]) {
+            const normalized = this.normalize(String(skill || ''));
+            if (normalized && normalized.length >= 2) values.add(normalized);
+          }
+        }
+      } catch {
+        // ignore malformed training file
+      }
+    }
+
+    const result = [...values];
+    this.trainedSkillVocabularyCache = { loadedAt: now, values: result };
+    return result;
+  }
+
+  private async getTrainedRoleProfiles(): Promise<Array<{ role: string; requiredSkills: string[]; optionalSkills: string[] }>> {
+    const now = Date.now();
+    if (this.trainedRoleProfilesCache && now - this.trainedRoleProfilesCache.loadedAt < 10 * 60 * 1000) {
+      return this.trainedRoleProfilesCache.values;
+    }
+
+    const dir = path.join(process.cwd(), 'data');
+    let files: string[] = [];
+    try {
+      files = await fs.readdir(dir);
+    } catch {
+      return [];
+    }
+
+    const trainingFiles = files.filter((name) => /^puestos_peru_training.*\.json$/i.test(name));
+    const out: Array<{ role: string; requiredSkills: string[]; optionalSkills: string[] }> = [];
+
+    for (const file of trainingFiles) {
+      try {
+        const raw = await fs.readFile(path.join(dir, file), 'utf8');
+        const parsed = JSON.parse(raw);
+        if (!Array.isArray(parsed)) continue;
+        for (const row of parsed as Array<Record<string, unknown>>) {
+          const role = String(row.role || '').trim();
+          if (!role) continue;
+          const requiredSkills = Array.isArray(row.required_skills)
+            ? row.required_skills.map((x) => this.normalize(String(x))).filter(Boolean)
+            : [];
+          const optionalSkills = Array.isArray(row.nice_to_have)
+            ? row.nice_to_have.map((x) => this.normalize(String(x))).filter(Boolean)
+            : [];
+          out.push({
+            role,
+            requiredSkills: [...new Set(requiredSkills)],
+            optionalSkills: [...new Set(optionalSkills)],
+          });
+        }
+      } catch {
+        // ignore malformed files
+      }
+    }
+
+    this.trainedRoleProfilesCache = { loadedAt: now, values: out };
+    return out;
+  }
+
+  private async computeSkillsBestFit(candidateSkills: string[], rankedJobs: RankedJobRow[]) {
+    const rankedProfile = await this.findBestFitRoleBySkills(candidateSkills);
+
+    if (!rankedProfile || rankedProfile.match <= 0) return null;
+
+    const sortedJobs = this.sortJobsForBestFitRole(rankedJobs || [], rankedProfile.role);
+    const topJob = sortedJobs[0];
+
+    return {
+      role: rankedProfile.role,
+      role_match_percent: Math.max(0, Math.min(100, Math.round(rankedProfile.match))),
+      top_job_title: String(topJob?.title || ''),
+      top_job_score: Number(topJob?.compatibility_score || 0),
+    };
+  }
+
+  private async findBestFitRoleBySkills(candidateSkills: string[]): Promise<{ role: string; match: number } | null> {
+    const profiles = await this.getTrainedRoleProfiles();
+    if (!profiles.length) return null;
+
+    const cv = [...new Set((candidateSkills || []).map((x) => this.normalize(x)).filter(Boolean))];
+    if (!cv.length) return null;
+
+    const rankedProfile = profiles
+      .map((p) => {
+        const requiredHits = p.requiredSkills.filter((s) => cv.some((c) => c === s || c.includes(s) || s.includes(c))).length;
+        const optionalHits = p.optionalSkills.filter((s) => cv.some((c) => c === s || c.includes(s) || s.includes(c))).length;
+        const weightedTotal = p.requiredSkills.length + p.optionalSkills.length * 0.5;
+        const weightedHits = requiredHits + optionalHits * 0.5;
+        const match = weightedTotal > 0 ? (weightedHits / weightedTotal) * 100 : 0;
+        return { role: p.role, match };
+      })
+      .sort((a, b) => b.match - a.match)[0];
+
+    if (!rankedProfile || rankedProfile.match <= 0) return null;
+    return rankedProfile;
+  }
+
+  private sortJobsForBestFitRole(jobs: RankedJobRow[], role: string): RankedJobRow[] {
+    const roleTokens = this.normalize(role).split(' ').filter((x) => x && x.length >= 3);
+    return [...(jobs || [])]
+      .map((job) => {
+        const haystack = this.normalize(`${job.title} ${job.company} ${job.reason || ''}`);
+        const overlap = roleTokens.length
+          ? roleTokens.filter((token) => haystack.includes(token)).length / roleTokens.length
+          : 0;
+        const blended = Number(job.compatibility_score || 0) * 0.8 + overlap * 100 * 0.2;
+        return { job, blended };
+      })
+      .sort((a, b) => b.blended - a.blended)
+      .map((x) => x.job);
   }
 
   private inferExperienceProfile(cvText: string, desiredRole?: string, insights?: CvInsights): ExperienceProfile {

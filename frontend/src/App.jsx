@@ -49,6 +49,7 @@ export default function App() {
   const [jobsLoading, setJobsLoading] = useState(false);
   const [jobsError, setJobsError] = useState('');
   const [jobsResult, setJobsResult] = useState(null);
+  const [jobsPanel, setJobsPanel] = useState('skills');
 
   const [careerForm, setCareerForm] = useState(careerInitial);
   const [careerLoading, setCareerLoading] = useState(false);
@@ -132,6 +133,7 @@ export default function App() {
         location: cvForm.location,
       });
       setJobsResult(data);
+      setJobsPanel('skills');
     } catch (err) {
       setJobsError(err.message);
     } finally {
@@ -205,6 +207,31 @@ export default function App() {
     }
     return Array.isArray(careerResult.steps) ? careerResult.steps : [];
   }, [careerResult]);
+
+  const jobBuckets = useMemo(() => {
+    if (!jobsResult) {
+      return {
+        bestSkillMatchJobs: [],
+        targetRoleMatchJobs: [],
+      };
+    }
+
+    const rankedJobs = Array.isArray(jobsResult?.employabilityAnalysis?.ranked_jobs)
+      ? jobsResult.employabilityAnalysis.ranked_jobs
+      : [];
+    const buckets = jobsResult?.employabilityAnalysis?.recommendation_buckets || {};
+    const bestSkillMatchJobs = Array.isArray(buckets.best_skill_match_jobs) && buckets.best_skill_match_jobs.length
+      ? buckets.best_skill_match_jobs
+      : rankedJobs.slice(0, 10);
+    const targetRoleMatchJobs = Array.isArray(buckets.target_role_match_jobs) && buckets.target_role_match_jobs.length
+      ? buckets.target_role_match_jobs
+      : rankedJobs.slice(0, 10);
+
+    return {
+      bestSkillMatchJobs,
+      targetRoleMatchJobs,
+    };
+  }, [jobsResult]);
 
   return (
     <main className="page">
@@ -379,26 +406,95 @@ export default function App() {
                   </p>
                 )}
 
-                <div className="jobs-list">
-                  {(jobsResult.jobs || []).map((job, idx) => (
-                    <article className="job-item" key={`${job.url}-${idx}`}>
-                      <h3>{job.title}</h3>
-                      <p>
-                        <strong>{job.company}</strong> | {job.location}
-                      </p>
-                      <p>
-                        <strong>Fuente:</strong> {job.source} | <strong>Score:</strong> {job.score}
-                      </p>
-                      <p>
-                        <strong>Publicado:</strong> {job.publishedAt || 'Sin fecha'}
-                      </p>
-                      <p className="muted">{(job.tags || []).slice(0, 8).join(', ')}</p>
-                      <a href={job.url} target="_blank" rel="noreferrer">
-                        Ver vacante
-                      </a>
-                    </article>
-                  ))}
+                <div className="tabs">
+                  <button
+                    className={jobsPanel === 'skills' ? 'tab active' : 'tab'}
+                    onClick={() => setJobsPanel('skills')}
+                    type="button"
+                  >
+                    Skills de mi CV
+                  </button>
+                  <button
+                    className={jobsPanel === 'target' ? 'tab active' : 'tab'}
+                    onClick={() => setJobsPanel('target')}
+                    type="button"
+                  >
+                    Ver por rol objetivo
+                  </button>
                 </div>
+
+                {jobsPanel === 'skills' && (
+                  <>
+                    <h3>Skills detectadas en tu CV</h3>
+                    <p className="muted">
+                      {(jobsResult?.extractedSkillTokens || [])
+                        .filter((x, i, arr) => arr.indexOf(x) === i)
+                        .slice(0, 24)
+                        .join(', ') || 'No se detectaron skills claras en el CV.'}
+                    </p>
+                    {jobsResult?.employabilityAnalysis?.skills_best_fit?.role && (
+                      <p>
+                        <strong>Puesto mas relacionado (entrenamiento + match CV):</strong>{' '}
+                        {jobsResult.employabilityAnalysis.skills_best_fit.role}{' '}
+                        ({jobsResult.employabilityAnalysis.skills_best_fit.role_match_percent}%)
+                      </p>
+                    )}
+                    <h3>Trabajos con mayor opcion por tus skills actuales</h3>
+                    {!jobBuckets.bestSkillMatchJobs.length && <p className="muted">Sin resultados rankeados por skills.</p>}
+                    <div className="jobs-list">
+                      {jobBuckets.bestSkillMatchJobs.map((job, idx) => (
+                        <article className="job-item" key={`skill-${job.title}-${job.company}-${idx}`}>
+                          <h3>{job.title}</h3>
+                          <p>
+                            <strong>{job.company}</strong>{job.location ? ` | ${job.location}` : ''}
+                          </p>
+                          <p>
+                            <strong>Compatibilidad:</strong> {job.compatibility_score}% | <strong>Nivel:</strong> {job.match_level}
+                          </p>
+                          <p className="muted">
+                            <strong>Skills que ya cumples:</strong> {(job.matching_skills || []).slice(0, 8).join(', ') || 'No detectadas'}
+                          </p>
+                          <p className="muted">
+                            <strong>Brechas:</strong> {(job.missing_skills || []).slice(0, 6).join(', ') || 'Sin brechas criticas'}
+                          </p>
+                          {job.source_url && (
+                            <a href={job.source_url} target="_blank" rel="noreferrer">
+                              Ver vacante
+                            </a>
+                          )}
+                        </article>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {jobsPanel === 'target' && (
+                  <>
+                    <h3>Trabajos alineados a tu rol objetivo</h3>
+                    <p className="muted">Rol objetivo usado: {cvForm.desiredRole || 'No especificado'}</p>
+                    {!jobBuckets.targetRoleMatchJobs.length && <p className="muted">Sin resultados alineados al rol objetivo.</p>}
+                    <div className="jobs-list">
+                      {jobBuckets.targetRoleMatchJobs.map((job, idx) => (
+                        <article className="job-item" key={`target-${job.title}-${job.company}-${idx}`}>
+                          <h3>{job.title}</h3>
+                          <p>
+                            <strong>{job.company}</strong>{job.location ? ` | ${job.location}` : ''}
+                          </p>
+                          <p>
+                            <strong>Compatibilidad:</strong> {job.compatibility_score}% | <strong>Nivel:</strong> {job.match_level}
+                          </p>
+                          <p className="muted">{job.reason}</p>
+                          {job.source_url && (
+                            <a href={job.source_url} target="_blank" rel="noreferrer">
+                              Ver vacante
+                            </a>
+                          )}
+                        </article>
+                      ))}
+                    </div>
+                  </>
+                )}
+
               </>
             )}
           </article>

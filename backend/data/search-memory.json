@@ -5,19 +5,27 @@
         "automatizacion": 6,
         "diseno": 6,
         "software": 6,
-        "ingles": 5.2,
-        "desarrollador de software snior": 1
+        "ingles": 6,
+        "desarrollador de software snior": 1,
+        "desarrollador frontend": 4,
+        "analista de datos": 1,
+        "profesional": 2,
+        "html5": 2,
+        "css3": 2,
+        "interfaces": 2,
+        "html": 4,
+        "python": 6
       },
       "sourceWeights": {
-        "computrabajo": 7.2,
-        "indeed": 6.9,
-        "bumeran": 6.599999999999999,
-        "linkedin": 6.299999999999999,
-        "glassdoor": 6,
+        "computrabajo": 8,
+        "indeed": 8,
+        "bumeran": 8,
+        "linkedin": 8,
+        "glassdoor": 8,
         "theirstack": 8
       },
-      "updates": 7,
-      "updatedAt": "2026-02-24T17:11:39.861Z"
+      "updates": 21,
+      "updatedAt": "2026-02-26T03:37:08.999Z"
     },
     "united states|intern": {
       "keywordWeights": {
