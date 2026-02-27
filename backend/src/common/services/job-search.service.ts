@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import axios from 'axios';
 import * as cheerio from 'cheerio';
+import { AdzunaService } from './adzuna.service';
 import { LearningProfile } from './search-memory.service';
 
 export interface MatchedJob {
@@ -61,6 +62,8 @@ export class JobSearchService {
     { source: 'Glassdoor', domainHint: 'glassdoor.', siteQuery: 'site:glassdoor.' },
   ];
 
+  constructor(private readonly adzunaService: AdzunaService) {}
+
   async searchPublicJobs(
     keywords: string[],
     location?: string,
@@ -79,14 +82,15 @@ export class JobSearchService {
     const locationText = cityOrRegion ? `${cityOrRegion}, ${countryText}` : countryText;
 
     const queries = this.buildQueries(defaultSeeds, locationText);
-    const [rapidResult, theirStackResult, coreSignalResult, byQuery] = await Promise.all([
+    const [rapidResult, theirStackResult, coreSignalResult, adzunaResult, byQuery] = await Promise.all([
       this.searchRapidApiJobs(defaultSeeds, enrichedKeywords, locationText, desiredRole),
       this.searchTheirStackJobs(enrichedKeywords, countryText, cityOrRegion, desiredRole, experience),
       this.searchCoreSignalJobs(enrichedKeywords, countryText, cityOrRegion, desiredRole, experience),
+      this.searchAdzunaJobs(enrichedKeywords, countryText),
       Promise.all(queries.map((q) => this.searchDuckDuckGo(q.query, q.source, countryText))),
     ]);
 
-    const merged = [...rapidResult.jobs, ...theirStackResult.jobs, ...coreSignalResult.jobs, ...byQuery.flat()];
+    const merged = [...rapidResult.jobs, ...theirStackResult.jobs, ...coreSignalResult.jobs, ...adzunaResult.jobs, ...byQuery.flat()];
     const dedup = this.mergeAndDedupe(merged);
     const filtered = dedup.filter((job) => this.isJobInCountry(job, countryText, cityOrRegion));
     const base = filtered.length ? filtered : dedup;
@@ -103,6 +107,7 @@ export class JobSearchService {
       rapidResult.status,
       theirStackResult.status,
       coreSignalResult.status,
+      adzunaResult.status,
       {
         provider: 'Public Scraping',
         enabled: true,
@@ -116,6 +121,72 @@ export class JobSearchService {
       jobs: finalJobs,
       providers,
     };
+  }
+
+  private async searchAdzunaJobs(
+    keywords: string[],
+    countryText: string,
+  ): Promise<{ jobs: MatchedJob[]; status: JobProviderStatus }> {
+    if (!this.adzunaService.isConfigured()) {
+      return {
+        jobs: [],
+        status: {
+          provider: 'Adzuna',
+          enabled: false,
+          success: false,
+          jobs: 0,
+          error: 'ADZUNA_APP_ID/ADZUNA_APP_KEY no configuradas',
+        },
+      };
+    }
+
+    try {
+      // Pull first two pages to broaden coverage while keeping response time bounded.
+      const [page1, page2] = await Promise.all([
+        this.adzunaService.searchJobs(keywords, countryText, 1),
+        this.adzunaService.searchJobs(keywords, countryText, 2),
+      ]);
+
+      const mapped: MatchedJob[] = [...page1, ...page2]
+        .map((row) => {
+          const published = this.parsePublished(row.created);
+          return {
+            title: this.clean(row.title) || 'Vacante',
+            company: this.clean(row.company) || 'Empresa no detectada',
+            location: this.clean(row.location) || 'No especificado',
+            source: 'Adzuna',
+            url: this.normalizeUrl(row.url),
+            tags: this.extractTags(`${row.title} ${row.company} ${row.location} ${row.description}`),
+            score: 0,
+            publishedAt: published.label,
+            publishedTs: published.ts,
+          } as MatchedJob;
+        })
+        .filter((job) => Boolean(job.url));
+
+      const deduped = this.mergeAndDedupe(mapped).slice(0, 120);
+      return {
+        jobs: deduped,
+        status: {
+          provider: 'Adzuna',
+          enabled: true,
+          success: deduped.length > 0,
+          jobs: deduped.length,
+          error: deduped.length > 0 ? undefined : '0 jobs returned by Adzuna',
+        },
+      };
+    } catch (error) {
+      return {
+        jobs: [],
+        status: {
+          provider: 'Adzuna',
+          enabled: true,
+          success: false,
+          jobs: 0,
+          error: this.readAxiosError(error),
+        },
+      };
+    }
   }
 
   private buildQueries(seeds: string[], locationText: string): Array<{ query: string; source: SourceConfig }> {
@@ -831,7 +902,7 @@ export class JobSearchService {
     }
 
     if (hasCountry) return true;
-    if (job.source === 'RapidAPI' || job.source === 'TheirStack' || job.source === 'CoreSignal') return false;
+    if (job.source === 'RapidAPI' || job.source === 'TheirStack' || job.source === 'CoreSignal' || job.source === 'Adzuna') return false;
     return true;
   }
 
@@ -879,6 +950,7 @@ export class JobSearchService {
     if (job.source === 'RapidAPI') score += 6;
     if (job.source === 'TheirStack') score += 6;
     if (job.source === 'CoreSignal') score += 6;
+    if (job.source === 'Adzuna') score += 6;
     score += this.scoreByExperience(haystack, experience);
     score += this.scoreByLearning(haystack, job.source, keywords, learning);
     return score;

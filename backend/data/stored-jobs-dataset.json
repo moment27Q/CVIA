@@ -1529,7 +1529,1138 @@
       "detected_seniority": "junior",
       "description": "Buscar cientifico de datos junior en Glassdoor (Peru). Glassdoor. Peru. cientifico de datos junior cientifico de datos junior node node.js python",
       "processed_timestamp": "2026-02-26T04:51:17.551Z"
+    },
+    {
+      "title": "Buscar \"node\" en Computrabajo (Lima, Peru)",
+      "company": "Computrabajo",
+      "location": "Lima, Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20node%20Lima%2C%20Peru",
+      "skills_required": [
+        "Node.js",
+        "NestJS",
+        "TypeScript"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en Computrabajo (Lima, Peru). Computrabajo. Lima, Peru. node node node.js nestjs typescript",
+      "processed_timestamp": "2026-02-27T16:43:42.394Z"
+    },
+    {
+      "title": "Buscar \"node\" en Indeed (Lima, Peru)",
+      "company": "Indeed",
+      "location": "Lima, Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=node&l=Lima%2C%20Peru",
+      "skills_required": [
+        "Node.js",
+        "NestJS",
+        "TypeScript"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en Indeed (Lima, Peru). Indeed. Lima, Peru. node node node.js nestjs typescript",
+      "processed_timestamp": "2026-02-27T16:43:42.396Z"
+    },
+    {
+      "title": "Buscar \"node\" en Bumeran (Lima, Peru)",
+      "company": "Bumeran",
+      "location": "Lima, Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20node%20Lima%2C%20Peru",
+      "skills_required": [
+        "Node.js",
+        "NestJS",
+        "TypeScript"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en Bumeran (Lima, Peru). Bumeran. Lima, Peru. node node node.js nestjs typescript",
+      "processed_timestamp": "2026-02-27T16:43:42.396Z"
+    },
+    {
+      "title": "Buscar \"node\" en LinkedIn (Lima, Peru)",
+      "company": "LinkedIn",
+      "location": "Lima, Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=node&location=Lima%2C%20Peru",
+      "skills_required": [
+        "Node.js",
+        "NestJS",
+        "TypeScript"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en LinkedIn (Lima, Peru). LinkedIn. Lima, Peru. node node node.js nestjs typescript",
+      "processed_timestamp": "2026-02-27T16:43:42.396Z"
+    },
+    {
+      "title": "Buscar \"node\" en Glassdoor (Lima, Peru)",
+      "company": "Glassdoor",
+      "location": "Lima, Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=node&locT=C&locId=1",
+      "skills_required": [
+        "Node.js",
+        "NestJS",
+        "TypeScript"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar node en Glassdoor (Lima, Peru). Glassdoor. Lima, Peru. node node node.js nestjs typescript",
+      "processed_timestamp": "2026-02-27T16:43:42.396Z"
+    },
+    {
+      "title": "Buscar \"backend developer\" en Computrabajo (Lima, Peru)",
+      "company": "Computrabajo",
+      "location": "Lima, Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20backend%20developer%20Lima%2C%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar backend developer en Computrabajo (Lima, Peru). Computrabajo. Lima, Peru. backend developer backend developer backend developer practica",
+      "processed_timestamp": "2026-02-27T16:43:42.397Z"
+    },
+    {
+      "title": "Buscar \"backend developer\" en Indeed (Lima, Peru)",
+      "company": "Indeed",
+      "location": "Lima, Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=backend%20developer&l=Lima%2C%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar backend developer en Indeed (Lima, Peru). Indeed. Lima, Peru. backend developer backend developer backend developer practica",
+      "processed_timestamp": "2026-02-27T16:43:42.397Z"
+    },
+    {
+      "title": "Buscar \"backend developer\" en Bumeran (Lima, Peru)",
+      "company": "Bumeran",
+      "location": "Lima, Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20backend%20developer%20Lima%2C%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar backend developer en Bumeran (Lima, Peru). Bumeran. Lima, Peru. backend developer backend developer backend developer practica",
+      "processed_timestamp": "2026-02-27T16:43:42.397Z"
+    },
+    {
+      "title": "Buscar \"backend developer\" en LinkedIn (Lima, Peru)",
+      "company": "LinkedIn",
+      "location": "Lima, Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=backend%20developer&location=Lima%2C%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar backend developer en LinkedIn (Lima, Peru). LinkedIn. Lima, Peru. backend developer backend developer backend developer practica",
+      "processed_timestamp": "2026-02-27T16:43:42.397Z"
+    },
+    {
+      "title": "Buscar \"backend developer\" en Glassdoor (Lima, Peru)",
+      "company": "Glassdoor",
+      "location": "Lima, Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=backend%20developer&locT=C&locId=1",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar backend developer en Glassdoor (Lima, Peru). Glassdoor. Lima, Peru. backend developer backend developer backend developer practica",
+      "processed_timestamp": "2026-02-27T16:43:42.398Z"
+    },
+    {
+      "title": "Buscar \"desarrollador de soluciones fintech junior\" en Computrabajo (Lima, Peru)",
+      "company": "Computrabajo",
+      "location": "Lima, Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20desarrollador%20de%20soluciones%20fintech%20junior%20Lima%2C%20Peru",
+      "skills_required": [
+        "Node.js",
+        "NestJS"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar desarrollador de soluciones fintech junior en Computrabajo (Lima, Peru). Computrabajo. Lima, Peru. desarrollador de soluciones fintech junior desarrollador de soluciones fintech junior node node.js nestjs",
+      "processed_timestamp": "2026-02-27T16:43:42.398Z"
+    },
+    {
+      "title": "Buscar \"desarrollador de soluciones fintech junior\" en Indeed (Lima, Peru)",
+      "company": "Indeed",
+      "location": "Lima, Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=desarrollador%20de%20soluciones%20fintech%20junior&l=Lima%2C%20Peru",
+      "skills_required": [
+        "Node.js",
+        "NestJS"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar desarrollador de soluciones fintech junior en Indeed (Lima, Peru). Indeed. Lima, Peru. desarrollador de soluciones fintech junior desarrollador de soluciones fintech junior node node.js nestjs",
+      "processed_timestamp": "2026-02-27T16:43:42.398Z"
+    },
+    {
+      "title": "Buscar \"desarrollador de soluciones fintech junior\" en Bumeran (Lima, Peru)",
+      "company": "Bumeran",
+      "location": "Lima, Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20desarrollador%20de%20soluciones%20fintech%20junior%20Lima%2C%20Peru",
+      "skills_required": [
+        "Node.js",
+        "NestJS"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar desarrollador de soluciones fintech junior en Bumeran (Lima, Peru). Bumeran. Lima, Peru. desarrollador de soluciones fintech junior desarrollador de soluciones fintech junior node node.js nestjs",
+      "processed_timestamp": "2026-02-27T16:43:42.398Z"
+    },
+    {
+      "title": "Buscar \"desarrollador de soluciones fintech junior\" en LinkedIn (Lima, Peru)",
+      "company": "LinkedIn",
+      "location": "Lima, Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=desarrollador%20de%20soluciones%20fintech%20junior&location=Lima%2C%20Peru",
+      "skills_required": [
+        "Node.js",
+        "NestJS"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar desarrollador de soluciones fintech junior en LinkedIn (Lima, Peru). LinkedIn. Lima, Peru. desarrollador de soluciones fintech junior desarrollador de soluciones fintech junior node node.js nestjs",
+      "processed_timestamp": "2026-02-27T16:43:42.398Z"
+    },
+    {
+      "title": "Buscar \"desarrollador de soluciones fintech junior\" en Glassdoor (Lima, Peru)",
+      "company": "Glassdoor",
+      "location": "Lima, Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=desarrollador%20de%20soluciones%20fintech%20junior&locT=C&locId=1",
+      "skills_required": [
+        "Node.js",
+        "NestJS"
+      ],
+      "extracted_stack": [
+        "Node.js",
+        "NestJS"
+      ],
+      "detected_seniority": "junior",
+      "description": "Buscar desarrollador de soluciones fintech junior en Glassdoor (Lima, Peru). Glassdoor. Lima, Peru. desarrollador de soluciones fintech junior desarrollador de soluciones fintech junior node node.js nestjs",
+      "processed_timestamp": "2026-02-27T16:43:42.399Z"
+    },
+    {
+      "title": "Buscar \"java\" en Computrabajo (United States)",
+      "company": "Computrabajo",
+      "location": "United States",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20java%20United%20States",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en Computrabajo (United States). Computrabajo. United States. java java python git excel",
+      "processed_timestamp": "2026-02-27T16:49:52.053Z"
+    },
+    {
+      "title": "Buscar \"java\" en Indeed (United States)",
+      "company": "Indeed",
+      "location": "United States",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=java&l=United%20States",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en Indeed (United States). Indeed. United States. java java python git excel",
+      "processed_timestamp": "2026-02-27T16:49:52.053Z"
+    },
+    {
+      "title": "Buscar \"java\" en Bumeran (United States)",
+      "company": "Bumeran",
+      "location": "United States",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20java%20United%20States",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en Bumeran (United States). Bumeran. United States. java java python git excel",
+      "processed_timestamp": "2026-02-27T16:49:52.054Z"
+    },
+    {
+      "title": "Buscar \"java\" en LinkedIn (United States)",
+      "company": "LinkedIn",
+      "location": "United States",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=java&location=United%20States",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en LinkedIn (United States). LinkedIn. United States. java java python git excel",
+      "processed_timestamp": "2026-02-27T16:49:52.055Z"
+    },
+    {
+      "title": "Buscar \"java\" en Glassdoor (United States)",
+      "company": "Glassdoor",
+      "location": "United States",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=java&locT=C&locId=1",
+      "skills_required": [
+        "Java",
+        "Python",
+        "Git",
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar java en Glassdoor (United States). Glassdoor. United States. java java python git excel",
+      "processed_timestamp": "2026-02-27T16:49:52.056Z"
+    },
+    {
+      "title": "Buscar \"frotend developert\" en Computrabajo (Peru)",
+      "company": "Computrabajo",
+      "location": "Peru",
+      "source": "Computrabajo",
+      "source_url": "https://www.bing.com/search?q=site%3Acomputrabajo.com%20frotend%20developert%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar frotend developert en Computrabajo (Peru). Computrabajo. Peru. frotend developert frotend developert frotend developert practica",
+      "processed_timestamp": "2026-02-27T16:53:16.065Z"
+    },
+    {
+      "title": "Buscar \"frotend developert\" en Indeed (Peru)",
+      "company": "Indeed",
+      "location": "Peru",
+      "source": "Indeed",
+      "source_url": "https://www.indeed.com/jobs?q=frotend%20developert&l=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar frotend developert en Indeed (Peru). Indeed. Peru. frotend developert frotend developert frotend developert practica",
+      "processed_timestamp": "2026-02-27T16:53:16.066Z"
+    },
+    {
+      "title": "Buscar \"frotend developert\" en Bumeran (Peru)",
+      "company": "Bumeran",
+      "location": "Peru",
+      "source": "Bumeran",
+      "source_url": "https://www.bing.com/search?q=site%3Abumeran.com%20frotend%20developert%20Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar frotend developert en Bumeran (Peru). Bumeran. Peru. frotend developert frotend developert frotend developert practica",
+      "processed_timestamp": "2026-02-27T16:53:16.066Z"
+    },
+    {
+      "title": "Buscar \"frotend developert\" en LinkedIn (Peru)",
+      "company": "LinkedIn",
+      "location": "Peru",
+      "source": "LinkedIn",
+      "source_url": "https://www.linkedin.com/jobs/search/?keywords=frotend%20developert&location=Peru",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar frotend developert en LinkedIn (Peru). LinkedIn. Peru. frotend developert frotend developert frotend developert practica",
+      "processed_timestamp": "2026-02-27T16:53:16.066Z"
+    },
+    {
+      "title": "Buscar \"frotend developert\" en Glassdoor (Peru)",
+      "company": "Glassdoor",
+      "location": "Peru",
+      "source": "Glassdoor",
+      "source_url": "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=frotend%20developert&locT=C&locId=1",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Buscar frotend developert en Glassdoor (Peru). Glassdoor. Peru. frotend developert frotend developert frotend developert practica",
+      "processed_timestamp": "2026-02-27T16:53:16.067Z"
+    },
+    {
+      "title": "Trainee de Marketing (CX and Growth)",
+      "company": "Ventura Soluciones",
+      "location": "Miraflores, Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/trainee-de-marketing-cx-and-growth-at-ventura-soluciones-4379053093",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Trainee de Marketing (CX and Growth). Ventura Soluciones. Miraflores, Lima. marketing soluciones para growth campanas soporte comercial trainee",
+      "processed_timestamp": "2026-02-27T22:38:44.459Z"
+    },
+    {
+      "title": "Desarrollador Java nivel senior",
+      "company": "PRAGMA",
+      "location": "Trujillo, La Libertad",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/desarrollador-java-nivel-senior-at-pragma-4378783884",
+      "skills_required": [
+        "Java"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "senior",
+      "description": "Desarrollador Java nivel senior. PRAGMA. Trujillo, La Libertad. experiencia implementacion conocimiento soluciones para diseno seguridad problemas",
+      "processed_timestamp": "2026-02-27T22:38:44.463Z"
+    },
+    {
+      "title": "Accounting Intern",
+      "company": "adidas",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://jobs.adidas-group.com/job/Lima-Accounting-Intern-LIM/1367956433/?feedId=301201&utm_source=j2w",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Accounting Intern. adidas. Lima. analisis para accounting adidas preparacion practica profesional nivel",
+      "processed_timestamp": "2026-02-27T22:38:44.466Z"
+    },
+    {
+      "title": "Accounting Intern (Practicante Pre Profesional)",
+      "company": "Liberty Mutual Surety™",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/accounting-intern-practicante-pre-profesional-at-liberty-mutual-surety%E2%84%A2-4377278357",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Accounting Intern (Practicante Pre Profesional). Liberty Mutual Surety . Lima. accounting skills liberty support have intern mutual local",
+      "processed_timestamp": "2026-02-27T22:38:44.466Z"
+    },
+    {
+      "title": "Intern, Advisory",
+      "company": "SURA Investments",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/intern-advisory-at-sura-investments-4375537500",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Intern, Advisory. SURA Investments. Lima. para analisis ingenieria intern advisory sura investments personas",
+      "processed_timestamp": "2026-02-27T22:38:44.467Z"
+    },
+    {
+      "title": "Sports Marketing Intern",
+      "company": "adidas",
+      "location": "Lima, Lima",
+      "source": "TheirStack",
+      "source_url": "https://jobs.adidas-group.com/job/Lima-Sports-Marketing-Intern-LIM/1367894833/?feedId=301201&utm_source=j2w",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Sports Marketing Intern. adidas. Lima, Lima. brand marketing that culture sports intern adidas lima",
+      "processed_timestamp": "2026-02-27T22:38:44.467Z"
+    },
+    {
+      "title": "Marketing Trainee",
+      "company": "Cabify",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://grnh.se/h7842jiv2us",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Marketing Trainee. Cabify. Lima. para cabify marketing nosotros redes forma movilidad posible.",
+      "processed_timestamp": "2026-02-27T22:38:44.467Z"
+    },
+    {
+      "title": "Marketing & Sales Intern",
+      "company": "Boehringer Ingelheim",
+      "location": "Lima, Lima",
+      "source": "TheirStack",
+      "source_url": "https://jobs.boehringer-ingelheim.com/job-invite/31432/?locale=en_US",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Marketing Sales Intern. Boehringer Ingelheim. Lima, Lima. support activities with marketing sales lima administrative management",
+      "processed_timestamp": "2026-02-27T22:38:44.468Z"
+    },
+    {
+      "title": "DESARROLLADOR FULL STACK JR PYTHON",
+      "company": "ALVA & QG CONSULTORES",
+      "location": "San Isidro, Lima",
+      "source": "TheirStack",
+      "source_url": "http://pe.indeed.com/job/desarrollador-full-stack-jr-python-5d0f4cc36d973cb7",
+      "skills_required": [
+        "Python"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "DESARROLLADOR FULL STACK JR PYTHON. ALVA QG CONSULTORES. San Isidro, Lima. python desarrollo soluciones para desarrollador full stack greta",
+      "processed_timestamp": "2026-02-27T22:38:44.468Z"
+    },
+    {
+      "title": "Senior Python Developer",
+      "company": "Infosys",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/senior-python-developer-at-infosys-4375219930",
+      "skills_required": [
+        "Python"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "senior",
+      "description": "Senior Python Developer. Infosys. Lima. python with digital experience infosys e.g. practices protected",
+      "processed_timestamp": "2026-02-27T22:38:44.468Z"
+    },
+    {
+      "title": "Intern Marketing Field & Other Biscuits",
+      "company": "Mondelēz International",
+      "location": "Miraflores, Lima",
+      "source": "TheirStack",
+      "source_url": "https://www.mondelezinternational.com/careers/jobs/job?jobid=R-160745&jobtitle=Intern+Marketing+Field+%26+Other+Biscuits",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Intern Marketing Field Other Biscuits. Mondel z International. Miraflores, Lima. marketing para analisis mondelez international wacam with intern",
+      "processed_timestamp": "2026-02-27T22:38:44.469Z"
+    },
+    {
+      "title": "Business Planning Trainee",
+      "company": "PUMA Group",
+      "location": "Surco, Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/business-planning-trainee-at-puma-group-4377417266",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Business Planning Trainee. PUMA Group. Surco, Lima. para sell puma spirit apoyo nuestro business planning",
+      "processed_timestamp": "2026-02-27T22:38:44.469Z"
+    },
+    {
+      "title": "Business Planning Trainee",
+      "company": "PUMA",
+      "location": "Lima, Lima",
+      "source": "TheirStack",
+      "source_url": "https://about.puma.com/node/20908",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Business Planning Trainee. PUMA. Lima, Lima. puma sell your para real apoyo lima spirit",
+      "processed_timestamp": "2026-02-27T22:38:44.470Z"
+    },
+    {
+      "title": "Desarrollador Python Senior - Trabajo Remoto",
+      "company": "BairesDev",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://applicants.bairesdev.com/job/71/282558/apply?utm_campaign=USA-20251111&utm_medium=jobposting&utm_source=linkedinjobposting",
+      "skills_required": [
+        "Python"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "senior",
+      "description": "Desarrollador Python Senior - Trabajo Remoto. BairesDev. Lima. para experiencia python habilidades desarrollador sistemas orientados senior",
+      "processed_timestamp": "2026-02-27T22:38:44.470Z"
+    },
+    {
+      "title": "Desarrollador Backend Java Senior",
+      "company": "SOAINT",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/desarrollador-backend-java-senior-at-soaint-4374541155",
+      "skills_required": [
+        "Java"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "senior",
+      "description": "Desarrollador Backend Java Senior. SOAINT. Lima. soaint experiencia backend java desarrollo buscamos profesional ingenieria",
+      "processed_timestamp": "2026-02-27T22:38:44.470Z"
+    },
+    {
+      "title": "Marketing Intern",
+      "company": "Delivery Hero",
+      "location": "Miraflores, Lima",
+      "source": "TheirStack",
+      "source_url": "https://jobs.smartrecruiters.com/DeliveryHero/744000110855659-marketing-intern",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Marketing Intern. Delivery Hero. Miraflores, Lima. delivery personas para pedidosya nuestra hero compania lider",
+      "processed_timestamp": "2026-02-27T22:38:44.472Z"
+    },
+    {
+      "title": "Desarrollador Java/backend",
+      "company": "AYNITECH GROUP",
+      "location": "Miraflores, Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/desarrollador-java-backend-at-aynitech-group-4377019669",
+      "skills_required": [
+        "Java"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Desarrollador Java/backend. AYNITECH GROUP. Miraflores, Lima. java experiencia obligatorio aynitech group developer nube arquitecturas",
+      "processed_timestamp": "2026-02-27T22:38:44.472Z"
+    },
+    {
+      "title": "Senior QA Automation Engineer (Selenium / Java)",
+      "company": "Lumenalta",
+      "location": "Peru",
+      "source": "TheirStack",
+      "source_url": "https://lumenalta.com/jobs/quality-assurance-engineer-senior-qa-automation-engineer-selenium-java-251/apply?utm_medium=social&utm_source=linkedin",
+      "skills_required": [
+        "Java"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "senior",
+      "description": "Senior QA Automation Engineer (Selenium / Java). Lumenalta. Peru. with automation experience test selenium testing tools java",
+      "processed_timestamp": "2026-02-27T22:38:44.472Z"
+    },
+    {
+      "title": "Intern Mineria - Arequipa",
+      "company": "Ecolab",
+      "location": "Arequipa, Arequipa",
+      "source": "TheirStack",
+      "source_url": "https://jobs.ecolab.com/global/en/job/EIYEIEUSR00280608EXTERNALENGLOBAL/Intern-Mineria-Arequipa?utm_medium=phenom-feeds&utm_source=linkedin",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Intern Mineria - Arequipa. Ecolab. Arequipa, Arequipa. ecolab arequipa mineria agua nuestro soluciones para nuestros",
+      "processed_timestamp": "2026-02-27T22:38:44.473Z"
+    },
+    {
+      "title": "Programador (Python & Java)",
+      "company": "ManpowerGroup",
+      "location": "San Isidro",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/programador-python-java-at-manpowergroup-4373471752",
+      "skills_required": [
+        "Java",
+        "Python"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Programador (Python Java). ManpowerGroup. San Isidro. sistemas para conocimientos programador python java experis peru",
+      "processed_timestamp": "2026-02-27T22:38:44.473Z"
+    },
+    {
+      "title": "Lider Tecnico Java - springboot (Peru)",
+      "company": "Juan Esteban Cardona Reclutador",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/lider-tecnico-java-springboot-peru-at-juan-esteban-cardona-reclutador-4375832844",
+      "skills_required": [
+        "Java",
+        "Azure"
+      ],
+      "extracted_stack": [
+        "Azure"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Lider Tecnico Java - springboot (Peru). Juan Esteban Cardona Reclutador. Lima. java arquitectura cloud microservicios limpia azure experiencia lider",
+      "processed_timestamp": "2026-02-27T22:38:44.474Z"
+    },
+    {
+      "title": "Desarrollador Backend Java",
+      "company": "SOAINT",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/desarrollador-backend-java-at-soaint-4373466648",
+      "skills_required": [
+        "Java",
+        "Spring"
+      ],
+      "extracted_stack": [
+        "Spring"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Desarrollador Backend Java. SOAINT. Lima. desarrollo para java experiencia backend soaint utilizando spring",
+      "processed_timestamp": "2026-02-27T22:38:44.474Z"
+    },
+    {
+      "title": "JAVA FULLSTACK DEVELOPER JR",
+      "company": "NEORIS",
+      "location": "Peru",
+      "source": "TheirStack",
+      "source_url": "https://job-boards.eu.greenhouse.io/neoris/jobs/4785795101?gh_src=63b69742teu",
+      "skills_required": [
+        "Java"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "JAVA FULLSTACK DEVELOPER JR. NEORIS. Peru. como experiencia conocimientos java fullstack developer neoris companias",
+      "processed_timestamp": "2026-02-27T22:38:44.474Z"
+    },
+    {
+      "title": "Analista de control y trazabilidad ( excel expert )",
+      "company": "ISEL ENERGIA",
+      "location": "La Joya, Arequipa",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/analista-de-control-y-trazabilidad-excel-expert-at-isel-energia-4373984013",
+      "skills_required": [
+        "Excel"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Analista de control y trazabilidad ( excel expert ). ISEL ENERGIA. La Joya, Arequipa. para datos trazabilidad excel control funciones gestion automatizacion",
+      "processed_timestamp": "2026-02-27T22:38:44.474Z"
+    },
+    {
+      "title": "Desarrollador Senior Java/Oracle - Especialista en IA Generativa",
+      "company": "Ministerio de la Mujer y Poblaciones Vulnerables",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/desarrollador-senior-java-oracle-especialista-en-ia-generativa-at-ministerio-de-la-mujer-y-poblaciones-vulnerables-4373995277",
+      "skills_required": [
+        "Java"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "senior",
+      "description": "Desarrollador Senior Java/Oracle - Especialista en IA Generativa. Ministerio de la Mujer y Poblaciones Vulnerables. Lima. codigo generativa desarrollo tecnica java oracle para evaluacion",
+      "processed_timestamp": "2026-02-27T22:38:44.475Z"
+    },
+    {
+      "title": "Java Developer Senior",
+      "company": "Tata Consultancy Services",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/java-developer-senior-at-tata-consultancy-services-4374133612",
+      "skills_required": [
+        "Java",
+        "Spring"
+      ],
+      "extracted_stack": [
+        "Spring"
+      ],
+      "detected_seniority": "senior",
+      "description": "Java Developer Senior. Tata Consultancy Services. Lima. experiencia spring servicios ing. anos java senior tata",
+      "processed_timestamp": "2026-02-27T22:38:44.475Z"
+    },
+    {
+      "title": "Desarrollador BackEnd (Java) (Remoto)",
+      "company": "Keppri",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://www.careers-page.com/keppri/job/4RV87W45?utm_medium=free_job_board&utm_source=linkedin",
+      "skills_required": [
+        "Java",
+        "Spring"
+      ],
+      "extracted_stack": [
+        "Spring"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Desarrollador BackEnd (Java) (Remoto). Keppri. Lima. spring experiencia backend java para deseable keppri boot",
+      "processed_timestamp": "2026-02-27T22:38:44.475Z"
+    },
+    {
+      "title": "Desarrollador Java",
+      "company": "SOAINT",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/desarrollador-java-at-soaint-4373215451",
+      "skills_required": [
+        "Java"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Desarrollador Java. SOAINT. Lima. soaint java desarrollo para como buscamos backend desarrollar",
+      "processed_timestamp": "2026-02-27T22:38:44.476Z"
+    },
+    {
+      "title": "Docentes para curso de Python",
+      "company": "Corporación Educativa Benjamín Franklin SAC",
+      "location": "San Borja, Lima",
+      "source": "TheirStack",
+      "source_url": "http://pe.indeed.com/job/docentes-para-curso-de-python-d9fb30502b921b4f",
+      "skills_required": [
+        "Python"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Docentes para curso de Python. Corporaci n Educativa Benjam n Franklin SAC. San Borja, Lima. experiencia para python datos proyectos analisis automatizacion programacion",
+      "processed_timestamp": "2026-02-27T22:38:44.476Z"
+    },
+    {
+      "title": "Desarrollador Backend Semisenior Java",
+      "company": "SOAINT",
+      "location": "Lima",
+      "source": "TheirStack",
+      "source_url": "https://pe.linkedin.com/jobs/view/desarrollador-backend-semisenior-java-at-soaint-4372904535",
+      "skills_required": [
+        "Java"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Desarrollador Backend Semisenior Java. SOAINT. Lima. soaint java desarrollo backend para como buscamos desarrollar",
+      "processed_timestamp": "2026-02-27T22:38:44.476Z"
+    },
+    {
+      "title": "Desarrollador Backend Java Semisenior",
+      "company": "SOAINT",
+      "location": "San Isidro, Lima",
+      "source": "TheirStack",
+      "source_url": "http://pe.indeed.com/job/desarrollador-backend-java-semisenior-2fff9512e8439cb5",
+      "skills_required": [
+        "Java"
+      ],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Desarrollador Backend Java Semisenior. SOAINT. San Isidro, Lima. soaint java desarrollo backend para como lima buscamos",
+      "processed_timestamp": "2026-02-27T22:38:44.477Z"
+    },
+    {
+      "title": "PRACTICANTE PRE DE PSICOLOGÍA ORGANIZACIONAL",
+      "company": "Perú Data",
+      "location": "Lima, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/practicante-pre-de-psicolog%C3%ADa-organizacional-at-per%C3%BA-data-4370102934",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "PRACTICANTE PRE DE PSICOLOG A ORGANIZACIONAL. Per Data. Lima, Peru. practicas redaccion psicologia peru estudiante internado indispensable informes",
+      "processed_timestamp": "2026-02-27T22:38:44.477Z"
+    },
+    {
+      "title": "Practicante de SEO",
+      "company": "Sodimac",
+      "location": "Lima, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/practicante-de-seo-at-sodimac-4370301046",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Practicante de SEO. Sodimac. Lima, Peru. para sodimac peru falabella optimizacion practicante nuestros como",
+      "processed_timestamp": "2026-02-27T22:38:44.477Z"
+    },
+    {
+      "title": "Analista tributación",
+      "company": "Sunda International",
+      "location": "Comas, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/analista-tributaci%C3%B3n-at-sunda-international-4368790383",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Analista tributaci n. Sunda International. Comas, Peru. analista tributario productos experiencia deseable contables tributacion sunda",
+      "processed_timestamp": "2026-02-27T22:38:44.477Z"
+    },
+    {
+      "title": "Practicante Profesional de Desarrollo de Sistemas",
+      "company": "Grupo Flesan Perú",
+      "location": "Magdalena del Mar, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/practicante-profesional-de-desarrollo-de-sistemas-at-grupo-flesan-per%C3%BA-4369498294",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "junior",
+      "description": "Practicante Profesional de Desarrollo de Sistemas. Grupo Flesan Per . Magdalena del Mar, Peru. peru apoyo desarrollo sistemas grupo flesan equipo parte",
+      "processed_timestamp": "2026-02-27T22:38:44.478Z"
+    },
+    {
+      "title": "Analista QA Automatizador",
+      "company": "Indra Group",
+      "location": "San Isidro, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/analista-qa-automatizador-at-indra-group-4369749288",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Analista QA Automatizador. Indra Group. San Isidro, Peru. para pruebas automatizador automatizacion tecnologia anos herramientas indispensable",
+      "processed_timestamp": "2026-02-27T22:38:44.478Z"
+    },
+    {
+      "title": "Analista de Master Data y Back Office - K0070",
+      "company": "Komatsu-Mitsui Maquinarias Peru S.A.",
+      "location": "Callao, Constitutional Province of Callao, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/analista-de-master-data-y-back-office-k0070-at-komatsu-mitsui-maquinarias-peru-s-a-4370957065",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Analista de Master Data y Back Office - K0070. Komatsu-Mitsui Maquinarias Peru S.A.. Callao, Constitutional Province of Callao, Peru. para como area equipo komatsu mitsui clientes titulos",
+      "processed_timestamp": "2026-02-27T22:38:44.478Z"
+    },
+    {
+      "title": "Ingeniero de Especialidades (Sanitarias y Electromecánicas)",
+      "company": "Alferza Desarrolladora Inmobiliaria",
+      "location": "Arequipa, Arequipa, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/ingeniero-de-especialidades-sanitarias-y-electromec%C3%A1nicas-at-alferza-desarrolladora-inmobiliaria-4369420150",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Ingeniero de Especialidades (Sanitarias y Electromec nicas). Alferza Desarrolladora Inmobiliaria. Arequipa, Arequipa, Peru. sanitarias ingeniero especialidades para coordinar ejecucion planos normativa",
+      "processed_timestamp": "2026-02-27T22:38:44.479Z"
+    },
+    {
+      "title": "Sub Contador(a). Exp. con NIIF. Manejo de equipo",
+      "company": "UNICON - Profesionales en CONCRETO",
+      "location": "San Juan de Miraflores, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/sub-contador-a-exp-con-niif-manejo-de-equipo-at-unicon-profesionales-en-concreto-4369745766",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Sub Contador(a). Exp. con NIIF. Manejo de equipo. UNICON - Profesionales en CONCRETO. San Juan de Miraflores, Peru. contables contador unicon para niif analisis concreto peru",
+      "processed_timestamp": "2026-02-27T22:38:44.480Z"
+    },
+    {
+      "title": "Fullstack Developer (Senior) - Python (Django) + React - Remote, Latin America",
+      "company": "Bluelight",
+      "location": "Tacna, Tacna, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/fullstack-developer-senior-python-django-%2B-react-remote-latin-america-at-bluelight-4369789933",
+      "skills_required": [
+        "React",
+        "Python",
+        "Django"
+      ],
+      "extracted_stack": [
+        "React",
+        "Django"
+      ],
+      "detected_seniority": "senior",
+      "description": "Fullstack Developer (Senior) - Python (Django) + React - Remote, Latin America. Bluelight. Tacna, Tacna, Peru. with work software development experience bluelight environment python",
+      "processed_timestamp": "2026-02-27T22:38:44.481Z"
+    },
+    {
+      "title": "Fullstack Developer (Senior) - Python (Django) + React - Remote, Latin America",
+      "company": "Bluelight",
+      "location": "Arequipa Metropolitan Area",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/fullstack-developer-senior-python-django-%2B-react-remote-latin-america-at-bluelight-4369789897",
+      "skills_required": [
+        "React",
+        "Python",
+        "Django"
+      ],
+      "extracted_stack": [
+        "React",
+        "Django"
+      ],
+      "detected_seniority": "senior",
+      "description": "Fullstack Developer (Senior) - Python (Django) + React - Remote, Latin America. Bluelight. Arequipa Metropolitan Area. with work software development experience bluelight environment python",
+      "processed_timestamp": "2026-02-27T22:38:44.481Z"
+    },
+    {
+      "title": "Asistente de Servicio",
+      "company": "GRUPO VARGAS",
+      "location": "Independencia, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/asistente-de-servicio-at-grupo-vargas-4369713682",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Asistente de Servicio. GRUPO VARGAS. Independencia, Peru. servicio para funciones beneficios asistente grupo vargas brindar",
+      "processed_timestamp": "2026-02-27T22:38:44.481Z"
+    },
+    {
+      "title": "Enfermero Conductor Urgente",
+      "company": "Salus Laboris | Expertos en Salud Ocupacional",
+      "location": "Arequipa, Arequipa, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/enfermero-conductor-urgente-at-salus-laboris-expertos-en-salud-ocupacional-4371010045",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Enfermero Conductor Urgente. Salus Laboris Expertos en Salud Ocupacional. Arequipa, Arequipa, Peru. salud enfermero conductor salus laboris ocupacional arequipa enfermeria",
+      "processed_timestamp": "2026-02-27T22:38:44.482Z"
+    },
+    {
+      "title": "Analista de Planeamiento Estratégico",
+      "company": "Industrias San Miguel",
+      "location": "San Borja, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/analista-de-planeamiento-estrat%C3%A9gico-at-industrias-san-miguel-4358819695",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Analista de Planeamiento Estrat gico. Industrias San Miguel. San Borja, Peru. planeamiento estrategico para analisis nivel gestion proceso seguimiento",
+      "processed_timestamp": "2026-02-27T22:38:44.482Z"
+    },
+    {
+      "title": "AUXILIAR CONTROL DE PRODUCCIÓN",
+      "company": "Creditex S.A.A.",
+      "location": "La Esperanza, La Libertad, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/auxiliar-control-de-producci%C3%B3n-at-creditex-s-a-a-4357716528",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "AUXILIAR CONTROL DE PRODUCCI N. Creditex S.A.A.. La Esperanza, La Libertad, Peru. control proceso produccion para creditex procesos calidad tecnicos",
+      "processed_timestamp": "2026-02-27T22:38:44.482Z"
+    },
+    {
+      "title": "Encargado de tienda - Lima Norte",
+      "company": "Empresa Confidencial",
+      "location": "Lima Metropolitan Area",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/encargado-de-tienda-lima-norte-at-empresa-confidencial-4370574158",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Encargado de tienda - Lima Norte. Empresa Confidencial. Lima Metropolitan Area. experiencia cliente equipo servicio mejora lima cumplimiento atencion",
+      "processed_timestamp": "2026-02-27T22:38:44.482Z"
+    },
+    {
+      "title": "Azure DevOps Engineer",
+      "company": "Applaudo",
+      "location": "Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/azure-devops-engineer-at-applaudo-4369791165",
+      "skills_required": [
+        "Azure"
+      ],
+      "extracted_stack": [
+        "Azure"
+      ],
+      "detected_seniority": "no_especificado",
+      "description": "Azure DevOps Engineer. Applaudo. Peru. azure with devops infrastructure automation engineering using applaudo",
+      "processed_timestamp": "2026-02-27T22:38:44.483Z"
+    },
+    {
+      "title": "Analista de compras con Manejo de MRP//Chorrillos",
+      "company": "Life Beauty Corporation",
+      "location": "Chorrillos, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/analista-de-compras-con-manejo-de-mrp-chorrillos-at-life-beauty-corporation-4368881844",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Analista de compras con Manejo de MRP//Chorrillos. Life Beauty Corporation. Chorrillos, Peru. para compras manejo seguimiento compra analista chorrillos life",
+      "processed_timestamp": "2026-02-27T22:38:44.483Z"
+    },
+    {
+      "title": "Software Test Engineer (QA Automatizador)",
+      "company": "Interbank",
+      "location": "Lima, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/software-test-engineer-qa-automatizador-at-interbank-4369676274",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Software Test Engineer (QA Automatizador). Interbank. Lima, Peru. pruebas herramientas para interbank software como prueba conocimiento",
+      "processed_timestamp": "2026-02-27T22:38:44.483Z"
+    },
+    {
+      "title": "Analista de Operaciones - Sector Energía",
+      "company": "OCA GLOBAL",
+      "location": "Lima, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/analista-de-operaciones-sector-energ%C3%ADa-at-oca-global-4369261235",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Analista de Operaciones - Sector Energ a. OCA GLOBAL. Lima, Peru. lima para global gestion power capacidad analista operaciones",
+      "processed_timestamp": "2026-02-27T22:38:44.484Z"
+    },
+    {
+      "title": "Analista de Nómina",
+      "company": "AG CHAVIN",
+      "location": "Buena Vista Alta, Ancash, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/analista-de-n%C3%B3mina-at-ag-chavin-4369202169",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Analista de N mina. AG CHAVIN. Buena Vista Alta, Ancash, Peru. personal calculo vacaciones beneficios sociales laboral funciones como",
+      "processed_timestamp": "2026-02-27T22:38:44.484Z"
+    },
+    {
+      "title": "Asistente Administrativo / Experiencia en planillas",
+      "company": "SEF Perú Holding",
+      "location": "Lima, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/asistente-administrativo-experiencia-en-planillas-at-sef-per%C3%BA-holding-4368890016",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Asistente Administrativo / Experiencia en planillas. SEF Per Holding. Lima, Peru. experiencia asistente planillas peru entre para disponibilidad holding",
+      "processed_timestamp": "2026-02-27T22:38:44.484Z"
+    },
+    {
+      "title": "Analista de Cobranzas",
+      "company": "Mallplaza",
+      "location": "Surquillo, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/analista-de-cobranzas-at-mallplaza-4367965722",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Analista de Cobranzas. Mallplaza. Surquillo, Peru. cobranzas analista mall plaza para gestion areas eficiente",
+      "processed_timestamp": "2026-02-27T22:38:44.484Z"
+    },
+    {
+      "title": "Asesores de Ventas / Open plaza Huánuco",
+      "company": "I-RUN",
+      "location": "Huánuco, Huánuco, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/asesores-de-ventas-open-plaza-hu%C3%A1nuco-at-i-run-4368433482",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "no_especificado",
+      "description": "Asesores de Ventas / Open plaza Hu nuco. I-RUN. Hu nuco, Hu nuco, Peru. huanuco ventas open plaza para manejo disponibilidad trabajar",
+      "processed_timestamp": "2026-02-27T22:38:44.485Z"
+    },
+    {
+      "title": "Analista Senior de Marketing y Creatividad",
+      "company": "Bitel",
+      "location": "San Isidro, Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/analista-senior-de-marketing-y-creatividad-at-bitel-4360592990",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "senior",
+      "description": "Analista Senior de Marketing y Creatividad. Bitel. San Isidro, Peru. marketing creatividad peru para digitales equipos bitel servicios",
+      "processed_timestamp": "2026-02-27T22:38:44.485Z"
+    },
+    {
+      "title": "Manager, Marketing Operations Strategist",
+      "company": "Toptal",
+      "location": "Peru",
+      "source": "CoreSignal",
+      "source_url": "https://www.linkedin.com/jobs/view/manager-marketing-operations-strategist-at-toptal-4370861021",
+      "skills_required": [],
+      "extracted_stack": [],
+      "detected_seniority": "senior",
+      "description": "Manager, Marketing Operations Strategist. Toptal. Peru. with marketing team work operations toptal business other",
+      "processed_timestamp": "2026-02-27T22:38:44.485Z"
     }
   ],
-  "updatedAt": "2026-02-26T04:51:19.215Z"
+  "updatedAt": "2026-02-27T22:38:45.804Z"
 }

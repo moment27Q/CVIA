@@ -8,6 +8,7 @@ import { PdfService } from '../common/services/pdf.service';
 import { JobSearchService } from '../common/services/job-search.service';
 import { CvParserService } from '../common/services/cv-parser.service';
 import { SearchMemoryService } from '../common/services/search-memory.service';
+import { AdzunaService } from '../common/services/adzuna.service';
 
 @Module({
   controllers: [JobController],
@@ -18,6 +19,7 @@ import { SearchMemoryService } from '../common/services/search-memory.service';
     UsageService,
     PdfService,
     JobSearchService,
+    AdzunaService,
     CvParserService,
     SearchMemoryService,
   ],
